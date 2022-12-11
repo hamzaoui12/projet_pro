@@ -16,6 +16,7 @@ Durant c'est deux semaines de travail chaque membre du groupe avait une tache à
 ### Avis (positifs/négatifs):
 
 le Nextjs c'est un framwork qui n'est pas facile pour moi et que je metrise pas trop mais le fait qu'on le fait en cours et qu'il y a beaucoup de pratique je pense que ça va m'aider pour avancer dans le projet.
+<<<<<<< HEAD
 
 
 ## Back-end (Amina)
@@ -36,3 +37,5 @@ Durant c'est deux semaines de travail chaque membre du groupe a du travailler su
 Apres avoir chisis les techno pour ce projet je pense pouvoir en apprendre davantage suite aux connaissances aquise l'année passé
 
 
+=======
+>>>>>>> be8596991f2b731cf0ab1713c2354c3ac6da1937
