@@ -21,7 +21,7 @@ le Nextjs c'est un framwork qui n'est pas facile pour moi et que je metrise pas 
 
 ///////////////////
 
-## Choix du stack technique
+## Choix du stack technique - Nora
 
 # Framework CSS:
 
@@ -31,7 +31,7 @@ le Nextjs c'est un framwork qui n'est pas facile pour moi et que je metrise pas 
 
 ###### Deuxièmement, Tailwind est très simple à comprendre et à utiliser. En effet, le nom des classes permet de comprendre très rapidement son utilité. De plus il y a une bonne documentation très complète, une bonne communauté ce qui rend facile la recherche sur Internet. Et donc, on trouve facilement la réponse à nos erreurs.
 
-###### Troisièmement, Tailwind permet à notre site d'être responsive c'est-à-dire qu'il peut s'adapter à un écran de tablettes, téléphones et bureaux. En ajoutant les directives @responsives et @screen à la création de la classe. Tailwind, dispose d'un système du design intégré. C'est-à-dire qu'il propose un design par défaut et des valeurs par défaut lors de la création de classe ( ex: couleurs, taille).
+###### Troisièmement, Tailwind permet à notre site d'être responsive c'est-à-dire qu'il peut s'adapter à un écran de tablettes, téléphones et bureaux. En effet, Tailwind nous permet de prefenir des taille d'ecran en fonction de l'appareil utilisé.Par exemple, en utilisant ces breakpoints: all,sm,md,lg,xl on pourra prédéfinir une taille de caractère.Si l'utilisateur est sur un ecran de smartphone, le breakpoints est sm et donc la taille de caractere sera plus petite. ###### Tailwind, dispose d'un système du design intégré. C'est-à-dire qu'il propose un design par défaut et des valeurs par défaut lors de la création de classe ( ex: couleurs, taille).
 
 ###### Enfin, chaque membre du groupe dispose de connaissance concernant Tailwind. D'autre part nous l'utilisons et l'apris en cours.
 
