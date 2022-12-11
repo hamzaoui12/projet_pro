@@ -1,34 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Front-End
 
-## Getting Started
+Après avoir fait des recherches sur les langages à utiliser pour le front on a décider de partir sur du Nextjs car c'est :
 
-First, run the development server:
+- un Framework qu'on apprend en cours et ou en est plus alaise
+- une bonne documentation et une tres bonne faciliter de recherche
+- un cadre d'application construit sur la base de React pour aider les développer a créé des applications hautes performances et des sites web statiques ultra-rapide cela signifie qu'il n'y a aucune connexion directe aux bases de données ou aux informations utilisateur ou a tous les informations sensibles.
+- avec nextjs tous les sites web et les applications sont accessibles depuis n'importe quel appareil afin que nous puissions proposer nos services et produits via différents canaux de vente.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## avis personel (Merina)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Mission des 2 semiane :
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+durant c'est deux semaines de travail chacun ambre du groupe avait une tache à faire pour ma part j'ai créé un projet sur ghithub avec une branche principale et 2 sous branche maitre et Devon et ensuite créé le projet nextjs et le push sur le projet que j'ai créé sur git
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Avis (positifs/négatifs):
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+le Nextjs c'est un framwork qui n'est pas facile pour moi et que je metrise pas trop mais le fait qu'on le fait en cours et qu'il y a beaucoup de pratique je pense que ça va m'aider pour avancer dans le projet.
