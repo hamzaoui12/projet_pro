@@ -11,7 +11,7 @@ Après avoir fait des recherches sur les langages à utiliser pour le front on a
 
 ### Mission des 2 semiane :
 
-durant c'est deux semaines de travail chacun ambre du groupe avait une tache à faire pour ma part j'ai créé un projet sur ghithub avec une branche principale et 2 sous branche maitre et Devon et ensuite créé le projet nextjs et le push sur le projet que j'ai créé sur git
+Durant c'est deux semaines de travail chaque membre du groupe avait une tache à faire pour ma part j'ai créé un projet sur github avec une branche principale et 2 sous branche maitre et Devlop et ensuite créé le projet nextjs et le push sur le projet que j'ai créé sur git
 
 ### Avis (positifs/négatifs):
 
