@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 ///////////////////
 
 ## Resume sprint2 - Nora
-
-# Framework CSS:
 
 ###### Creation de l'arborescence du projets avec les principaux dossiers. Prochaineent, nous allons faire une réunion pour avoir une arborescence définitif.
 
@@ -32,19 +29,3 @@
 ###### utilisation du trello pour la methode d'organisation nous aide a mieux nous organiser sur nos taches a faire pour chaque sprint
 
 ///////////////////
-=======
-///////////////////
-
-## Resume sprint2 - Nora
-
-###### Creation de l'arborescence du projets avec les principaux dossiers. Prochaineent, nous allons faire une réunion pour avoir une arborescence définitif.
-###### De plus, apprentissage des nouvelle technologies utilisées pour le projet tels que Reactjs, NodeJs, Tailwind et Next.Js. Utilisations des outils de la methode Agile (Diagramme de Gantt, Trello, ...)
-###### Création du front de la page "Product" mais en fonction de la maquette Figma je serais ammener à le modifier.
-
-# Avis personelle sur le Sprint (Nora):
-
-###### Avis positif: Une bonne methode d'organisation qui commence à prendre place. On communique plus facilement, chacun s'écoute et de plus en plus on utilise la méthode Agile (Planification de reunion hebdomadaire, utilisation du Trello, ...)
-###### Avis négatif: Il faut que je renforce ma méthode d'apprentissage, de recherche et il faut que j'organise mieux mon temps entre le travail, l'ecole et le projet pro.
-
-///////////////////
->>>>>>> 9671a858f7d375120b0d4e6125f99c1a72228d1f
