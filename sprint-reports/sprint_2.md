@@ -2,8 +2,6 @@
 
 ## Resume sprint2 - Nora
 
-# Framework CSS:
-
 ###### Creation de l'arborescence du projets avec les principaux dossiers. Prochaineent, nous allons faire une réunion pour avoir une arborescence définitif.
 ###### De plus, apprentissage des nouvelle technologies utilisées pour le projet tels que Reactjs, NodeJs, Tailwind et Next.Js. Utilisations des outils de la methode Agile (Diagramme de Gantt, Trello, ...)
 ###### Création du front de la page "Product" mais en fonction de la maquette Figma je serais ammener à le modifier.
