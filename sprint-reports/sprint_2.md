@@ -29,3 +29,15 @@
 ###### utilisation du trello pour la methode d'organisation nous aide a mieux nous organiser sur nos taches a faire pour chaque sprint
 
 ///////////////////
+
+## Résumé sprint 2 - Eric
+
+##### Création du modèle de base de données de l'application
+
+# Avis personnel (Eric)
+
+##### Avis positif : Lors de ce sprint, il y a eut une nette amélioration au niveau de notre méthode de travail (Mise en place d'outil de gestion de projet mais surtout utilisations de ceux-ci, ex: trello, Figma).
+
+##### Avis négatif : La gestion de projet est encore trop timide et nous cumulons du retard vis-à-vis de l'échéance du projet, nous allons donc devoir redoubler d'efforts afin de pouvoir revenir dan les temps.
+
+///////////////////
