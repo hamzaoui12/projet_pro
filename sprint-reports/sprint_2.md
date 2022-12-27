@@ -39,3 +39,14 @@
 ##### Avis négatif : La gestion de projet est encore trop timide et nous cumulons du retard vis-à-vis de l'échéance du projet, nous allons donc devoir redoubler d'efforts afin de pouvoir revenir dan les temps.
 
 ///////////////////
+
+## Resume sprint2 - Amina
+
+###### Organisation du Trello, attribution des tâches au sein de l’équipe et suivi des travaux réalisés.
+###### Mise à jour de mes interfaces graphiques et Figma réalisé lors du premier sprint.
+###### Choix d’une nouvelle techno ( React), pour la réalisation du site. 
+
+##### Avis positif : J’ai pris en charge l’organisation de travail et la gestion du Trello, afin de pouvoir installer une bonne méthode de travail au sein de mon équipe, cela permet de mettre en application nos connaissances en méthode agile .La réalisation de les interfaces graphiques sur Figma a permis à mon équipe d’avoir un visuel sur le résultat désirer par notre client.
+
+###### Avis négatif: La gestion de projet est encore en cours d'acheminement , nous avons pris un peu de retard sur l'organisation du projet, le retard doit etre rattraper afin de pouvoir rendre le projet dans les temps.
+
