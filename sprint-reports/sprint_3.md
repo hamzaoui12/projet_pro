@@ -1,12 +1,12 @@
 ///////////////////
 
-## Resume sprint2 - Nora
+## Resume sprint3 - Nora
 
 # Avis personelle sur le Sprint (Nora):
 
 ///////////////////
 
-## Resume sprint2 - Merina
+## Resume sprint3 - Merina
 
 Création des user story de la page panier et checkout, et création des taches de chaque page avec les priorités et la note de chaque tache
 
@@ -24,13 +24,13 @@ Création du bouton menu avec un effet que quand en clique dessus le bouton devi
 
 ///////////////////
 
-## Résumé sprint 2 - Eric
+## Résumé sprint 3 - Eric
 
 # Avis personnel (Eric)
 
 ///////////////////
 
-## Resume sprint2 - Amina
+## Resume sprint3 - Amina
 
 ##### Avis positif :
 
