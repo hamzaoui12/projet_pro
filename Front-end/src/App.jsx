@@ -1,11 +1,10 @@
-import Home from "./page/Home";
-
+import "../src/App.css";
+import Navbar from "./components/Navbar";
 const App = () => {
   return (
     <div className="app">
-      <Home />
+      <Navbar />
     </div>
   );
 };
-
 export default App;

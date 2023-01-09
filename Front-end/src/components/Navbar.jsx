@@ -1,37 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../style/Navbar.css";
+import { useState } from "react";
 
 const Navbar = () => {
-  const [toggleMenu, setTogleMenu] = useState(false);
-  const [largeur, setLargeur] = useState(window.innerWidth);
+  const [showLinks, setShowlinks] = useState(false);
 
-  const toggleNavSmallScreen = () => {
-    setTogleMenu(!toggleMenu);
+  const handleShowLinks = () => {
+    setShowlinks(!showLinks);
   };
-
-  useEffect(() => {
-    const changeWidth = () => {
-      setLargeur(window.innerWidth);
-    };
-    window.addEventListener("resize", changeWidth);
-
-    return () => {
-      window.removeEventListener("resize", changeWidth);
-    };
-  }, []);
-
   return (
-    <nav>
-      {(toggleMenu || largeur > 500) && (
-        <ul className="liste">
-          <li className="items">Acceuil</li>
-          <li className="items">Poduit</li>
-          <li className="items">Panier</li>
-        </ul>
-      )}
-
-      <button onClick={toggleNavSmallScreen} className="btn">
-        BTN
+    <nav className={`navbar ${showLinks ? "show-nav" : "hide-nav"} `}>
+      <div className="avbar_logo">Logo</div>
+      <lu className="navbar_links">
+        <li className="navbar_item">
+          <a href="/" className="navbar_link">
+            Accueil
+          </a>
+        </li>
+        <li className="navbar_item">
+          <a href="/" className="navbar_link">
+            produit
+          </a>
+        </li>
+        <li className="navbar_item">
+          <a href="/" className="navbar_link">
+            connexion
+          </a>
+        </li>
+        <li className="navbar_item">
+          <a href="/" className="navbar_link">
+            category
+          </a>
+        </li>
+      </lu>
+      <ul className="navbar_icons">
+        <li className="navbar_action">
+          <a href="/" className="navbar_icone">
+            panier
+          </a>
+        </li>
+        <li className="navbar_action">
+          <a href="/" className="navbar_icone">
+            recherche
+          </a>
+        </li>
+      </ul>
+      <button className="navbar_burger" onClick={handleShowLinks}>
+        <span className="burger-bar"></span>
       </button>
     </nav>
   );
