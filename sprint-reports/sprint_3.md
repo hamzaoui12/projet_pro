@@ -26,7 +26,16 @@ Création du bouton menu avec un effet que quand en clique dessus le bouton devi
 
 ## Résumé sprint 3 - Eric
 
+### Tâches :
+
+- Création des tâches correspondant aux pages Commandes, mes commandes, paramètres de compte, créer un compte
+- connection entre la base de données et le backend
+
 # Avis personnel (Eric)
+
+#### Points positifs : L'équipe a pu mettre en place une gestion de projet ainsi qu'une méthode de travail nous permettant de devenir plus efficace dans nos tâches.
+
+#### Points négatifs : Le manque de communication est toujours très présent (du moins en distanciel), j'èspere que le retour en cours permettra une meilleur communication au sein du groupe.
 
 ///////////////////
 
