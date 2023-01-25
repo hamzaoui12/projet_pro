@@ -32,3 +32,24 @@
 ### Idées d'amélioration : Faire des réunions plus régulière permettant de pouvoir plus facilement suivre le travail de chacun des membres du groupe et ainsi de pouvoir s'entraider en cas de difficultés.
 
 ///////////////////
+
+## Overview
+
+- Creation du formulaire données de paiement - Front (interface graphique) (score: 1)
+- Création des users stories + tache pour la backoffice (score:1)
+- Rédaction méthodologie - méthode commit (score:1)
+- AJout des tables/migrations (score:5)
+- Création d’un header - Mes commande (score:2)
+
+
+# Résumé sprint 4 - Nora
+
+## Avis personnel
+
+#### Points positifs : Dans ce sprint, j'ai pu davantage m'organiser et trouver un rythme de travail. Je suis plus à l'aise avec react et Tailwind mais ça reste laborieux malheureusement.
+
+#### Points négatifs : Manque de communication, on a échangé encore moins que les autres sprints car la planification des réunions était pour les Product Owner. Pour ma part, manque de connaissances et de compétences. Au début, de ce sprint j'avais une mauvaise organisation c'est pour ça que je n'ai pas pu finir mes taches. On a pris du retard. De plus, Éric et moi nous nous sommes rendu compte qu'on a sous-évalué les taches par rapport à nos connaissances.
+
+### Idées d'amélioration : Plus de communication dans le groupe, plus de réunions, plus de suivie. Améliorer ma méthode de recherche et organiser mieux mon temps.
+
+///////////////////
