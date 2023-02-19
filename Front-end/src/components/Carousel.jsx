@@ -1,33 +1,50 @@
 import React from "react"
-import "../style/Carousel.css"
-import "react-responsive-carousel/lib/styles/carousel.min.css"
-import { Carousel } from "react-responsive-carousel"
+import { useState, useEffect } from "react"
 
 const CarouselComponent = (props) => {
-  const { images } = props
+  const { images, slideDuration } = props
+  const [slide, setSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(images[1])
+
+  const name = () => {
+    console.log(slide)
+    if (slide < images.length - 1) {
+      setSlide(slide + 1)
+    } else {
+      setSlide(0)
+    }
+    setCurrentSlide(images[slide])
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(name, slideDuration)
+    return () => clearTimeout(timer)
+  })
+
   return (
-    <div class="carousel">
-      <Carousel
-        useKeyboardArrows={true}
-        showThumbs={false}
-        showIndicators={false}
-        autoPlay={true}
-        showStatus={false}
-        autoplay
-        transitionTime="500"
-        interval="2000"
-      >
-        {images.map((image, index) => (
-          <img
-            class="carouselImage"
-            alt="carouselImage"
-            src={image}
-            key={index}
-          />
-        ))}
-      </Carousel>
+    <div className="relative h-full w-full">
+      {images.map((image) => {
+        return (
+          <div
+            className={`absolute h-full w-full ${
+              currentSlide === image
+                ? "opacity-1 duration-1000"
+                : "opacity-0 duration-1000 ease-in scale-75"
+            }`}
+            key={image}
+          >
+            {currentSlide === image && (
+              <img
+                src={image}
+                alt="{curentSlide}"
+                className="h-full w-full object-cover"
+              />
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }
 
-export default CarouselComponent;
+export default CarouselComponent
