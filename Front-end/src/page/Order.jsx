@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
 const Order = () => {
-  return <div></div>;
-};
+  return <div></div>
+}
 
-export default Order;
+export default Order

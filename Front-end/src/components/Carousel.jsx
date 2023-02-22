@@ -5,23 +5,24 @@ const CarouselComponent = (props) => {
   const { images, slideDuration } = props
   const [slide, setSlide] = useState(0)
   const [currentSlide, setCurrentSlide] = useState(images[1])
-
   const name = () => {
-    console.log(slide)
     if (slide < images.length - 1) {
       setSlide(slide + 1)
     } else {
       setSlide(0)
     }
+
     setCurrentSlide(images[slide])
   }
-
+  
   useEffect(() => {
     const timer = setTimeout(name, slideDuration)
-    return () => clearTimeout(timer)
+
+    
+return () => clearTimeout(timer)
   })
 
-  return (
+  return(
     <div className="relative h-full w-full">
       {images.map((image) => {
         return (
