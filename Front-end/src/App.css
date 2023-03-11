@@ -24,3 +24,13 @@ ul {
 a {
   text-decoration: none;
 }
+
+.footer {
+  background-color: rgb(1, 252, 122);
+  border-top:2px solid rgb(18, 27, 8);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  color: rgb(9, 9, 9);
+  font-size: 25px;
+ }
