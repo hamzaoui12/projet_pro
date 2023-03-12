@@ -6,14 +6,17 @@ const product = () => {
       <div class="flex lg:space-x-96">
         <div class="m-20 bg-black max-w-sm h-48 lg:h-96 lg:w-96 rounded overflow-hidden shadow-lg ">
           <slot>
-            <p class="text-white p-2">Carousel d'Eric à mettre</p>
+          <div><img
+  src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.fully.com%2Ffr-eu%2Fbureau-debout-jarvis-en-l.html&psig=AOvVaw2LIhKQTN41SvyKlYRlSJPA&ust=1678721418367000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLCbo-Ha1v0CFQAAAAAdAAAAABAI"
+  class="h-auto max-w-full"
+  alt="..." /></div>            
           </slot>
         </div>
 
         <div class="lg:max-w-sm p-6 lg:m-20 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="flex space-x-8">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">1 200€</h5>
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">NOM PRODUIT</h5>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">BUREAU JARVIS</h5>
             </div>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">En stock</p>    
             <h5 class="mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat numquam voluptate quod vitae excepturi odio obcaecati? Sit laudantium id dignissimos necessitatibus autem obcaecati non, praesentium debitis. Rem officia veniam consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi porro eos iste blanditiis autem tempore ullam, numquam reiciendis, mollitia commodi nobis error! Blanditiis, voluptatem tempore. Et, cupiditate. A, libero alias?</h5>
