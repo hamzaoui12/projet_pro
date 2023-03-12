@@ -26,15 +26,7 @@ const product = () => {
         </div>
       </div>
       <div class="font-bold p-4 text-center">PRODUITS SIMILAIRES</div>
-      <div class="grid grid-cols-4 gap-4 p-4">
-        <div><img
-  src="https://th.bing.com/th/id/OIP.x1-6X1rg49jF23q0ztlKZAHaEe?pid=ImgDet&rs=1"
-  class="h-auto max-w-full"
-  alt="..." /></div>
-        <div><img
-  src="https://th.bing.com/th/id/OIP.x1-6X1rg49jF23q0ztlKZAHaEe?pid=ImgDet&rs=1"
-  class="h-auto max-w-full"
-  alt="..." /></div>
+      <div class="grid grid-cols-3 gap-4 p-4">
         <div><img
   src="https://th.bing.com/th/id/OIP.x1-6X1rg49jF23q0ztlKZAHaEe?pid=ImgDet&rs=1"
   class="h-auto max-w-full"
