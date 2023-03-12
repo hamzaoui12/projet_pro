@@ -2,24 +2,24 @@ import React from "react";
 
   const Inscription = () => {
     return (
-      <Container>
-        <Wrapper>
-          <Title>Creer un compte</Title>
-          <Form>
-            <Input placeholder="Nom" />
-            <Input placeholder="Prenom" />
-            <Input placeholder="Nom d'utilisateur" />
-            <Input placeholder="Email" />
-            <Input placeholder="Mot de passe" />
-            <Input placeholder="Confirmation du mot de passe" />
-            <Agreement>
+      <container>
+        <wrapper>
+          <title>Creer un compte</title>
+          <form>
+            <input placeholder="Nom" />
+            <input placeholder="Prenom" />
+            <input placeholder="Nom d'utilisateur" />
+            <input placeholder="Email" />
+            <input placeholder="Mot de passe" />
+            <input placeholder="Confirmation du mot de passe" />
+            <agreement>
             En créant un compte, je consens au traitement de mes données personnelles
             données conformément à la politique de confidentialité
-            </Agreement>
-            <Button>Creer</Button>
-          </Form>
-        </Wrapper>
-      </Container>
+            </agreement>
+            <button>Creer</button>
+          </form>
+        </wrapper>
+      </container>
     );
   };
   export default Inscription;

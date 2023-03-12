@@ -11,28 +11,28 @@ const Connexion = () => {
       Connexion(dispatch, { username, password });
     };
     return (
-      <Container>
-        <Wrapper>
-          <Title>Connexion</Title>
-          <Form>
-            <Input
+      <container>
+        <wrapper>
+          <title> Connexion </title>
+          <form>
+            <input
               placeholder="username"
               onChange={(e) => setUsername(e.target.value)}
             />
-            <Input
+            <input
               placeholder="password"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button onClick={handleClick} disabled={isFetching}>
+            <button onClick={handleClick} disabled={isFetching}>
               CONNEXION
-            </Button>
+            </button>
             {error && <Error>Echec de la Connexion...</Error>}
-            <Link>Mot de passe oublier !</Link>
-            <Link>Creer un nouveau compte</Link>
-          </Form>
-        </Wrapper>
-      </Container>
+            <link>Mot de passe oublier !</link>
+            <link>Creer un nouveau compte</link>
+          </form>
+        </wrapper>
+      </container>
     );
   };
   

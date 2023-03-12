@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
 const shopping_cart = () => {
-  return <div></div>;
-};
+  return <div></div>
+}
 
-export default shopping_cart;
+export default shopping_cart

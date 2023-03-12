@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
 const S = () => {
-  return <div></div>;
-};
+  return <div></div>
+}
 
-export default S;
+export default S
