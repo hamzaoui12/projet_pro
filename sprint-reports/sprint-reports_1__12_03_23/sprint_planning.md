@@ -24,11 +24,15 @@
 
 ### création du composant de barre de recherche - score = 2
 
+### Création du dossiers image pour les differentes categories et produits du projet - score = 2 
+
 # Change log :
 
 ### Formulaire d'inscription - score = 2 - amdz213
 
 ### Création de formulaire de connexion - score = 2 - amdz213
+
+### Création du dossiers image pour les differentes categories et produits du projet - score = 2 - amdz213
 
 ### Création du composant "Menu de Navigation" - score = 2 - hamzaoui12
 

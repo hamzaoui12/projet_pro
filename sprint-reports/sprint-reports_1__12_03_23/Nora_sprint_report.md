@@ -4,7 +4,6 @@
 
 ## Création du front du pied de page - [29-create_footer 34d1509] - Score = 2
 ## Création du front de la page produit - [30-front_page_product 6d373f9] et [30-front_page_product f92ea3b] - Score = 2
-## Create API Product + CRUD - 31-back_create_api_product - Score = 5 
 
 ## Summary:
 ### Le footer est fini, on y retrouve les contacts de l'entreprise et ses differents reseaus sociaux.
