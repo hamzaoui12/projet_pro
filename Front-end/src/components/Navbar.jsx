@@ -1,46 +1,72 @@
-import React, { useState } from "react"
-import { ImHome } from "react-icons/im"
-import { AiFillDelete } from "react-icons/ai"
-import { AiOutlineMenuUnfold } from "react-icons/ai"
+import { useState, useContext } from "react"
+import { useCartDetails } from "@/context/useCartDetails"
+
+import LogoSneakes from "@/assets/images/logo.svg"
+import AvatarImage from "@/assets/images/image-avatar.png"
+
+import MenuIcon from "@/components/icons/MenuIcon"
+import CartIcon from "@/components/icons/CartIcon"
+import CloseIcon from "@/components/icons/CloseIcon"
+import NavLinkHeader from "@/components/header/NavLinkHeader"
+
+import CartDetailsHeader from "@/components/header/CartDetailsHeader"
+
 const Navbar = () => {
-  const [open, setOpen] = useState(false)
-  const links = [
-    { name: "Home", link: "/" },
-    { name: "Service", link: "/service" },
-    { name: "About", link: "/about" },
-    { name: "Contact", link: "/" },
-  ]
+  const { totalQuantityProduct } = useContext(useCartDetails)
+
+  const [isOpenMenu, setIsOpenMenu] = useState(false)
+  const [isOpenDetailsCart, setOpenDetailsCart] = useState(false)
+
+  const handleOpenMenu = () => {
+    setIsOpenMenu(true)
+  }
+  const handleCloseMenu = () => {
+    setIsOpenMenu(false)
+  }
 
   return (
-    <div className="shadow-md w-full fixed top-0 left-0 ">
-      <div className="lg:flex items-center justify-between  bg-yellow-700 py-4 lg:px-10 px-10">
-        <div className="font-bold text-2xl cursor-pointer flex items-center font-[poppins] text-gray-800">
-          <span className="text-3xl ">
-            <ImHome />
-          </span>
-        </div>
-        <div
-          onclick={() => setOpen(!open)}
-          className="text-3xl absolute right-8 top-5 cursor-pointer lg:hidden"
+    <>
+      <header className="container relative mx-auto flex items-center gap-8 p-4 md:p-0">
+        <button className="md:hidden" onClick={handleOpenMenu}>
+          <MenuIcon />
+        </button>
+        <img
+          src={LogoSneakes}
+          alt="Logo sneakers"
+          className="mr-auto mb-1 h-5 md:mr-0"
+        />
+        <nav
+          className={`font-bold md:static md:mr-auto md:flex md:h-auto md:flex-row md:gap-4 md:p-0 ${
+            isOpenMenu
+              ? "absolute top-0 left-0 z-10 flex h-full w-4/5 flex-col gap-y-[21px] bg-white p-8"
+              : "hidden"
+          }`}
         >
-          {open ? <AiFillDelete /> : <AiOutlineMenuUnfold />}
+          <button className="mb-12 md:hidden" onClick={handleCloseMenu}>
+            <CloseIcon />
+          </button>
+          <NavLinkHeader text="Collections" />
+          <NavLinkHeader text="Men" />
+          <NavLinkHeader text="Women" />
+          <NavLinkHeader text="About" />
+          <NavLinkHeader text="Contact" />
+        </nav>
+        <div className="flex gap-4">
+          <button
+            onClick={() => setOpenDetailsCart(!isOpenDetailsCart)}
+            className="relative"
+          >
+            <CartIcon />
+            <span className="rigth-0 absolute top-0 translate-x-1 rounded-full bg-orange-primary px-2 text-xs font-bold text-white">
+              {totalQuantityProduct}
+            </span>
+          </button>
+          <img src={AvatarImage} alt="" className="w-10" />
+          {isOpenDetailsCart && <CartDetailsHeader />}
         </div>
-        <ul
-          className={
-            "lg:flex md:items-center md:pb-3 pb-12 absolute lg-static bg-yellow-700  lg:z-auto z-[-1] right-8 w-fulllg:w-auto lg:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-18 opacity-100 : 'top-[-490] lg:opacity-100 opacity-0'}"
-          }
-        >
-          {links.map((link) => (
-            <li
-              key={link.name}
-              className="lg:ml-12 lg:my-0 my-7 text-xl cursor-pointer hover:border-b-2 duration-500 hover:text-gray-700"
-            >
-              {link.name}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+      </header>
+      <span className="container mx-auto hidden h-[3px] w-full bg-gray-500 md:block"></span>
+    </>
   )
 }
 
