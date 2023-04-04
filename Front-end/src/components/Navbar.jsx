@@ -1,53 +1,43 @@
-import React from "react";
-import "../style/Navbar.css";
-import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
-  const [showLinks, setShowlinks] = useState(false);
-
-  const handleShowLinks = () => {
-    setShowlinks(!showLinks);
-  };
   return (
-    <nav className={`navbar ${showLinks ? "show-nav" : "hide-nav"} `}>
-      <div className="avbar_logo">Logo</div>
-      <lu className="navbar_links">
-        <li className="navbar_item">
-          <a href="/" className="navbar_link">
-            Accueil
+    <nav className="flex items-center justify-between py-4">
+      <div className="flex items-center">
+        <Link href="/">
+          <a className="mr-4">
+            <Image src="/logo.png" alt="Logo" width={50} height={50} />
           </a>
-        </li>
-        <li className="navbar_item">
-          <a href="/" className="navbar_link">
-            produit
+        </Link>
+        <ul className="flex items-center">
+          <li className="mr-4">
+            <Link href="/">
+              <a className="hover:text-gray-700">Accueil</a>
+            </Link>
+          </li>
+          <li className="mr-4">
+            <Link href="/produits">
+              <a className="hover:text-gray-700">Produit</a>
+            </Link>
+          </li>
+          <li className="mr-4">
+            <Link href="/categories">
+              <a className="hover:text-gray-700">Catégories</a>
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <div className="flex items-center">
+        <Link href="/panier">
+          <a className="flex items-center hover:text-gray-700">
+            <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
+            Panier
           </a>
-        </li>
-        <li className="navbar_item">
-          <a href="/" className="navbar_link">
-            connexion
-          </a>
-        </li>
-        <li className="navbar_item">
-          <a href="/" className="navbar_link">
-            category
-          </a>
-        </li>
-      </lu>
-      <ul className="navbar_icons">
-        <li className="navbar_action">
-          <a href="/" className="navbar_icone">
-            panier
-          </a>
-        </li>
-        <li className="navbar_action">
-          <a href="/" className="navbar_icone">
-            recherche
-          </a>
-        </li>
-      </ul>
-      <button className="navbar_burger" onClick={handleShowLinks}>
-        <span className="burger-bar"></span>
-      </button>
+        </Link>
+      </div>
     </nav>
   );
 };
