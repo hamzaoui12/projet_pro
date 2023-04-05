@@ -1,151 +1,109 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
-export default function ContactForm() {
+function Form() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
   const [city, setCity] = useState('');
-  const [region, setRegion] = useState('');
-  const [postalCode, setPostalCode] = useState('');
+  const [state, setState] = useState('');
+  const [zipCode, setZipCode] = useState('');
   const [country, setCountry] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const router = useRouter();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    router.push('/payment');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-gray-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="firstName">
-          First Name:
-        </label>
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 border rounded-lg shadow-lg">
+      <label className="block mb-2">
+        <span className="text-gray-700">Prénom :</span>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="firstName"
           type="text"
           value={firstName}
           onChange={(event) => setFirstName(event.target.value)}
-          required
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="lastName">
-          Last Name:
-        </label>
+      </label>
+      <label className="block mb-2">
+        <span className="text-gray-700">Nom :</span>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="lastName"
           type="text"
           value={lastName}
           onChange={(event) => setLastName(event.target.value)}
-          required
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="address1">
-          Address Line 1:
-        </label>
+      </label>
+      <label className="block mb-2">
+        <span className="text-gray-700">Adresse 1 :</span>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="address1"
           type="text"
           value={address1}
           onChange={(event) => setAddress1(event.target.value)}
-          required
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="address2">
-          Address Line 2:
-        </label>
+      </label>
+      <label className="block mb-2">
+        <span className="text-gray-700">Adresse 2 :</span>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="address2"
           type="text"
           value={address2}
           onChange={(event) => setAddress2(event.target.value)}
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="city">
-          City:
-        </label>
+      </label>
+      <label className="block mb-2">
+        <span className="text-gray-700">Ville :</span>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="city"
           type="text"
           value={city}
-          onChange= {(event) => setCity(event.target.value)}
-          required
+          onChange={(event) => setCity(event.target.value)}
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="region">
-          State/Region:
-        </label>
+      </label>
+      <label className="block mb-2">
+        <span className="text-gray-700">Région :</span>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="region"
           type="text"
-          value={region}
-          onChange={(event) => setRegion(event.target.value)}
-          required
+          value={state}
+          onChange={(event) => setState(event.target.value)}
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="postalCode">
-          Postal Code:
-        </label>
+      </label>
+      <label className="block mb-2">
+        <span className="text-gray-700">Code postal :</span>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="postalCode"
           type="text"
-          value={postalCode}
-          onChange={(event) => setPostalCode(event.target.value)}
-          required
+          value={zipCode}
+          onChange={(event) => setZipCode(event.target.value)}
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="country">
-          Country:
-        </label>
+      </label>
+      <label className="block mb-2">
+        <span className="text-gray-700">Pays :</span>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="country"
           type="text"
           value={country}
           onChange={(event) => setCountry(event.target.value)}
-          required
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2" htmlFor="phoneNumber">
-          Phone Number:
-        </label>
+      </label>
+      <label className="block mb-2">
+        <span className="text-gray-700">Numéro de téléphone :</span>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="phoneNumber"
           type="text"
           value={phoneNumber}
           onChange={(event) => setPhoneNumber(event.target.value)}
-          required
+          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
         />
-      </div>
-      <div className="flex items-center justify-between">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="submit"
-        >
-          Pay
-        </button>
-      </div>
+      </label>
+      <button type="submit" className="bg-indigo-500 text-white px-4 py-2 rounded mt-4 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+        Payer
+      </button>
     </form>
-  );
+    );
 }
 
+export default Form;    
+         
