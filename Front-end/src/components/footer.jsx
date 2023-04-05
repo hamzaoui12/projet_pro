@@ -1,6 +1,6 @@
 import React from 'react';
 import SimpleReactFooter from 'simple-react-footer';
-import "../style/footer.css"
+import "../style/Footer.css"
 
 const Footer = () => {
   // Define the data for the footer
