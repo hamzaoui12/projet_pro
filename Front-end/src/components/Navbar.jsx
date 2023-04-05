@@ -1,45 +1,44 @@
-import Link from "next/link";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 
-const Navbar = () => {
+function Navbar() {
   return (
-    <nav className="flex items-center justify-between py-4">
-      <div className="flex items-center">
-        <Link href="/">
-          <a className="mr-4">
-            <Image src="/logo.png" alt="Logo" width={50} height={50} />
-          </a>
-        </Link>
-        <ul className="flex items-center">
-          <li className="mr-4">
-            <Link href="/">
-              <a className="hover:text-gray-700">Accueil</a>
-            </Link>
+    <nav className="bg-gray-800">
+      <div className="container mx-auto flex items-center justify-between py-4">
+        <img
+          className="h-8 w-8"
+          src="https://example.com/logo.png"
+          alt="Logo"
+        />
+        <img
+          className="h-8 w-8"
+          src="https://example.com/cart-icon.png"
+          alt="Cart icon"
+        />
+        <ul className="flex">
+          <li className="mr-6">
+            <a className="text-white hover:text-gray-400" href="/">
+              Accueil
+            </a>
           </li>
-          <li className="mr-4">
-            <Link href="/produits">
-              <a className="hover:text-gray-700">Produit</a>
-            </Link>
+          <li className="mr-6">
+            <a className="text-white hover:text-gray-400" href="/cart">
+              Panier
+            </a>
           </li>
-          <li className="mr-4">
-            <Link href="/categories">
-              <a className="hover:text-gray-700">Catégories</a>
-            </Link>
+          <li className="mr-6">
+            <a className="text-white hover:text-gray-400" href="/products">
+              Produit
+            </a>
+          </li>
+          <li>
+            <a className="text-white hover:text-gray-400" href="/categories">
+              Catégories
+            </a>
           </li>
         </ul>
       </div>
-      <div className="flex items-center">
-        <Link href="/panier">
-          <a className="flex items-center hover:text-gray-700">
-            <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
-            Panier
-          </a>
-        </Link>
-      </div>
     </nav>
   );
-};
+}
 
 export default Navbar;
