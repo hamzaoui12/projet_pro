@@ -3,28 +3,11 @@ const UserModel = require("./user.model");
 const CategoryModel = require("./category.model");
 
 class ProductModel extends Model {
-  static get tableName() {
-    return "products";
-  }
+  static tableName = "products";
 
   static get relationMappings() {
     return {
-      creator: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: UserModel,
-        join: {
-          from: "products.created_by",
-          to: "users.id",
-        },
-      },
-      lastModifyBy: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: UserModel,
-        join: {
-          from: "products.last_modified_by",
-          to: "users.id",
-        },
-      },
+      //une categorie a plusieur produit n* -> 1
       category: {
         relation: Model.BelongsToOneRelation,
         modelClass: CategoryModel,

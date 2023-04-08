@@ -1,8 +1,8 @@
 const express = require('express');
 const ProductModel = require('./models/ProductModels'); // Import du modèle de données Product
+import config from "../../config"
 
 const app = express();
-const port = 3000;
 
 // Route pour récupérer tous les produits
 app.get('/products', async (req, res) => {
@@ -51,8 +51,4 @@ app.delete('/products/:id', async (req, res) => {
     const deleted = await product.$query().delete(); // Suppression du produit avec Objection.js
     res.json(deleted);
   }
-});
-
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
 });
