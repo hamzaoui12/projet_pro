@@ -2,7 +2,7 @@ import React from "react"
 
 const product = () => {
   return (
-    <div className="app">
+    <div className="app" class="bg-[#F5F5DC]">
       <div class="flex lg:space-x-96">
         <div class="m-20 bg-black max-w-sm h-48 lg:h-96 lg:w-96 rounded overflow-hidden shadow-lg ">
           <slot>
