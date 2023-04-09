@@ -1,4 +1,4 @@
-# Sprint n°1 du 09/03/2023 - Merina
+# Sprint n°2 du 09/04/2023 - Merina
 
 # Taches et commits effectués - Author : https://github.com/hamzaoui12
 
