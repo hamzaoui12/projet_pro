@@ -1,7 +1,7 @@
 const { Model } = require("objection")
 const ImageModel = require("./image.model")
 
-class ProductModel extends Model {
+class CategoryModel extends Model {
   static get tableName() {
     return "Category"
   }
@@ -20,4 +20,4 @@ class ProductModel extends Model {
   }
 }
 
-module.exports = ProductModel
+module.exports = CategoryModel
