@@ -16,6 +16,16 @@ const config = {
       stub: "./db/migration.stub",
     },
   },
+  security: {
+    session: {
+      password: {
+        saltLen: process.env.PSW_SALT,
+        iterations: process.env.PSW_ITERATIONS,
+        keyLen: process.env.PSW_KEY,
+        digest: process.env.PSW_DIGEST,
+      },
+    },
+  },
 }
 
 module.exports = config
