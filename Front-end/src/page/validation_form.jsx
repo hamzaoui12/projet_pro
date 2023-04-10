@@ -1,110 +1,131 @@
-import React, { useState } from 'react';
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
-function Form() {
-  
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [address1, setAddress1] = useState('');
-  const [address2, setAddress2] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [country, setCountry] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+const initialValues = {
+  firstName: "",
+  lastName: "",
+  address1: "",
+  address2: "",
+  city: "",
+  region: "",
+  postalCode: "",
+  country: "",
+  phoneNumber: "",
+};
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.firstName) {
+    errors.firstName = "Prénom est requis";
+  }
+
+  if (!values.lastName) {
+    errors.lastName = "Nom est requis";
+  }
+
+  if (!values.address1) {
+    errors.address1 = "Adresse est requise";
+  }
+
+  if (!values.city) {
+    errors.city = "Ville est requise";
+  }
+
+  if (!values.region) {
+    errors.region = "Région est requise";
+  }
+
+  if (!values.postalCode) {
+    errors.postalCode = "Code postal est requis";
+  }
+
+  if (!values.country) {
+    errors.country = "Pays est requis";
+  }
+
+  if (!values.phoneNumber) {
+    errors.phoneNumber = "Numéro de téléphone est requis";
+  }
+
+  return errors;
+};
+
+const PaymentForm = () => {
+  const handleSubmit = (values) => {
+    // envoyer les données du formulaire à une API ou à un backend pour traitement
+    console.log(values);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-8 border rounded-lg shadow-lg">
-      <label className="block mb-2">
-        <span className="text-gray-700">Prénom :</span>
-        <input
-          type="text"
-          value={firstName}
-          onChange={(event) => setFirstName(event.target.value)}
-          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Nom :</span>
-        <input
-          type="text"
-          value={lastName}
-          onChange={(event) => setLastName(event.target.value)}
-          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Adresse 1 :</span>
-        <input
-          type="text"
-          value={address1}
-          onChange={(event) => setAddress1(event.target.value)}
-          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Adresse 2 :</span>
-        <input
-          type="text"
-          value={address2}
-          onChange={(event) => setAddress2(event.target.value)}
-          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Ville :</span>
-        <input
-          type="text"
-          value={city}
-          onChange={(event) => setCity(event.target.value)}
-          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Région :</span>
-        <input
-          type="text"
-          value={state}
-          onChange={(event) => setState(event.target.value)}
-          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Code postal :</span>
-        <input
-          type="text"
-          value={zipCode}
-          onChange={(event) => setZipCode(event.target.value)}
-          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Pays :</span>
-        <input
-          type="text"
-          value={country}
-          onChange={(event) => setCountry(event.target.value)}
-          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </label>
-      <label className="block mb-2">
-        <span className="text-gray-700">Numéro de téléphone :</span>
-        <input
-          type="text"
-          value={phoneNumber}
-          onChange={(event) => setPhoneNumber(event.target.value)}
-          className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-        />
-      </label>
-      <button type="submit" className="bg-indigo-500 text-white px-4 py-2 rounded mt-4 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
-        Payer
-      </button>
-    </form>
-    );
-}
+    <Formik
+      initialValues={initialValues}
+      validate={validate}
+      onSubmit={handleSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          <div>
+            <label htmlFor="firstName">Prénom :</label>
+            <Field type="text" name="firstName" />
+            <ErrorMessage name="firstName" />
+          </div>
 
-export default Form;    
-         
+          <div>
+            <label htmlFor="lastName">Nom :</label>
+            <Field type="text" name="lastName" />
+            <ErrorMessage name="lastName" />
+          </div>
+
+          <div>
+            <label htmlFor="address1">Adresse :</label>
+            <Field type="text" name="address1" />
+            <ErrorMessage name="address1" />
+          </div>
+
+          <div>
+            <label htmlFor="address2">Adresse 2 :</label>
+            <Field type="text" name="address2" />
+            <ErrorMessage name="address2" />
+          </div>
+
+          <div>
+            <label htmlFor="city">Ville :</label>
+            <Field type="text" name="city" />
+            <ErrorMessage name="city" />
+          </div>
+
+          <div>
+            <label htmlFor="region">Région :</label>
+            <Field type="text" name="region" />
+            <ErrorMessage name="region" />
+          </div>
+
+          <div>
+            <label htmlFor="postalCode">Code Postal :</label>
+            <Field type="text" name="postalCode" />
+            <ErrorMessage name="postalCode" />
+          </div>
+
+          <div>
+            <label htmlFor="country">Pays :</label>
+            <Field type="text" name="country" />
+            <ErrorMessage name="country" />
+          </div>
+
+          <div>
+            <label htmlFor="phoneNumber">Numéro de téléphone :</label>
+            <Field type="text" name="phoneNumber" />
+            <ErrorMessage name="phoneNumber" />
+          </div>
+
+          <button type="submit" disabled={isSubmitting}>
+            Valider
+          </button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
+
+export default PaymentForm;
