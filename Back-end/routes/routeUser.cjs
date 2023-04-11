@@ -1,10 +1,9 @@
 const sanitizeUser = require("../sanitizer.js")
 const UserModel = require("../models/UserModel.cjs")
+const hashPassword = require("../hashPassword.cjs")
 
 const routeUsers = async ({ app, db }) => {
-  const checkUser = async (res, userId) => {
-    const user = await UserModel.query().findById(userId)
-
+  const checkUser = (user) => {
     if (user) {
       return true
     }
@@ -22,45 +21,64 @@ const routeUsers = async ({ app, db }) => {
 
   app.get("/users/:id", async (req, res) => {
     const { id } = req.params
-
-    if (checkUser(res, id)) {
-      res.status(404).send({error: "not found"})
-    }
-
     const user = await UserModel.query().findById(id)
-    console.log(user)
+
+    if ((!checkUser(user))) {
+      res.status(404).send({ error: "not found" })
+
+      return
+    }
 
     res.send({ result: sanitizeUser(user) })
   })
 
   app.post("/users", async (req, res) => {
-    const { firstName, lastName, mail, phoneNumber } = req.body
+    const { firstName, lastName, password, mail, phoneNumber } = req.body
 
-    const [user] = await UserModel.query().insert({ firstName, lastName, mail, phoneNumber })
-    res.send({ id: user, firstName, lastName, mail, phoneNumber })
+    const [passwordHash, passwordSalt] = hashPassword(password)
+
+    try {
+      const user = await UserModel.query().insert({ firstName, lastName, passwordHash, passwordSalt, mail, phoneNumber })
+      res.send(sanitizeUser(user))
+    } catch (error) {
+      res.send({result: error})
+
+      return 
+    }
   })
 
   app.patch("/users/:id", async (req, res) => {
     const { id } = req.params
     const { firstName, lastName, mail, phoneNumber } = req.body
 
-    if (checkUser(res, id)) {
-      res.status(404).send({error: "not found"})
-    }
+    try {
+      const updateUser = await UserModel.query().updateAndFetchById(id, { firstName, lastName, mail, phoneNumber })
 
-    const updateUser = await UserModel.query().updateAndFetchById(id, { firstName, lastName, mail, phoneNumber })
-    res.send({ id: updateUser, firstName, lastName, mail, phoneNumber })
+      if (!checkUser(updateUser)) {
+        res.status(404).send({ error: "not found" })
+
+        return
+      }
+
+      res.send(sanitizeUser(updateUser))
+    } catch (error) {
+      res.send({result: error})
+
+      return 
+    }
   })
 
   app.delete("/users/:id", async (req, res) => {
     const { id } = req.params
     const [user] = await db("users").where({ id: id })
 
-    if (checkUser(res, id)) {
-      res.status(404).send({error: "not found"})
+    if (!checkUser(user)) {
+      res.status(404).send({ error: "not found" })
+
+      return
     }
 
-    res.send({ result: user })
+    res.send({ result: sanitizeUser(user) })
     await UserModel.query().deleteById(id)
   })
 }
