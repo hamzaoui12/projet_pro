@@ -22,6 +22,14 @@
 
 ## create API User + CRUD - score = 5
 
+## feature : Creation du formulaire validationd'information - score = 2
+
+## feature : Création de la page mot de passe oublier - score = 2
+
+## feature : Création de l'api cart - score = 4
+
+## feature : Création de l'api adress - score = 4
+
 # Change log :
 
 ## Create API Picture + CRUD - [55-back_create_api_pictures 2838f6c] - Score = 5 - NoraSEDJAI
@@ -45,3 +53,11 @@
 ## ajout des tables/migrations - score = 5 - sckaper
 
 ## create API User + CRUD - score = 5 - sckaper
+
+## feature : Creation du formulaire validationd'information - score = 2 - amdz213
+
+## feature : Création de la page mot de passe oublier - score = 2 - amdz213
+
+## feature : Création de l'api cart - score = 4 - amdz213
+
+## feature : Création de l'api adress - score = 4 - amdz213
