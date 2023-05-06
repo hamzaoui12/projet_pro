@@ -6,9 +6,7 @@ const App = () => {
   return (
     <div className="app">
       <Navbar />
-    <footer>
-      <Footer />
-    </footer>
+
     </div>
   );
 };
