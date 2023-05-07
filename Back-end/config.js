@@ -24,6 +24,10 @@ const config = {
         keyLen: parseInt(process.env.PSW_KEY),
         digest: process.env.PSW_DIGEST,
       },
+      jwt: {
+        secret : process.env.JWT_SECRET,
+        expiresIn : process.env.JWT_EXPIRE
+      }
     },
   },
 }
