@@ -31,7 +31,8 @@ const Navbar = () => {
       </div>
       {/* Cart button */}
       <button className="bg-black text-white hidden md:flex items-center p-2 rounded-full">
-        <BsFillCartFill size={20} className="mr-1" /> Cart
+        <BsFillCartFill size={20} className="mr-1" />
+        Cart
       </button>
 
       {/* Mobile Menu */}
