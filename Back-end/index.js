@@ -1,6 +1,4 @@
-const express = require("express")
-require("dotenv").config()
-const app = express()
+const run = require("./run.cjs")
 const config = require("./config.js")
 
-app.listen(config.port, () => { })
+run(config)
