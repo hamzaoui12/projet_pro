@@ -1,161 +1,66 @@
-import React from "react"
-import Link from "next/link"
+import React, { useState } from "react"
+import { data } from "../data/data.jsx"
 
-const categories = [
-  {
-    id: 1,
-    name: "Chambre",
-    description: "Tous les meubles pour la chambre",
-    image: "/images/Pictures/Chambre.jpg",
-    products: [
-      {
-        id: 1,
-        name: "Lit",
-        price: "500€",
-        image: "/images/Categories/chambre/adulte/Lit_double/IMG_6994_2.jpg",
-      },
-      {
-        id: 2,
-        name: "Armoire",
-        price: "300€",
-        image: "/images/Categories/chambre/adulte/Armoire/IMG_2017_2.jpg",
-      },
-      {
-        id: 3,
-        name: "Commodes",
-        price: "150€",
-        image: "/images/Categories/chambre/adulte/Commode/IMG_7006_2.jpg",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Cuisine",
-    description: "Tous les meubles pour la cuisine",
-    image: "/images/Pictures/Cuisine.jpg",
-    products: [
-      {
-        id: 1,
-        name: "Bar",
-        price: "200€",
-        image: "/images/Categories/Cuisine/Bar/IMG_6963_2.jpg",
-      },
-      {
-        id: 2,
-        name: "cellier",
-        price: "50€",
-        image: "/images/Categories/Cuisine/cellier/IMG_6983_2.jpg",
-      },
-      {
-        id: 3,
-        name: "chaise",
-        price: "350€",
-        image: "/images/Categories/Cuisine/Chaise_haute/IMG_6973_2.jpg",
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Salon",
-    description: "Tous les meubles pour le salon",
-    image: "/images/Pictures/Salon.jpg",
-    products: [
-      {
-        id: 1,
-        name: "Canapé",
-        price: "800€",
-        image: "/images/Categories/Salon/Canape/IMG_6880_2.jpg",
-      },
-      {
-        id: 2,
-        name: "Fauteuils",
-        price: "150€",
-        image: "/images/Categories/Salon/Fauteuil/IMG_6945_2.jpg",
-      },
-      {
-        id: 3,
-        name: "Table basse",
-        price: "100€",
-        image: "/images/Categories/Salon/Table_basse/IMG_6885_2.jpg",
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: "Salle de bain",
-    description: "Tous les meubles pour la salle de bain",
-    image: "/images/Pictures/salle-de-bain.jpg",
-    products: [
-      {
-        id: 1,
-        name: "Meuble lavabo",
-        price: "250€",
-        image: "/images/Categories/Salle_de_bain/Meuble_lavabo/IMG_7046_2.jpg",
-      },
-      {
-        id: 2,
-        name: "etagere murale",
-        price: "50€",
-        image: "/images/Categories/Salle_de_bain/Etagere_murale/IMG_7051_2.jpg",
-      },
-      {
-        id: 3,
-        name: "Vasque",
-        price: "100€",
-        image: "/images/Categories/Salle_de_bain/Vasque/IMG_7042_2.jpg",
-      },
-    ],
-  },
-]
+const Category = () => {
+  //   console.log(data);
+  const [Kitchen] = useState(data)
 
-const CategoryPage = ({ category }) => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold mb-4">{category.name}</h1>
-      <img className="mb-4" src={category.image} alt={category.name} />
-      <p className="mb-4">{category.description}</p>
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols
--3 lg:grid-cols-3 gap-4"
-      >
-        {category.products.map((product) => (
-          <div
-            key={product.id}
-            className="bg-white rounded-lg overflow-hidden shadow-md"
-          >
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-48 object-cover"
-            />
-            <div className="px-4 py-2">
-              <p className="text-lg font-bold mb-2">{product.name}</p>
-              <p className="text-gray-700">{product.price}</p>
-            </div>
-          </div>
-        ))}
+    <div className="max-w-[1640px] mx-auto p-2">
+      <div className="max-h-[500px] relative">
+        {/* Overlay */}
+        <div className="absolute w-full h-full text-gray-200 max-h-[500px] bg-black/40 flex flex-col justify-center">
+          <h1 className="px-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+            The <span className="text-orange-200">Best</span>
+          </h1>
+          <h1 className="px-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+            {" "}
+            <span className="text-orange-200">Kitchen</span> Furniture
+          </h1>
+        </div>
+        <img
+          className="w-full max-h-[500px] object-cover"
+          src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg"
+          alt="/"
+        />
       </div>
-      <Link href="/">
-        <a className="block mt-4 text-indigo-600 hover:text-indigo-800">
-          Retour à la page d'accueil
-        </a>
-      </Link>
+      <div className="max-w-[1640px] m-auto px-4 py-32">
+        <h1 className="text-gray-900  font-bold text-4xl text-center">
+          Discover Our Best Models
+          <p className="text-gray-700  font-bold text-2xl py-12 text-center">
+            La cuisine est une pièce spécifique dans un bâtiment, spécialement
+            équipée pour la préparation des aliments et des plats. On y dispose
+            généralement de l'eau courante et divers appareils électroménagers
+            (cuisinière, four, réfrigérateur...).
+          </p>
+        </h1>
+
+        {/* Display foods */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 py-32  cursor-pointer">
+          {Kitchen.map((item, index) => (
+            <div
+              key={index}
+              className="border shadow-lg  hover:scale-105 duration-300"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-full h-[300px] l-[300px]object-cover "
+              />
+              <div className="flex justify-between px-2 py-4">
+                <p className="font-bold">{item.name}</p>
+                <p>
+                  <span className="bg-black text-white p-1 rounded-full">
+                    {item.price}
+                  </span>
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
-export async function getStaticPaths() {
-  const paths = categories.map((category) => ({
-    params: { id: category.id.toString() },
-  }))
 
-  return { paths, fallback: false }
-}
-
-export async function getStaticProps({ params }) {
-  const id = parseInt(params.id)
-  const category = categories.find((category) => category.id === id)
-
-  return { props: { category } }
-}
-
-export default CategoryPage
+export default Category
