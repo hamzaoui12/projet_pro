@@ -1,86 +1,102 @@
 import React, { useState } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { AiOutlineMenu, AiOutlineSearch, AiOutlineClose } from "react-icons/ai"
+import { BsFillCartFill } from "react-icons/bs"
+import { TbHome } from "react-icons/tb"
+import { FaWallet } from "react-icons/fa"
+import { MdCategory, MdHelp } from "react-icons/md"
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const handleMenuClick = () => {
-    setMenuOpen(!menuOpen)
-  }
+  const [div, setNav] = useState(false)
 
   return (
-    <div className="bg-orange-100 shadow">
-      <div className="container mx-auto px-6 py-3 md:flex md:justify-between md:items-center">
-        <div className="flex items-center justify-between">
-          <div>
-            <a
-              className="text-gray-800 text-xl font-bold md:text-2xl hover:text-gray-700"
-              href="#"
-            >
-              Mon Site E-commerce
-            </a>
-          </div>
-
-          <div className="flex md:hidden">
-            <button
-              type="button"
-              className="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
-              aria-label="toggle menu"
-              onClick={handleMenuClick}
-            >
-              <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-                ></path>
-              </svg>
-            </button>
-          </div>
+    <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
+      {/* Left side */}
+      <div className="flex items-center">
+        <div onClick={() => setNav(!div)} className="cursor-pointer">
+          <AiOutlineMenu size={30} />
         </div>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl px-2">
+          Best <span className="font-bold">Furniture</span>
+        </h1>
+      </div>
 
-        <div
-          className={`md:flex items-center ${menuOpen ? "block" : "hidden"}`}
-        >
-          <div className="flex flex-col md:flex-row md:mx-6">
-            <a
-              className="my-1 text-gray-700 hover:text-blue-500 md:mx-4 md:my-0"
-              href="#"
-            >
-              Accueil
-            </a>
-            <a
-              className="my-1 text-gray-700 hover:text-blue-500 md:mx-4 md:my-0"
-              href="#"
-            >
-              Produits
-            </a>
-            <a
-              className="my-1 text-gray-700 hover:text-blue-500 md:mx-4 md:my-0"
-              href="#"
-            >
-              Catégories
-            </a>
-            <a
-              className="my-1 text-gray-700 hover:text-blue-500 md:mx-4 md:my-0"
-              href="#"
-            >
+      {/* Search Input */}
+      <div className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[400px] lg:w-[500px]">
+        <AiOutlineSearch size={25} />
+        <input
+          className="bg-transparent p-2 w-full focus:outline-none"
+          type="text"
+          placeholder="Best Furniture"
+        />
+      </div>
+      {/* Cart button */}
+      <button className="bg-black text-white hidden md:flex items-center p-2 rounded-full">
+        <BsFillCartFill size={20} className="mr-1" /> Cart
+      </button>
+
+      {/* Mobile Menu */}
+      {/* Overlay */}
+      {div ? (
+        <div className="bg-black/80 fixed w-full h-screen z-10 top-0 left-0"></div>
+      ) : (
+        ""
+      )}
+
+      {/* Side drawer menu */}
+      <div
+        className={
+          div
+            ? "fixed top-0 left-0 w-[300px] h-screen bg-white z-10 duration-300"
+            : "fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-10 duration-300"
+        }
+      >
+        <AiOutlineClose
+          onClick={() => setNav(!div)}
+          size={30}
+          className="absolute right-4 top-4 cursor-pointer"
+        />
+        <h2 className="text-2xl p-4">
+          Best <span className="font-bold">Furniture</span>
+        </h2>
+        <div>
+          <ul className="flex flex-col p-4 text-gray-800">
+            <li className="text-xl py-4 flex">
+              <TbHome
+                onClick={() => setNav(!div)}
+                size={25}
+                className="mr-4 cursor-pointer"
+              />{" "}
+              Home
+            </li>
+            <li className="text-xl py-4 flex">
+              <MdCategory
+                onClick={() => setNav(!div)}
+                size={25}
+                className="mr-4 cursor-pointer"
+              />{" "}
+              Category
+            </li>
+            <li className="text-xl py-4 flex">
+              <FaWallet
+                onClick={() => setNav(!div)}
+                size={25}
+                className="mr-4 cursor-pointer"
+              />{" "}
               Panier
-            </a>
-          </div>
-
-          <div className="flex items-center">
-            <button
-              className=" text-gray-700 rounded-full  focus:outline-none  transition duration-150 ease-in-out"
-              aria-label="Cart"
-            >
-              <span className="sr-only">View cart</span>
-              <FontAwesomeIcon icon={faShoppingCart} className="h-6 w-6" />
-            </button>
-          </div>
+            </li>
+            <li className="text-xl py-4 flex">
+              <MdHelp
+                onClick={() => setNav(!div)}
+                size={25}
+                className="mr-4 cursor-pointer"
+              />{" "}
+              Help
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   )
 }
+
 export default Navbar
