@@ -30,7 +30,19 @@
 
 ### Création front page produit - score = 2
 
+### feature : Mise a jour et finition du front de la page Catégories - score = 5
+
+### feature : Ajout de la fonction “Ajouter au panier” - score = 3
+
+### feature : creation du Composant liste produits front pour la page “Commandes” + “Panier” - score = 3
+
 # Change log :
+
+### feature : Mise a jour et finition du front de la page Catégories - score = 5 - hamzaoui12
+
+### feature : Ajout de la fonction “Ajouter au panier” - score = 3 - hamzaoui12
+
+### feature : creation du Composant liste produits front pour la page “Commandes” + “Panier” - score = 3 - hamzaoui12
 
 ### Création du composent prix - score = 2 - amdz213
 
