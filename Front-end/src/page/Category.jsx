@@ -45,7 +45,7 @@ const Category = () => {
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-full h-[300px] l-[300px]object-cover "
+                className="w-full h-[200px] l-[200px] object-cover "
               />
               <div className="flex justify-between px-2 py-4">
                 <p className="font-bold">{item.name}</p>
