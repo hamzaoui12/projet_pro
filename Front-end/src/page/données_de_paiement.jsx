@@ -5,6 +5,7 @@ function PaymentForm() {
   const [cardNumber, setCardNumber] = useState("")
   const [expirationDate, setExpirationDate] = useState("")
   const [cvv, setCvv] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleCardNameChange = (event) => {
     setCardName(event.target.value)
@@ -24,12 +25,26 @@ function PaymentForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    //
+    setIsLoading(true)
+
+    // Simulating a delay for the payment process
+    setTimeout(() => {
+      setIsLoading(false)
+      // Perform the actual payment logic here
+      // Reset form fields
+      setCardName("")
+      setCardNumber("")
+      setExpirationDate("")
+      setCvv("")
+    }, 2000)
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8">
-      <div className="mb-4">
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-md mx-auto mt-8 p-6 rounded-lg shadow-lg bg-gray-100"
+    >
+      <div className="mb-6">
         <label
           htmlFor="cardName"
           className="block text-gray-700 font-bold mb-2"
@@ -46,7 +61,7 @@ function PaymentForm() {
         />
       </div>
 
-      <div className="mb-4">
+      <div className="mb-6">
         <label
           htmlFor="cardNumber"
           className="block text-gray-700 font-bold mb-2"
@@ -55,15 +70,18 @@ function PaymentForm() {
         </label>
         <input
           id="cardNumber"
-          type="text"
+          type="Number"
           value={cardNumber}
           onChange={handleCardNumberChange}
+          minlength="16"
+          maxlength="16"
+          placeholder="0000 0000 0000 0000"
           required
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
 
-      <div className="mb-4">
+      <div className="mb-6">
         <label
           htmlFor="expirationDate"
           className="block text-gray-700 font-bold mb-2"
@@ -72,7 +90,7 @@ function PaymentForm() {
         </label>
         <input
           id="expirationDate"
-          type="text"
+          type="date"
           value={expirationDate}
           onChange={handleExpirationDateChange}
           required
@@ -80,26 +98,30 @@ function PaymentForm() {
         />
       </div>
 
-      <div className="mb-4">
+      <div className="mb-6">
         <label htmlFor="cvv" className="block text-gray-700 font-bold mb-2">
           CVV
         </label>
         <input
           id="cvv"
-          type="text"
+          type="number"
           value={cvv}
           onChange={handleCvvChange}
+          min="0"
+          max="999"
+          placeholder="000"
           required
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
 
-      <div className="flex items-center justify-center">
+      <div className="flex items-center  justify-center">
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          disabled={isLoading}
+          className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Payer
+          {isLoading ? "Paiement en cours..." : "Payer"}
         </button>
       </div>
     </form>
