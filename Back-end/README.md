@@ -1,8 +1,15 @@
-# Fonctionnement du backend
+# Lancement du backend
+
+## Installation des dépendances et paquets
+
+Dans le terminal, utiliser la commandes :
+"npm install"
 
 ## Configuration du fichier .env
 
-Dans le fichier .env, créer les variables suivantes :
+Créer un fichier .env
+
+Dans ce fichier .env, créer les variables suivantes :
 
 PORT = <port utilisé par le backend>
 DB_PORT = <port sur lequel la base de donnée tourne>
@@ -16,7 +23,17 @@ PSW_ITERATIONS = <nombre iterations du sel (Integer)>
 PSW_KEY = <clef des mots de passe (Integer)>
 PSW_DIGEST = <methode de hashing utilisée>
 
-## lancement du backend
+## Lancement des migrations
 
-se placer sur le dossier "Back-end" et lancer la commande :
+Dans le terminal utiliser la commande "npx --knex migrate:latest"
+Si un message d'erreur apparait, essayer la commande "npx knex --esm migrate:latest"
+
+## Lancement du SEED
+
+Dans le terminal, utiliser la commande : "node ./db/seed.js"
+puis ctrl+C après quelques secondes
+
+## Lancement du backend
+
+Se placer sur le dossier "Back-end" et lancer la commande :
 node index.js
