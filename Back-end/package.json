@@ -17,12 +17,12 @@
     "color-convert": "^2.0.1",
     "color-name": "^1.1.4",
     "concat-map": "^0.0.1",
+    "cors": "^2.8.5",
     "cross-spawn": "^7.0.3",
     "deep-is": "^0.1.4",
     "doctrine": "^3.0.0",
     "dotenv": "^16.0.3",
     "escape-string-regexp": "^4.0.0",
-    "eslint": "^8.31.0",
     "eslint-scope": "^7.1.1",
     "eslint-utils": "^3.0.0",
     "eslint-visitor-keys": "^3.3.0",
@@ -59,12 +59,16 @@
     "js-yaml": "^4.1.0",
     "json-schema-traverse": "^0.4.1",
     "json-stable-stringify-without-jsonify": "^1.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "knex": "^2.4.2",
     "levn": "^0.4.1",
     "locate-path": "^6.0.0",
     "lodash.merge": "^4.6.2",
     "minimatch": "^3.1.2",
+    "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "natural-compare": "^1.4.0",
+    "objection": "^3.0.1",
     "once": "^1.4.0",
     "optionator": "^0.9.1",
     "p-limit": "^3.1.0",
@@ -96,8 +100,12 @@
     "yocto-queue": "^0.1.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "knex": "knex --esm"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.36.0"
+  }
 }

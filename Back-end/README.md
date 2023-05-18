@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Lancement du backend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation des dépendances et paquets
 
-## Available Scripts
+Dans le terminal, utiliser la commandes :
+"npm install"
 
-In the project directory, you can run:
+## Configuration du fichier .env
 
-### `npm start`
+Créer un fichier .env
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Dans ce fichier .env, créer les variables suivantes :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+PORT = <port utilisé par le backend>
+DB_PORT = <port sur lequel la base de donnée tourne>
+DB_CLIENT = <le client utilisé (mysql2)>
+DB_HOST = <l'adresse IP sur laquel tourne le back (lovahost pour ce qui tourne en local)>
+DB_CONNECTION_USER = <username utilisateur de la BDD>
+DB_PASSWORD = <mot de passe utilisateur de la BDD>
+DB_CONNECTION_DATABASE = <nom de la BDD utilisée>
+PSW_SALT = <sel des mot de passe (Integer)>
+PSW_ITERATIONS = <nombre iterations du sel (Integer)>
+PSW_KEY = <clef des mots de passe (Integer)>
+PSW_DIGEST = <methode de hashing utilisée>
+JWT_SECRET = <clef secrète du Json web token (String)>
+JWT_EXPIRE = <temps de validité du token (1 min, 1 day, 1 week...)>
 
-### `npm test`
+## Lancement des migrations
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Dans le terminal utiliser la commande "npx --knex migrate:latest"
+Si un message d'erreur apparait, essayer la commande "npx knex --esm migrate:latest"
 
-### `npm run build`
+## Lancement du SEED
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Dans le terminal, utiliser la commande : "node ./db/seed.js"
+puis ctrl+C après quelques secondes
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Lancement du backend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Se placer sur le dossier "Back-end" et lancer la commande :
+node index.js
