@@ -22,6 +22,8 @@ PSW_SALT = <sel des mot de passe (Integer)>
 PSW_ITERATIONS = <nombre iterations du sel (Integer)>
 PSW_KEY = <clef des mots de passe (Integer)>
 PSW_DIGEST = <methode de hashing utilisée>
+JWT_SECRET = <clef secrète du Json web token (String)>
+JWT_EXPIRE = <temps de validité du token (1 min, 1 day, 1 week...)>
 
 ## Lancement des migrations
 
