@@ -1,13 +1,24 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react"
-import { AiOutlineMenu, AiOutlineSearch, AiOutlineClose } from "react-icons/ai"
-import { BsFillCartFill } from "react-icons/bs"
+import {
+  AiOutlineMenu,
+  AiOutlineSearch,
+  AiOutlineClose,
+  AiOutlineShoppingCart,
+} from "react-icons/ai"
 import { TbHome } from "react-icons/tb"
 import { FaWallet } from "react-icons/fa"
 import { MdCategory, MdHelp } from "react-icons/md"
 
 const Navbar = () => {
   const [div, setNav] = useState(false)
+  const [cart, setCart] = useState([]) // Tableau pour stocker les produits ajoutés au panier
+  const [item, setShowCart] = useState(false)
 
+  function handleAddToCart(product) {
+    setCart([...cart, product]) // Ajouter le produit sélectionné au tableau cart
+    setShowCart(true) // Afficher le panier
+  }
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
       {/* Left side */}
@@ -30,10 +41,38 @@ const Navbar = () => {
         />
       </div>
       {/* Cart button */}
-      <button className="bg-black text-white hidden md:flex items-center p-2 rounded-full">
-        <BsFillCartFill size={20} className="mr-1" />
-        Cart
-      </button>
+      <div className="text-black hidden md:flex items-center p-2  cursor-pointer">
+        <div onClick={() => setShowCart(!item)} size={30}>
+          <AiOutlineShoppingCart className="text-3xl" />
+
+          <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
+            {cart.length}
+          </div>
+        </div>
+        {item ? (
+          <div className=" fixed w-full h-screen z-10 top-0 right-0"></div>
+        ) : (
+          ""
+        )}
+        {item && (
+          <div
+            className={`${
+              item ? "right-0" : "-right-full"
+            } bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px]`}
+          >
+            <div className="flex items-center justify-between py-6 border-b">
+              <div className="uppercase text-xl font-semibold">
+                Shopping Bag
+              </div>{" "}
+              <AiOutlineClose
+                onClick={() => setShowCart(!item)}
+                size={30}
+                className="cursor-pointer w-8 h-8 flex justify-center items-center"
+              />
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Mobile Menu */}
       {/* Overlay */}
