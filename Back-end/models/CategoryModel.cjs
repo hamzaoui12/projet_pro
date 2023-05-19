@@ -1,19 +1,21 @@
-const BaseModel = require("./BaseModel.cjs")
-const ProductModel = require("./ProductModel.cjs")
+const { Model } = require("objection")
+const ImageModel = require("./image.model")
 
 class CategoryModel extends BaseModel {
-  static tableName = "categories"
+  static get tableName() {
+    return "Category"
+  }
 
-  static relationMappings() {
-  return {
-    products: {
-      modelClass: ProductModel,
-      relation: BaseModel.HasManyRelation,
-      join: {
-        from: "categories.id",
-        to: "products.category_id"
-      }
-    }
+  static get relationMappings() {
+    return {
+      images: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: ImageModel,
+        join: {
+          from: "category.id_picture",
+          to: "picture.id",
+        },
+      },
     }
   }
 }
