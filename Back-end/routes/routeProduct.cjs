@@ -1,54 +1,124 @@
-const express = require('express');
-const ProductModel = require('./models/ProductModels'); // Import du modèle de données Product
-import config from "../config"
+const ProductModel = require("../models/ProductModel.cjs");
+const auth = require("../middlewares/auth.js");
 
-const app = express();
+const routeProducts = async ({ app, db }) => {
+  const checkProduct = (product) => {
+    if (product) {
+      return true;
+    }
+    return false;
+  };
+  
+  app.get("/products", async (req, res) => {
+    res.send({
+      result: await ProductModel.query().withGraphFetched("materials").withGraphFetched("category"),
+    });
+  });
 
-// Route pour récupérer tous les produits
-app.get('/products', async (req, res) => {
-  const products = await ProductModel.query(); // Récupération de tous les produits avec Objection.js
-  res.json(products);
-});
+  app.get("/products/:id", async (req, res) => {
+    const { id } = req.params;
+    const product = await ProductModel.query().findById(id).withGraphFetched("materials").withGraphFetched("category");
 
-// Route pour récupérer un produit par son ID
-app.get('/products/:id', async (req, res) => {
-  const productId = req.params.id;
-  const product = await ProductModel.query().findById(productId); // Récupération du produit avec l'ID spécifié avec Objection.js
-  if (!product) {
-    res.status(404).json({ error: 'Product not found' });
-  } else {
-    res.json(product);
-  }
-});
+    if (!checkProduct(product)) {
+      res.status(404).send({ error: "not found" });
+      return;
+    }
 
-// Route pour créer un nouveau produit
-app.post('/products', async (req, res) => {
-  const newProduct = req.body; // Le corps de la requête contient les données du nouveau produit à créer
-  const product = await ProductModel.query().insert(newProduct); // Création du nouveau produit avec Objection.js
-  res.json(product);
-});
+    res.send({ result: product });
+  });
 
-// Route pour mettre à jour un produit existant
-app.put('/products/:id', async (req, res) => {
-  const productId = req.params.id;
-  const updatedProduct = req.body; // Le corps de la requête contient les données mises à jour du produit
-  const product = await ProductModel.query().findById(productId); // Récupération du produit avec l'ID spécifié avec Objection.js
-  if (!product) {
-    res.status(404).json({ error: 'Product not found' });
-  } else {
-    const updated = await product.$query().update(updatedProduct); // Mise à jour du produit avec Objection.js
-    res.json(updated);
-  }
-});
+  app.post("/products", async (req, res) => {
+    const {
+      name,
+      description,
+      highlander,
+      welcome_order,
+      stock,
+      priority,
+      price,
+      category_id,
+      material_ids, 
+    } = req.body;
+  
+    try {
+      
+      const newProduct = await ProductModel.query().insert({
+        name,
+        description,
+        highlander,
+        welcome_order,
+        stock,
+        priority,
+        price,
+        category_id,
+      });
+  
+      
+      await Promise.all(
+        material_ids.map(async (material_id) => {
+          await db("productmaterials").insert({
+            product_id: newProduct.id,
+            material_id,
+          });
+        })
+      );
+  
+      res.status(201).send({ result: newProduct });
+    } catch (error) {
+      res.status(500).send({ error: "Failed to add product" });
+    }
+  });
 
-// Route pour supprimer un produit existant
-app.delete('/products/:id', async (req, res) => {
-  const productId = req.params.id;
-  const product = await ProductModel.query().findById(productId); // Récupération du produit avec l'ID spécifié avec Objection.js
-  if (!product) {
-    res.status(404).json({ error: 'Product not found' });
-  } else {
-    const deleted = await product.$query().delete(); // Suppression du produit avec Objection.js
-    res.json(deleted);
-  }
-});
+  app.patch("/products/:id", async (req, res) => {
+    const { id } = req.params;
+    const {
+      name,
+      description,
+      highlander,
+      welcome_order,
+      stock,
+      priority,
+      price,
+      category_id,
+    } = req.body;
+
+    try {
+      const updateProduct = await ProductModel.query()
+        .updateAndFetchById(id, {
+          name,
+          description,
+          highlander,
+          welcome_order,
+          stock,
+          priority,
+          price,
+          category_id,
+        });
+
+      if (!checkProduct(updateProduct)) {
+        res.status(404).send({ error: "not found" });
+        return;
+      }
+
+      res.send(updateProduct);
+    } catch (error) {
+      res.send({ result: error });
+      return;
+    }
+  });
+
+  app.delete("/products/:id", async (req, res) => {
+    const { id } = req.params;
+    const [product] = await db("products").where({ id: id });
+
+    if (!checkProduct(product)) {
+      res.status(404).send({ error: "not found" });
+      return;
+    }
+
+    res.send({ result: product });
+    await ProductModel.query().deleteById(id);
+  });
+};
+
+module.exports = routeProducts;
