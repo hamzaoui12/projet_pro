@@ -1,9 +1,16 @@
 import React, { useState } from "react"
 import { data } from "../data/data.jsx"
 
-const Category = () => {
+// import icons
+import { BsPlus } from "react-icons/bs"
+const Category = ({ addToCart }) => {
   //   console.log(data);
   const [Kitchen] = useState(data)
+
+  const handleAddToCart = (product) => {
+    // Step 3: Call the addToCart function with the product object as an argument
+    addToCart(product)
+  }
 
   return (
     <div className="max-w-[1640px] mx-auto p-2">
@@ -40,13 +47,20 @@ const Category = () => {
           {Kitchen.map((item, index) => (
             <div
               key={index}
-              className="border shadow-lg  hover:scale-105 duration-300"
+              className="border shadow-lg  hover:scale-105 duration-300  relative group"
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-full h-[200px] l-[200px] object-cover "
+                className="w-full h-[300px] W-[300px] object-cover "
               />
+              <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
+                <button onClick={() => handleAddToCart(item)}>
+                  <div className="flex justify-center rounded-full items-center hover:bg-gray-500 text-white w-12 h-12 bg-black">
+                    <BsPlus className="text-3xl" />
+                  </div>
+                </button>
+              </div>
               <div className="flex justify-between px-2 py-4">
                 <p className="font-bold">{item.name}</p>
                 <p>

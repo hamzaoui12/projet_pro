@@ -13,7 +13,7 @@ exports.up = async (knex) => {
       table.integer("welcome_order")
       table.integer("stock")
       table.integer("priority")
-      table.integer("price").notNullable()
+      table.float("price").notNullable()
       table.integer("category_id").unsigned().notNullable()
       table
         .foreign("category_id")
@@ -49,6 +49,7 @@ exports.up = async (knex) => {
       table.text("passwordSalt")
       table.string("mail").unique().notNullable()
       table.text("phoneNumber")
+      table.boolean("is_admin")
     })
     .createTable("bankCards", (table) => {
       table.increments("id")
