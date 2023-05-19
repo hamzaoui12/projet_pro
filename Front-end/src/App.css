@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300");
+@import url("https://fonts.googleapis.com/css?family=Italiana");
 
 * {
   box-sizing: border-box;
