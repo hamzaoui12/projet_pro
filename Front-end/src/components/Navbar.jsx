@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react"
 import {
   AiOutlineMenu,
@@ -12,12 +11,12 @@ import { MdCategory, MdHelp } from "react-icons/md"
 
 const Navbar = () => {
   const [div, setNav] = useState(false)
-  const [cart, setCart] = useState([]) // Tableau pour stocker les produits ajoutés au panier
+  const [cart, setCart] = useState([])
   const [item, setShowCart] = useState(false)
 
   function handleAddToCart(product) {
-    setCart([...cart, product]) // Ajouter le produit sélectionné au tableau cart
-    setShowCart(true) // Afficher le panier
+    setCart([...cart, product])
+    setShowCart(true)
   }
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
@@ -26,25 +25,15 @@ const Navbar = () => {
         <div onClick={() => setNav(!div)} className="cursor-pointer">
           <AiOutlineMenu size={30} />
         </div>
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl px-2">
-          Best <span className="font-bold">Furniture</span>
-        </h1>
-      </div>
-
-      {/* Search Input */}
-      <div className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[400px] lg:w-[500px]">
-        <AiOutlineSearch size={25} />
-        <input
-          className="bg-transparent p-2 w-full focus:outline-none"
-          type="text"
-          placeholder="Best Furniture"
-        />
-      </div>
+      </div>{" "}
+      <h1 className="text-3xl sm:text-4xl text-center lg:text-4xl ">
+        Best <span className="font-bold">Furniture</span>
+      </h1>
       {/* Cart button */}
-      <div className="text-black hidden md:flex items-center p-2  cursor-pointer">
-        <div onClick={() => setShowCart(!item)} size={30}>
+      <div className="text-black  md:flex flex  items-center  gap-4 cursor-pointer">
+        <AiOutlineSearch size={30} className="text-3xl " />
+        <div onClick={() => setShowCart(!item)} size={25} className="text-3xl ">
           <AiOutlineShoppingCart className="text-3xl" />
-
           <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
             {cart.length}
           </div>
@@ -73,7 +62,6 @@ const Navbar = () => {
           </div>
         )}
       </div>
-
       {/* Mobile Menu */}
       {/* Overlay */}
       {div ? (
@@ -81,7 +69,6 @@ const Navbar = () => {
       ) : (
         ""
       )}
-
       {/* Side drawer menu */}
       <div
         className={

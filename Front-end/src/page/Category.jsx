@@ -1,22 +1,19 @@
 import React, { useState } from "react"
 import { data } from "../data/data.jsx"
-
-// import icons
 import { BsPlus } from "react-icons/bs"
+
 const Category = ({ addToCart }) => {
-  //   console.log(data);
   const [Kitchen] = useState(data)
 
   const handleAddToCart = (product) => {
-    // Step 3: Call the addToCart function with the product object as an argument
     addToCart(product)
   }
 
   return (
-    <div className="max-w-[1640px] mx-auto p-2">
-      <div className="max-h-[500px] relative">
+    <div className="max-w-[1640px] mx-auto  p-2">
+      <div className="max-h-[500px] relative  ">
         {/* Overlay */}
-        <div className="absolute w-full h-full text-gray-200 max-h-[500px] bg-black/40 flex flex-col justify-center">
+        <div className="absolute w-full h-full rounded-xl text-gray-200 max-h-[500px] bg-black/40 flex flex-col justify-center">
           <h1 className="px-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
             The <span className="text-orange-200">Best</span>
           </h1>
@@ -26,7 +23,7 @@ const Category = ({ addToCart }) => {
           </h1>
         </div>
         <img
-          className="w-full max-h-[500px] object-cover"
+          className="w-full max-h-[500px] object-cover rounded-xl "
           src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg"
           alt="/"
         />
@@ -43,7 +40,7 @@ const Category = ({ addToCart }) => {
         </h1>
 
         {/* Display foods */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 py-32  cursor-pointer">
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 py-32  cursor-pointer">
           {Kitchen.map((item, index) => (
             <div
               key={index}
