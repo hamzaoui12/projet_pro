@@ -1,93 +1,87 @@
+import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useState } from 'react';
+import 'tailwindcss/tailwind.css';
+import { MdCheck, MdError, MdRefresh } from 'react-icons/md';
 
-const ForgotPasswordSchema = Yup.object().shape({
-  email: Yup.string().email('Adresse e-mail invalide').required('Adresse e-mail requise'),
+const PasswordResetSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email address').required('Required field'),
 });
 
-const ResetPasswordSchema = Yup.object().shape({
-  password: Yup.string()
-    .min(8, 'Le mot de passe doit contenir au moins 8 caractères')
-    .required('Nouveau mot de passe requis'),
-  passwordConfirm: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Les mots de passe ne correspondent pas')
-    .required('Confirmation de mot de passe requise'),
-});
+const PasswordResetPage = () => {
+  const [successMessage, setSuccessMessage] = useState('');
+  const [resetEmail, setResetEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-const ForgotPassword = () => {
-  const [emailSent, setEmailSent] = useState(false);
-  
-  const onSubmit = async (values) => {
-    // Vérifier si l'e-mail existe dans la base de données
-    const user = await fetchUserByEmail(values.email);
-    if (user) {
-      // Générer un jeton de réinitialisation de mot de passe unique
-      const resetToken = generateResetToken(user.id);
-      
-      // Envoyer l'e-mail de réinitialisation de mot de passe
-      sendResetPasswordEmail(user.email, resetToken);
-      
-      setEmailSent(true);
-    }
+  const handleSubmit = (values, { setSubmitting }) => {
+    setIsSubmitting(true);
+    // Perform necessary action to reset the password
+    console.log(values.email);
+    setResetEmail('');
+    setSuccessMessage('Password reset successful!');
+    setSubmitting(false);
+    setTimeout(() => {
+      setSuccessMessage('');
+    }, 3000);
   };
-  
-  if (emailSent) {
-    return <p>Un e-mail de réinitialisation de mot de passe a été envoyé à votre adresse e-mail.</p>;
-  }
-  
+
   return (
-    <Formik initialValues={{ email: '' }} validationSchema={ForgotPasswordSchema} onSubmit={onSubmit}>
-  {({ isSubmitting }) => (
-    <Form>
-      <label htmlFor="email">Adresse e-mail</label>
-      <Field type="email" name="email" />
-      <ErrorMessage name="email" component="div" />
-      <button type="submit" disabled={isSubmitting}>Envoyer</button>
-    </Form>
-  )}
-</Formik>
-);
-};
-
-        const ResetPassword = ({ resetToken }) => {
-        const [passwordReset, setPasswordReset] = useState(false);
-
-        const onSubmit = async (values) => {
-        // Vérifier que le jeton de réinitialisation de mot de passe est valide
-        const user = await verifyResetToken(resetToken);
-        if (user) {
-        // Mettre à jour le mot de passe de l'utilisateur dans la base de données
-        await updateUserPassword(user.id, values.password);
-        setPasswordReset(true);
-        }
-        };
-
-        if (passwordReset) {
-        return <p>Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.</p>;
-        }
-
-return (
-    <Formik initialValues={{ password: '', passwordConfirm: '' }} validationSchema={ResetPasswordSchema} onSubmit={onSubmit}>
-    {({ isSubmitting }) => (
-            <Form>
-                <label htmlFor="password">Nouveau mot de passe</label>
-                    <Field type="password" name="password" />
-                    <ErrorMessage name="password" component="div" />
-                    <label htmlFor="passwordConfirm">Confirmez le nouveau mot de passe</label>
-                    <Field type="password" name="passwordConfirm" />
-                <ErrorMessage name="passwordConfirm" component="div" />
-            <button type="submit" disabled={isSubmitting}>Réinitialiser le mot de passe</button>
+    <div
+      className="min-h-screen flex items-center justify-center bg-gray-100"
+      style={{
+        backgroundImage: "url('https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg')",
+        backgroundSize: 'cover',
+      }}
+    >
+      <div className="max-w-md w-full p-6 bg-white bg-opacity-70 rounded-md shadow-md">
+        <h2 className="text-2xl font-bold mb-6 text-center">Forgot Password</h2>
+        <Formik
+          initialValues={{ email: '' }}
+          validationSchema={PasswordResetSchema}
+          onSubmit={handleSubmit}
+        >
+          {() => (
+            <Form className="space-y-4">
+              <div>
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                  Email Address
+                </label>
+                <Field
+                  className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email address"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                />
+                <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
+              </div>
+              <button
+                className="w-full py-2 px-4 bg-black text-white font-semibold rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 flex items-center justify-center"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <MdRefresh className="animate-spin mr-2" /> Submitting...
+                  </>
+                ) : (
+                  'Reset Password'
+                )}
+              </button>
+              {successMessage && (
+                <div className="text-green-500 text-sm mt-2 flex items-center">
+                  <MdCheck className="mr-1" />
+                  {successMessage}
+                </div>
+              )}
             </Form>
-    )}
-    </Formik>
-);
+          )}
+        </Formik>
+      </div>
+    </div>
+  );
 };
 
-        export default function PasswordResetPage({ resetToken }) {
-        if (resetToken) {
-        return <ResetPassword resetToken={resetToken} />;
-        } else {
-        return <ForgotPassword />;
-        }
-        }
+export default PasswordResetPage;

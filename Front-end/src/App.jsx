@@ -1,14 +1,12 @@
 import "../src/App.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/footer";
+
+import PasswordResetPage from "./page/Password";
 
 const App = () => {
   return (
     <div className="app">
-      <Navbar />
-    <footer>
-      <Footer />
-    </footer>
+      
+      <PasswordResetPage/>
     </div>
   );
 };
