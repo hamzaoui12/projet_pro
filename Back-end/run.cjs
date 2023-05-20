@@ -3,6 +3,7 @@ const cors = require("cors")
 const knex = require("knex")
 const BaseModel = require("./models/BaseModel.cjs")
 const routeUser = require("./routes/routeUser.cjs")
+const routeMaterial = require("./routes/routeMaterial.cjs")
 const routeSignIn = require("./routes/routeSignIn.cjs")
 const morgan = require("morgan")
 
@@ -16,6 +17,7 @@ const run = async (config) => {
   BaseModel.knex(db)
 
   routeUser({ app, db })
+  routeMaterial({ app, db })
   routeSignIn({app})
 
   app.listen(config.port)
