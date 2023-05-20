@@ -29,7 +29,7 @@ const PasswordResetPage = () => {
     <div
       className="min-h-screen flex items-center justify-center bg-gray-100"
       style={{
-        backgroundImage: "url('https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg')",
+        backgroundImage: "url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
         backgroundSize: 'cover',
       }}
     >
