@@ -10,8 +10,8 @@ const Category = ({ addToCart }) => {
   }
 
   return (
-    <div className="max-w-[1640px] mx-auto  p-2">
-      <div className="max-h-[500px] relative  ">
+    <div className="max-w-[1640px] mx-auto p-2">
+      <div className="max-h-[500px] relative   ">
         {/* Overlay */}
         <div className="absolute w-full h-full rounded-xl text-gray-200 max-h-[500px] bg-black/40 flex flex-col justify-center">
           <h1 className="px-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
@@ -23,7 +23,7 @@ const Category = ({ addToCart }) => {
           </h1>
         </div>
         <img
-          className="w-full max-h-[500px] object-cover rounded-xl "
+          className="w-full max-h-[500px] object-cover rounded-xl"
           src="https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg"
           alt="/"
         />
@@ -32,10 +32,10 @@ const Category = ({ addToCart }) => {
         <h1 className="text-gray-900  font-bold text-4xl text-center">
           Discover Our Best Models
           <p className="text-gray-700  font-bold text-2xl py-12 text-center">
-            La cuisine est une pièce spécifique dans un bâtiment, spécialement
-            équipée pour la préparation des aliments et des plats. On y dispose
-            généralement de l'eau courante et divers appareils électroménagers
-            (cuisinière, four, réfrigérateur...).
+            The kitchen is a specific room in a building, especially equipped
+            for the preparation of food and dishes. We have there usually
+            running water and various household appliances (stove,
+            oven,refrigerator...).
           </p>
         </h1>
 
@@ -49,7 +49,7 @@ const Category = ({ addToCart }) => {
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-full h-[300px] W-[300px] object-cover "
+                className="w-full h-[300px] W-[300px] object-cover p-2 "
               />
               <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
                 <button onClick={() => handleAddToCart(item)}>

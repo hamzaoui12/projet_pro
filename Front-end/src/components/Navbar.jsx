@@ -8,11 +8,13 @@ import {
 import { TbHome } from "react-icons/tb"
 import { FaWallet } from "react-icons/fa"
 import { MdCategory, MdHelp } from "react-icons/md"
+import { VscCircleSmall, VscAccount } from "react-icons/vsc"
 
 const Navbar = () => {
   const [div, setNav] = useState(false)
   const [cart, setCart] = useState([])
   const [item, setShowCart] = useState(false)
+  const [showCategoryList, setShowCategoryList] = useState(false)
 
   function handleAddToCart(product) {
     setCart([...cart, product])
@@ -25,19 +27,20 @@ const Navbar = () => {
         <div onClick={() => setNav(!div)} className="cursor-pointer">
           <AiOutlineMenu size={30} />
         </div>
-      </div>{" "}
-      <h1 className="text-3xl sm:text-4xl text-center lg:text-4xl ">
+      </div>
+      <h1 className="text-3xl sm:text-4xl text-center lg:text-4xl px-2">
         Best <span className="font-bold">Furniture</span>
       </h1>
-      {/* Cart button */}
-      <div className="text-black  md:flex flex  items-center  gap-4 cursor-pointer">
+
+      <div className="text-black md:flex flex items-center  gap-4 cursor-pointer">
         <AiOutlineSearch size={30} className="text-3xl " />
-        <div onClick={() => setShowCart(!item)} size={25} className="text-3xl ">
+        <div onClick={() => setShowCart(!item)} size={25} className=" ">
           <AiOutlineShoppingCart className="text-3xl" />
           <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
             {cart.length}
           </div>
         </div>
+        <VscAccount size={30} className="text-3xl" />
         {item ? (
           <div className=" fixed w-full h-screen z-10 top-0 right-0"></div>
         ) : (
@@ -86,7 +89,7 @@ const Navbar = () => {
           Best <span className="font-bold">Furniture</span>
         </h2>
         <div>
-          <ul className="flex flex-col p-4 text-gray-800">
+          <ul className="flex font-bold flex-col p-4 text-gray-800">
             <li className="text-xl py-4 flex">
               <TbHome
                 onClick={() => setNav(!div)}
@@ -95,21 +98,56 @@ const Navbar = () => {
               />{" "}
               Home
             </li>
-            <li className="text-xl py-4 flex">
+            <li className="text-xl py-2 flex">
               <MdCategory
-                onClick={() => setNav(!div)}
+                onClick={() => setShowCategoryList(!showCategoryList)}
                 size={25}
                 className="mr-4 cursor-pointer"
               />{" "}
               Category
             </li>
+            {showCategoryList && (
+              <li>
+                {/* Liste de clics */}
+                <ul className=" text-gray-800 text-xl py-4 px-12">
+                  <li
+                    onClick={() => setNav(!div)}
+                    className=" cursor-pointer grap-2 flex"
+                  >
+                    <VscCircleSmall size={30} />
+                    Kitchens
+                  </li>
+                  <li
+                    onClick={() => setNav(!div)}
+                    className=" cursor-pointer grap-2 flex"
+                  >
+                    <VscCircleSmall size={30} />
+                    Bedrooms
+                  </li>
+                  <li
+                    onClick={() => setNav(!div)}
+                    className=" cursor-pointer grap-2 flex"
+                  >
+                    <VscCircleSmall size={30} />
+                    Bathroom
+                  </li>
+                  <li
+                    onClick={() => setNav(!div)}
+                    className=" cursor-pointer grap-2 flex"
+                  >
+                    <VscCircleSmall size={30} />
+                    Livingroom
+                  </li>
+                </ul>
+              </li>
+            )}
             <li className="text-xl py-4 flex">
               <FaWallet
                 onClick={() => setNav(!div)}
                 size={25}
                 className="mr-4 cursor-pointer"
               />{" "}
-              Panier
+              shopping cart
             </li>
             <li className="text-xl py-4 flex">
               <MdHelp
