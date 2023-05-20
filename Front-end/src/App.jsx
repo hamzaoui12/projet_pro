@@ -5,6 +5,7 @@ import Product from "./page/Product"
 import CarouselComponent from "./components/Carousel"
 import CategoryComposant from "./components/CategoryComposant"
 import Connexion from "./page/Connexion"
+import ValidateForm from "./page/validation_form"
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <CarouselComponent images={[]} duration={1000} className="h-12 l-12" />
       <CategoryComposant />
       <Connexion />
+      <ValidateForm/>
     </div>
   )
 }
