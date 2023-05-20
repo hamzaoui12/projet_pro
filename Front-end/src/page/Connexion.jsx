@@ -42,7 +42,7 @@ const Connexion = () => {
               </button>
             </div>
             <div className="flex justify-center">
-              <button className="w-full text-[#060606] m-1 bg-white border-2 border-black rounded-md p-4 text-center flex items-center text-xl font-semibold">
+              <button className="w-full text-[#060606] m-1 bg-white border-2 border-black rounded-md p-4 text-center flex items-center justify-center text-xl font-semibold">
                 Register
               </button>
             </div>

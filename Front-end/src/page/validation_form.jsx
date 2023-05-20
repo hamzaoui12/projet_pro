@@ -247,7 +247,7 @@ const ValidateForm = () => {
                 disabled={isSubmitting}
                 className="w-full py-2 bg-black text-white font-semibold rounded-md hover:bg-gray-900 transition-colors"
               >
-                Submit
+                Proceed To Payment
               </button>
             </Form>
           )}
