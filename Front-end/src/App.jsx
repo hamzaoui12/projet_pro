@@ -13,8 +13,8 @@ const App = () => {
       <Category />
       <Product />
       <CarouselComponent images={[]} duration={1000} className="h-12 l-12" />
-      <CategoryComposant/>
-      <Connexion/>
+      <CategoryComposant />
+      <Connexion />
     </div>
   )
 }
