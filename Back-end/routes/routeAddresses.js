@@ -1,83 +1,83 @@
-const sanitizeAddress = require("../sanitizer.js")
-const AddressModel = require("../models/AddressModel.cjs")
+const AddressModel = require("../models/AddressModel.cjs");
+const auth = require("../middlewares/auth.js");
 
 const routeAddresses = async ({ app, db }) => {
   const checkAddress = (address) => {
-    if (address) {
-      return true
-    }
+    return !!address;
+  };
 
-    return false
-  }
-
-  app.get("/adress", async (req, res) => {
-    res.send({
-      result: sanitizeAddress(
-        await AddressModel.query()
-      ),
-    })
-  })
-
-  app.get("/adress/:id", async (req, res) => {
-    const { id } = req.params
-    const address = await AddressModel.query().findById(id)
-
-    if (!checkAddress(address)) {
-      res.status(404).send({ error: "not found" })
-
-      return
-    }
-
-    res.send({ result: sanitizeAddress(address) })
-  })
-
-  app.post("/adress", async (req, res) => {
-    const { city, region, postal_code, country } = req.body
-
+  app.get("/addresses", async (req, res) => {
     try {
-      const address = await AddressModel.query().insert({ city, region, postal_code, country })
-      res.send(sanitizeAddress(address))
+      const addresses = await AddressModel.query();
+      res.send({ result: addresses });
     } catch (error) {
-      res.send({result: error})
-
-      return 
+      res.status(500).send({ error: "Failed to fetch addresses" });
     }
-  })
+  });
 
-  app.patch("/adress/:id", async (req, res) => {
-    const { id } = req.params
-    const { city, region, postal_code, country } = req.body
-
+  app.get("/addresses/:id", async (req, res) => {
+    const { id } = req.params;
     try {
-      const updateAddress = await AddressModel.query().updateAndFetchById(id, { city, region, postal_code, country })
-
-      if (!checkAddress(updateAddress)) {
-        res.status(404).send({ error: "not found" })
-
-        return
+      const address = await AddressModel.query().findById(id);
+      if (!checkAddress(address)) {
+        res.status(404).send({ error: "Address not found" });
+      } else {
+        res.send({ result: address });
       }
-
-      res.send(sanitizeAddress(updateAddress))
     } catch (error) {
-      res.send({result: error})
-
-      return 
+      res.status(500).send({ error: "Failed to fetch address" });
     }
-  })
+  });
 
-  app.delete("/adress/:id", async (req, res) => {
-    const { id } = req.params
-    const [address] = await db("adress").where({ id: id })
-
-    if (!checkAddress(address)) {
-      res.status(404).send({ error: "not found" })
-
-      return
+  app.post("/addresses", async (req, res) => {
+    const { country, city, region, postalCode } = req.body;
+    try {
+      const newAddress = await AddressModel.query().insert({
+        country,
+        city,
+        region,
+        postalCode,
+      });
+      res.status(201).send({ result: newAddress });
+    } catch (error) {
+      res.status(500).send({ error: "Failed to add address" });
     }
+  });
 
-    res.send({ result: sanitizeAddress(address) })
-    await AddressModel.query().deleteById(id)
-  })
-}
+  app.patch("/addresses/:id", async (req, res) => {
+    const { id } = req.params;
+    const { country, city, region, postalCode } = req.body;
+    try {
+      const updatedAddress = await AddressModel.query()
+        .updateAndFetchById(id, {
+          country,
+          city,
+          region,
+          postalCode,
+        });
+      if (!checkAddress(updatedAddress)) {
+        res.status(404).send({ error: "Address not found" });
+      } else {
+        res.send({ result: updatedAddress });
+      }
+    } catch (error) {
+      res.status(500).send({ error: "Failed to update address" });
+    }
+  });
 
-module.exports = routeAddresses
+  app.delete("/addresses/:id", async (req, res) => {
+    const { id } = req.params;
+    try {
+      const address = await AddressModel.query().findById(id);
+      if (!checkAddress(address)) {
+        res.status(404).send({ error: "Address not found" });
+      } else {
+        await AddressModel.query().deleteById(id);
+        res.send({ result: address });
+      }
+    } catch (error) {
+      res.status(500).send({ error: "Failed to delete address" });
+    }
+  });
+};
+module.exports = routeAddresses;
