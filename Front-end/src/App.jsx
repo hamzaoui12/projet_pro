@@ -4,6 +4,8 @@ import Category from "./page/Category"
 import Product from "./page/Product"
 import CarouselComponent from "./components/Carousel"
 import Registration from "./page/Inscription"
+import Contact from "./page/Contact"
+
 
 
 const App = () => {
@@ -14,6 +16,7 @@ const App = () => {
       <Product />
       <Registration/>
       <CarouselComponent images={[]} duration={1000} className="h-12 l-12" />
+      <Contact/>
      
     </div>
   )
