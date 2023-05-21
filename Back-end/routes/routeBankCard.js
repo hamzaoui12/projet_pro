@@ -3,7 +3,11 @@ const auth = require("../middlewares/auth.js");
 
 const routeBankCards = async ({ app, db }) => {
   const checkBankCard = (bankCard) => {
-    return !!bankCard;
+    if (bankCard) {
+      return true
+    }
+
+    return false
   };
 
   app.get("/bankcards", async (req, res) => {
