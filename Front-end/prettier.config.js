@@ -1,1 +1,3 @@
-module.exports = { semi: false }
+module.exports = {
+  semi: false,
+}
