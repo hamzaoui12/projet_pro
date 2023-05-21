@@ -5,7 +5,7 @@ import 'tailwindcss/tailwind.css';
 import { MdCheck, MdError, MdRefresh } from 'react-icons/md';
 
 const PasswordResetSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email address').required('Required field'),
+  email: Yup.string().email('Invalid email address'),
 });
 
 const PasswordResetPage = () => {
@@ -40,7 +40,7 @@ const PasswordResetPage = () => {
           validationSchema={PasswordResetSchema}
           onSubmit={handleSubmit}
         >
-          {() => (
+          {({ errors, touched }) => (
             <Form className="space-y-4">
               <div>
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -55,12 +55,14 @@ const PasswordResetPage = () => {
                   value={resetEmail}
                   onChange={(e) => setResetEmail(e.target.value)}
                 />
-                <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
+                {errors.email && touched.email ? (
+                  <div className="text-red-500 text-sm">{errors.email}</div>
+                ) : null}
               </div>
               <button
                 className="w-full py-2 px-4 bg-black text-white font-semibold rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 flex items-center justify-center"
                 type="submit"
-                disabled={isSubmitting}
+                disabled={resetEmail === ''}
               >
                 {isSubmitting ? (
                   <>
