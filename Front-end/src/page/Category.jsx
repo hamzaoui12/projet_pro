@@ -1,14 +1,11 @@
 import React, { useState } from "react"
 import { data } from "../data/data.jsx"
-
-// import icons
 import { BsPlus } from "react-icons/bs"
+
 const Category = ({ addToCart }) => {
-  //   console.log(data);
   const [Kitchen] = useState(data)
 
   const handleAddToCart = (product) => {
-    // Step 3: Call the addToCart function with the product object as an argument
     addToCart(product)
   }
 
