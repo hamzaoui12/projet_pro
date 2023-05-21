@@ -1,6 +1,6 @@
 import React from 'react';
 import SimpleReactFooter from 'simple-react-footer';
-import "../style/Footer.css"
+import "../style/footer.css"
 
 const Footer = () => {
   // Define the data for the footer
@@ -38,5 +38,3 @@ const Footer = () => {
     copyrightColor="dark"
   />;
 }
-
-export default Footer;
