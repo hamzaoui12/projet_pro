@@ -1,96 +1,89 @@
 const BankCardModel = require("../models/BankCardModel.cjs");
-const sanitizeUser = require("../sanitizer.js");
+const auth = require("../middlewares/auth.js");
 
-const routeBankCard = async ({ app }) => {
+const routeBankCards = async ({ app, db }) => {
   const checkBankCard = (bankCard) => {
-    if (bankCard) {
-      return true;
-    }
-
-    return false;
+    return !!bankCard;
   };
 
-  app.get("/Bank_card", async (req, res) => {
+  app.get("/bankcards", async (req, res) => {
     res.send({
-      result: sanitizeUser(await BankCardModel.query()),
+      result: await BankCardModel.query(),
     });
   });
 
-  app.get("/Bank_card/:id", async (req, res) => {
+  app.get("/bankcards/:id", async (req, res) => {
     const { id } = req.params;
     const bankCard = await BankCardModel.query().findById(id);
 
     if (!checkBankCard(bankCard)) {
-      res.status(404).send({ error: "not found" });
-
+      res.status(404).send({ error: "Bank card not found" });
       return;
     }
 
-    res.send({ result: sanitizeUser(bankCard) });
+    res.send({ result: bankCard });
   });
 
-  app.post("/Bank_card", async (req, res) => {
-    const { id_user, name, card_number, expiration_year, expiration_month, CVV } = req.body;
+  app.post("/bankcards", async (req, res) => {
+    const { expirationMonth, expirationYear, cardValidationCodeHash, cardValidationCodeSalt, cardNumberHash, cardNumberSalt, user_id } = req.body;
 
     try {
-      const bankCard = await BankCardModel.query().insert({
-        id_user,
-        name,
-        card_number,
-        expiration_year,
-        expiration_month,
-        CVV,
+      const newBankCard = await BankCardModel.query().insert({
+        expirationMonth,
+        expirationYear,
+        cardValidationCodeHash,
+        cardValidationCodeSalt,
+        cardNumberHash,
+        cardNumberSalt,
+        user_id,
       });
-      res.send(sanitizeUser(bankCard));
-    } catch (error) {
-      res.send({ result: error });
 
-      return;
+      res.status(201).send({ result: newBankCard });
+    } catch (error) {
+      res.status(500).send({ error: "Failed to add bank card" });
     }
   });
 
-  app.patch("/Bank_card/:id", async (req, res) => {
+  app.patch("/bankcards/:id", async (req, res) => {
     const { id } = req.params;
-    const { name, card_number, expiration_year, expiration_month, CVV } = req.body;
+    const { expirationMonth, expirationYear, cardValidationCodeHash, cardValidationCodeSalt, cardNumberHash, cardNumberSalt, user_id } = req.body;
 
     try {
-      const updateBankCard = await BankCardModel.query()
+      const updatedBankCard = await BankCardModel.query()
         .updateAndFetchById(id, {
-          name,
-          card_number,
-          expiration_year,
-          expiration_month,
-          CVV,
-        })
-        .where({ id });
+          expirationMonth,
+          expirationYear,
+          cardValidationCodeHash,
+          cardValidationCodeSalt,
+          cardNumberHash,
+          cardNumberSalt,
+          user_id,
+        });
 
-      if (!checkBankCard(updateBankCard)) {
-        res.status(404).send({ error: "not found" });
-
+      if (!checkBankCard(updatedBankCard)) {
+        res.status(404).send({ error: "Bank card not found" });
         return;
       }
 
-      res.send(sanitizeUser(updateBankCard));
+      res.send(updatedBankCard);
     } catch (error) {
       res.send({ result: error });
-
-      return;
     }
   });
 
-  app.delete("/Bank_card/:id", async (req, res) => {
+  app.delete("/bankcards/:id", async (req, res) => {
     const { id } = req.params;
-    const [bankCard] = await BankCardModel.query().where({ id });
+    const [bankCard] = await db("bankcards").where({ id });
 
     if (!checkBankCard(bankCard)) {
-      res.status(404).send({ error: "not found" });
-
+      res.status(404).send({ error: "Bank card not found" });
       return;
     }
 
-    res.send({ result: sanitizeUser(bankCard) });
+    res.send({ result: bankCard });
     await BankCardModel.query().deleteById(id);
   });
 };
 
-module.exports = routeBankCard;
+
+module.exports = routeBankCards;
