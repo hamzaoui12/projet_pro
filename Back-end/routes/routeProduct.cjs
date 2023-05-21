@@ -112,7 +112,7 @@ const routeProducts = async ({ app, db }) => {
     const [product] = await db("products").where({ id: id });
 
     if (!checkProduct(product)) {
-      res.status(404).send({ error: "not found" });
+      res.status(404).send({ error: "Not found" });
       return;
     }
 
