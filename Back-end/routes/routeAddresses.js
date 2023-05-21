@@ -3,7 +3,11 @@ const auth = require("../middlewares/auth.js");
 
 const routeAddresses = async ({ app, db }) => {
   const checkAddress = (address) => {
-    return !!address;
+    if (address) {
+      return true
+    }
+
+    return false
   };
 
   app.get("/addresses", async (req, res) => {
@@ -80,4 +84,5 @@ const routeAddresses = async ({ app, db }) => {
     }
   });
 };
+
 module.exports = routeAddresses;
