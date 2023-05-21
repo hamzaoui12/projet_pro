@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar"
 import Category from "./page/Category"
 import Product from "./page/Product"
 import CarouselComponent from "./components/Carousel"
+import Registration from "./page/Inscription"
 
 
 const App = () => {
@@ -11,9 +12,9 @@ const App = () => {
       <Navbar />
       <Category />
       <Product />
-      <Inscription/>
+      <Registration/>
       <CarouselComponent images={[]} duration={1000} className="h-12 l-12" />
-      <ValidateForm/>
+     
     </div>
   )
 }
