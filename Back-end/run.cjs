@@ -3,7 +3,7 @@ const cors = require("cors")
 const knex = require("knex")
 const BaseModel = require("./models/BaseModel.cjs")
 const routeUser = require("./routes/routeUser.cjs")
-const routeMaterial = require("./routes/routeMaterial.cjs")
+const routeMaterial =  require("./routes/routeMaterial.cjs")
 const routeSignIn = require("./routes/routeSignIn.cjs")
 const morgan = require("morgan")
 

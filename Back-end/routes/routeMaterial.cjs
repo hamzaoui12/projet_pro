@@ -68,7 +68,7 @@ const routeMaterials = async ({ app, db }) => {
     const [material] = await db("materials").where({ id: id });
 
     if (!checkMaterial(material)) {
-      res.status(404).send({ error: "not found" });
+      res.status(404).send({ error: "Not found" });
       return;
     }
 
