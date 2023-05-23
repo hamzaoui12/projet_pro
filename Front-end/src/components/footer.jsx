@@ -7,7 +7,7 @@ const Footer = () => (
         <div>
           <h6 className="text-lg font-bold underline">CGU</h6>
           <ul className="text-sm">
-            <li>© Inter ARNEIS Systems B.V 2022-2023</li>
+            <li> © Inter ARNEIS Systems B.V 2022-2023</li>
           </ul>          
         </div>
         <div>
