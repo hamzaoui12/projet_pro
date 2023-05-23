@@ -1,43 +1,50 @@
 import React from 'react';
-import { FiMapPin } from 'react-icons/fi';
-import { FiMail } from 'react-icons/fi';
-import { FiPhoneCall } from 'react-icons/fi';  
 
 const Footer = () => (
-    <footer className="footer">
-        <div className="grid grid-cols-1  lg:grid-cols-2">
-            <div className='p-4'>
-                <h1 className="underline mb-6 text-sm font-semibold text-black-500 uppercase dark:text-black-400">CONTACT</h1>
-                <ul className="text-base text-gray-500 dark:text-gray-400">
-                    <div className="mb-4">
-                        <p><FiMapPin />2 Avenue louis martins</p>
-                    </div>
-                    <div className="mb-4">
-                        <p><FiMail />furmitures@hotmail.fr</p>
-                    </div>
-                    <div className="mb-4">
-                        <p><FiPhoneCall />03.22.33.44.88</p>
-                    </div>
-                </ul>
-            </div>
-            <div className='p-4'>
-                <h1 className="underline mb-6 text-sm font-semibold text-black-500 uppercase dark:text-black-400">RESAUX</h1>
-                <ul className="text-base text-black-500 dark:text-black-400">
-                    <li className="mb-4">
-                        <p>@furnitures.meubles</p>
-                    </li>
-                    <li className="mb-4">
-                        <p>@furnitures_meubles</p>
-                    </li>
-                    <li className="mb-4">
-                        <p>facebook_account</p>
-                    </li>
-                </ul>
-            </div>            
-        </div> 
-    
-  
-    </footer>
+  <footer className="bg-black text-white">
+    <div className="container mx-auto py-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div>
+          <h6 className="text-lg font-bold underline">CGU</h6>
+          <ul className="text-sm">
+            <li>© Inter ARNEIS Systems B.V 2022-2023</li>
+          </ul>          
+        </div>
+        <div>
+          <h3 className="text-lg font-bold underline">Mentions légales</h3>
+          <ul className="text-sm">
+            <li>Dénomination sociale : Meubles ARNEIS France S.A.S.</li>
+            <li>Siège social : 425 rue Henri Barbusse 78370 PLAISIR</li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="text-lg font-bold underline">Contact</h3>
+          <p>Numéro de téléphone : <a href="tel:+123456789">+123456789</a></p>
+          <p>Email : <a href="mailto:contact@example.com">contact@example.com</a></p>
+        </div>
+        <div>
+          <h3 className="text-lg font-bold underline">Réseaux sociaux</h3>
+          <ul className="flex space-x-4">
+            <li>
+              <a href="https://www.instagram.com/">
+                <img src="chemin_vers_icone_instagram.png" alt="Instagram" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/">
+                <img src="chemin_vers_icone_facebook.png" alt="Facebook" />
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/">
+                <img src="chemin_vers_icone_twitter.png" alt="Twitter" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 );
-  
+
 export default Footer;
