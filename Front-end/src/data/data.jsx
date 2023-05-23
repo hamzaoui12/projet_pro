@@ -26,7 +26,7 @@ export const data = [
   {
     id: 4,
     name: "Cellier",
-    category: "Cellier",
+    category: "chaise haute",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "1000$",
@@ -34,7 +34,7 @@ export const data = [
   {
     id: 5,
     name: "Cellier",
-    category: "Cellier",
+    category: "chaise haute",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "800$",
@@ -42,7 +42,7 @@ export const data = [
   {
     id: 6,
     name: "Cellier",
-    category: "Cellier",
+    category: "chaise haute",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "2500$",
@@ -50,7 +50,7 @@ export const data = [
   {
     id: 7,
     name: "Cellier",
-    category: "Cellier",
+    category: "placard vaisselle",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "3000$",
@@ -58,7 +58,7 @@ export const data = [
   {
     id: 8,
     name: "Cellier",
-    category: "Cellier",
+    category: "placard coulissant",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "600$",
@@ -66,7 +66,7 @@ export const data = [
   {
     id: 9,
     name: "Cellier",
-    category: "Cellier",
+    category: "placard coulissant",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "700$",
@@ -74,7 +74,7 @@ export const data = [
   {
     id: 10,
     name: "Cellier",
-    category: "Cellier",
+    category: "placard coulissant",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "200$",
@@ -82,7 +82,7 @@ export const data = [
   {
     id: 11,
     name: "Cellier",
-    category: "Cellier",
+    category: "placard coulissant",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "500$",
@@ -90,7 +90,7 @@ export const data = [
   {
     id: 12,
     name: "Cellier",
-    category: "Cellier",
+    category: "placard coulissant",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "600$",
@@ -98,7 +98,7 @@ export const data = [
   {
     id: 13,
     name: "Cellier",
-    category: "Cellier",
+    category: "placard coulissant",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "2000$",
@@ -106,7 +106,7 @@ export const data = [
   {
     id: 14,
     name: "Cellier",
-    category: "Cellier",
+    category: "Tiroir couvert",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "3000$",
@@ -114,7 +114,7 @@ export const data = [
   {
     id: 15,
     name: "Cellier",
-    category: "Cellier",
+    category: "Tiroir couvert",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: "3000$",

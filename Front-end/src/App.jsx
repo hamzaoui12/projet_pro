@@ -1,14 +1,13 @@
-import "../src/App.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/footer";
+import "../src/App.css"
+import Navbar from "./components/Navbar"
+
+import Category from "./page/Category"
 
 const App = () => {
   return (
     <div className="app">
       <Navbar />
-    <footer>
-      <Footer />
-    </footer>
+      <Category />
     </div>
   )
 }
