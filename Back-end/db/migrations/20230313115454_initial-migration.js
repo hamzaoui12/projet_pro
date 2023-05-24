@@ -51,6 +51,37 @@ exports.up = async (knex) => {
       table.text("phoneNumber")
       table.boolean("is_admin")
     })
+    .createTable("orders", (table) => {
+      table.increments("id")
+      table.float("total")
+      table.float("tva")
+      table.boolean("finished").defaultTo(false)
+      table.boolean("canceled").defaultTo(false)
+      table.boolean("arrived").defaultTo(false)
+      table.boolean("progress").defaultTo(false)
+      table.date("date")
+      table.integer("user_id").unsigned().notNullable()
+      table
+        .foreign("user_id")
+        .references("id")
+        .inTable("users")
+        .onDelete("CASCADE")
+    })
+    .createTable("orderProducts", (table) => {
+      table.increments("id")
+      table.integer("order_id").unsigned().notNullable()
+      table
+        .foreign("order_id")
+        .references("id")
+        .inTable("orders")
+        .onDelete("CASCADE")
+      table.integer("product_id").unsigned().notNullable()
+      table
+        .foreign("product_id")
+        .references("id")
+        .inTable("products")
+        .onDelete("CASCADE")
+    })
     .createTable("bankCards", (table) => {
       table.increments("id")
       table.integer("expirationMonth").notNullable()
@@ -88,22 +119,7 @@ exports.up = async (knex) => {
         .inTable("materials")
         .onDelete("")
     })
-  .createTable("userProducts", (table) => {
-      table.increments("id")
-      table.integer("user_id").unsigned().notNullable()
-      table
-        .foreign("user_id")
-        .references("id")
-        .inTable("users")
-        .onDelete("")
-      table.integer("product_id").unsigned().notNullable()
-      table
-        .foreign("product_id")
-        .references("id")
-        .inTable("products")
-        .onDelete("")
-  })
-  .createTable("userAddress", (table) => {
+    .createTable("userAddress", (table) => {
       table.increments("id")
       table.integer("user_id").unsigned().notNullable()
       table
@@ -123,9 +139,10 @@ exports.up = async (knex) => {
 exports.down = async (knex) => {
   await knex.schema
     .dropTable("userAddress")
-    .dropTable("userProducts")
     .dropTable("productMaterials")
     .dropTable("bankCards")
+    .dropTable("orderProducts")
+    .dropTable("orders")
     .dropTable("images")
     .dropTable("products")
     .dropTable("address")
