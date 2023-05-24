@@ -19,7 +19,7 @@ exports.up = async (knex) => {
         .foreign("category_id")
         .references("id")
         .inTable("categories")
-        .onDelete("")
+        .onDelete("SET NULL")
     })
     .createTable("images", (table) => {
       table.increments("id")
@@ -29,13 +29,13 @@ exports.up = async (knex) => {
         .foreign("product_id")
         .references("id")
         .inTable("products")
-        .onDelete("")
+        .onDelete("SET NULL")
       table.integer("category_id").unsigned().notNullable()
       table
         .foreign("category_id")
         .references("id")
         .inTable("categories")
-        .onDelete("")
+        .onDelete("SET NULL")
     })
     .createTable("materials", (table) => {
       table.increments("id")
@@ -95,7 +95,7 @@ exports.up = async (knex) => {
         .foreign("user_id")
         .references("id")
         .inTable("users")
-        .onDelete("")
+        .onDelete("CASCADE")
     })
     .createTable("address", (table) => {
       table.increments("id")
@@ -111,13 +111,13 @@ exports.up = async (knex) => {
         .foreign("product_id")
         .references("id")
         .inTable("products")
-        .onDelete("")
+        .onDelete("CASCADE")
       table.integer("material_id").unsigned().notNullable()
       table
         .foreign("material_id")
         .references("id")
         .inTable("materials")
-        .onDelete("")
+        .onDelete("CASCADE")
     })
     .createTable("userAddress", (table) => {
       table.increments("id")
@@ -126,13 +126,13 @@ exports.up = async (knex) => {
         .foreign("user_id")
         .references("id")
         .inTable("users")
-        .onDelete("")
+        .onDelete("CASCADE")
       table.integer("address_id").unsigned().notNullable()
       table
         .foreign("address_id")
         .references("id")
         .inTable("address")
-        .onDelete("")
+        .onDelete("CASCADE")
     })
 }
 
