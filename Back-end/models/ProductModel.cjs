@@ -39,18 +39,6 @@ class ProductModel extends BaseModel {
         to: "materials.id"
       }
       },
-      users: {
-        relation: BaseModel.ManyToManyRelation,
-        modelClass: UserModel,
-      join: {
-        from: "products.id",
-        through: {
-          from: "userProducts.product_id",
-          to: "userProducts.user_id"
-        },
-        to: "users.id"
-      }
-    }
     }
   }
 }
