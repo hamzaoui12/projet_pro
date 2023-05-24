@@ -1,49 +1,50 @@
-const CategoryModel = require("./models/CategoryModel")
-
-const port = 3000
+const Category = require("../models/CategoryModel.cjs")
+const Product = require("../models/ProductModel.cjs")
 const routeCategory = ({ app }) => {
-  app.get("/categories", async (req, res) => {
-    const categories = await CategoryModel.query()
-    res.json(categories)
+  app.get("/", (req, res) => {
+    Category.findAll({
+      include: [Product],
+    })
+
+      .then((categories) => res.json(categories))
+      .catch((err) => res.status(500).json(err))
   })
 
-  app.get("/categories/:id", async (req, res) => {
-    const categoryId = req.params.id
-    const category = await CategoryModel.query().findById(categoryId)
-    if (!category) {
-      res.status(404).json({ error: "Category not found" })
-    } else {
-      res.json(category)
-    }
+  app.get("/:id", (req, res) => {
+    Category.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [Product],
+    })
+      .then((category) => res.json(category))
+      .catch((err) => res.status(400).json(err))
   })
 
-  app.post("/categories", async (req, res) => {
-    const newCategory = req.body
-    const category = await CategoryModel.query().insert(newCategory)
-    res.json(category)
+  app.post("/", (req, res) => {
+    Category.create(req.body)
+      .then((category) => res.status(200).json(category))
+      .catch((err) => res.status(400).json(err))
   })
 
-  app.patch("/categories/:id", async (req, res) => {
-    const categoryId = req.params.id
-    const updatedCategory = req.body
-    const category = await CategoryModel.query().findById(categoryId)
-    if (!category) {
-      res.status(404).json({ error: "Category not found" })
-    } else {
-      const updated = await category.$query().update(updatedCategory)
-      res.json(updated)
-    }
+  app.put("/:id", (req, res) => {
+    Category.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    })
+      .then((category) => res.status(200).json(category))
+      .catch((err) => res.status(400).json(err))
   })
 
-  app.delete("/categories/:id", async (req, res) => {
-    const categoryId = req.params.id
-    const category = await CategoryModel.query().findById(categoryId)
-    if (!category) {
-      res.status(404).json({ error: "Category not found" })
-    } else {
-      const deleted = await category.$query().delete()
-      res.json(deleted)
-    }
+  app.delete("/:id", (req, res) => {
+    Category.destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+      .then((category) => res.status(200).json(category))
+      .catch((err) => res.status(400).json(err))
   })
 }
 
