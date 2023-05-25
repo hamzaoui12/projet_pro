@@ -1,50 +1,60 @@
-const Category = require("../models/CategoryModel.cjs")
-const Product = require("../models/ProductModel.cjs")
+const CategoryModel = require("../models/CategoryModel.cjs")
+
 const routeCategory = ({ app }) => {
-  app.get("/", (req, res) => {
-    Category.findAll({
-      include: [Product],
-    })
-
-      .then((categories) => res.json(categories))
-      .catch((err) => res.status(500).json(err))
+  app.get("/categories", async (req, res) => {
+    res.send({ result: await CategoryModel.query() })
   })
 
-  app.get("/:id", (req, res) => {
-    Category.findOne({
-      where: {
-        id: req.params.id,
-      },
-      include: [Product],
-    })
-      .then((category) => res.json(category))
-      .catch((err) => res.status(400).json(err))
+  app.get("/categories/:id", async (req, res) => {
+    const { id } = req.params
+    const user = await CategoryModel.query()
+      .findById(id)
+      .withGraphFetched("products")
+
+    if (!checkUser(user)) {
+      res.status(404).send({ error: "not found" })
+
+      return
+    }
   })
 
-  app.post("/", (req, res) => {
-    Category.create(req.body)
-      .then((category) => res.status(200).json(category))
-      .catch((err) => res.status(400).json(err))
+  app.patch("/categories/:id", auth, async (req, res) => {
+    const { id } = req.params
+    const { name, welcome_order } = req.body
+
+    try {
+      const updateCategory = await CategoryModel.query()
+        .updateAndFetchById(id, { name, welcome_order })
+        .withGraphFetched("products")
+
+      if (!checkCategory(updateCategory)) {
+        res.status(404).send({ error: "not found" })
+
+        return
+      }
+
+      res.send(sanitizeUser(updateUser))
+    } catch (error) {
+      res.send({ result: error })
+
+      return
+    }
   })
 
-  app.put("/:id", (req, res) => {
-    Category.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    })
-      .then((category) => res.status(200).json(category))
-      .catch((err) => res.status(400).json(err))
-  })
+  app.delete("/categories/:id", auth, async (req, res) => {
+    const { id } = req.params
 
-  app.delete("/:id", (req, res) => {
-    Category.destroy({
-      where: {
-        id: req.params.id,
-      },
-    })
-      .then((category) => res.status(200).json(category))
-      .catch((err) => res.status(400).json(err))
+    const [user] = await CategoryModel.query()
+      .deleteById(id)
+      .withGraphFetched("products")
+
+    if (!checkCategory(user)) {
+      res.status(404).send({ error: "not found" })
+
+      return
+    }
+
+    res.send({ result: sanitizeCategory(user) })
   })
 }
 
