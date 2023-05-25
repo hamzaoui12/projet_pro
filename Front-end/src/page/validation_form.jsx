@@ -242,18 +242,12 @@ const ValidateForm = () => {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-2 bg-black text-white font-semibold rounded-md hover:bg-gray-900 transition-colors"
-              >
-                Proceed To Payment
-              </button>
-            </Form>
-          )}
-        </Formik>
-      </div>
-    </div>
+          <button type="submit" disabled={isSubmitting}>
+            Valider
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
