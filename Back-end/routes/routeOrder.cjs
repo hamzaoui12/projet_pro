@@ -11,7 +11,7 @@ const routeOrder = ({ app }) => {
       .findById(id)
       .withGraphFetched("products")
 
-    if (!checkUser(user)) {
+    if (!checkOrder(user)) {
       res.status(404).send({ error: "not found" })
 
       return
@@ -41,7 +41,7 @@ const routeOrder = ({ app }) => {
         return
       }
 
-      res.send(sanitizeUser(updateOrder))
+      res.send(sanitizeOrder(updateOrder))
     } catch (error) {
       res.send({ result: error })
 
