@@ -1,35 +1,68 @@
-const Order = require("../models/Order")
+const OrderModel = require("../models/OrderModel.cjs")
 
 const routeOrder = ({ app }) => {
-  app.get("/orders", Auth, async (req, res) => {
-    const owner = req.user._id
-    try {
-      const order = await Order.find({ owner: owner }).sort({ date: -1 })
-      res.status(200).send(order)
-    } catch (err) {
-      res.status(500).send()
+  app.get("/orders", async (req, res) => {
+    res.send({ result: await OrderModel.query() })
+  })
+
+  app.get("/orders/:id", async (req, res) => {
+    const { id } = req.params
+    const user = await OrderModel.query()
+      .findById(id)
+      .withGraphFetched("products")
+
+    if (!checkUser(user)) {
+      res.status(404).send({ error: "not found" })
+
+      return
     }
   })
 
-  app.post("/orders", Auth, async (req, res) => {
-    const owner = req.user._id
-    try {
-      if (cart && cart.items.length > 0) {
-        const newOrder = await Order.create({
-          owner,
-          items: cart.items,
-          bill: cart.bill,
-        })
+  app.patch("/orders/:id", auth, async (req, res) => {
+    const { id } = req.params
+    const { canceled, total, tva, finished, arrived, progress, date } = req.body
 
-        return res.status(201).send(newOrder)
-      } else
-        return res.status(404).send({
-          message: "No items in cart",
+    try {
+      const updateOrder = await OrderModel.query()
+        .updateAndFetchById(id, {
+          canceled,
+          total,
+          tva,
+          finished,
+          arrived,
+          progress,
+          date,
         })
-    } catch (err) {
-      console.log(err)
-      res.status(500).send("something went wrong     :(")
+        .withGraphFetched("products")
+
+      if (!checkOrder(updateOrder)) {
+        res.status(404).send({ error: "not found" })
+
+        return
+      }
+
+      res.send(sanitizeUser(updateOrder))
+    } catch (error) {
+      res.send({ result: error })
+
+      return
     }
+  })
+
+  app.delete("/Orders/:id", auth, async (req, res) => {
+    const { id } = req.params
+
+    const [user] = await OrderModel.query()
+      .deleteById(id)
+      .withGraphFetched("products")
+
+    if (!checkOrder(user)) {
+      res.status(404).send({ error: "not found" })
+
+      return
+    }
+
+    res.send({ result: sanitizeOrder(user) })
   })
 }
 
