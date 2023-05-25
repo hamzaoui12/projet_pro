@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 
-const Registration = () => {
+const Account = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -95,4 +95,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Account;
