@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const ValidateForm = () => {
@@ -53,66 +54,52 @@ const ValidateForm = () => {
   };
 
   const handleSubmit = (values) => {
-    // Send the form data to an API or process it in the background
     console.log(values);
   };
 
   return (
+    <div><Navbar/>
     <div
-      className="w-full h-screen flex items-center justify-center"
+      className="flex items-center justify-center"
       style={{
-        backgroundImage: 'url("https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg")',
+        minHeight: "100vh",
+        backgroundImage: "url(https://images.pexels.com/photos/276528/pexels-photo-276528.jpeg)",
         backgroundSize: "cover",
-       
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
-      <div
-        className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg"
-        style={{ backgroundColor: "rgba(255, 255, 255, 0.8)" }} // Rééluminer le formulaire avec un fond blanc semi-transparent
-      >
-        <h1 className="text-3xl font-bold text-center mb-8">
-          Personal Information Form
-        </h1>
-        <Formik
-          initialValues={initialValues}
-          validate={validate}
-          onSubmit={handleSubmit}
-        >
+      <div className="max-w-md p-8 bg-white bg-opacity-75 rounded-lg shadow-lg border border-gray-300" style={{ width: "500px" }}>
+        <h1 className="text-3xl font-bold mb-8">Livraison</h1>
+        <Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmit}>
           {({ isSubmitting }) => (
             <Form className="space-y-4">
-              <div>
-                <label htmlFor="firstName" className="text-lg font-semibold">
-                  First Name:
-                </label>
-                <div className="relative">
-                  <Field
-                    type="text"
-                    name="firstName"
-                    className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
-                  />
-                  <ErrorMessage
-                    name="firstName"
-                    component="div"
-                    className="text-red-500 mt-1"
-                  />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="firstName" className="text-lg font-semibold">
+                    First Name:
+                  </label>
+                  <div className="relative">
+                    <Field
+                      type="text"
+                      name="firstName"
+                      className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
+                    />
+                    <ErrorMessage name="firstName" component="div" className="text-red-500 mt-1" />
+                  </div>
                 </div>
-              </div>
-
-              <div>
-                <label htmlFor="lastName" className="text-lg font-semibold">
-                  Last Name:
-                </label>
-                <div className="relative">
-                  <Field
-                    type="text"
-                    name="lastName"
-                    className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
-                  />
-                  <ErrorMessage
-                    name="lastName"
-                    component="div"
-                    className="text-red-500 mt-1"
-                  />
+                <div>
+                  <label htmlFor="lastName" className="text-lg font-semibold">
+                    Last Name:
+                  </label>
+                  <div className="relative">
+                    <Field
+                      type="text"
+                      name="lastName"
+                      className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
+                    />
+                    <ErrorMessage name="lastName" component="div" className="text-red-500 mt-1" />
+                  </div>
                 </div>
               </div>
 
@@ -126,11 +113,7 @@ const ValidateForm = () => {
                     name="address1"
                     className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
                   />
-                  <ErrorMessage
-                    name="address1"
-                    component="div"
-                    className="text-red-500 mt-1"
-                  />
+                  <ErrorMessage name="address1" component="div" className="text-red-500 mt-1" />
                 </div>
               </div>
 
@@ -144,47 +127,36 @@ const ValidateForm = () => {
                     name="address2"
                     className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
                   />
-                  <ErrorMessage
-                    name="address2"
-                    component="div"
-                    className="text-red-500 mt-1"
-                  />
+                  <ErrorMessage name="address2" component="div" className="text-red-500 mt-1" />
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="city" className="text-lg font-semibold">
-                  City:
-                </label>
-                <div className="relative">
-                  <Field
-                    type="text"
-                    name="city"
-                    className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
-                  />
-                  <ErrorMessage
-                    name="city"
-                    component="div"
-                    className="text-red-500 mt-1"
-                  />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="city" className="text-lg font-semibold">
+                    City:
+                  </label>
+                  <div className="relative">
+                    <Field
+                      type="text"
+                      name="city"
+                      className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
+                    />
+                    <ErrorMessage name="city" component="div" className="text-red-500 mt-1" />
+                  </div>
                 </div>
-              </div>
-
-              <div>
-                <label htmlFor="region" className="text-lg font-semibold">
-                  Region:
-                </label>
-                <div className="relative">
-                  <Field
-                    type="text"
-                    name="region"
-                    className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
-                  />
-                  <ErrorMessage
-                    name="region"
-                    component="div"
-                    className="text-red-500 mt-1"
-                  />
+                <div>
+                  <label htmlFor="region" className="text-lg font-semibold">
+                    Region:
+                  </label>
+                  <div className="relative">
+                    <Field
+                      type="text"
+                      name="region"
+                      className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
+                    />
+                    <ErrorMessage name="region" component="div" className="text-red-500 mt-1" />
+                  </div>
                 </div>
               </div>
 
@@ -198,11 +170,7 @@ const ValidateForm = () => {
                     name="postalCode"
                     className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
                   />
-                  <ErrorMessage
-                    name="postalCode"
-                    component="div"
-                    className="text-red-500 mt-1"
-                  />
+                  <ErrorMessage name="postalCode" component="div" className="text-red-500 mt-1" />
                 </div>
               </div>
 
@@ -216,11 +184,7 @@ const ValidateForm = () => {
                     name="country"
                     className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
                   />
-                  <ErrorMessage
-                    name="country"
-                    component="div"
-                    className="text-red-500 mt-1"
-                  />
+                  <ErrorMessage name="country" component="div" className="text-red-500 mt-1" />
                 </div>
               </div>
 
@@ -234,29 +198,25 @@ const ValidateForm = () => {
                     name="phoneNumber"
                     className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
                   />
-                  <ErrorMessage
-                    name="phoneNumber"
-                    component="div"
-                    className="text-red-500 mt-1"
-                  />
+                  <ErrorMessage name="phoneNumber" component="div" className="text-red-500 mt-1" />
                 </div>
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-2 bg-black text-white font-semibold rounded-md hover:bg-gray-900 transition-colors"
+                className="w-full py-2 px-4 btn-black-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
+                style={{ backgroundColor: "black", color: "white" }}
               >
-                Submit
+                Payment
               </button>
             </Form>
           )}
         </Formik>
       </div>
     </div>
+    </div>
   );
 };
 
 export default ValidateForm;
-
-
