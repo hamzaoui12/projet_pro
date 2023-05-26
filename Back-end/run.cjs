@@ -4,6 +4,7 @@ const knex = require("knex")
 const BaseModel = require("./models/BaseModel.cjs")
 const routeUser = require("./routes/routeUser.cjs")
 const routeSignIn = require("./routes/routeSignIn.cjs")
+const routeProduct = require("./routes/routeProduct.cjs")
 const morgan = require("morgan")
 
 const run = async (config) => {
@@ -16,8 +17,8 @@ const run = async (config) => {
   BaseModel.knex(db)
 
   routeUser({ app, db })
-  routeSignIn({app})
-
+  routeSignIn({ app })
+  routeProduct({ app })
   app.listen(config.port)
 }
 
