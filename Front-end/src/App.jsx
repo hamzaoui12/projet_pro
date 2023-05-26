@@ -4,7 +4,7 @@ import Category from "./page/Category"
 import Product from "./page/Product"
 import CarouselComponent from "./components/Carousel"
 import Registration from "./page/Inscription"
-import Contact from "./page/Contact"
+import Contact from "./page/contact"
 
 
 

@@ -26,6 +26,7 @@ const Contact = () => {
   };
 
   return (
+   <div><Navbar/>
     
     <div
     
@@ -69,6 +70,7 @@ const Contact = () => {
         {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
       </div>
     </div>
+    </div> 
   );
 };
 
