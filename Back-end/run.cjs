@@ -17,8 +17,8 @@ const run = async (config) => {
   BaseModel.knex(db)
 
   routeUser({ app, db })
-  routeProduct({ app, db })
   routeSignIn({app})
+  routeProduct({ app, db })
 
   app.listen(config.port)
 }

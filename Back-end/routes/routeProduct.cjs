@@ -96,7 +96,7 @@ const routeProducts = async ({ app, db }) => {
         });
 
       if (!checkProduct(updateProduct)) {
-        res.status(404).send({ error: "not found" });
+        res.status(404).send({ error: "Not found" });
         return;
       }
 
