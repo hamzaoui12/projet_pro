@@ -1,87 +1,120 @@
-import React, { useState } from "react"
-import "tailwindcss/tailwind.css"
+import React, { useState } from "react";
+import "tailwindcss/tailwind.css";
 
-const Inscription = () => {
-  const [username, setUsername] = useState("")
-  const [email, setEmail] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
+const Registration = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    // Vérification du nom d'utilisateur et de l'adresse e-mail dans la base de données
-    const userExists = checkIfUserExists(username)
-    const emailExists = checkIfEmailExists(email)
-
-    if (userExists || emailExists) {
-      setErrorMessage(
-        "Un compte avec ce nom d'utilisateur ou cette adresse e-mail existe déjà."
-      )
-    } else {
-      // Traitement de la soumission du formulaire
+    if (!email.includes("@")) {
+      setErrorMessage("Your email is not valid.");
+      return;
     }
-  }
 
-  const checkIfUserExists = (username) => {
-    // Code pour vérifier si le nom d'utilisateur existe déjà dans la base de données
-    return false
-  }
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      return;
+    }
 
-  const checkIfEmailExists = (email) => {
-    // Code pour vérifier si l'adresse e-mail existe déjà dans la base de données
-    return false
-  }
+    if (!isChecked) {
+      setErrorMessage("Please agree to the privacy policy.");
+      return;
+    }
+
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      setErrorMessage("Please complete all fields.");
+      return;
+    }
+
+    setErrorMessage("");
+    setSuccessMessage("Account created successfully!");
+  };
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-gray-200">
-      <h1 className="text-4xl font-bold mb-8 text-gray-800">Créer un compte</h1>
-      <form className="flex flex-col gap-4 w-96 bg-white p-6 rounded-lg shadow-md">
-        <input
-          className="border border-gray-300 p-2 rounded-lg"
-          placeholder="Nom"
-        />
-        <input
-          className="border border-gray-300 p-2 rounded-lg"
-          placeholder="Prénom"
-        />
-        <input
-          className="border border-gray-300 p-2 rounded-lg"
-          placeholder="Nom d'utilisateur"
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        <input
-          className="border border-gray-300 p-2 rounded-lg"
-          placeholder="Email"
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <input
-          className="border border-gray-300 p-2 rounded-lg"
-          placeholder="Mot de passe"
-        />
-        <input
-          className="border border-gray-300 p-2 rounded-lg"
-          placeholder="Confirmation du mot de passe"
-        />
-        <div className="flex items-center gap-2">
-          <input type="checkbox" className="rounded-sm" />
-          <label className="text-gray-700">
-            En créant un compte, je consens au traitement de mes données
-            personnelles conformément à la politique de confidentialité
-          </label>
-        </div>
-        <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-all duration-200">
-          Créer
-        </button>
-      </form>
-      {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
-      <p className="mt-4 text-gray-700">
-        Vous avez déjà un compte ?{" "}
-        <a className="text-blue-800 mt-4 hover:text-blue-600" href="#">
-          Connectez-vous ici
-        </a>
-      </p>
+    <div
+      className="flex items-center justify-center h-screen bg-gray-800"
+      style={{
+        backgroundImage: `url('https://images.pexels.com/photos/5998120/pexels-photo-5998120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-md">
+        <h1 className="text-4xl font-bold mb-8 text-gray-800">Create an Account</h1>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <input
+            className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value)}
+            required
+          />
+          <input
+            className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(event) => setLastName(event.target.value)}
+            required
+          />
+          <input
+            className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+          <input
+            className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            required
+          />
+          <input
+            className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
+            placeholder="Confirm Password"
+            type="password"
+            value={confirmPassword}
+            onChange={(event) => setConfirmPassword(event.target.value)}
+            required
+          />
+          <div className="flex items-center gap-2 text-white">
+            <input
+              type="checkbox"
+              className="rounded-sm"
+              required
+              onChange={() => setIsChecked(!isChecked)}
+            />
+            <label className="text-gray-900">
+              By creating an account, I consent to the processing of my personal data
+              in accordance with the privacy policy.
+            </label>
+          </div>
+          <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-all duration-200">
+            Create
+          </button>
+        </form>
+        {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
+        {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
+        <p className="mt-4 text-black ">
+          Already have an account?{" "}
+          <a className="text-black mt-4 hover:text-blue-200" href="#">
+            Log in here
+          </a>
+        </p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Inscription
+export default Registration;

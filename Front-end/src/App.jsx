@@ -1,21 +1,17 @@
 import "../src/App.css"
-import Navbar from "./components/Navbar"
-import Category from "./page/Category"
-import Product from "./page/Product"
-import CarouselComponent from "./components/Carousel"
-import CategoryComposant from "./components/CategoryComposant"
+import Research from "./page/Research"
 import Connexion from "./page/Connexion"
+import Footer from "./components/footer"
 
 const App = () => {
   return (
     <div className="app">
-      <Navbar />
-      <Category />
-      <Product />
-      <CarouselComponent images={[]} duration={1000} className="h-12 l-12" />
-      <CategoryComposant />
-      <Connexion />
+      <Research />
+      <Connexion/>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   )
 }
-export default App
+export default App;
