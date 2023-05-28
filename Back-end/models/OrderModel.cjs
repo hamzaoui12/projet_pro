@@ -2,7 +2,7 @@ const BaseModel = require("./BaseModel.cjs");
 const UserModel = require("./UserModel.cjs");
 const ProductModel = require("./ProductModel.cjs");
 
-class OrdersModel extends BaseModel {
+class OrderModel extends BaseModel {
   static tableName = "orders";
 
   static relationMappings() {
@@ -31,4 +31,4 @@ class OrdersModel extends BaseModel {
   }
 }
 
-module.exports = OrdersModel;
+module.exports = OrderModel;
