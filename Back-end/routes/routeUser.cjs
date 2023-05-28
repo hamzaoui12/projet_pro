@@ -14,14 +14,14 @@ const routeUsers = async ({ app, db }) => {
   app.get("/users", auth, async (req, res) => {
     res.send({
       result: sanitizeUser(
-        await UserModel.query()
+        await UserModel.query().withGraphFetched("products")
       ),
     })
   })
 
   app.get("/users/:id", auth, async (req, res) => {
     const { id } = req.params
-    const user = await UserModel.query().findById(id)
+    const user = await UserModel.query().findById(id).withGraphFetched("products")
 
     if ((!checkUser(user))) {
       res.status(404).send({ error: "not found" })
@@ -37,7 +37,7 @@ const routeUsers = async ({ app, db }) => {
     const { firstName, lastName, mail, phoneNumber } = req.body
 
     try {
-      const updateUser = await UserModel.query().updateAndFetchById(id, { firstName, lastName, mail, phoneNumber })
+      const updateUser = await UserModel.query().updateAndFetchById(id, { firstName, lastName, mail, phoneNumber }).withGraphFetched("products")
 
       if (!checkUser(updateUser)) {
         res.status(404).send({ error: "not found" })
@@ -64,7 +64,7 @@ const routeUsers = async ({ app, db }) => {
     }
 
     res.send({ result: sanitizeUser(user) })
-    await UserModel.query().deleteById(id)
+    await UserModel.query().deleteById(id).withGraphFetched("products")
   })
 }
 
