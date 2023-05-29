@@ -58,7 +58,7 @@ const Registration = () => {
 
   return (
     <div
-      className="flex items-center justify-end h-screen bg-cover bg-center"
+      className="flex items-center justify-center h-screen bg-gray-800"
       style={{
         backgroundImage:
           'url("https://images.pexels.com/photos/2029665/pexels-photo-2029665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")'
@@ -179,7 +179,7 @@ const Registration = () => {
         </Formik>
         <p className="mt-4 text-gray-700">
           Already have an account?{" "}
-          <a className="text-blue-800 mt-4 hover:text-blue-600" href="#">
+          <a className="text-black mt-4 hover:text-blue-200" href="#">
             Log in here
           </a>
         </p>
