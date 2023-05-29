@@ -8,7 +8,6 @@ class MaterialModel extends BaseModel {
 
     return {
       products: {
-
         relation: BaseModel.ManyToManyRelation,
         modelClass: ProductModel,
         join: {

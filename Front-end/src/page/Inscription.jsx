@@ -2,73 +2,100 @@ import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
 
 const Registration = () => {
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const userExists = checkIfUserExists(username);
-    const emailExists = checkIfEmailExists(email);
-
-    if (userExists || emailExists) {
-      setErrorMessage(
-        "An account with this username or email already exists."
-      );
-    } else {
-      // Handle form submission
+    if (!email.includes("@")) {
+      setErrorMessage("Your email is not valid.");
+      return;
     }
-  };
 
-  const checkIfUserExists = (username) => {
-    return false;
-  };
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      return;
+    }
 
-  const checkIfEmailExists = (email) => {
-    return false;
+    if (!isChecked) {
+      setErrorMessage("Please agree to the privacy policy.");
+      return;
+    }
+
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      setErrorMessage("Please complete all fields.");
+      return;
+    }
+
+    setErrorMessage("");
+    setSuccessMessage("Account created successfully!");
   };
 
   return (
     <div
-      className="flex items-center justify-end h-screen bg-cover bg-center"
+      className="flex items-center justify-center h-screen bg-gray-800"
       style={{
-        backgroundImage:
-          'url("https://images.pexels.com/photos/2029665/pexels-photo-2029665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
+        backgroundImage: `url('https://images.pexels.com/photos/5998120/pexels-photo-5998120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-md mr-10">
+      <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-md">
         <h1 className="text-4xl font-bold mb-8 text-gray-800">Create an Account</h1>
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input
-            className="bg-transparent border border-gray-300 p-2 rounded-lg"
+            className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
             placeholder="First Name"
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value)}
+            required
           />
           <input
-            className="bg-transparent border border-gray-300 p-2 rounded-lg"
+            className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
             placeholder="Last Name"
+            value={lastName}
+            onChange={(event) => setLastName(event.target.value)}
+            required
           />
           <input
-            className="bg-transparent border border-gray-300 p-2 rounded-lg"
-            placeholder="Username"
-            onChange={(event) => setUsername(event.target.value)}
-          />
-          <input
-            className="bg-transparent border border-gray-300 p-2 rounded-lg"
+            className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
             placeholder="Email"
+            type="email"
+            value={email}
             onChange={(event) => setEmail(event.target.value)}
+            required
           />
           <input
-            className="bg-transparent border border-gray-300 p-2 rounded-lg"
+            className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
             placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            required
           />
           <input
-            className="bg-transparent border border-gray-300 p-2 rounded-lg"
+            className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
             placeholder="Confirm Password"
+            type="password"
+            value={confirmPassword}
+            onChange={(event) => setConfirmPassword(event.target.value)}
+            required
           />
-          <div className="flex items-center gap-2">
-            <input type="checkbox" className="rounded-sm" />
-            <label className="text-gray-700">
+          <div className="flex items-center gap-2 text-white">
+            <input
+              type="checkbox"
+              className="rounded-sm"
+              required
+              onChange={() => setIsChecked(!isChecked)}
+            />
+            <label className="text-gray-900">
               By creating an account, I consent to the processing of my personal data
               in accordance with the privacy policy.
             </label>
@@ -78,9 +105,10 @@ const Registration = () => {
           </button>
         </form>
         {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
-        <p className="mt-4 text-gray-700">
+        {successMessage && <p className="text-green-500 mt-4">{successMessage}</p>}
+        <p className="mt-4 text-black ">
           Already have an account?{" "}
-          <a className="text-blue-800 mt-4 hover:text-blue-600" href="#">
+          <a className="text-black mt-4 hover:text-blue-200" href="#">
             Log in here
           </a>
         </p>
