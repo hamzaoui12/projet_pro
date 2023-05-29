@@ -7,6 +7,7 @@ const routeAddresses = require("./routes/routeAddresses.js");
 const routeMaterial = require("./routes/routeMaterial.cjs");
 const routeSignIn = require("./routes/routeSignIn.cjs");
 const routeCategory = require("./routes/routeCategory.cjs");
+const routeProduct = require("./routes/routeProduct.cjs")
 const morgan = require("morgan");
 
 const run = async (config) => {
@@ -22,7 +23,8 @@ const run = async (config) => {
   routeAddresses({ app });
   routeMaterial({ app, db });
   routeSignIn({ app });
-  routeCategory({ app, db });
+  routeCategory({ app, db });  
+  routeProduct({ app, db })
 
   app.listen(config.port);
 };
