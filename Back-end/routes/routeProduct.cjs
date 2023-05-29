@@ -36,8 +36,9 @@ const routeProducts = async ({ app, db }) => {
       stock,
       priority,
       price,
-      category_id,
-      material_ids, 
+      category,
+      material, 
+      images,
     } = req.body;
   
     try {
@@ -50,12 +51,14 @@ const routeProducts = async ({ app, db }) => {
         stock,
         priority,
         price,
-        category_id,
+        category,
+        material, 
+        images,
       });
   
       
       await Promise.all(
-        material_ids.map(async (material_id) => {
+        material.map(async (material_id) => {
           await db("productmaterials").insert({
             product_id: newProduct.id,
             material_id,
@@ -79,7 +82,8 @@ const routeProducts = async ({ app, db }) => {
       stock,
       priority,
       price,
-      category_id,
+      category,
+      material,       
     } = req.body;
 
     try {
@@ -92,7 +96,8 @@ const routeProducts = async ({ app, db }) => {
           stock,
           priority,
           price,
-          category_id,
+          category,
+          material,           
         });
 
       if (!checkProduct(updateProduct)) {
