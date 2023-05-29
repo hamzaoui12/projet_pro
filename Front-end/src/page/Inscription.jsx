@@ -35,8 +35,7 @@ const Registration = () => {
   });
 
   const handleSubmit = (values) => {
-    console.log(values)
-    axios.post("http://localhost:3306/sign-up", {
+    axios.post(`${process.env.REACT_APP_URL_ROUTE}/sign-up`, {
         firstName: values.firstName,
         lastName: values.lastName,
         password: values.password,
@@ -44,11 +43,9 @@ const Registration = () => {
         phoneNumber: values.phoneNumber
       })
       .then(function (response) {
-        console.log("OK");
         console.log(response);
       })
       .catch(function (error) {
-        console.log("NOT");
         console.log(error);
       });
   };

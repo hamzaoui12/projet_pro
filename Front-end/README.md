@@ -68,3 +68,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Pour pouvoir utiliser le .env en front ###
+
+### npm install dotenv
+#### importez la bibliothèque dotenv et appelez sa méthode config() > require('dotenv').config();
+#### utiliser les variables de .env comme ça : `${process.env.URL_ROUTE}/sign-up`
+#### creer un fichier dans .env à la racine du dossier Front avec à l'interieur : ##### REACT_APP_URL_ROUTE = 'http://localhost:3307'
+
+
+
+
