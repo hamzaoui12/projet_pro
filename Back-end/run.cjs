@@ -19,11 +19,14 @@ const run = async (config) => {
   BaseModel.knex(db)
 
   routeUser({ app, db })
-
-  routeMaterial({ app, db })
-  routeCategory({ app, db })
+<<<<<<<<< Temporary merge branch 1
   routeSignIn({app})
   routeAddresses({app})
+=========
+  routeSignIn({ app })
+  routeCategory({ app, db })
+
+>>>>>>>>> Temporary merge branch 2
   app.listen(config.port)
 }
 
