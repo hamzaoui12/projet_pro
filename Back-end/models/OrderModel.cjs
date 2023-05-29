@@ -1,11 +1,12 @@
-const BaseModel = require("./BaseModel.cjs");
-const UserModel = require("./UserModel.cjs");
-const ProductModel = require("./ProductModel.cjs");
+const BaseModel = require("./BaseModel.cjs")
 
 class OrderModel extends BaseModel {
-  static tableName = "orders";
+  static tableName = "orders"
 
   static relationMappings() {
+    const UserModel = require("./UserModel.cjs")
+    const ProductModel = require("./ProductModel.cjs")
+
     return {
       user: {
         modelClass: UserModel,
@@ -21,14 +22,14 @@ class OrderModel extends BaseModel {
         join: {
           from: "orders.id",
           through: {
-            from: "order_products.order_id",
-            to: "order_products.product_id"
+            from: "orderProducts.order_id",
+            to: "orderProducts.product_id"
           },
           to: "products.id"
         }
       }
-    };
+    }
   }
 }
 
-module.exports = OrderModel;
+module.exports = OrderModel
