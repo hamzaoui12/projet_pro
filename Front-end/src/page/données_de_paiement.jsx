@@ -1,7 +1,4 @@
 import React, { useState } from "react"
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import axios from "axios"
-
 function PaymentForm() {
   const [cardName, setCardName] = useState("")
   const [cardNumber, setCardNumber] = useState("")
@@ -42,91 +39,109 @@ function PaymentForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-md mx-auto mt-8 p-6 rounded-lg shadow-lg bg-gray-100"
+    <div
+      className="flex items-center justify-center"
+      style={{
+        minHeight: "100vh",
+        backgroundImage:
+          "url(https://images.pexels.com/photos/276528/pexels-photo-276528.jpeg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
-      <div className="mb-6">
-        <label
-          htmlFor="cardName"
-          className="block text-gray-700 font-bold mb-2"
+      <div
+        className="max-w-md p-8 bg-white bg-opacity-75 rounded-lg shadow-lg border border-gray-300"
+        style={{ width: "500px" }}
+      >
+        <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-md mx-auto mt-8 p-6 rounded-lg shadow-lg bg-gray-100"
         >
-          Nom de la carte
-        </label>
-        <input
-          id="cardName"
-          type="text"
-          value={cardName}
-          onChange={handleCardNameChange}
-          required
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
+          <div className="mb-6">
+            <label
+              htmlFor="cardName"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Nom de la carte
+            </label>
+            <input
+              id="cardName"
+              type="text"
+              value={cardName}
+              onChange={handleCardNameChange}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
 
-      <div className="mb-6">
-        <label
-          htmlFor="cardNumber"
-          className="block text-gray-700 font-bold mb-2"
-        >
-          Numéro de carte
-        </label>
-        <input
-          id="cardNumber"
-          type="Number"
-          value={cardNumber}
-          onChange={handleCardNumberChange}
-          minlength="16"
-          maxlength="16"
-          placeholder="0000 0000 0000 0000"
-          required
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
+          <div className="mb-6">
+            <label
+              htmlFor="cardNumber"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Numéro de carte
+            </label>
+            <input
+              id="cardNumber"
+              type="Number"
+              value={cardNumber}
+              onChange={handleCardNumberChange}
+              minlength="16"
+              maxlength="16"
+              placeholder="0000 0000 0000 0000"
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
 
-      <div className="mb-6">
-        <label
-          htmlFor="expirationDate"
-          className="block text-gray-700 font-bold mb-2"
-        >
-          Date d'expiration
-        </label>
-        <input
-          id="expirationDate"
-          type="date"
-          value={expirationDate}
-          onChange={handleExpirationDateChange}
-          required
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
+          <div className="mb-6">
+            <label
+              htmlFor="expirationDate"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Date d'expiration
+            </label>
+            <input
+              id="expirationDate"
+              type="date"
+              value={expirationDate}
+              onChange={handleExpirationDateChange}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
 
-      <div className="mb-6">
-        <label htmlFor="cvv" className="block text-gray-700 font-bold mb-2">
-          CVV
-        </label>
-        <input
-          id="cvv"
-          type="number"
-          value={cvv}
-          onChange={handleCvvChange}
-          min="0"
-          max="999"
-          placeholder="000"
-          required
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
+          <div className="mb-6">
+            <label htmlFor="cvv" className="block text-gray-700 font-bold mb-2">
+              CVV
+            </label>
+            <input
+              id="cvv"
+              type="number"
+              value={cvv}
+              onChange={handleCvvChange}
+              min="0"
+              max="999"
+              placeholder="000"
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
 
-      <div className="flex items-center  justify-center">
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          {isLoading ? "Paiement en cours..." : "Payer"}
-        </button>
+          <div className="flex items-center  justify-center">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              {isLoading ? "Paiement en cours..." : "Payer"}
+            </button>
+          </div>
+        </form>{" "}
       </div>
-    </form>
+    </div>
   )
 }
 
