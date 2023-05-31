@@ -30,7 +30,7 @@ const Connexion = () => {
     <div className="flex flex-col md:flex-row ">
     
       <div
-        className="w-full md:w-1/2 h-screen bg-cover bg-center relative filter brightness-50"
+        className="w-full md:w-1/2 h-screen bg-cover bg-center relative"
         style={{ backgroundImage: "url(https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg)" }}
       >
       </div>
