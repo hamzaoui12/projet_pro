@@ -38,6 +38,7 @@ const Connexion = () => {
           <h1 className="text-6xl  text-white font-bold flex-col my-6 tracking-wide leading-tight">
             MAKE YOUR <span className="text-[#FED7AA]">FURNITURE</span> 
             <br/> DREAMS A <span className="text-[#FED7AA]">REALITY</span>
+            
           </h1>
           <p className="text-2xl text-white font-normal">Logging in to get more offers on our articles!</p>
         </div>
