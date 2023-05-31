@@ -9,9 +9,9 @@ const CategoryComposant = () => {
         {/* Overlay */}
         <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
           <p className="font-bold text-3xl px-2 pt-4 text-orange-200">
-            Cuisine
+            Kitchen
           </p>
-          <p className="px-2">Best Cuisine</p>
+          <p className="px-2">Best Kitchen</p>
         </div>
         <img
           className="max-h-[160px] md:max-h-[500px] w-full object-cover rounded-xl"
@@ -28,9 +28,9 @@ const CategoryComposant = () => {
         {/* Overlay */}
         <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
           <p className="font-bold text-3xl px-2 pt-4 text-orange-200">
-            Chambre
+            Room
           </p>
-          <p className="px-2">Best room</p>
+          <p className="px-2">Best Room</p>
         </div>
         <img
           className="max-h-[160px] md:max-h-[500px] w-full object-cover rounded-xl"
@@ -43,7 +43,7 @@ const CategoryComposant = () => {
         {/* Overlay */}
         <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
           <p className="font-bold text-3xl px-2 pt-4 text-orange-200">
-            Salle De Bain
+            Chawroom
           </p>
           <p className="px-2">Best chawroom</p>
         </div>
@@ -57,7 +57,7 @@ const CategoryComposant = () => {
         {/* Overlay */}
         <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
           <p className="font-bold text-3xl px-2 pt-4 text-orange-200">
-            Espace Séjour
+            Living-room
           </p>
           <p className="px-2">Best living-room</p>
         </div>
