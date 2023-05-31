@@ -1,5 +1,6 @@
 const ImageModel = require("../models/ImageModel.cjs");
 const auth = require("../middlewares/auth.js");
+const multer = require("multer");
 
 const routeImages = async ({ app, db }) => {
   const checkImage = (image) => {
@@ -27,8 +28,22 @@ const routeImages = async ({ app, db }) => {
     res.send({ result: image });
   });
 
-  app.post("/images", async (req, res) => {
-    const { product_id, category_id, picture } = req.body;
+    // Configurez Multer pour spécifier où enregistrer les fichiers téléchargés
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "uploads/");
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+      cb(null, file.fieldname + "-" + uniqueSuffix + ".jpg");
+    },
+  });
+
+  const upload = multer({ storage: storage });
+
+  app.post("/images", upload.single("picture"), async (req, res) => {
+    const { product_id, category_id } = req.body;
+    const picture = req.file.filename;
 
     try {
       const newImage = await ImageModel.query().insert({
