@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import Navbar from "../components/Navbar";
+
 
 const Connexion = () => {
   return (
@@ -55,6 +57,8 @@ const Connexion = () => {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 }
 
