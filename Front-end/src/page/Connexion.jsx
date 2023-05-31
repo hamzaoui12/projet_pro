@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Navbar from "../components/Navbar";
+
 
 const Connexion = () => {
   const [email, setEmail] = useState("");
@@ -23,20 +25,25 @@ const Connexion = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div> 
+      <Navbar/>
+    <div className="flex flex-col md:flex-row ">
+    
       <div
-        className="w-full md:w-1/2 h-screen bg-cover bg-center relative"
+        className="w-full md:w-1/2 h-screen bg-cover bg-center relative filter brightness-50"
         style={{ backgroundImage: "url(https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg)" }}
       >
-        <div className="absolute top-[20%] left-[10%] flex flex-col">
-          <h1 className="text-6xl text-white font-bold my-4 tracking-wide leading-tight">
-            MAKE YOUR <span className="text-[#FED7AA]">FURNITURE</span> DREAMS A <span className="text-[#FED7AA]">REALITY</span>
-          </h1>
-          <p className="text-2xl text-black font-normal">Logging in to get more offers on our articles!</p>
-        </div>
       </div>
+      <div className="absolute top-[33%] text-left flex flex-col ">
+          <h1 className="text-6xl  text-white font-bold flex-col my-6 tracking-wide leading-tight">
+            MAKE YOUR <span className="text-[#FED7AA]">FURNITURE</span> 
+            <br/> DREAMS A <span className="text-[#FED7AA]">REALITY</span>
+          </h1>
+          <p className="text-2xl text-white font-normal">Logging in to get more offers on our articles!</p>
+        </div>
+
       <div className="w-full md:w-1/2 bg-[#F5f5F5] flex flex-col p-20 justify-center">
-        <div className="flex flex-col mb-5">
+        <div className="flex flex-col mb-6">
           <h3 className="text-6xl font-bold mb-4">Login</h3>
           <p className="text-base mb-2">Welcome Back! Please enter your details.</p>
         </div>
@@ -71,11 +78,6 @@ const Connexion = () => {
               Log in
             </button>
           </div>
-          <div className="flex justify-center">
-            <button className="w-full text-[#060606] m-1 bg-white border-2 border-black rounded-md p-4 text-center flex items-center justify-center text-xl font-semibold">
-              Register
-            </button>
-          </div>
         </div>
         <div className="flex items-center justify-center">
           <p className="text-base font-normal text-[#060606]">
@@ -84,6 +86,8 @@ const Connexion = () => {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 };
 
