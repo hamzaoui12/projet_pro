@@ -5,6 +5,7 @@ import { TbHome } from "react-icons/tb"
 import { FaWallet } from "react-icons/fa"
 import { MdCategory, MdHelp } from "react-icons/md"
 import { VscCircleSmall, VscAccount } from "react-icons/vsc"
+import { BrowserRouter as Router, Link } from "react-router-dom"
 import {
   AiOutlineMenu,
   AiOutlineSearch,
@@ -23,7 +24,7 @@ const Navbar = () => {
     setShowCart(true)
   }
   return (
-    <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
+    <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4">
       {/* Left side */}
       <div className="flex items-center">
         <div onClick={() => setNav(!div)} className="cursor-pointer">
@@ -52,7 +53,9 @@ const Navbar = () => {
             {cart.length}
           </div>
         </div>
-        <VscAccount size={30} className="text-3xl" />
+        <Link to="/singin">
+          <VscAccount size={30} className="text-3xl" />
+        </Link>
         {item ? (
           <div className=" fixed w-full h-screen z-10 top-0 right-0"></div>
         ) : (
@@ -103,11 +106,13 @@ const Navbar = () => {
         <div>
           <ul className="flex font-bold flex-col p-4 text-gray-800">
             <li className="text-xl py-4 flex">
-              <TbHome
+              <Link
+                to="/"
                 onClick={() => setNav(!div)}
-                size={25}
                 className="mr-4 cursor-pointer"
-              />{" "}
+              >
+                <TbHome size={25} />
+              </Link>{" "}
               Home
             </li>
             <li className="text-xl py-2 flex">
@@ -122,51 +127,51 @@ const Navbar = () => {
               <li>
                 {/* Liste de clics */}
                 <ul className=" text-gray-800 text-xl py-4 px-12">
-                  <li
-                    onClick={() => setNav(!div)}
-                    className=" cursor-pointer grap-2 flex"
-                  >
-                    <VscCircleSmall size={30} />
+                  <li className=" cursor-pointer grap-2 flex">
+                    <Link to="/category" onClick={() => setNav(!div)}>
+                      <VscCircleSmall size={30} />
+                    </Link>{" "}
                     Kitchens
                   </li>
-                  <li
-                    onClick={() => setNav(!div)}
-                    className=" cursor-pointer grap-2 flex"
-                  >
-                    <VscCircleSmall size={30} />
+                  <li className=" cursor-pointer grap-2 flex">
+                    <Link to="/Category" onClick={() => setNav(!div)}>
+                      <VscCircleSmall size={30} />
+                    </Link>{" "}
                     Bedrooms
                   </li>
-                  <li
-                    onClick={() => setNav(!div)}
-                    className=" cursor-pointer grap-2 flex"
-                  >
-                    <VscCircleSmall size={30} />
+                  <li className=" cursor-pointer grap-2 flex">
+                    <Link to="/category" onClick={() => setNav(!div)}>
+                      <VscCircleSmall size={30} />
+                    </Link>{" "}
                     Bathroom
                   </li>
-                  <li
-                    onClick={() => setNav(!div)}
-                    className=" cursor-pointer grap-2 flex"
-                  >
-                    <VscCircleSmall size={30} />
+                  <li className=" cursor-pointer grap-2 flex">
+                    <Link to="/category" onClick={() => setNav(!div)}>
+                      <VscCircleSmall size={30} />
+                    </Link>{" "}
                     Livingroom
                   </li>
                 </ul>
               </li>
             )}
             <li className="text-xl py-4 flex">
-              <FaWallet
+              <Link
+                to="/shopping-cart"
                 onClick={() => setNav(!div)}
-                size={25}
                 className="mr-4 cursor-pointer"
-              />{" "}
-              shopping cart
+              >
+                <FaWallet size={25} />
+              </Link>{" "}
+              Shopping Cart
             </li>
             <li className="text-xl py-4 flex">
-              <MdHelp
+              <Link
+                to="/help"
                 onClick={() => setNav(!div)}
-                size={25}
                 className="mr-4 cursor-pointer"
-              />{" "}
+              >
+                <MdHelp size={25} />
+              </Link>{" "}
               Help
             </li>
           </ul>
@@ -218,7 +223,7 @@ const research = ({ addToCart }) => {
       </div>
 
       <div class="flex  max-w-[1640px] mx-auto py-12  ">
-        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 px-6 py-12 cursor-pointer">
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-auto p-3 gap-6 cursor-pointer">
           {Kitchen.map((item, index) => (
             <div
               key={index}
@@ -227,7 +232,7 @@ const research = ({ addToCart }) => {
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-full h-[300px] W-[300px] object-cover p-2 "
+                className="w-full h-[300px] W-[300px] object-cover p-2"
               />
               <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
                 <button onClick={() => handleAddToCart(item)}>

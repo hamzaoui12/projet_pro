@@ -1,9 +1,9 @@
 import React, { useState } from "react"
-import { Formik, Form, Field, ErrorMessage } from "formik"
+import { Formik, Form, Field } from "formik"
 import Navbar from "../components/Navbar"
 import * as Yup from "yup"
 import "tailwindcss/tailwind.css"
-import { MdCheck, MdError, MdRefresh } from "react-icons/md"
+import { MdCheck, MdRefresh } from "react-icons/md"
 
 const PasswordResetSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address"),

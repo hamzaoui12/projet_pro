@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { data } from "../data/data.jsx"
 import { BsPlus } from "react-icons/bs"
 import Navbar from "../components/Navbar"
+import { BrowserRouter as Router, Link } from "react-router-dom"
 const allCategory = ["all", ...new Set(data.map((item) => item.category))]
 const Category = ({ addToCart }) => {
   const [Kitchen, setLists] = useState(data)
@@ -21,7 +22,6 @@ const Category = ({ addToCart }) => {
 
   return (
     <div>
-      <h1>HELLO</h1>
       <Navbar />
       <div className="max-w-[1640px] mx-auto p-2">
         <div className="max-h-[500px] relative   ">
@@ -67,32 +67,35 @@ const Category = ({ addToCart }) => {
           </div>
           {/* Display foods */}
           <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6   cursor-pointer">
+            {" "}
             {Kitchen.map((item, index) => (
-              <div
-                key={index}
-                className="border shadow-lg  hover:scale-105 duration-300  relative group"
-              >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-[300px] W-[300px] object-cover p-2 "
-                />
-                <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
-                  <button onClick={() => handleAddToCart(item)}>
-                    <div className="flex justify-center rounded-full items-center hover:bg-gray-500 text-white w-12 h-12 bg-black">
-                      <BsPlus className="text-3xl" />
-                    </div>
-                  </button>
+              <Link to="/product">
+                <div
+                  key={index}
+                  className="border shadow-lg  hover:scale-105 duration-300  relative group"
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-[300px] W-[300px] object-cover p-2 "
+                  />
+                  <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
+                    <button onClick={() => handleAddToCart(item)}>
+                      <div className="flex justify-center rounded-full items-center hover:bg-gray-500 text-white w-12 h-12 bg-black">
+                        <BsPlus className="text-3xl" />
+                      </div>
+                    </button>
+                  </div>
+                  <div className="flex justify-between px-2 py-4">
+                    <p className="font-bold">{item.name}</p>
+                    <p>
+                      <span className="bg-black text-white p-1 rounded-full">
+                        {item.price}
+                      </span>
+                    </p>
+                  </div>
                 </div>
-                <div className="flex justify-between px-2 py-4">
-                  <p className="font-bold">{item.name}</p>
-                  <p>
-                    <span className="bg-black text-white p-1 rounded-full">
-                      {item.price}
-                    </span>
-                  </p>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

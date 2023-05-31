@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Link } from "react-router-dom"
 import {
   AiOutlineMenu,
   AiOutlineSearch,
@@ -22,7 +22,7 @@ const Navbar = () => {
     setShowCart(true)
   }
   return (
-    <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
+    <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4">
       {/* Left side */}
       <div className="flex items-center">
         <div onClick={() => setNav(!div)} className="cursor-pointer">
@@ -34,14 +34,20 @@ const Navbar = () => {
       </h1>
 
       <div className="text-black md:flex flex items-center  gap-4 cursor-pointer">
-        <AiOutlineSearch size={30} className="text-3xl " />
+        <Link to="/Search">
+          <AiOutlineSearch size={30} className="text-3xl " />
+        </Link>
+
         <div onClick={() => setShowCart(!item)} size={25} className=" ">
           <AiOutlineShoppingCart className="text-3xl" />
           <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
             {cart.length}
           </div>
         </div>
-        <VscAccount size={30} className="text-3xl" />
+        <Link to="/singin">
+          <VscAccount size={30} className="text-3xl" />
+        </Link>
+
         {item ? (
           <div className=" fixed w-full h-screen z-10 top-0 right-0"></div>
         ) : (
