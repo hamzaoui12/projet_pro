@@ -4,6 +4,7 @@ class UserModel extends BaseModel {
   static tableName = "users"
 
   static get relationMappings() {
+    const OrderModel = require("./OrderModel.cjs")
     const AddressModel = require("./AddressModel.cjs")
     const BankCardModel = require("./BankCardModel.cjs")
     
@@ -26,6 +27,14 @@ class UserModel extends BaseModel {
       join: {
         from: "users.id",
         to: "bankCards.user_id"
+      }
+      },
+      orders: {
+      modelClass: OrderModel,
+      relation: BaseModel.HasManyRelation,
+      join: {
+        from: "orders.id",
+        to: "orders.user_id"
       }
     },
     }
