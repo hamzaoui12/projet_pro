@@ -39,7 +39,7 @@ const Connexion = () => {
             MAKE YOUR <span className="text-[#FED7AA]">FURNITURE</span> 
             <br/> DREAMS A <span className="text-[#FED7AA]">REALITY</span>
           </h1>
-          <p className="text-2xl text-black font-normal">Logging in to get more offers on our articles!</p>
+          <p className="text-2xl text-white font-normal">Logging in to get more offers on our articles!</p>
         </div>
 
       <div className="w-full md:w-1/2 bg-[#F5f5F5] flex flex-col p-20 justify-center">
