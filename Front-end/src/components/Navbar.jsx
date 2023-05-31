@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom"
 import {
   AiOutlineMenu,
   AiOutlineSearch,
@@ -91,11 +92,13 @@ const Navbar = () => {
         <div>
           <ul className="flex font-bold flex-col p-4 text-gray-800">
             <li className="text-xl py-4 flex">
-              <TbHome
+              <Link
+                to="/"
                 onClick={() => setNav(!div)}
-                size={25}
                 className="mr-4 cursor-pointer"
-              />{" "}
+              >
+                <TbHome size={25} />
+              </Link>{" "}
               Home
             </li>
             <li className="text-xl py-2 flex">
@@ -110,51 +113,51 @@ const Navbar = () => {
               <li>
                 {/* Liste de clics */}
                 <ul className=" text-gray-800 text-xl py-4 px-12">
-                  <li
-                    onClick={() => setNav(!div)}
-                    className=" cursor-pointer grap-2 flex"
-                  >
-                    <VscCircleSmall size={30} />
+                  <li className=" cursor-pointer grap-2 flex">
+                    <Link to="/category" onClick={() => setNav(!div)}>
+                      <VscCircleSmall size={30} />
+                    </Link>{" "}
                     Kitchens
                   </li>
-                  <li
-                    onClick={() => setNav(!div)}
-                    className=" cursor-pointer grap-2 flex"
-                  >
-                    <VscCircleSmall size={30} />
+                  <li className=" cursor-pointer grap-2 flex">
+                    <Link to="/Category" onClick={() => setNav(!div)}>
+                      <VscCircleSmall size={30} />
+                    </Link>{" "}
                     Bedrooms
                   </li>
-                  <li
-                    onClick={() => setNav(!div)}
-                    className=" cursor-pointer grap-2 flex"
-                  >
-                    <VscCircleSmall size={30} />
+                  <li className=" cursor-pointer grap-2 flex">
+                    <Link to="/category" onClick={() => setNav(!div)}>
+                      <VscCircleSmall size={30} />
+                    </Link>{" "}
                     Bathroom
                   </li>
-                  <li
-                    onClick={() => setNav(!div)}
-                    className=" cursor-pointer grap-2 flex"
-                  >
-                    <VscCircleSmall size={30} />
+                  <li className=" cursor-pointer grap-2 flex">
+                    <Link to="/category" onClick={() => setNav(!div)}>
+                      <VscCircleSmall size={30} />
+                    </Link>{" "}
                     Livingroom
                   </li>
                 </ul>
               </li>
             )}
             <li className="text-xl py-4 flex">
-              <FaWallet
+              <Link
+                to="/shopping-cart"
                 onClick={() => setNav(!div)}
-                size={25}
                 className="mr-4 cursor-pointer"
-              />{" "}
-              shopping cart
+              >
+                <FaWallet size={25} />
+              </Link>{" "}
+              Shopping Cart
             </li>
             <li className="text-xl py-4 flex">
-              <MdHelp
+              <Link
+                to="/help"
                 onClick={() => setNav(!div)}
-                size={25}
                 className="mr-4 cursor-pointer"
-              />{" "}
+              >
+                <MdHelp size={25} />
+              </Link>{" "}
               Help
             </li>
           </ul>
