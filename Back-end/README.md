@@ -39,3 +39,10 @@ puis ctrl+C après quelques secondes
 
 Se placer sur le dossier "Back-end" et lancer la commande :
 node index.js
+
+### Pour pouvoir utiliser le .env en front ###
+
+### npm install dotenv
+#### importez la bibliothèque dotenv et appelez sa méthode config() > require('dotenv').config();
+#### utiliser les variables de .env comme ça : `${process.env.REACT_APP_URL_ROUTE}/sign-up`
+#### creer un fichier dans .env à la racine du dossier Front avec à l'interieur : ##### REACT_APP_URL_ROUTE = 'http://localhost:3307'
