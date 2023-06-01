@@ -30,7 +30,7 @@ const Navbar = () => {
         </div>
       </div>
       <h1 className="text-3xl sm:text-4xl text-center lg:text-4xl px-2">
-        Best <span className="font-bold">Furniture</span>
+        <span className="">Λｉｒｎｅｉｓ</span>
       </h1>
 
       <div className="text-black md:flex flex items-center  gap-4 cursor-pointer">
@@ -92,8 +92,8 @@ const Navbar = () => {
           size={30}
           className="absolute right-4 top-4 cursor-pointer"
         />
-        <h2 className="text-2xl p-4">
-          Best <span className="font-bold">Furniture</span>
+        <h2 className="text-2xl p-4 flex justify-center items-center">
+          <span className="">Λｉｒｎｅｉｓ</span>
         </h2>
         <div>
           <ul className="flex font-bold flex-col p-4 text-gray-800">

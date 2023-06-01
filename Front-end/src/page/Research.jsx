@@ -31,7 +31,7 @@ const Navbar = () => {
           <AiOutlineMenu size={30} />
         </div>
         <h1 className="text-3xl sm:text-4xl  hidden md:flex lg:text-4xl ">
-          Best <span className="font-bold">Furniture</span>
+          <span className="">Λｉｒｎｅｉｓ</span>
         </h1>
       </div>
 
@@ -101,7 +101,7 @@ const Navbar = () => {
           className="absolute right-4 top-4 cursor-pointer"
         />
         <h2 className="text-2xl p-4">
-          Best <span className="font-bold">Furniture</span>
+          <span className="">Λｉｒｎｅｉｓ</span>
         </h2>
         <div>
           <ul className="flex font-bold flex-col p-4 text-gray-800">
