@@ -4,6 +4,7 @@ const jsonwebtoken = require("jsonwebtoken")
 const sanitizeUser = require("../sanitizer.js")
 const UserModel = require("../models/UserModel.cjs")
 
+
 const routeSign = ({ app }) => {
   app.post("/sign-up", async (req, res) => {
     const { firstName, lastName, password, mail, phoneNumber } = req.body
@@ -51,7 +52,7 @@ const routeSign = ({ app }) => {
       { expiresIn: config.security.session.jwt.expiresIn }
     )
 
-    res.send({ result: jwt })
+    res.send({ result: jwt, "user" : sanitizeUser(user)})
   })
 }
 
