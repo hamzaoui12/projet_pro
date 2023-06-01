@@ -1,21 +1,18 @@
-import React, { useState } from "react"
+import React, { useState, useEFfect, useEffect } from "react"
 import { data } from "../data/data.jsx"
-import { BsPlus } from "react-icons/bs"
-const allCategory = ["all", ...new Set(data.map((item) => item.category))]
+import { BsPlus } from "react-icons/bs" 
+import {orderStorage} from "../Storage/orerStorage.js"
+
 const Category = ({ addToCart }) => {
-  const [Kitchen, setLists] = useState(data)
-  const [category, setCategory] = useState(allCategory)
-  console.log(setCategory)
-  const filterItems = (category) => {
-    const newItems = data.filter((item) => item.category === category)
-    setLists(newItems)
-    if (category === "all") {
-      setLists(data)
-      return
-    }
-  }
+  const [Kitchen] = useState(data)
+
   const handleAddToCart = (product) => {
-    addToCart(product)
+    if (!orderStorage.storageOrder) {
+      localStorage.setItem('storageOrder', JSON.stringify(product))
+    } else {
+      orderStorage.storageOrder.push(product)
+      localStorage.setItem('storageOrder', JSON.stringify(orderStorage.storageOrder))
+    }
   }
 
   return (
@@ -37,8 +34,8 @@ const Category = ({ addToCart }) => {
           alt="/"
         />
       </div>
-      <div className="max-w-[1640px] m-auto px-4 ">
-        <h1 className="text-gray-900  font-bold text-4xl py-32 text-center">
+      <div className="max-w-[1640px] m-auto px-4 py-32">
+        <h1 className="text-gray-900  font-bold text-4xl text-center">
           Discover Our Best Models
           <p className="text-gray-700  font-bold text-2xl py-12 text-center">
             The kitchen is a specific room in a building, especially equipped
@@ -47,22 +44,9 @@ const Category = ({ addToCart }) => {
             oven,refrigerator...).
           </p>
         </h1>
-        <h1 className="text-gray-900  font-bold text-3xl text-center ">
-          Filter
-        </h1>
-        <div className="flex gap-6 justify-center py-6">
-          {category.map((category) => (
-            <button
-              className="px-4 py-2 bg-black text-white rounded-full font-bold  hover:bg-orange-200"
-              onClick={() => filterItems(category)}
-              data-aos="zoom-out-down"
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+
         {/* Display foods */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6   cursor-pointer">
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 py-32  cursor-pointer">
           {Kitchen.map((item, index) => (
             <div
               key={index}
