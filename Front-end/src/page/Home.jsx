@@ -1,12 +1,10 @@
 import React from "react"
-import Navbar from "../components/Navbar"
 import CarouselComponent from "../components/Carousel"
 import CategoryComposant from "../components/CategoryComposant"
 
 const Home = () => {
   return (
     <div>
-      <Navbar />
       <div className="h-screen bg-black flex flex-col justify-center items-center relative">
         <div className="h-full w-full filter brightness-50">
           <CarouselComponent

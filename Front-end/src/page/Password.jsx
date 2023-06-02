@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Formik, Form, Field } from "formik"
-import Navbar from "../components/Navbar"
 import * as Yup from "yup"
 import "tailwindcss/tailwind.css"
 import { MdCheck, MdRefresh } from "react-icons/md"
@@ -29,7 +28,6 @@ const PasswordResetPage = () => {
   return (
     <div>
       {" "}
-      <Navbar />
       <div
         className="min-h-screen flex items-center justify-center bg-gray-100"
         style={{

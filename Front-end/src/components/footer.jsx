@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaInstagram, FaFacebook, FaTwitter } from 'react-icons/fa';
+import React from "react"
+import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa"
 
 const Footer = () => (
   <footer className="bg-black text-white">
@@ -9,7 +9,7 @@ const Footer = () => (
           <h6 className="text-lg font-bold underline mb-2">CGU</h6>
           <ul className="text-sm">
             <li> © Inter ARNEIS Systems B.V 2022-2023</li>
-          </ul>          
+          </ul>
         </div>
         <div>
           <h3 className="text-lg font-bold underline mb-2">Mentions légales</h3>
@@ -20,8 +20,12 @@ const Footer = () => (
         </div>
         <div>
           <h3 className="text-lg font-bold underline mb-2">Contact</h3>
-          <p>Numéro de téléphone : <a href="tel:+123456789">+123456789</a></p>
-          <p>Email : <a href="mailto:contact@example.com">contact@example.com</a></p>
+          <p>
+            Numéro de téléphone : <a href="tel:+123456789">+123456789</a>
+          </p>
+          <p>
+            Email : <a href="mailto:contact@example.com">contact@example.com</a>
+          </p>
         </div>
         <div>
           <h3 className="text-lg font-bold underline mb-2">Réseaux sociaux</h3>
@@ -46,6 +50,6 @@ const Footer = () => (
       </div>
     </div>
   </footer>
-);
+)
 
-export default Footer;
+export default Footer

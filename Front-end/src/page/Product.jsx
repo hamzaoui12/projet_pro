@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { data } from "../data/data.jsx"
 import { BsPlus } from "react-icons/bs"
-import Navbar from "../components/Navbar"
 
 const ProductPage = ({ addToCart }) => {
   const [images] = useState({})
@@ -28,7 +27,6 @@ const ProductPage = ({ addToCart }) => {
   return (
     <div>
       {" "}
-      <Navbar />
       <div className="max-w-[1640px] mx-auto  p-2">
         <div className="max-h-[500px] relative hidden md:flex ">
           {/* Overlay */}
@@ -50,31 +48,31 @@ const ProductPage = ({ addToCart }) => {
         <div className="flex flex-col justify-between lg:flex-row p-6 lg:p-24 gap-6 lg:gap-16 lg:items-center">
           <div className="flex flex-col gap-6 lg:w-2/4">
             <img
-              src={activeImg}
+              src="https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt=""
               className="w-full h-full aspect-square object-cover rounded-xl"
             />
             <div className="flex flex-row justify-between h-12 sm:h-24">
               <img
-                src={images.img1}
+                src="https://images.pexels.com/photos/6198663/pexels-photo-6198663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt=""
                 className="w-12 sm:w-24 h-12 sm:h-24 rounded-md cursor-pointer"
                 onClick={() => setActiveImage(images.img1)}
               />
               <img
-                src={images.img2}
+                src="https://images.pexels.com/photos/6198663/pexels-photo-6198663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt=""
                 className="w-12 sm:w-24 h-12 sm:h-24 rounded-md cursor-pointer"
                 onClick={() => setActiveImage(images.img2)}
               />
               <img
-                src={images.img3}
+                src="https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt=""
                 className="w-12 sm:w-24 h-12 sm:h-24 rounded-md cursor-pointer"
                 onClick={() => setActiveImage(images.img3)}
               />
               <img
-                src={images.img4}
+                src="https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt=""
                 className="w-12 sm:w-24 h-12 sm:h-24 rounded-md cursor-pointer"
                 onClick={() => setActiveImage(images.img4)}

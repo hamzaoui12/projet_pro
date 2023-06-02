@@ -1,6 +1,4 @@
 import React, { useState } from "react"
-import Navbar from "../components/Navbar"
-
 import "tailwindcss/tailwind.css"
 
 const Contact = () => {
@@ -28,8 +26,6 @@ const Contact = () => {
 
   return (
     <div>
-      <Navbar />
-
       <div
         className="flex items-center justify-center h-screen bg-cover bg-center"
         style={{

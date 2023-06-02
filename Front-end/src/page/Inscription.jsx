@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Navbar from "../components/Navbar"
+
 import "tailwindcss/tailwind.css"
 
 const Registration = () => {
@@ -41,7 +41,6 @@ const Registration = () => {
 
   return (
     <div>
-      <Navbar />
       <div
         className="flex items-center justify-center h-screen bg-gray-800"
         style={{

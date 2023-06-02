@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Navbar from "../components/Navbar"
+import { BrowserRouter as Router, Link } from "react-router-dom"
 
 function PaymentForm() {
   const [cardName, setCardName] = useState("")
@@ -42,7 +42,6 @@ function PaymentForm() {
 
   return (
     <div>
-      <Navbar />
       <form
         onSubmit={handleSubmit}
         className="max-w-md mx-auto mt-8 p-6 rounded-lg shadow-lg bg-gray-100"
@@ -119,13 +118,16 @@ function PaymentForm() {
         </div>
 
         <div className="flex items-center  justify-center">
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            {isLoading ? "Paiement en cours..." : "Payer"}
-          </button>
+          <Link to="/thankyou">
+            {" "}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              {isLoading ? "Paiement en cours..." : "Payer"}
+            </button>
+          </Link>
         </div>
       </form>
     </div>

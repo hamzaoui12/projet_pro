@@ -1,7 +1,9 @@
 import React from "react"
 
 const shopping_cart = () => {
-  return <div></div>
+  return (
+    
+  )
 }
 
 export default shopping_cart
