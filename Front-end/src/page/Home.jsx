@@ -1,26 +1,23 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import CarouselComponent from "../components/Carousel";
-import CategoryComposant from "../components/CategoryComposant";
-import Footer from "../components/footer";
+import React from "react"
+import CarouselComponent from "../components/Carousel"
+import CategoryComposant from "../components/CategoryComposant"
 
 const Home = () => {
   return (
     <div>
-    <Navbar />
-    <div className="h-screen bg-black flex flex-col justify-center items-center relative">
-      <div className="h-full w-full filter brightness-50">
-        <CarouselComponent
-          images={[
-            "https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            "https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            "https://images.pexels.com/photos/7031883/pexels-photo-7031883.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            "https://images.pexels.com/photos/8135105/pexels-photo-8135105.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          ]}
-          slideDuration={2000}
-        />
-      </div>
-<div className="absolute left-0 top-1/2 transform -translate-y-1/2 text-left pl-8">
+      <div className="h-screen bg-black flex flex-col justify-center items-center relative">
+        <div className="h-full w-full filter brightness-50">
+          <CarouselComponent
+            images={[
+              "https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              "https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              "https://images.pexels.com/photos/7031883/pexels-photo-7031883.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              "https://images.pexels.com/photos/8135105/pexels-photo-8135105.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+            ]}
+            slideDuration={2000}
+          />
+        </div>
+        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 text-left pl-8">
           <h1 className="text-white text-6xl font-bold">
             THE <span className="text-[#FED7AA]">HIGHLANDERS</span> OF THE{" "}
             <br />
@@ -28,18 +25,19 @@ const Home = () => {
           </h1>
           <p className="text-white text-lg mt-12">
             On Best Furniture you will find a multitude ,
-            <br/>of furniture choices to bring your home up to date .
+            <br />
+            of furniture choices to bring your home up to date .
           </p>
-        <div className="mt-6">
-          <a
-            href="./page/product"
-            className="justify-center inline-block px-4 py-4 text-white text-lg font-semibold bg-white bg-opacity-25 border-white border-2 hover:bg-grid-200 rounded-lg mt-4"
-          >
-            Take advantage of all our current offers, here!
-          </a>
+          <div className="mt-6">
+            <a
+              href="./page/product"
+              className="justify-center inline-block px-4 py-4 text-white text-lg font-semibold bg-white bg-opacity-25 border-white border-2 hover:bg-grid-200 rounded-lg mt-4"
+            >
+              Take advantage of all our current offers, here!
+            </a>
+          </div>
         </div>
       </div>
-    </div>
       <h1 className="text-center mt-20 text-4xl font-bold">
         FROM THE HIGHLANDS<span className="text-[#FED7AA]"> OF SCOTLAND</span>,
         OUR FURNITURE <span className="text-[#FED7AA]">IS IMMORTAL</span>
@@ -51,8 +49,8 @@ const Home = () => {
         <p className="text-lg leading-relaxed">
           Discover our collection of furniture inspired by the majestic Hautes
           Lands of Scotland. Each piece is meticulously crafted to combine
-          beauty and sustainability, reflecting the very essence of this mythical
-          region.
+          beauty and sustainability, reflecting the very essence of this
+          mythical region.
         </p>
 
         <img
@@ -71,9 +69,8 @@ const Home = () => {
         <h1 className="text-center text-4xl font-bold">OUR PRODUCTS</h1>
         <CategoryComposant />
       </div>
-      <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

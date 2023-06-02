@@ -1,18 +1,18 @@
-import React, { useState } from "react"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { useState } from "react"
 import {
+  AiOutlineClose,
   AiOutlineMenu,
   AiOutlineSearch,
-  AiOutlineClose,
   AiOutlineShoppingCart,
 } from "react-icons/ai"
-import { TbHome } from "react-icons/tb"
 import { FaWallet } from "react-icons/fa"
 import { MdCategory, MdHelp } from "react-icons/md"
-import { VscCircleSmall, VscAccount } from "react-icons/vsc"
-import { orderStorage } from "../Storage/orerStorage.js"
+import { TbHome } from "react-icons/tb"
+import { VscAccount, VscCircleSmall } from "react-icons/vsc"
+import { Link } from "react-router-dom"
+import SearchBar from "./SearchBar"
 
-const Navbar = () => {
+const SearchNavbar = () => {
   const [div, setNav] = useState(false)
   const [cart, setCart] = useState([])
   const [item, setShowCart] = useState(false)
@@ -22,6 +22,7 @@ const Navbar = () => {
     setCart([...cart, product])
     setShowCart(true)
   }
+
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4">
       {/* Left side */}
@@ -29,16 +30,24 @@ const Navbar = () => {
         <div onClick={() => setNav(!div)} className="cursor-pointer">
           <AiOutlineMenu size={30} />
         </div>
+        <h1 className="text-3xl sm:text-4xl  hidden md:flex lg:text-4xl ">
+          <span className="">Λｉｒｎｅｉｓ</span>
+        </h1>
       </div>
-      <h1 className="text-3xl sm:text-4xl text-center lg:text-4xl px-2">
-        <span className="">Λｉｒｎｅｉｓ</span>
-      </h1>
 
+      <nav className="navbar">
+        <div className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[400px] lg:w-[500px]">
+          <AiOutlineSearch size={25} />
+          <input
+            className="bg-transparent p-2 w-full focus:outline-none"
+            type="text"
+            placeholder="Best Furniture"
+          />
+        </div>
+
+        {/* Ajoutez d'autres éléments de la barre de navigation ici si nécessaire */}
+      </nav>
       <div className="text-black md:flex flex items-center  gap-4 cursor-pointer">
-        <Link to="/Search">
-          <AiOutlineSearch size={30} className="text-3xl " />
-        </Link>
-
         <div onClick={() => setShowCart(!item)} size={25} className=" ">
           <AiOutlineShoppingCart className="text-3xl" />
           <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
@@ -48,7 +57,6 @@ const Navbar = () => {
         <Link to="/singin">
           <VscAccount size={30} className="text-3xl" />
         </Link>
-
         {item ? (
           <div className=" fixed w-full h-screen z-10 top-0 right-0"></div>
         ) : (
@@ -93,7 +101,7 @@ const Navbar = () => {
           size={30}
           className="absolute right-4 top-4 cursor-pointer"
         />
-        <h2 className="text-2xl p-4 flex justify-center items-center">
+        <h2 className="text-2xl p-4">
           <span className="">Λｉｒｎｅｉｓ</span>
         </h2>
         <div>
@@ -149,7 +157,7 @@ const Navbar = () => {
             )}
             <li className="text-xl py-4 flex">
               <Link
-                to="/panier"
+                to="/shopping-cart"
                 onClick={() => setNav(!div)}
                 className="mr-4 cursor-pointer"
               >
@@ -174,4 +182,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default SearchNavbar
