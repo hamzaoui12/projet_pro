@@ -4,11 +4,11 @@
 
 ## Création du front du pied de page. - Score = 2
 
-## Create API Product + CRUD - score = 3
+## Create API Product + CRUD - score = 5
 
-## Create API Material + CRUD - score = 3 
+## Create API Material + CRUD - score = 5 
 
-## Front - Formulaire paramètre du compte - score = 3
+## Front - Formulaire paramètre du compte - score = 5
 
 ## Create API Picture + CRUD - score = 5
 
