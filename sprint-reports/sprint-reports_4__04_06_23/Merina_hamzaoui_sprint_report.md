@@ -14,7 +14,7 @@
 
 ## feature : Ajout de la fonction “Ajouter au panier” - score = 3
 
-## feature : BACK \_API commandes - score = 2
+## feature : BACK API commandes - score = 2
 
 ## feature : creation de la page de confirmation - score = 2
 
