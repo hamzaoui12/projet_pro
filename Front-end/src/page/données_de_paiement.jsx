@@ -1,136 +1,92 @@
 import React, { useState } from "react"
+import { BrowserRouter as Router, Link } from "react-router-dom"
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js"
+import { element } from "prop-types"
+import axios from "axios"
+
 function PaymentForm() {
+  const stripe = useStripe()
+  const elements = useElements()
   const [cardName, setCardName] = useState("")
-  const [cardNumber, setCardNumber] = useState("")
-  const [expirationDate, setExpirationDate] = useState("")
-  const [cvv, setCvv] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleCardNameChange = (event) => {
-    setCardName(event.target.value)
-  }
-
-  const handleCardNumberChange = (event) => {
-    setCardNumber(event.target.value)
-  }
-
-  const handleExpirationDateChange = (event) => {
-    setExpirationDate(event.target.value)
-  }
-
-  const handleCvvChange = (event) => {
-    setCvv(event.target.value)
-  }
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     setIsLoading(true)
 
-    // Simulating a delay for the payment process
-    setTimeout(() => {
-      setIsLoading(false)
-      // Perform the actual payment logic here
-      // Reset form fields
-      setCardName("")
-      setCardNumber("")
-      setExpirationDate("")
-      setCvv("")
-    }, 2000)
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement),
+      billing_details: {
+        name: cardName,
+      },
+    })
+
+    setIsLoading(false)
+
+    if (!error) {
+      console.log("token Généré: ", paymentMethod)
+
+      try {
+        const { id } = paymentMethod
+        const response = await axios.post(
+          "http://localhost:3001/stripe/charge",
+          {
+            amount: 10000,
+            id: id,
+          }
+        )
+        if (response.data.success) console.log("payment reussi")
+      } catch (error) {
+        console.log("erreur! ", error)
+      }
+    } else {
+      console.log(error.message)
+    }
   }
 
   return (
-    <div
-      className="flex items-center justify-center"
-      style={{
-        minHeight: "100vh",
-        backgroundImage:
-          "url(https://images.pexels.com/photos/276528/pexels-photo-276528.jpeg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <div
-        className="max-w-md p-8 bg-white bg-opacity-75 rounded-lg shadow-lg border border-gray-300"
-        style={{ width: "500px" }}
+    <div>
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-md mx-auto mt-8 p-6 rounded-lg shadow-lg bg-gray-100"
       >
-        <h1 className="text-3xl font-bold mb-8">Checkout</h1>
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-md mx-auto mt-8 p-6 rounded-lg shadow-lg bg-gray-100"
-        >
-          <div className="mb-6">
-            <label
-              htmlFor="cardName"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Nom de la carte
-            </label>
-            <input
-              id="cardName"
-              type="text"
-              value={cardName}
-              onChange={handleCardNameChange}
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        <div className="mb-6">
+          <label
+            htmlFor="cardName"
+            className="block text-gray-700 font-bold mb-2"
+          >
+            Nom de la carte
+          </label>
+          <input
+            id="cardName"
+            type="text"
+            value={cardName}
+            onChange={(e) => setCardName(e.target.value)}
+            required
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
+        </div>
+
+        <div className="mb-6">
+          <label
+            htmlFor="cardElement"
+            className="block text-gray-700 font-bold mb-2"
+          >
+            Informations de carte de crédit
+          </label>
+          <div id="cardElement" className="border rounded p-2">
+            <CardElement
+              options={{
+                hidePostalCode: true,
+              }}
             />
           </div>
+        </div>
 
-          <div className="mb-6">
-            <label
-              htmlFor="cardNumber"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Numéro de carte
-            </label>
-            <input
-              id="cardNumber"
-              type="Number"
-              value={cardNumber}
-              onChange={handleCardNumberChange}
-              minlength="16"
-              maxlength="16"
-              placeholder="0000 0000 0000 0000"
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-
-          <div className="mb-6">
-            <label
-              htmlFor="expirationDate"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Date d'expiration
-            </label>
-            <input
-              id="expirationDate"
-              type="date"
-              value={expirationDate}
-              onChange={handleExpirationDateChange}
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-
-          <div className="mb-6">
-            <label htmlFor="cvv" className="block text-gray-700 font-bold mb-2">
-              CVV
-            </label>
-            <input
-              id="cvv"
-              type="number"
-              value={cvv}
-              onChange={handleCvvChange}
-              min="0"
-              max="999"
-              placeholder="000"
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-
-          <div className="flex items-center  justify-center">
+        <div className="flex items-center justify-center">
+          <Link to="/thankyou">
+            {" "}
             <button
               type="submit"
               disabled={isLoading}
@@ -138,9 +94,9 @@ function PaymentForm() {
             >
               {isLoading ? "Paiement en cours..." : "Payer"}
             </button>
-          </div>
-        </form>{" "}
-      </div>
+          </Link>
+        </div>
+      </form>
     </div>
   )
 }

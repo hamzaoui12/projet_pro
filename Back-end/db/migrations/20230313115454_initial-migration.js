@@ -14,7 +14,7 @@ exports.up = async (knex) => {
       table.integer("stock")
       table.integer("priority")
       table.float("price").notNullable()
-      table.integer("category_id").unsigned().notNullable()
+      table.integer("category_id").unsigned().nullable()
       table
         .foreign("category_id")
         .references("id")
@@ -24,13 +24,13 @@ exports.up = async (knex) => {
     .createTable("images", (table) => {
       table.increments("id")
       table.specificType("picture", "blob").notNullable()
-      table.integer("product_id").unsigned().notNullable()
+      table.integer("product_id").unsigned().nullable()
       table
         .foreign("product_id")
         .references("id")
         .inTable("products")
         .onDelete("SET NULL")
-      table.integer("category_id").unsigned().notNullable()
+      table.integer("category_id").unsigned().nullable()
       table
         .foreign("category_id")
         .references("id")
