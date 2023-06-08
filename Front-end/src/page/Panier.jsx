@@ -15,18 +15,13 @@ const Panier = () => {
 
   const handleSubmit = (values) => {}
 
-  useEffect(() => {
-    console.log(localStorageOrder)
-  })
-
   const deleteItem = (product) => {
     const updatedOrder = order.filter((item) => item !== product)
     setOrder(updatedOrder)
     localStorage.setItem("storageOrder", JSON.stringify(updatedOrder))
   }
 
-  const numberItem = (productPrice, values) => {
-    console.log(values)
+  const numberItem = (productPrice) => {
     setTotal(total + parseInt(productPrice))
   }
 

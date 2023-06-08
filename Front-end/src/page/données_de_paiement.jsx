@@ -25,8 +25,6 @@ function PaymentForm() {
     setIsLoading(false)
 
     if (!error) {
-      console.log("token Généré: ", paymentMethod)
-
       try {
         const { id } = paymentMethod
         const response = await axios.post(
@@ -37,66 +35,59 @@ function PaymentForm() {
           }
         )
         if (response.data.success) console.log("payment reussi")
-      } catch (error) {
-        console.log("erreur! ", error)
-      }
-    } else {
-      console.log(error.message)
+      } catch (error) {}
     }
   }
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-md mx-auto mt-8 p-6 rounded-lg shadow-lg bg-gray-100"
-      >
-        <div className="mb-6">
-          <label
-            htmlFor="cardName"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Nom de la carte
-          </label>
-          <input
-            id="cardName"
-            type="text"
-            value={cardName}
-            onChange={(e) => setCardName(e.target.value)}
-            required
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-
-        <div className="mb-6">
-          <label
-            htmlFor="cardElement"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Informations de carte de crédit
-          </label>
-          <div id="cardElement" className="border rounded p-2">
-            <CardElement
-              options={{
-                hidePostalCode: true,
-              }}
+    <div className="flex items-center justify-center h-screen">
+      <div className="max-w-md w-full mx-4 bg-transparent">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white bg-opacity-50 shadow-md rounded-lg px-8 py-6"
+        >
+          <div className="mb-6">
+            <label
+              htmlFor="cardName"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Nom de la carte
+            </label>
+            <input
+              id="cardName"
+              type="text"
+              value={cardName}
+              onChange={(e) => setCardName(e.target.value)}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
-        </div>
 
-        <div className="flex items-center justify-center">
-          <Link to="/thankyou">
-            {" "}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          <div className="mb-6">
+            <label
+              htmlFor="cardElement"
+              className="block text-gray-700 text-sm font-bold mb-2"
             >
-              {isLoading ? "Paiement en cours..." : "Payer"}
-            </button>
-          </Link>
-        </div>
-      </form>
+              Informations de carte de crédit
+            </label>
+            <div id="cardElement" className="border rounded p-2">
+              <CardElement options={{ hidePostalCode: true }} />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center">
+            <Link to="/thankyou">
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                {isLoading ? "Paiement en cours..." : "Payer"}
+              </button>
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

@@ -4,7 +4,6 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
 const routeChekout = async ({ app, db }) => {
   app.post("/stripe/charge", async (req, res) => {
     let { amount, id } = req.body
-    console.log("amount & id :", amount, id)
     try {
       const payment = await stripe.paymentIntents.create({
         amount: amount,
