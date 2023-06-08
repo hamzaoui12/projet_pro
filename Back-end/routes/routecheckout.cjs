@@ -1,7 +1,7 @@
 require("dotenv").config()
 const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
 
-const routeChekout = async ({ app, db }) => {
+const routeCheckout = async ({ app }) => {
   app.post("/stripe/charge", async (req, res) => {
     let { amount, id } = req.body
     try {
@@ -12,13 +12,12 @@ const routeChekout = async ({ app, db }) => {
         payment_method: id,
         confirm: true,
       })
-      res.json({
+      res.send({
         message: "payement reussi",
         success: true,
       })
     } catch (error) {
-      console.log("erreur... ", error)
-      res.json({
+      res.send({
         message: "le payement a echoue",
         success: false,
       })
@@ -26,4 +25,4 @@ const routeChekout = async ({ app, db }) => {
   })
 }
 
-module.exports = routeChekout
+module.exports = routeCheckout

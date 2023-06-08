@@ -10,7 +10,7 @@ const routeSignIn = require("./routes/routeSignIn.cjs")
 const routeCategory = require("./routes/routeCategory.cjs")
 const routeProduct = require("./routes/routeProduct.cjs")
 const routeOrder = require("./routes/routeOrder.cjs")
-const routeChekout = require("./routes/routechekout.cjs")
+const routeCheckout = require("./routes/routecheckout.cjs")
 const morgan = require("morgan")
 
 const run = async (config) => {
@@ -30,7 +30,7 @@ const run = async (config) => {
   routeCategory({ app, db })
   routeProduct({ app, db })
   routeOrder({ app })
-  routeChekout({ app, db })
+  routeCheckout({ app })
 
   app.listen(config.port, () => {
     console.log(`Server is listening :: ${config.port}`)
