@@ -11,6 +11,7 @@ const routeCategory = require("./routes/routeCategory.cjs")
 const routeProduct = require("./routes/routeProduct.cjs")
 const routeOrder = require("./routes/routeOrder.cjs")
 const morgan = require("morgan")
+const routeImages = require("./routes/routeImage.cjs")
 
 const run = async (config) => {
   const app = express()
@@ -29,6 +30,8 @@ const run = async (config) => {
   routeCategory({ app, db })
   routeProduct({ app, db })
   routeOrder({ app })
+  routeImages({ app, db })
+  routeSignIn({app})
 
   app.listen(config.port)
 }

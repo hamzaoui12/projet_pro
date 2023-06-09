@@ -30,6 +30,9 @@ const config = {
       }
     },
   },
+  upload: {
+    directory: "./uploads", 
+  },
 }
 
 module.exports = config
