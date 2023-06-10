@@ -20,6 +20,7 @@ const run = async (config) => {
   app.use(morgan("dev"))
   const db = knex(config.db)
   BaseModel.knex(db)
+  app.use(express.static("./uploads/"))
 
   routeUser({ app, db })
   routeAddresses({ app })
