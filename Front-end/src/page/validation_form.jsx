@@ -5,17 +5,17 @@ import axios from "axios"
 import * as Yup from "yup"
 
 const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required("First name is required"),
-  lastName: Yup.string().required("Last name is required"),
-  address: Yup.string().required("Address is required"),
-  city: Yup.string().required("City is required"),
-  region: Yup.string().required("Region is required"),
+  firstName: Yup.string().required("Le prenom est requis"),
+  lastName: Yup.string().required("Le nom est requis"),
+  address: Yup.string().required("L'Adresse est requise"),
+  city: Yup.string().required("La ville est requise"),
+  region: Yup.string().required("La region est requise"),
   postalCode: Yup.string()
-    .required("postal code is required")
+    .required("Le postal code est requis")
     .matches(/^\d{5}$/, "Le code postal doit contenir 5 chiffres"),
   country: Yup.string().required("Le pays est requis"),
   phoneNumber: Yup.string()
-    .required("phone number is required")
+    .required("Le numero de telephone est requis")
     .matches(/^\d{10}$/, "Le numéro de téléphone doit contenir 10 chiffres"),
 })
 
@@ -41,7 +41,6 @@ const ValidateForm = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      // Make a POST request to the address API
       await axios.post("/addresses", {
         country: values.country,
         city: values.city,
@@ -49,23 +48,19 @@ const ValidateForm = () => {
         postalCode: values.postalCode,
       })
 
-      // Make a PATCH request to the user API to update user data
       await axios.patch("/users/:id", {
         firstName: values.firstName,
         lastName: values.lastName,
         phoneNumber: values.phoneNumber,
-        // Add other user data fields as needed
       })
 
-      // Handle success or navigate to the next step
-      alert("Address and user data updated successfully")
-      // Navigate to the next step or show a success message
+     
+      alert("Adresse et données utilisateur mises à jour avec succès")
 
       setSubmitting(false)
     } catch (error) {
-      // Handle error
-      alert("Failed to update address and user data", error)
-      // Show an error message to the user
+      alert("Échec de la mise à jour de l'adresse et des données utilisateur", error)
+  
 
       setSubmitting(false)
     }
@@ -103,7 +98,7 @@ const ValidateForm = () => {
                       htmlFor="firstName"
                       className="text-lg font-semibold"
                     >
-                      First Name:
+                      Prenom:
                     </label>
                     <div className="relative">
                       <Field
@@ -120,7 +115,7 @@ const ValidateForm = () => {
                   </div>
                   <div>
                     <label htmlFor="lastName" className="text-lg font-semibold">
-                      Last Name:
+                      Nom:
                     </label>
                     <div className="relative">
                       <Field
@@ -139,7 +134,7 @@ const ValidateForm = () => {
 
                 <div>
                   <label htmlFor="address1" className="text-lg font-semibold">
-                    Address :
+                    Adresse :
                   </label>
                   <div className="relative">
                     <Field
@@ -158,7 +153,7 @@ const ValidateForm = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="city" className="text-lg font-semibold">
-                      City:
+                      Ville:
                     </label>
                     <div className="relative">
                       <Field
@@ -197,7 +192,7 @@ const ValidateForm = () => {
                     htmlFor="postalCode"
                     className="text-lg font-semibold"
                   >
-                    Postal Code:
+                    Code Postal :
                   </label>
                   <div className="relative">
                     <Field
@@ -215,7 +210,7 @@ const ValidateForm = () => {
 
                 <div>
                   <label htmlFor="country" className="text-lg font-semibold">
-                    Country:
+                    Pays:
                   </label>
                   <div className="relative">
                     <Field
@@ -236,7 +231,7 @@ const ValidateForm = () => {
                     htmlFor="phoneNumber"
                     className="text-lg font-semibold"
                   >
-                    Phone Number:
+                    Numero de telephone:
                   </label>
                   <div className="relative">
                     <Field
@@ -262,7 +257,7 @@ const ValidateForm = () => {
                         } hover:bg-blue-700 focus:outline-none focus:bg-blue-700`}
                         style={{ backgroundColor: "black", color: "white" }}
                       >
-                        Payment
+                        Payement
                       </button>
                     </Link>
                   </div>
