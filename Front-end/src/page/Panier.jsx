@@ -25,14 +25,14 @@ const Panier = (item) => {
         </span>
 
         {cart.map((item) => (
-          <div key={item.id} className="flex flex-col  my-4 py-4 border-b  ">
-            <div className="flex flex-row gap-w-3 ">
+          <div key={item.id} className="flex flex-col  my-4 py-4 border-b">
+            <div className="flex flex-col lg:flex-row gap-w-3">
               <img
                 className="w-48 lg:w-64 mr-4 object-cover"
                 src={item.image}
                 alt={item.name}
               />
-              <div className="flex flex-col ">
+              <div className="flex flex-col">
                 <span className="h-6 w-full text-xl font-bold mb-2 lg:mb-4 ">
                   {item.name}
                 </span>
@@ -45,8 +45,8 @@ const Panier = (item) => {
               </div>
             </div>
 
-            <div className="flex flex-row-reverse sm-flex sm-flex-col">
-              <div className=" flex gap-6 h-[36px] text-sm ">
+            <div className="flex flex-row-reverse">
+              <div className="flex gap-6 h-[36px] text-sm">
                 <div className="flex w-16 lg:w-30 items-center h-full border text-primary font-medium">
                   <div
                     onClick={() => decreaseAmount(item.id)}
@@ -54,7 +54,7 @@ const Panier = (item) => {
                   >
                     <IoMdRemove />
                   </div>
-                  <div className=" flex h-full justify-center items-center px-2 w-24 lg:w-30 ">
+                  <div className="flex h-full justify-center items-center px-2 w-24 lg:w-30">
                     {item.amount}
                   </div>
                   <div
@@ -80,12 +80,12 @@ const Panier = (item) => {
           <div className="relative bottom-0  w-1/3">
             <div className="grid grid-cols-2">
               <span>Total</span>
-              <span className="flex justify-end">{total} $</span>
+              <span className="flex justify-end">{total}$</span>
               <span className="font-extrabold text-sm pl-1 text-slate-400">
                 TVA
               </span>
               <span className="flex justify-end">
-                {((total * 20) / 100).toFixed(2)} $
+                {((total * 20) / 100).toFixed(2)}$
               </span>
             </div>
             <div>
