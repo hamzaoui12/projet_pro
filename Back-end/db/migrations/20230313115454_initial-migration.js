@@ -5,6 +5,14 @@ exports.up = async (knex) => {
       table.text("name").notNullable()
       table.integer("welcome_order")
     })
+
+    .createTable("contact", (table) => {
+      table.increments("id").primary()
+      table.string("mail").notNullable()
+      table.string("subject").notNullable()
+      table.text("message").notNullable()
+    })
+
     .createTable("products", (table) => {
       table.increments("id")
       table.text("name").notNullable()
