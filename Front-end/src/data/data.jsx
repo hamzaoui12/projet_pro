@@ -3,6 +3,9 @@ export const data = [
     id: 1,
     name: "Bar",
     category: "Bar",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/6198663/pexels-photo-6198663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 1200,
@@ -11,6 +14,8 @@ export const data = [
     id: 2,
     name: "Cellier",
     category: "cellar",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 400,
@@ -19,6 +24,9 @@ export const data = [
     id: 3,
     name: "Cellier",
     category: "cellar",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 600,
@@ -27,6 +35,9 @@ export const data = [
     id: 4,
     name: "Cellier",
     category: "cellar",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 1000,
@@ -35,6 +46,9 @@ export const data = [
     id: 5,
     name: "Cellier",
     category: "high chair",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 800,
@@ -43,6 +57,9 @@ export const data = [
     id: 6,
     name: "Cellier",
     category: "high chair",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 2500,
@@ -51,6 +68,9 @@ export const data = [
     id: 7,
     name: "Cellier",
     category: "pdish cupboard",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 3000,
@@ -59,6 +79,9 @@ export const data = [
     id: 8,
     name: "Cellier",
     category: "dish cupboard",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 600,
@@ -67,6 +90,9 @@ export const data = [
     id: 9,
     name: "Cellier",
     category: "dish cupboard",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 700,
@@ -75,6 +101,9 @@ export const data = [
     id: 10,
     name: "Cellier",
     category: "sliding closet",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 200,
@@ -83,6 +112,9 @@ export const data = [
     id: 11,
     name: "Cellier",
     category: "sliding closet",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 500,
@@ -91,6 +123,9 @@ export const data = [
     id: 12,
     name: "Cellier",
     category: "sliding closet",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 600,
@@ -99,6 +134,9 @@ export const data = [
     id: 13,
     name: "Cellier",
     category: "sliding closet",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 2000,
@@ -107,6 +145,9 @@ export const data = [
     id: 14,
     name: "Cellier",
     category: "covered drawer",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 3000,
@@ -115,6 +156,9 @@ export const data = [
     id: 15,
     name: "Cellier",
     category: "covered drawer",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 3000,
@@ -123,6 +167,9 @@ export const data = [
     id: 16,
     name: "Cellier",
     category: "cellar",
+    description:
+      "Tous les styles de meubles et déco sont chez Maisons du Monde ! Et avec des nouveautés toute l'année et la livraison gratuite en magasin, décorez à volonté.",
+
     image:
       "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 900,

@@ -25,31 +25,28 @@ const Panier = (item) => {
         </span>
 
         {cart.map((item) => (
-          <div
-            key={item.id}
-            className="flex flex-col lg:flex-row my-4 py-4 border-b"
-          >
-            <div className="flex">
+          <div key={item.id} className="flex flex-col  my-4 py-4 border-b  ">
+            <div className="flex flex-row gap-w-3 ">
               <img
                 className="w-48 lg:w-64 mr-4 object-cover"
                 src={item.image}
                 alt={item.name}
               />
-              <div className="flex flex-col">
-                <span className="h-6 w-full text-base font-bold mb-2 lg:mb-4 overflow-x-hidden">
+              <div className="flex flex-col ">
+                <span className="h-6 w-full text-xl font-bold mb-2 lg:mb-4 ">
                   {item.name}
                 </span>
-                <span className="text-xs break-words overflow-hidden mb-2">
+                <span className="text-l break-words  overflow-hidden mb-2">
                   {item.description}
                 </span>
-                <span className="flex whitespace-nowrap px-2 lg:px-6">
+                <span className="h-6 w-full text-xl font-bold mb-2 lg:mb-4 ">
                   {item.price} $
                 </span>
               </div>
             </div>
 
-            <div>
-              <div className="flex gap-6 h-[36px] text-sm">
+            <div className="flex flex-row-reverse sm-flex sm-flex-col">
+              <div className=" flex gap-6 h-[36px] text-sm ">
                 <div className="flex w-16 lg:w-30 items-center h-full border text-primary font-medium">
                   <div
                     onClick={() => decreaseAmount(item.id)}
@@ -57,7 +54,7 @@ const Panier = (item) => {
                   >
                     <IoMdRemove />
                   </div>
-                  <div className=" flex h-full justify-center items-center px-2 w-24 lg:w-30">
+                  <div className=" flex h-full justify-center items-center px-2 w-24 lg:w-30 ">
                     {item.amount}
                   </div>
                   <div
