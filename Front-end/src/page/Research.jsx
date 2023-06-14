@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { data } from "../data/data.jsx"
 import { BsPlus } from "react-icons/bs"
 import { TbHome } from "react-icons/tb"
@@ -6,6 +6,7 @@ import { FaWallet } from "react-icons/fa"
 import { MdCategory, MdHelp } from "react-icons/md"
 import { VscCircleSmall, VscAccount } from "react-icons/vsc"
 import { BrowserRouter as Router, Link } from "react-router-dom"
+import { CartContext } from "../contexts/CartContext.jsx"
 import {
   AiOutlineMenu,
   AiOutlineSearch,
@@ -13,15 +14,13 @@ import {
   AiOutlineShoppingCart,
 } from "react-icons/ai"
 
-const research = ({ addToCart }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const Research = () => {
   const [isOpen, setIsOpen] = useState(false)
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
   const [Kitchen] = useState(data)
 
-  const handleAddToCart = (product) => {
-    addToCart(product)
-  }
+  const { addToCart } = useContext(CartContext)
+
   const openModal = () => {
     setIsOpen(true)
   }
@@ -66,7 +65,7 @@ const research = ({ addToCart }) => {
                 className="w-full h-[300px] W-[300px] object-cover p-2"
               />
               <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
-                <button onClick={() => handleAddToCart(item)}>
+                <button onClick={() => addToCart(item)}>
                   <div className="flex justify-center rounded-full items-center hover:bg-gray-500 text-white w-12 h-12 bg-black">
                     <BsPlus className="text-3xl" />
                   </div>
@@ -327,4 +326,4 @@ const research = ({ addToCart }) => {
   )
 }
 
-export default research
+export default Research
