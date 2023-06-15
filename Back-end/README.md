@@ -23,17 +23,17 @@ PSW_ITERATIONS = <nombre iterations du sel (Integer)>
 PSW_KEY = <clef des mots de passe (Integer)>
 PSW_DIGEST = <methode de hashing utilisée>
 JWT_SECRET = <clef secrète du Json web token (String)>
-JWT_EXPIRE = <temps de validité du token (1 min, 1 day, 1 week...)>
+JWT_EXPIRE = <temps de validité du token (1m, 1d, 1w...)>
 
 ## Lancement des migrations
 
 Dans le terminal utiliser la commande "npx --knex migrate:latest"
 Si un message d'erreur apparait, essayer la commande "npx knex --esm migrate:latest"
 
-## Lancement du SEED
+## Lancement du seed
 
-Dans le terminal, utiliser la commande : "node ./db/seed.js"
-puis ctrl+C après quelques secondes
+Dans le terminal utiliser la commande "npx --knex seed:run"
+Si un message d'erreur apparait, essayer la commande "npx knex --esm seed:run"
 
 ## Lancement du backend
 

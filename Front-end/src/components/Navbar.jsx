@@ -22,7 +22,8 @@ const Navbar = () => {
     setCart([...cart, product])
     setShowCart(true)
   }
-  return (
+  
+return (
     <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4">
       {/* Left side */}
       <div className="flex items-center">

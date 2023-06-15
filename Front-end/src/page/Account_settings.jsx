@@ -1,33 +1,33 @@
-import React, { useState } from "react";
-import "tailwindcss/tailwind.css";
+import React, { useState } from "react"
+import "tailwindcss/tailwind.css"
 
 const Account = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const userExists = checkIfUserExists(username);
-    const emailExists = checkIfEmailExists(email);
+    const userExists = checkIfUserExists(username)
+    const emailExists = checkIfEmailExists(email)
 
     if (userExists || emailExists) {
       setErrorMessage(
         "An account with this username or email already exists."
-      );
+      )
     } else {
       // Handle form submission
     }
-  };
+  }
 
   const checkIfUserExists = (username) => {
-    return false;
-  };
+    return false
+  }
 
   const checkIfEmailExists = (email) => {
-    return false;
-  };
+    return false
+  }
 
   return (
     <div
@@ -92,7 +92,7 @@ const Account = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Account;
+export default Account

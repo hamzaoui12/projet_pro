@@ -10,7 +10,7 @@ const routeCategory = ({ app }) => {
     return false
   }
 
-  app.get("/categories", auth, async (req, res) => {
+  app.get("/categories", async (req, res) => {
     res.send({
       result: await CategoryModel.query()
         .withGraphFetched("products")
@@ -18,7 +18,7 @@ const routeCategory = ({ app }) => {
     })
   })
 
-  app.get("/categories/:id", auth, async (req, res) => {
+  app.get("/categories/:id", async (req, res) => {
     const { id } = req.params
     const category = await CategoryModel.query()
       .findById(id)
@@ -53,11 +53,11 @@ const routeCategory = ({ app }) => {
 
   app.patch("/categories/:id", auth, async (req, res) => {
     const { id } = req.params
-    const { name, welcome_order } = req.body
+    const { name, welcome_order, main_page } = req.body
 
     try {
       const updateCategory = await CategoryModel.query()
-        .updateAndFetchById(id, { name, welcome_order })
+        .updateAndFetchById(id, { name, welcome_order, main_page })
         .withGraphFetched("products")
         .withGraphFetched("images")
 

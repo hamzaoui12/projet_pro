@@ -17,22 +17,26 @@ const Registration = () => {
 
     if (!email.includes("@")) {
       setErrorMessage("Your email is not valid.")
-      return
+
+return
     }
 
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match.")
-      return
+
+return
     }
 
     if (!isChecked) {
       setErrorMessage("Please agree to the privacy policy.")
-      return
+
+return
     }
 
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       setErrorMessage("Please complete all fields.")
-      return
+ 
+return
     }
 
     setErrorMessage("")
