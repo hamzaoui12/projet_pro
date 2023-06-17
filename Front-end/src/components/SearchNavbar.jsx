@@ -50,9 +50,11 @@ const SearchNavbar = () => {
       <div className="text-black md:flex flex items-center  gap-4 cursor-pointer">
         <div onClick={() => setShowCart(!item)} size={25} className=" ">
           <AiOutlineShoppingCart className="text-3xl" />
-          <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
-            {cart.length}
-          </div>
+          {cart && cart.length > 0 && (
+            <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
+              {cart.length}
+            </div>
+          )}
         </div>
         <Link to="/singin">
           <VscAccount size={30} className="text-3xl" />
@@ -106,75 +108,65 @@ const SearchNavbar = () => {
         </h2>
         <div>
           <ul className="flex font-bold flex-col p-4 text-gray-800">
-            <li className="text-xl py-4 flex">
-              <Link
-                to="/"
-                onClick={() => setNav(!div)}
-                className="mr-4 cursor-pointer"
-              >
+            <Link to="/" onClick={() => setNav(!div)} className="mr-4">
+              <li className="text-xl py-4 flex cursor-pointer">
                 <TbHome size={25} />
-              </Link>{" "}
-              Home
-            </li>
-            <li className="text-xl py-2 flex">
-              <MdCategory
-                onClick={() => setShowCategoryList(!showCategoryList)}
-                size={25}
-                className="mr-4 cursor-pointer"
-              />{" "}
-              Category
+                <p className="px-4">Home</p>
+              </li>
+            </Link>{" "}
+            <li
+              onClick={() => setShowCategoryList(!showCategoryList)}
+              size={25}
+              className="text-xl py-2 flex cursor-pointer"
+            >
+              <MdCategory className="mr-4 " /> Category
             </li>
             {showCategoryList && (
               <li>
                 {/* Liste de clics */}
                 <ul className=" text-gray-800 text-xl py-4 px-12">
-                  <li className=" cursor-pointer grap-2 flex">
-                    <Link to="/category" onClick={() => setNav(!div)}>
+                  <Link to="/category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex">
+                      <VscCircleSmall size={30} /> Kitchens
+                    </li>{" "}
+                  </Link>{" "}
+                  <Link to="/Category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex">
                       <VscCircleSmall size={30} />
-                    </Link>{" "}
-                    Kitchens
-                  </li>
-                  <li className=" cursor-pointer grap-2 flex">
-                    <Link to="/Category" onClick={() => setNav(!div)}>
+                      Bedrooms
+                    </li>
+                  </Link>{" "}
+                  <Link to="/category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex">
                       <VscCircleSmall size={30} />
-                    </Link>{" "}
-                    Bedrooms
-                  </li>
-                  <li className=" cursor-pointer grap-2 flex">
-                    <Link to="/category" onClick={() => setNav(!div)}>
+                      Bathroom
+                    </li>{" "}
+                  </Link>{" "}
+                  <Link to="/category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex">
                       <VscCircleSmall size={30} />
-                    </Link>{" "}
-                    Bathroom
-                  </li>
-                  <li className=" cursor-pointer grap-2 flex">
-                    <Link to="/category" onClick={() => setNav(!div)}>
-                      <VscCircleSmall size={30} />
-                    </Link>{" "}
-                    Livingroom
-                  </li>
+                      Livingroom
+                    </li>{" "}
+                  </Link>{" "}
                 </ul>
               </li>
             )}
-            <li className="text-xl py-4 flex">
-              <Link
-                to="/shopping-cart"
-                onClick={() => setNav(!div)}
-                className="mr-4 cursor-pointer"
-              >
+            <Link to="/panier" onClick={() => setNav(!div)} className="mr-4 ">
+              <li className="text-xl py-4 flex cursor-pointer">
                 <FaWallet size={25} />
-              </Link>{" "}
-              Shopping Cart
-            </li>
-            <li className="text-xl py-4 flex">
-              <Link
-                to="/help"
-                onClick={() => setNav(!div)}
-                className="mr-4 cursor-pointer"
-              >
+                <p className="px-4">Shopping Cart</p>
+              </li>
+            </Link>{" "}
+            <Link
+              to="/help"
+              onClick={() => setNav(!div)}
+              className="mr-4 cursor-pointer"
+            >
+              <li className="text-xl py-4 flex">
                 <MdHelp size={25} />
-              </Link>{" "}
-              Help
-            </li>
+                <p className="px-4">Help</p>
+              </li>{" "}
+            </Link>{" "}
           </ul>
         </div>
       </div>
