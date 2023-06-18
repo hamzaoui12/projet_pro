@@ -1,30 +1,38 @@
-import { useState } from "react"
+import React, { useContext, useState } from "react"
+import { BrowserRouter as Router, Link } from "react-router-dom"
 import {
-  AiOutlineClose,
   AiOutlineMenu,
   AiOutlineSearch,
+  AiOutlineClose,
   AiOutlineShoppingCart,
 } from "react-icons/ai"
-import { FaWallet } from "react-icons/fa"
-import { MdCategory, MdHelp } from "react-icons/md"
 import { TbHome } from "react-icons/tb"
-import { VscAccount, VscCircleSmall } from "react-icons/vsc"
-import { Link } from "react-router-dom"
-import SearchBar from "./SearchBar"
+import { FaWallet } from "react-icons/fa"
+import { FiLogOut } from "react-icons/fi"
+import { MdCategory, MdHelp } from "react-icons/md"
+import { VscCircleSmall, VscAccount } from "react-icons/vsc"
+import { SidebarContext } from "../contexts/SidebarContext.jsx"
+import { CartContext } from "../contexts/CartContext.jsx"
+import { orderStorage } from "../Storage/orerStorage.js"
 
 const SearchNavbar = () => {
   const [div, setNav] = useState(false)
   const [cart, setCart] = useState([])
   const [item, setShowCart] = useState(false)
   const [showCategoryList, setShowCategoryList] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { isOpen, setIsOpen } = useContext(SidebarContext)
+  const { itemAmount } = useContext(CartContext)
 
-  function handleAddToCart(product) {
-    setCart([...cart, product])
-    setShowCart(true)
+  const handleLogout = () => {
+    setIsLoggedIn(false)
+
+    setCart([])
+    setShowCart(false)
   }
 
   return (
-    <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4">
+    <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4 sticky top-0 z-20 bg-white">
       {/* Left side */}
       <div className="flex items-center">
         <div onClick={() => setNav(!div)} className="cursor-pointer">
@@ -48,38 +56,24 @@ const SearchNavbar = () => {
         {/* Ajoutez d'autres éléments de la barre de navigation ici si nécessaire */}
       </nav>
       <div className="text-black md:flex flex items-center  gap-4 cursor-pointer">
-        <div onClick={() => setShowCart(!item)} size={25} className=" ">
+        <div onClick={() => setIsOpen(!isOpen)}>
           <AiOutlineShoppingCart className="text-3xl" />
-          <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
-            {cart.length}
-          </div>
+          {itemAmount > 0 ? (
+            <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
+              {itemAmount}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <Link to="/singin">
           <VscAccount size={30} className="text-3xl" />
         </Link>
-        {item ? (
-          <div className=" fixed w-full h-screen z-10 top-0 right-0"></div>
-        ) : (
-          ""
-        )}
-        {item && (
-          <div
-            className={`${
-              item ? "right-0" : "-right-full"
-            } bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px]`}
-          >
-            <div className="flex items-center justify-between py-6 border-b">
-              <div className="uppercase text-xl font-semibold">
-                Shopping Bag
-              </div>{" "}
-              <AiOutlineClose
-                onClick={() => setShowCart(!item)}
-                size={30}
-                className="cursor-pointer w-8 h-8 flex justify-center items-center"
-              />
-            </div>
+        {isLoggedIn ? (
+          <div onClick={() => handleLogout()} className="cursor-pointer">
+            <FiLogOut size={30} />
           </div>
-        )}
+        ) : null}
       </div>
       {/* Mobile Menu */}
       {/* Overlay */}
@@ -106,75 +100,65 @@ const SearchNavbar = () => {
         </h2>
         <div>
           <ul className="flex font-bold flex-col p-4 text-gray-800">
-            <li className="text-xl py-4 flex">
-              <Link
-                to="/"
-                onClick={() => setNav(!div)}
-                className="mr-4 cursor-pointer"
-              >
+            <Link to="/" onClick={() => setNav(!div)} className="mr-4">
+              <li className="text-xl py-4 flex cursor-pointer">
                 <TbHome size={25} />
-              </Link>{" "}
-              Home
-            </li>
-            <li className="text-xl py-2 flex">
-              <MdCategory
-                onClick={() => setShowCategoryList(!showCategoryList)}
-                size={25}
-                className="mr-4 cursor-pointer"
-              />{" "}
-              Category
+                <p className="px-4">Home</p>
+              </li>
+            </Link>{" "}
+            <li
+              onClick={() => setShowCategoryList(!showCategoryList)}
+              size={25}
+              className="text-xl py-2 flex cursor-pointer"
+            >
+              <MdCategory className="mr-4 " /> Category
             </li>
             {showCategoryList && (
               <li>
                 {/* Liste de clics */}
                 <ul className=" text-gray-800 text-xl py-4 px-12">
-                  <li className=" cursor-pointer grap-2 flex">
-                    <Link to="/category" onClick={() => setNav(!div)}>
+                  <Link to="/category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex">
+                      <VscCircleSmall size={30} /> Kitchens
+                    </li>{" "}
+                  </Link>{" "}
+                  <Link to="/Category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex">
                       <VscCircleSmall size={30} />
-                    </Link>{" "}
-                    Kitchens
-                  </li>
-                  <li className=" cursor-pointer grap-2 flex">
-                    <Link to="/Category" onClick={() => setNav(!div)}>
+                      Bedrooms
+                    </li>
+                  </Link>{" "}
+                  <Link to="/category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex">
                       <VscCircleSmall size={30} />
-                    </Link>{" "}
-                    Bedrooms
-                  </li>
-                  <li className=" cursor-pointer grap-2 flex">
-                    <Link to="/category" onClick={() => setNav(!div)}>
+                      Bathroom
+                    </li>{" "}
+                  </Link>{" "}
+                  <Link to="/category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex">
                       <VscCircleSmall size={30} />
-                    </Link>{" "}
-                    Bathroom
-                  </li>
-                  <li className=" cursor-pointer grap-2 flex">
-                    <Link to="/category" onClick={() => setNav(!div)}>
-                      <VscCircleSmall size={30} />
-                    </Link>{" "}
-                    Livingroom
-                  </li>
+                      Livingroom
+                    </li>{" "}
+                  </Link>{" "}
                 </ul>
               </li>
             )}
-            <li className="text-xl py-4 flex">
-              <Link
-                to="/shopping-cart"
-                onClick={() => setNav(!div)}
-                className="mr-4 cursor-pointer"
-              >
+            <Link to="/panier" onClick={() => setNav(!div)} className="mr-4 ">
+              <li className="text-xl py-4 flex cursor-pointer">
                 <FaWallet size={25} />
-              </Link>{" "}
-              Shopping Cart
-            </li>
-            <li className="text-xl py-4 flex">
-              <Link
-                to="/help"
-                onClick={() => setNav(!div)}
-                className="mr-4 cursor-pointer"
-              >
+                <p className="px-4">Shopping Cart</p>
+              </li>
+            </Link>{" "}
+            <Link
+              to="/help"
+              onClick={() => setNav(!div)}
+              className="mr-4 cursor-pointer"
+            >
+              <li className="text-xl py-4 flex">
                 <MdHelp size={25} />
-              </Link>{" "}
-              Help
-            </li>
+                <p className="px-4">Help</p>
+              </li>{" "}
+            </Link>{" "}
           </ul>
         </div>
       </div>

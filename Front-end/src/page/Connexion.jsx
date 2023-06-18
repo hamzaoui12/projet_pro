@@ -17,7 +17,6 @@ const Connexion = () => {
         password: values.password,
       })
       .then((res) => {
-        console.log(res.data.user)
         logToken.logIn(res.data.result, res.data.user)
       })
   }

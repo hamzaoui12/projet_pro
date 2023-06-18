@@ -13,10 +13,12 @@ import Layout from "./components/Layout"
 import Stripe from "./components/Stripe"
 import PaymentForm from "./page/données_de_paiement"
 import Thankyou from "./page/thankyou"
+import Sidebar from "./components/Sidebar"
 
 const App = () => {
   return (
     <Router>
+      <Sidebar />
       <Routes>
         <Route
           path="/"
