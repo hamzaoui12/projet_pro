@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Link } from "react-router-dom"
 import { IoMdClose, IoMdAdd, IoMdRemove } from "react-icons/io"
 import { CartContext } from "../contexts/CartContext"
 import { SidebarContext } from "../contexts/SidebarContext"
+import { useTranslation } from "react-i18next"
+import i18n from "i18next"
 
 const Panier = (item) => {
   const {
@@ -17,11 +19,13 @@ const Panier = (item) => {
 
   const { isOpen, handleClose } = useContext(SidebarContext)
 
+  const { t } = useTranslation()
+
   return (
     <div>
       <div className="flex flex-col lg:border-2 lg:border-black p-12 mx-4 lg:mx-24 my-4 lg:my-10 ">
         <span className="font-extrabold text-4xl pl-4 pb-8 lg:pb-16 mx-auto justify-center ">
-          Panier
+          {t("cart")}
         </span>
 
         {cart.map((item) => (
@@ -79,10 +83,10 @@ const Panier = (item) => {
         <div className="flex justify-center">
           <div className="relative bottom-0  w-1/3">
             <div className="grid grid-cols-2">
-              <span>Total</span>
+              <span>{t("total")}</span>
               <span className="flex justify-end">{total}$</span>
               <span className="font-extrabold text-sm pl-1 text-slate-400">
-                TVA
+                {t("vat")}
               </span>
               <span className="flex justify-end">
                 {((total * 20) / 100).toFixed(2)}$
@@ -92,7 +96,7 @@ const Panier = (item) => {
               <Link to="/validationfrom">
                 {" "}
                 <button className="border-4 border-black w-full py-2 mt-6 hover:bg-black hover:text-white">
-                  Passer la commande
+                  {t("placeOrder")}
                 </button>
               </Link>
             </div>

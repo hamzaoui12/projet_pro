@@ -1,0 +1,8 @@
+{
+  "cardName": "Nom de la carte",
+  "cardNumber": "Numéro de carte",
+  "expirationDate": "Date d'expiration",
+  "cvv": "CVV",
+  "payButton": "Payer",
+  "paymentInProgress": "Paiement en cours..."
+}

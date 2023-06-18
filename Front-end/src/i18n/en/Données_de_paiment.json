@@ -1,0 +1,8 @@
+{
+  "cardName": "Card Name",
+  "cardNumber": "Card Number",
+  "expirationDate": "Expiration Date",
+  "cvv": "CVV",
+  "payButton": "Pay",
+  "paymentInProgress": "Payment in progress..."
+}
