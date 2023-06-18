@@ -1,9 +1,0 @@
-{
-  "contactUs": "Contactez-nous",
-  "email": "Email",
-  "subject": "Sujet",
-  "message": "Message",
-  "send": "Envoyer",
-  "successMessage": "Votre message a été envoyé avec succès !",
-  "errorMessage": "Veuillez remplir tous les champs du formulaire."
-}
