@@ -18,7 +18,3 @@ const isLogIn = () => {
 
 const token = localStorage.getItem("token")
 const loggedUser = localStorage.getItem("loggedUser")
-
-export const logToken = {
-  logIn, logOut, isLogIn, token, loggedUser
-}
