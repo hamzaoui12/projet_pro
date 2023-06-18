@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { BrowserRouter as Router, Link } from "react-router-dom"
 import {
   AiOutlineMenu,
@@ -8,8 +8,11 @@ import {
 } from "react-icons/ai"
 import { TbHome } from "react-icons/tb"
 import { FaWallet } from "react-icons/fa"
+import { FiLogOut } from "react-icons/fi"
 import { MdCategory, MdHelp } from "react-icons/md"
 import { VscCircleSmall, VscAccount } from "react-icons/vsc"
+import { SidebarContext } from "../contexts/SidebarContext.jsx"
+import { CartContext } from "../contexts/CartContext.jsx"
 import { orderStorage } from "../Storage/orerStorage.js"
 
 const Navbar = () => {
@@ -17,13 +20,24 @@ const Navbar = () => {
   const [cart, setCart] = useState([])
   const [item, setShowCart] = useState(false)
   const [showCategoryList, setShowCategoryList] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { isOpen, setIsOpen } = useContext(SidebarContext)
+  const { itemAmount } = useContext(CartContext)
 
-  function handleAddToCart(product) {
+  const handleAddToCart = (product) => {
     setCart([...cart, product])
     setShowCart(true)
   }
+
+  const handleLogout = () => {
+    setIsLoggedIn(false)
+
+    setCart([])
+    setShowCart(false)
+  }
+
   return (
-    <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4">
+    <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4 sticky top-0 z-20 bg-white">
       {/* Left side */}
       <div className="flex items-center">
         <div onClick={() => setNav(!div)} className="cursor-pointer">
@@ -39,41 +53,24 @@ const Navbar = () => {
           <AiOutlineSearch size={30} className="text-3xl " />
         </Link>
 
-        <div onClick={() => setShowCart(!item)} size={25} className=" ">
+        <div onClick={() => setIsOpen(!isOpen)}>
           <AiOutlineShoppingCart className="text-3xl" />
-          {cart && cart.length > 0 && (
+          {itemAmount > 0 ? (
             <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
-              {cart.length}
+              {itemAmount}
             </div>
+          ) : (
+            ""
           )}
         </div>
         <Link to="/singin">
           <VscAccount size={30} className="text-3xl" />
         </Link>
-
-        {item ? (
-          <div className=" fixed w-full h-screen z-10 top-0 right-0"></div>
-        ) : (
-          ""
-        )}
-        {item && (
-          <div
-            className={`${
-              item ? "right-0" : "-right-full"
-            } bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px]`}
-          >
-            <div className="flex items-center justify-between py-6 border-b">
-              <div className="uppercase text-xl font-semibold">
-                Shopping Bag
-              </div>{" "}
-              <AiOutlineClose
-                onClick={() => setShowCart(!item)}
-                size={30}
-                className="cursor-pointer w-8 h-8 flex justify-center items-center"
-              />
-            </div>
+        {isLoggedIn ? (
+          <div onClick={() => handleLogout()} className="cursor-pointer">
+            <FiLogOut size={30} />
           </div>
-        )}
+        ) : null}
       </div>
       {/* Mobile Menu */}
       {/* Overlay */}
