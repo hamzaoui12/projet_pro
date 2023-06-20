@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { BrowserRouter as Router, Link } from "react-router-dom"
 
-function PaymentForm() {
+const PaymentForm = () => {
   const [cardName, setCardName] = useState("")
   const [cardNumber, setCardNumber] = useState("")
   const [expirationDate, setExpirationDate] = useState("")
@@ -28,11 +28,8 @@ function PaymentForm() {
     event.preventDefault()
     setIsLoading(true)
 
-    // Simulating a delay for the payment process
     setTimeout(() => {
       setIsLoading(false)
-      // Perform the actual payment logic here
-      // Reset form fields
       setCardName("")
       setCardNumber("")
       setExpirationDate("")

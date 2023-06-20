@@ -18,10 +18,11 @@ const Navbar = () => {
   const [item, setShowCart] = useState(false)
   const [showCategoryList, setShowCategoryList] = useState(false)
 
-  function handleAddToCart(product) {
-    setCart([...cart, product])
-    setShowCart(true)
-  }
+  // const handleAddToCart = (product) => {
+  //   setCart([...cart, product])
+  //   setShowCart(true)
+  // }
+
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4">
       {/* Left side */}

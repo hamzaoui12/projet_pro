@@ -19,23 +19,23 @@ exports.up = async (knex) => {
         .foreign("category_id")
         .references("id")
         .inTable("categories")
-        .onDelete("SET NULL")
+        .onDelete("CASCADE")
     })
     .createTable("images", (table) => {
       table.increments("id")
-      table.text("picture").notNullable() 
+      table.text("picture").notNullable()
       table.integer("product_id").unsigned().notNullable()
       table
         .foreign("product_id")
         .references("id")
         .inTable("products")
-        .onDelete("SET NULL")
+        .onDelete("CASCADE")
       table.integer("category_id").unsigned().notNullable()
       table
         .foreign("category_id")
         .references("id")
         .inTable("categories")
-        .onDelete("SET NULL")
+        .onDelete("CASCADE")
     })
     .createTable("materials", (table) => {
       table.increments("id")
