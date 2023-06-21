@@ -54,7 +54,7 @@ const Navbar = () => {
           >
             <option value="fr">{t("fr")}</option>
             <option value="en">{t("en")}</option>
-            <option value="ab">{t("ab")}</option>
+            <option value="Ar">{t("Ar")}</option>
             <option value="es">{t("es")}</option>
           </select>
         </div>

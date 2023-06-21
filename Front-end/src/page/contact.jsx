@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import "tailwindcss/tailwind.css"
+import { useTranslation } from "react-i18next"
 
 const Contact = () => {
+  const { t } = useTranslation()
   const [email, setEmail] = useState("")
   const [subject, setSubject] = useState("")
   const [message, setMessage] = useState("")
@@ -37,10 +39,12 @@ const Contact = () => {
         }}
       >
         <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-md max-w-lg w-full">
-          <h1 className="text-4xl font-bold mb-8 text-gray-800">Contact Us</h1>
+          <h1 className="text-4xl font-bold mb-8 text-gray-800">
+            {t("contactUs")}
+          </h1>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <input
-              type="email"
+              type={t("email")}
               className="border border-gray-300 p-2 rounded-lg"
               placeholder="Email"
               value={email}
@@ -48,18 +52,18 @@ const Contact = () => {
             />
             <input
               className="border border-gray-300 p-2 rounded-lg"
-              placeholder="Subject"
+              placeholder={t("subject")}
               value={subject}
               onChange={(event) => setSubject(event.target.value)}
             />
             <textarea
               className="border border-gray-300 p-2 rounded-lg h-60 resize-none"
-              placeholder="Message"
+              placeholder={t("message")}
               value={message}
               onChange={(event) => setMessage(event.target.value)}
             ></textarea>
             <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-all duration-200">
-              Send
+              {t("send")}
             </button>
           </form>
           {successMessage && (

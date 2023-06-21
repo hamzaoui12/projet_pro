@@ -4,7 +4,9 @@ import { BsPlus } from "react-icons/bs"
 import { orderStorage } from "../Storage/orerStorage.js"
 import { BrowserRouter as Router, Link } from "react-router-dom"
 import { CartContext } from "../contexts/CartContext.jsx"
+import { useTranslation } from "react-i18next"
 const Category = () => {
+  const { t } = useTranslation()
   const [Kitchen] = useState(data)
   const { addToCart } = useContext(CartContext)
   const handleAddToCart = (product) => {
@@ -19,11 +21,15 @@ const Category = () => {
         {/* Overlay */}
         <div className="absolute w-full h-full rounded-xl text-gray-200 max-h-[500px] bg-black/40 flex flex-col justify-center">
           <h1 className="px-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
-            The <span className="text-orange-200">Best</span>
+            {t("category.best")}
+            <span className="text-orange-200">{t("category.best2")}</span>
           </h1>
           <h1 className="px-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
             {" "}
-            <span className="text-orange-200">Kitchen</span> Furniture
+            <span className="text-orange-200">
+              {t("category.kitchen")}
+            </span>{" "}
+            {t("category.furniture")}
           </h1>
         </div>
         <img
@@ -34,12 +40,9 @@ const Category = () => {
       </div>
       <div className="max-w-[1640px] m-auto px-4 py-32">
         <h1 className="text-gray-900  font-bold text-4xl text-center">
-          Discover Our Best Models
+          {t("category.discoverModels")}
           <p className="text-gray-700  font-bold text-2xl py-12 text-center">
-            The kitchen is a specific room in a building, especially equipped
-            for the preparation of food and dishes. We have there usually
-            running water and various household appliances (stove,
-            oven,refrigerator...).
+            {t("category.description")}
           </p>
         </h1>
 
