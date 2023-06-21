@@ -14,6 +14,7 @@ import Stripe from "./components/Stripe"
 import PaymentForm from "./page/données_de_paiement"
 import Thankyou from "./page/thankyou"
 import Sidebar from "./components/Sidebar"
+import ValidateForm from "./page/validation_form"
 
 const App = () => {
   return (
@@ -61,10 +62,18 @@ const App = () => {
           }
         />
         <Route
-          path="/validationfrom"
+          path="/payment"
           element={
             <Layout>
               <Stripe />
+            </Layout>
+          }
+        />
+        <Route
+          path="/validationfrom"
+          element={
+            <Layout>
+              <ValidateForm />
             </Layout>
           }
         />

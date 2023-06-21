@@ -1,7 +1,10 @@
-import React from "react"
+ 
+import React, { useRef } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { BrowserRouter as Router, Link } from "react-router-dom"
+ 
 const ValidateForm = () => {
+  const paymentPageRef = useRef()
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -13,47 +16,56 @@ const ValidateForm = () => {
     country: "",
     phoneNumber: "",
   }
-
+ 
   const validate = (values) => {
     const errors = {}
-
+ 
     if (!values.firstName) {
       errors.firstName = "First name is required"
     }
-
+ 
     if (!values.lastName) {
       errors.lastName = "Last name is required"
     }
-
+ 
     if (!values.address1) {
-      errors.address1 = "Address is required"
+       errors.address1 = "Address is required"
     }
-
+ 
     if (!values.city) {
       errors.city = "City is required"
     }
-
+ 
     if (!values.region) {
       errors.region = "Region is required"
     }
-
+ 
     if (!values.postalCode) {
       errors.postalCode = "Postal code is required"
     }
-
-    if (!values.country) {
-      errors.country = "Country is required"
+ 
+     if (!values.country) {
+     errors.country = "Country is required"
     }
-
-    if (!values.phoneNumber) {
+ 
+     if (!values.phoneNumber) {
       errors.phoneNumber = "Phone number is required"
-    }
-
+   }
+ 
     return errors
   }
+ 
+  const handleSubmit = (values) => {
+    localStorage.removeItem("userData")
+ 
+    console.log("values", values)
+    localStorage.setItem("userData", JSON.stringify(values))
+    paymentPageRef.current.click()
 
-  const handleSubmit = (values) => {}
+  }
+ 
 
+ 
   return (
     <div>
       <div
@@ -77,8 +89,8 @@ const ValidateForm = () => {
             validate={validate}
             onSubmit={handleSubmit}
           >
-            {({ isSubmitting }) => (
-              <Form className="space-y-4">
+            {({ isSubmitting, handleSubmit }) => (
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label
@@ -118,7 +130,7 @@ const ValidateForm = () => {
                     </div>
                   </div>
                 </div>
-
+ 
                 <div>
                   <label htmlFor="address1" className="text-lg font-semibold">
                     Address 1:
@@ -136,7 +148,7 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
-
+ 
                 <div>
                   <label htmlFor="address2" className="text-lg font-semibold">
                     Address 2:
@@ -154,7 +166,7 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
-
+ 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="city" className="text-lg font-semibold">
@@ -191,7 +203,7 @@ const ValidateForm = () => {
                     </div>
                   </div>
                 </div>
-
+ 
                 <div>
                   <label htmlFor="postalCode" className="text-lg font-semibold">
                     Postal Code:
@@ -209,7 +221,7 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
-
+ 
                 <div>
                   <label htmlFor="country" className="text-lg font-semibold">
                     Country:
@@ -227,7 +239,7 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
-
+ 
                 <div>
                   <label
                     htmlFor="phoneNumber"
@@ -248,19 +260,24 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
-
-                <Link to="/checkout">
-                  {" "}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-2 px-4 btn-black-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
-                    style={{ backgroundColor: "black", color: "white" }}
-                  >
-                    Payment
-                  </button>
-                </Link>
-              </Form>
+ 
+                {/* <Link to="/checkout"> */}
+                {/* {" "} */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-2 px-4 btn-black-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
+                  style={{ backgroundColor: "black", color: "white" }}
+                >
+                  Payment
+                </button>
+                {/* </Link> */}
+                <Link
+                  to="/payment"
+                  ref={paymentPageRef}
+                  style={{ opacity: "0" }}
+                ></Link>
+              </form>
             )}
           </Formik>
         </div>
@@ -268,5 +285,7 @@ const ValidateForm = () => {
     </div>
   )
 }
-
+ 
 export default ValidateForm
+ 
+ 
