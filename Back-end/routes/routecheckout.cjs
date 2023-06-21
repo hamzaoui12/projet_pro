@@ -3,10 +3,11 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
 
 const routeCheckout = async ({ app }) => {
   app.post("/stripe/charge", async (req, res) => {
-    let { amount, id, metaData } = req.body
+    let { total, id, metaData } = req.body
+
     try {
-      const payment = await stripe.paymentIntents.create({
-        amount: amount,
+      await stripe.paymentIntents.create({
+        amount: total,
         currency: "EUR",
         description: "your Company Description",
         payment_method: id,

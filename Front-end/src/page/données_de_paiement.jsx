@@ -1,7 +1,6 @@
 import React, { useState, useContext, useRef } from "react"
 import { BrowserRouter as Router, Link } from "react-router-dom"
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js"
-import { element } from "prop-types"
 import axios from "axios"
 import { CartContext } from "../contexts/CartContext"
 
@@ -14,6 +13,8 @@ function PaymentForm() {
   const [isLoading, setIsLoading] = useState(false)
   const [paymentStatus, setPaymentStatus] = useState(false)
   const { total } = useContext(CartContext)
+  const { active, setActive } = useState()
+  const [email, setEmail] = useState("")
   const handleSubmit = async (event) => {
     event.preventDefault()
     setIsLoading(true)
@@ -21,7 +22,10 @@ function PaymentForm() {
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
-      billing_details: {},
+      billing_details: {
+        name: cardName,
+        email: email,
+      },
     })
 
     setIsLoading(false)
@@ -38,6 +42,7 @@ function PaymentForm() {
           }
         )
         setPaymentStatus(true)
+        console.log(total)
         thankuRef.current.click()
         console.log("response", response)
       } catch (error) {
@@ -67,7 +72,7 @@ function PaymentForm() {
           className=" shadow-md rounded-lg px-8 py-6"
         >
           <div className="mb-6 ">
-            <div className="mb-4">
+            <div className="mb-4 border-b border-black">
               <label
                 htmlFor="cardName"
                 className="text-black text-sm font-bold mb-2 flex justify-between"
@@ -78,12 +83,13 @@ function PaymentForm() {
                   type="text"
                   value={userData.firstName}
                   disabled={true}
-                  className="px-6 text-right "
+                  className="px-6 text-right bg-transparent"
+                  onChange={(e) => setCardName(e.target.value)}
                 />
               </label>
             </div>
 
-            <div className="mb-4 border-b">
+            <div className="mb-4 border-b border-black">
               <label
                 htmlFor="cardName"
                 className="text-black text-sm font-bold mb-2 flex justify-between"
@@ -94,11 +100,12 @@ function PaymentForm() {
                   type="text"
                   value={userData.lastName}
                   disabled={true}
-                  className="px-6 text-right"
+                  className="px-6 text-right bg-transparent"
+                  onChange={(e) => setCardName(e.target.value)}
                 />
               </label>
             </div>
-            <div className="mb-4 border-b">
+            <div className="mb-4 border-b border-black">
               <label
                 htmlFor="cardName"
                 className="text-black text-sm font-bold mb-2 flex justify-between"
@@ -109,11 +116,11 @@ function PaymentForm() {
                   type="text"
                   value={userData.address1}
                   disabled={true}
-                  className="px-6 text-right"
+                  className="px-6 text-right bg-transparent"
                 />
               </label>
             </div>
-            <div className="mb-4 border-b">
+            <div className="mb-4 border-b border-black">
               <label
                 htmlFor="cardName"
                 className="text-black text-sm font-bold mb-2 flex justify-between"
@@ -124,11 +131,11 @@ function PaymentForm() {
                   type="text"
                   value={userData.address2}
                   disabled={true}
-                  className="px-6 text-right"
+                  className="px-6 text-right bg-transparent"
                 />
               </label>
             </div>
-            <div className="mb-4 border-b">
+            <div className="mb-4 border-b border-black">
               <label
                 htmlFor="cardName"
                 className="text-black text-sm font-bold mb-2 flex justify-between"
@@ -139,11 +146,11 @@ function PaymentForm() {
                   type="text"
                   value={userData.city}
                   disabled={true}
-                  className="px-6 text-right"
+                  className="px-6 text-right bg-transparent"
                 />
               </label>
             </div>
-            <div className="mb-4 border-b">
+            <div className="mb-4 border-b border-black">
               <label
                 htmlFor="cardName"
                 className="text-black text-sm font-bold mb-2 flex justify-between"
@@ -154,11 +161,11 @@ function PaymentForm() {
                   type="text"
                   value={userData.region}
                   disabled={true}
-                  className="px-6 text-right"
+                  className="px-6 text-right bg-transparent"
                 />
               </label>
             </div>
-            <div className="mb-4 border-b">
+            <div className="mb-4 border-b border-black">
               <label
                 htmlFor="cardName"
                 className="text-black text-sm font-bold mb-2 flex justify-between"
@@ -169,11 +176,11 @@ function PaymentForm() {
                   type="text"
                   value={userData.postalCode}
                   disabled={true}
-                  className="px-6 text-right"
+                  className="px-6 text-right bg-transparent"
                 />
               </label>
             </div>
-            <div className="mb-4 border-b">
+            <div className="mb-4 border-b border-black">
               <label
                 htmlFor="cardName"
                 className="text-black text-sm font-bold mb-2 flex justify-between"
@@ -184,11 +191,11 @@ function PaymentForm() {
                   type="text"
                   value={userData.country}
                   disabled={true}
-                  className="px-6 text-right"
+                  className="px-6 text-right bg-transparent"
                 />
               </label>
             </div>
-            <div className="mb-4 border-b">
+            <div className="mb-4 border-b border-black">
               <label
                 htmlFor="cardName"
                 className="text-black text-sm font-bold mb-2 flex justify-between"
@@ -199,11 +206,11 @@ function PaymentForm() {
                   type="text"
                   value={userData.phoneNumber}
                   disabled={true}
-                  className="px-6 text-right"
+                  className="px-6 text-right bg-transparent"
                 />
               </label>
             </div>
-            <div className="mb-4 border-b">
+            <div className="mb-4 border-b border-black">
               <label
                 htmlFor="cardName"
                 className="text-black text-sm font-bold mb-2 flex justify-between"
@@ -214,19 +221,36 @@ function PaymentForm() {
                   type="text"
                   value={total}
                   disabled={true}
-                  className="px-6 text-right "
+                  className="px-6 text-right bg-transparent"
                 />
               </label>
             </div>
             <div>
               <div className="mb-6 py-6">
                 <label
+                  htmlFor="email"
+                  className="flex items-center justify-center text-black text-sm font-bold mb-2"
+                >
+                  Email :
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="border-2 border-black rounded px-2 py-1 w-full text-black bg-transparent"
+                  placeholder="Entrez votre mail"
+                />
+                <label
                   htmlFor="cardElement"
-                  className="flex items-center justify-center  text-black text-sm font-bold mb-2"
+                  className="flex items-center justify-center px-4 text-black text-sm font-bold mb-2"
                 >
                   Informations de carte de crédit
                 </label>
-                <div id="cardElement" className="border rounded p-2">
+                <div
+                  id="cardElement"
+                  className="border-2 border-black rounded p-2"
+                >
                   <CardElement options={{ hidePostalCode: true }} />
                 </div>
               </div>

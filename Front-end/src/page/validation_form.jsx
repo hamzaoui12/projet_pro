@@ -1,8 +1,7 @@
- 
 import React, { useRef } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { BrowserRouter as Router, Link } from "react-router-dom"
- 
+
 const ValidateForm = () => {
   const paymentPageRef = useRef()
   const initialValues = {
@@ -16,56 +15,53 @@ const ValidateForm = () => {
     country: "",
     phoneNumber: "",
   }
- 
+
   const validate = (values) => {
     const errors = {}
- 
+
     if (!values.firstName) {
       errors.firstName = "First name is required"
     }
- 
+
     if (!values.lastName) {
       errors.lastName = "Last name is required"
     }
- 
+
     if (!values.address1) {
-       errors.address1 = "Address is required"
+      errors.address1 = "Address is required"
     }
- 
+
     if (!values.city) {
       errors.city = "City is required"
     }
- 
+
     if (!values.region) {
       errors.region = "Region is required"
     }
- 
+
     if (!values.postalCode) {
       errors.postalCode = "Postal code is required"
     }
- 
-     if (!values.country) {
-     errors.country = "Country is required"
+
+    if (!values.country) {
+      errors.country = "Country is required"
     }
- 
-     if (!values.phoneNumber) {
+
+    if (!values.phoneNumber) {
       errors.phoneNumber = "Phone number is required"
-   }
- 
+    }
+
     return errors
   }
- 
+
   const handleSubmit = (values) => {
     localStorage.removeItem("userData")
- 
+
     console.log("values", values)
     localStorage.setItem("userData", JSON.stringify(values))
     paymentPageRef.current.click()
-
   }
- 
 
- 
   return (
     <div>
       <div
@@ -130,7 +126,7 @@ const ValidateForm = () => {
                     </div>
                   </div>
                 </div>
- 
+
                 <div>
                   <label htmlFor="address1" className="text-lg font-semibold">
                     Address 1:
@@ -148,7 +144,7 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
- 
+
                 <div>
                   <label htmlFor="address2" className="text-lg font-semibold">
                     Address 2:
@@ -166,7 +162,7 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
- 
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="city" className="text-lg font-semibold">
@@ -203,7 +199,7 @@ const ValidateForm = () => {
                     </div>
                   </div>
                 </div>
- 
+
                 <div>
                   <label htmlFor="postalCode" className="text-lg font-semibold">
                     Postal Code:
@@ -221,7 +217,7 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
- 
+
                 <div>
                   <label htmlFor="country" className="text-lg font-semibold">
                     Country:
@@ -239,7 +235,7 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
- 
+
                 <div>
                   <label
                     htmlFor="phoneNumber"
@@ -260,7 +256,7 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
- 
+
                 {/* <Link to="/checkout"> */}
                 {/* {" "} */}
                 <button
@@ -285,7 +281,5 @@ const ValidateForm = () => {
     </div>
   )
 }
- 
+
 export default ValidateForm
- 
- 
