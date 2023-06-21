@@ -13,6 +13,7 @@ import { MdCategory, MdHelp } from "react-icons/md"
 import { VscCircleSmall, VscAccount } from "react-icons/vsc"
 import { SidebarContext } from "../contexts/SidebarContext.jsx"
 import { CartContext } from "../contexts/CartContext.jsx"
+import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa"
 import { orderStorage } from "../Storage/orerStorage.js"
 
 const SearchNavbar = () => {
@@ -95,23 +96,24 @@ const SearchNavbar = () => {
           size={30}
           className="absolute right-4 top-4 cursor-pointer"
         />
-        <h2 className="text-2xl p-4">
-          <span className="">Λｉｒｎｅｉｓ</span>
+        <h2 className="text-2xl p-4 flex border-b ">
+          <span className="uppercase ">Λｉｒｎｅｉｓ</span>
         </h2>
         <div>
-          <ul className="flex font-bold flex-col p-4 text-gray-800">
+          <ul className="flex font-bold flex-col p-4 text-gray-800 ">
             <Link to="/" onClick={() => setNav(!div)} className="mr-4">
-              <li className="text-xl py-4 flex cursor-pointer">
-                <TbHome size={25} />
-                <p className="px-4">Home</p>
+              <li className="text-xl py-4 flex cursor-pointer ">
+                <TbHome size={25} className="mr-4 " />
+                <p className=" font-semibold uppercase border-b">HOME</p>
               </li>
             </Link>{" "}
             <li
               onClick={() => setShowCategoryList(!showCategoryList)}
               size={25}
-              className="text-xl py-2 flex cursor-pointer"
+              className="text-xl py-2 flex cursor-pointer "
             >
-              <MdCategory className="mr-4 " /> Category
+              <MdCategory className="mr-4 " />{" "}
+              <p className=" border-b font-semibold uppercase ">CATEGORY</p>
             </li>
             {showCategoryList && (
               <li>
@@ -119,25 +121,26 @@ const SearchNavbar = () => {
                 <ul className=" text-gray-800 text-xl py-4 px-12">
                   <Link to="/category" onClick={() => setNav(!div)}>
                     <li className=" cursor-pointer grap-2 flex">
-                      <VscCircleSmall size={30} /> Kitchens
+                      <VscCircleSmall size={30} />{" "}
+                      <p className="border-b">KITCHENS</p>
                     </li>{" "}
                   </Link>{" "}
                   <Link to="/Category" onClick={() => setNav(!div)}>
                     <li className=" cursor-pointer grap-2 flex">
                       <VscCircleSmall size={30} />
-                      Bedrooms
+                      <p className="border-b">BEDROOMS</p>
                     </li>
                   </Link>{" "}
                   <Link to="/category" onClick={() => setNav(!div)}>
                     <li className=" cursor-pointer grap-2 flex">
                       <VscCircleSmall size={30} />
-                      Bathroom
+                      <p className="border-b">BATHROOM</p>
                     </li>{" "}
                   </Link>{" "}
                   <Link to="/category" onClick={() => setNav(!div)}>
                     <li className=" cursor-pointer grap-2 flex">
                       <VscCircleSmall size={30} />
-                      Livingroom
+                      <p className="border-b">LIVINGROOM</p>
                     </li>{" "}
                   </Link>{" "}
                 </ul>
@@ -145,8 +148,8 @@ const SearchNavbar = () => {
             )}
             <Link to="/panier" onClick={() => setNav(!div)} className="mr-4 ">
               <li className="text-xl py-4 flex cursor-pointer">
-                <FaWallet size={25} />
-                <p className="px-4">Shopping Cart</p>
+                <FaWallet size={25} className="mr-4 " />
+                <p className=" border-b">CART</p>
               </li>
             </Link>{" "}
             <Link
@@ -154,12 +157,34 @@ const SearchNavbar = () => {
               onClick={() => setNav(!div)}
               className="mr-4 cursor-pointer"
             >
-              <li className="text-xl py-4 flex">
-                <MdHelp size={25} />
-                <p className="px-4">Help</p>
+              <li className="text-xl py-4 flex ">
+                <MdHelp size={25} className="mr-4 " />
+                <p className=" font-semibold uppercase border-b">FAQ</p>
               </li>{" "}
             </Link>{" "}
           </ul>
+          <div className="absolute bottom-3 left-[20%]">
+            <ul className="flex space-x-8 py-6 relative left-4">
+              <li>
+                <a href="https://www.instagram.com/">
+                  <FaInstagram size={25} />
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/">
+                  <FaFacebook size={25} />
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/">
+                  <FaTwitter size={25} />
+                </a>
+              </li>
+            </ul>
+            <ul className="flex text-sm ">
+              <li> © Inter ARNEIS 2022-2023</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
