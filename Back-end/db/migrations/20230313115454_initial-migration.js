@@ -49,7 +49,8 @@ exports.up = async (knex) => {
       table.text("passwordSalt")
       table.string("mail").unique().notNullable()
       table.text("phoneNumber")
-      table.boolean("is_admin")
+      table.boolean("is_admin").defaultTo(false)
+      table.boolean("verification").defaultTo(false)
     })
     .createTable("orders", (table) => {
       table.increments("id")
