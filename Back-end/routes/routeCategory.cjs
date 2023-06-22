@@ -10,11 +10,9 @@ const routeCategory = ({ app }) => {
     return false
   }
 
-  app.get("/categories", auth, async (req, res) => {
+  app.get("/categories", async (req, res) => {
     res.send({
-      result: await CategoryModel.query()
-        .withGraphFetched("products")
-        .withGraphFetched("images"),
+      result: await CategoryModel.query(),
     })
   })
 

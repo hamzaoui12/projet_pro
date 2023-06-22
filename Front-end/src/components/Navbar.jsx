@@ -25,10 +25,10 @@ const Navbar = () => {
   const { isOpen, setIsOpen } = useContext(SidebarContext)
   const { itemAmount } = useContext(CartContext)
 
-  const handleAddToCart = (product) => {
-    setCart([...cart, product])
-    setShowCart(true)
-  }
+  // const handleAddToCart = (product) => {
+  //   setCart([...cart, product])
+  //   setShowCart(true)
+  // }
 
   const handleLogout = () => {
     setIsLoggedIn(false)
