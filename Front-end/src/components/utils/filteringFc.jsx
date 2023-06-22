@@ -37,8 +37,6 @@ export const filteringFc = async (
     })
   }
 
-  console.log(categories.length)
-
   if (categories.length) {
     data = data.filter((product) => {
       let isIt = false
@@ -50,8 +48,6 @@ export const filteringFc = async (
         return product
       }
     })
-
-    console.log("category", data)
   }
 
   return data
