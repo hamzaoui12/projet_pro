@@ -1,7 +1,8 @@
 import { useLocation } from "react-router"
-import Footer from "./footer"
+import Footer from "./Footer"
 import Navbar from "./Navbar"
 import SearchNavbar from "./SearchNavbar"
+import { ContextSearch } from "../context/Search"
 
 const Layout = (props) => {
   const { children } = props
@@ -9,15 +10,21 @@ const Layout = (props) => {
   const location = useLocation()
 
   return (
-    <>
-      {location.pathname.startsWith("/Search") ? <SearchNavbar /> : <Navbar />}
-      <div className="flex flex-col min-h-screen">
-        <div>
-          <div>{children}</div>
+    <ContextSearch>
+      <>
+        {location.pathname.startsWith("/Search") ? (
+          <SearchNavbar />
+        ) : (
+          <Navbar />
+        )}
+        <div className="flex flex-col min-h-screen">
+          <div>
+            <div>{children}</div>
+          </div>
         </div>
-      </div>
-      <Footer />
-    </>
+        <Footer />
+      </>
+    </ContextSearch>
   )
 }
 export default Layout

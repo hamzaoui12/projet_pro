@@ -22,6 +22,15 @@ const Navbar = () => {
     setCart([...cart, product])
     setShowCart(true)
   }
+
+
+  const handleLogout = () => {
+    setIsLoggedIn(false)
+
+    setCart([])
+    setShowCart(false)
+  }
+
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4">
       {/* Left side */}
