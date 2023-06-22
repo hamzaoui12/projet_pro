@@ -1,35 +1,35 @@
-import React, { useState } from "react";
-import { Formik, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
-import { logToken } from "../Storage/logToken";
-import { Link } from "react-router-dom";
+import React, { useState } from "react"
+import { Formik, Field, ErrorMessage } from "formik"
+import * as Yup from "yup"
+import axios from "axios"
+import { logToken } from "../Storage/logToken"
+import { Link } from "react-router-dom"
 
 const Connexion = () => {
   const initialValues = {
     mail: "",
     password: "",
-  };
-  const [loginError, setLoginError] = useState("");
-  const [loginSuccess, setLoginSuccess] = useState(false);
+  }
+  const [loginError, setLoginError] = useState("")
+  const [loginSuccess, setLoginSuccess] = useState(false)
 
   const handleSubmit = (values) => {
     axios
-      .post("http://localhost:3002/sign-in/", {
+      .post(`${process.env.REACT_APP_URL_ROUTE}/sign-up`, {
         mail: values.mail,
         password: values.password,
       })
       .then((res) => {
-        logToken.logIn(res.data.result, res.data.user);
-        setLoginSuccess(true);
-        setLoginError("");
+        logToken.logIn(res.data.result, res.data.user)
+        setLoginSuccess(true)
+        setLoginError("")
       })
       .catch((error) => {
-        console.error(error);
-        setLoginError("Failed to log in. Please check your credentials.");
-        setLoginSuccess(false);
-      });
-  };
+        alert.error(error)
+        setLoginError("Failed to log in. Please check your credentials.")
+        setLoginSuccess(false)
+      })
+  }
 
   const validationSchema = Yup.object().shape({
     mail: Yup.string().email("Invalid email").required("Email is required"),
@@ -40,7 +40,7 @@ const Connexion = () => {
         /^(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
         "Password must contain at least one uppercase letter and one special character"
       ),
-  });
+  })
 
   return (
     <div className="w-full h-screen flex items-center">
@@ -142,7 +142,7 @@ const Connexion = () => {
         </Formik>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Connexion;
+export default Connexion
