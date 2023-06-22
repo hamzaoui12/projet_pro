@@ -42,12 +42,8 @@ function PaymentForm() {
           }
         )
         setPaymentStatus(true)
-        console.log(total)
         thankuRef.current.click()
-        console.log("response", response)
-      } catch (error) {
-        console.log("error", error)
-      }
+      } catch (error) {}
     }
   }
 
