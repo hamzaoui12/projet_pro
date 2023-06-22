@@ -15,7 +15,7 @@ const Connexion = () => {
 
   const handleSubmit = (values) => {
     axios
-      .post(`${process.env.REACT_APP_URL_ROUTE}/sign-up`, {
+      .post(`${process.env.REACT_APP_URL_ROUTE}/sign-in`, {
         mail: values.mail,
         password: values.password,
       })
