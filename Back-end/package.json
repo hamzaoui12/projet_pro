@@ -4,6 +4,7 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "acorn": "^8.8.1",
     "acorn-jsx": "^5.3.2",
     "ajv": "^6.12.6",
