@@ -23,19 +23,19 @@ exports.up = async (knex) => {
     })
     .createTable("images", (table) => {
       table.increments("id")
-      table.specificType("picture", "blob").notNullable()
-      table.integer("product_id").unsigned()
+      table.text("picture").notNullable() 
+      table.integer("product_id").unsigned().notNullable()
       table
         .foreign("product_id")
         .references("id")
         .inTable("products")
-        .onDelete("SET NULL")
-      table.integer("category_id").unsigned()
+        .onDelete("CASCADE")
+      table.integer("category_id").unsigned().notNullable()
       table
         .foreign("category_id")
         .references("id")
         .inTable("categories")
-        .onDelete("SET NULL")
+        .onDelete("CASCADE")
     })
     .createTable("materials", (table) => {
       table.increments("id")
@@ -49,7 +49,8 @@ exports.up = async (knex) => {
       table.text("passwordSalt")
       table.string("mail").unique().notNullable()
       table.text("phoneNumber")
-      table.boolean("is_admin")
+      table.boolean("is_admin").defaultTo(false)
+      table.boolean("verification").defaultTo(false)
     })
     .createTable("orders", (table) => {
       table.increments("id")

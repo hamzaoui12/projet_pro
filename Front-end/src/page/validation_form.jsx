@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import * as Yup from "yup"
 
@@ -20,6 +20,10 @@ const validationSchema = Yup.object().shape({
 })
 
 const ValidateForm = () => {
+  const navigate = useNavigate()
+  const token = localStorage.getItem("token")
+  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -39,29 +43,36 @@ const ValidateForm = () => {
       .catch(() => setIsFormValid(false))
   }
 
+
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await axios.post("/addresses", {
+      await axios.post("http://localhost:3002/addresses", {
         country: values.country,
         city: values.city,
         region: values.region,
         postalCode: values.postalCode,
-      })
-
-      await axios.patch("/users/:id", {
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      }
+      )
+      await axios.patch(`http://localhost:3002/users/${loggedUser.id}`, {
         firstName: values.firstName,
         lastName: values.lastName,
         phoneNumber: values.phoneNumber,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
       })
 
-     
       alert("Adresse et données utilisateur mises à jour avec succès")
-
       setSubmitting(false)
+      // sauter à la page
+      navigate("/checkout")
     } catch (error) {
-      alert("Échec de la mise à jour de l'adresse et des données utilisateur", error)
-  
-
+      alert("ERROR", error)
       setSubmitting(false)
     }
   }
@@ -246,21 +257,18 @@ const ValidateForm = () => {
                     />
                   </div>
                 </div>
-              
+
                 <div>
-                    <Link to="/checkout">
-                      <button
-                        type="submit"
-                        disabled={isSubmitting || !isFormValid}
-                        className={`w-full py-2 px-4 btn-black-white font-semibold rounded-md ${
-                          !isFormValid ? "opacity-50 cursor-not-allowed" : ""
-                        } hover:bg-blue-700 focus:outline-none focus:bg-blue-700`}
-                        style={{ backgroundColor: "black", color: "white" }}
-                      >
-                        Payement
-                      </button>
-                    </Link>
-                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !isFormValid}
+                    className={`w-full py-2 px-4 btn-black-white font-semibold rounded-md ${!isFormValid ? "opacity-50 cursor-not-allowed" : ""
+                      } hover:bg-blue-700 focus:outline-none focus:bg-blue-700`}
+                    style={{ backgroundColor: "black", color: "white" }}
+                  >
+                    Payement
+                  </button>
+                </div>
               </Form>
             )}
           </Formik>
