@@ -1,6 +1,5 @@
-import React, { useState, useEFfect, useEffect, useContext } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { BsPlus } from "react-icons/bs"
-import { orderStorage } from "../Storage/orerStorage.js"
 import { BrowserRouter as Router, Link, useParams } from "react-router-dom"
 import axios from "axios"
 import { CartContext } from "../contexts/CartContext.jsx"
@@ -11,25 +10,21 @@ const Category = () => {
   const { addToCart } = useContext(CartContext)
   const [categories, setCategories] = useState(null)
   const [NomCategories, setNomCategorie] = useState("")
-  const [div, setNav] = useState(false)
 
   useEffect(() => {
     axios
       .get(`http://localhost:3001/categories/${id}`)
       .then((res) => setData(res.data.result))
-      .catch((err) => console.log(err))
   }, [id])
   useEffect(() => {
     axios
       .get(`http://localhost:3001/categories/`)
       .then((res) => res.data)
       .then((data) => setCategories(data.result))
-      .catch((err) => console.log(err))
   }, [])
 
   useEffect(() => {
     if (Number(id) === 1) {
-      console.log(id)
       setNomCategorie("Chambre adultes")
     } else if (Number(id) === 3) {
       setNomCategorie("Cuisine")
@@ -41,14 +36,6 @@ const Category = () => {
       setNomCategorie("Salon")
     }
   }, [id])
-
-  const handleAddToCart = (product) => {
-    const data = JSON.parse(localStorage.getItem("storageOrder")) || []
-    data.push(product)
-    localStorage.setItem("storageOrder", JSON.stringify(data))
-  }
-
-  console.log(NomCategories)
 
   return (
     <div className="max-w-[1640px] mx-auto ">
@@ -81,7 +68,6 @@ const Category = () => {
           ))}
 
       <div className="max-w-[1640px] m-auto px-4 py-96">
-        {/* Display foods */}
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-24 py-32  cursor-pointer">
           {!!data &&
             data.map((item, index) => (

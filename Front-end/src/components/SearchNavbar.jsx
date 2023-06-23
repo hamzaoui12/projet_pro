@@ -16,14 +16,13 @@ import { useSearch } from "../context/Search"
 import axios from "axios"
 import { SidebarContext } from "../contexts/SidebarContext.jsx"
 import { CartContext } from "../contexts/CartContext.jsx"
-import { orderStorage } from "../Storage/orerStorage.js"
 
 const SearchNavbar = () => {
   const [div, setNav] = useState(false)
-  const [cart, setCart] = useState([])
-  const [item, setShowCart] = useState(false)
+  const [setCart] = useState([])
+  const [setShowCart] = useState(false)
   const [showCategoryList, setShowCategoryList] = useState(false)
-  const { search, setSearch } = useSearch()
+  const { setSearch } = useSearch()
   const [searchProduct, setSearchProduct] = useState("")
   const [categories, setCategories] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -45,30 +44,27 @@ const SearchNavbar = () => {
     const timer = setTimeout(() => {
       setSearch(searchProduct)
     }, 1300)
+
     return () => clearTimeout(timer)
   }, [searchProduct, setSearch])
-  // const handleAddToCart = (product) => {
-  //   setCart([...cart, product])
-  //   setShowCart(true)
-  // }
+
   useEffect(() => {
     axios
       .get(`http://localhost:3001/categories`)
       .then((res) => res.data)
       .then((data) => setCategories(data.result))
-      .catch((err) => console.log(err))
   }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setSearch(searchProduct)
     }, 1300)
+
     return () => clearTimeout(timer)
   }, [searchProduct, setSearch])
 
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4 sticky top-0 z-20 bg-white">
-      {/* Left side */}
       <div className="flex items-center">
         <div onClick={() => setNav(!div)} className="cursor-pointer">
           <AiOutlineMenu size={30} />
@@ -150,7 +146,6 @@ const SearchNavbar = () => {
             </li>
             {showCategoryList && (
               <li>
-                {/* Liste de clics */}
                 <ul className=" text-gray-800 text-xl py-4 px-4">
                   {!!categories &&
                     categories.map((category, index) => (

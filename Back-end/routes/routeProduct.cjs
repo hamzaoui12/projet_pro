@@ -14,8 +14,6 @@ const routeProducts = async ({ app, db }) => {
       const { minPrice, maxPrice, inStock, dateAdded, sortBy, searchName } =
         req.query
 
-      console.log(sortBy, "Heloo from HERE")
-
       let query = ProductModel.query()
 
       if (searchName) {
@@ -30,7 +28,6 @@ const routeProducts = async ({ app, db }) => {
       }
 
       if (inStock !== "false") {
-        console.log("I am Here")
         query = query.where("stock", ">", 0)
       }
 
@@ -38,12 +35,9 @@ const routeProducts = async ({ app, db }) => {
         query = query.where("date", "=", dateAdded)
       }
 
-      console.log("ready to enter sortBy")
       if (sortBy === "asc") {
-        console.log("enter sortBy asc")
         query = query.orderBy("price", "asc")
       } else if (sortBy === "desc") {
-        console.log("enter sortBy desc")
         query = query.orderBy("price", "desc")
       }
 

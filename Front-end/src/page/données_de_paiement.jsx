@@ -72,8 +72,8 @@ const PaymentForm = () => {
             type="Number"
             value={cardNumber}
             onChange={handleCardNumberChange}
-            minlength="16"
-            maxlength="16"
+            minLength="16"
+            maxLength="16"
             placeholder="0000 0000 0000 0000"
             required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

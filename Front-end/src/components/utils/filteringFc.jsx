@@ -23,31 +23,14 @@ export const filteringFc = async (
 
   let data = response.data.result
 
-  console.log(materials.length)
-
   if (materials.length) {
-    data = data.filter((product) => {
-      let isIt = false
-      product.materials.filter((material) => {
-        materials.includes(material.name) ? (isIt = true) : (isIt = false)
-      })
-      if (isIt) {
-        return product
-      }
-    })
+    data = data.filter((product) =>
+      product.materials.some((material) => materials.includes(material.name))
+    )
   }
 
   if (categories.length) {
-    data = data.filter((product) => {
-      let isIt = false
-      categories.includes(product.category.name)
-        ? (isIt = true)
-        : (isIt = false)
-
-      if (isIt) {
-        return product
-      }
-    })
+    data = data.filter((product) => categories.includes(product.category.name))
   }
 
   return data

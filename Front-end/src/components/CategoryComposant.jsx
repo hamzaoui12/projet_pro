@@ -5,12 +5,12 @@ import { BrowserRouter as Router, Link } from "react-router-dom"
 const CategoryComposant = () => {
   const [categories, setCategories] = useState(null)
   const [div, setNav] = useState(false)
+
   useEffect(() => {
     axios
       .get(`http://localhost:3001/categories`)
       .then((res) => res.data)
       .then((data) => setCategories(data.result))
-      .catch((err) => console.log(err))
   }, [])
 
   return (

@@ -1,33 +1,31 @@
-import React, { useState } from "react";
-import "tailwindcss/tailwind.css";
+import React, { useState } from "react"
+import "tailwindcss/tailwind.css"
 
 const Account = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const userExists = checkIfUserExists(username);
-    const emailExists = checkIfEmailExists(email);
+    const userExists = checkIfUserExists(username)
+    const emailExists = checkIfEmailExists(email)
 
     if (userExists || emailExists) {
-      setErrorMessage(
-        "An account with this username or email already exists."
-      );
+      setErrorMessage("An account with this username or email already exists.")
     } else {
       // Handle form submission
     }
-  };
+  }
 
   const checkIfUserExists = (username) => {
-    return false;
-  };
+    return false
+  }
 
   const checkIfEmailExists = (email) => {
-    return false;
-  };
+    return false
+  }
 
   return (
     <div
@@ -38,7 +36,9 @@ const Account = () => {
       }}
     >
       <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-md max-w-lg mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-gray-800">Personal Information</h1>
+        <h1 className="text-4xl font-bold mb-8 text-gray-800">
+          Personal Information
+        </h1>
         <form className="flex flex-col gap-4">
           <input
             className="bg-transparent border border-gray-500 p-2 rounded-lg w-full"
@@ -79,7 +79,9 @@ const Account = () => {
             placeholder="Billing Address"
           />
         </form>
-        <h1 className="text-4xl font-bold mb-8 text-gray-800">Payment Methods</h1>
+        <h1 className="text-4xl font-bold mb-8 text-gray-800">
+          Payment Methods
+        </h1>
         <form className="flex flex-col gap-4 pb-4">
           <input
             className="bg-transparent border border-gray-500 p-2 rounded-lg w-full"
@@ -92,7 +94,7 @@ const Account = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Account;
+export default Account

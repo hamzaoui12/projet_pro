@@ -52,8 +52,8 @@ const ValidateForm = () => {
     return errors
   }
 
-  const handleSubmit = (values) => {
-    console.log(values)
+  const handleSubmit = (/*values*/) => {
+    // console.log(values)
   }
 
   return (

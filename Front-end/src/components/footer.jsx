@@ -1,6 +1,6 @@
-import React from "react";
-import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
-import { Link } from "react-router-dom"; 
+import React from "react"
+import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa"
+import { Link } from "react-router-dom"
 
 const Footer = () => (
   <footer className="hidden md:block bg-black text-white">
@@ -20,9 +20,7 @@ const Footer = () => (
           </ul>
         </div>
         <div>
-          <h3 className="text-lg font-bold underline mb-2">
-            Contact
-          </h3>
+          <h3 className="text-lg font-bold underline mb-2">Contact</h3>
           <p>
             Numéro de téléphone : <a href="tel:+123456789">+123456789</a>
           </p>
@@ -30,7 +28,7 @@ const Footer = () => (
             Email : <a href="mailto:contact@example.com">contact@example.com</a>
           </p>
           <p>
-          <Link to="/help">Contact</Link> 
+            <Link to="/help">Contact</Link>
           </p>
         </div>
         <div>
