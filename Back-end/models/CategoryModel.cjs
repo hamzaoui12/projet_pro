@@ -1,10 +1,11 @@
 const BaseModel = require("./BaseModel.cjs")
-const ProductModel = require("./ProductModel.cjs")
-const ImageModel = require("./ImageModel.cjs")
 
 class CategoryModel extends BaseModel {
   static tableName = "categories"
   static relationMappings() {
+    const ProductModel = require("./ProductModel.cjs")
+    const ImageModel = require("./ImageModel.cjs")
+
     return {
       products: {
         modelClass: ProductModel,

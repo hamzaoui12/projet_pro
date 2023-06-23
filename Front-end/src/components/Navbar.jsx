@@ -39,7 +39,8 @@ const Navbar = () => {
 
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4 sticky top-0 z-20 bg-white">
-      {/* Left side */}
+
+    {/* Left side */}
       <div className="flex items-center">
         <div onClick={() => setNav(!div)} className="cursor-pointer">
           <AiOutlineMenu size={30} />

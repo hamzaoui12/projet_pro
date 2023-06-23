@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Formik, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "tailwindcss/tailwind.css";
+import React, { useState } from "react"
+import { Formik, Field, ErrorMessage } from "formik"
+import * as Yup from "yup"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import "tailwindcss/tailwind.css"
 
 const Registration = () => {
   const initialValues = {
@@ -13,9 +13,9 @@ const Registration = () => {
     password: "",
     confirmPassword: "",
     phoneNumber: ""
-  };
+  }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("Le prénom est requis"),
@@ -35,7 +35,7 @@ const Registration = () => {
       .min(10, "Le numéro de téléphone doit comporter au moins 10 chiffres")
       .max(15, "Le numéro de téléphone ne doit pas dépasser 15 chiffres")
       .required("Le numéro de téléphone est requis")
-  });
+  })
 
   const handleSubmit = (values) => {
     axios.post(`${process.env.REACT_APP_URL_ROUTE}/sign-up`, {
@@ -46,18 +46,15 @@ const Registration = () => {
         phoneNumber: values.phoneNumber
       })
       .then(function (response) {
-        navigate("/Singin");
+        navigate("/Singin")
       })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  }
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
 
   const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+    setShowPassword(!showPassword)
+  }
 
   return (
     <div
@@ -181,7 +178,7 @@ const Registration = () => {
         </Formik>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Registration;
+export default Registration
