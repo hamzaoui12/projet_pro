@@ -13,10 +13,12 @@ import Layout from "./components/Layout"
 import ValidateForm from "./page/validation_form"
 import PaymentForm from "./page/données_de_paiement"
 import Thankyou from "./page/thankyou"
+import Sidebar from "./components/Sidebar"
 
 const App = () => {
   return (
     <Router>
+      <Sidebar />
       <Routes>
         <Route
           path="/"

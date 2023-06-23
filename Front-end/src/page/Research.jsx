@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { BsPlus } from "react-icons/bs"
 import Filter from "../components/Filter"
 import { filteringFc } from "../components/utils/filteringFc"
 import { useSearch } from "../context/Search"
+import { CartContext } from "../contexts/CartContext.jsx"
 
-const Research = ({ addToCart }) => {
+const Research = () => {
   const { search } = useSearch()
   const [data, setData] = useState(null)
+  const { addToCart } = useContext(CartContext)
   const [materials, setMaterials] = useState([])
   const [categories, setCategories] = useState([])
   const [start, setStart] = useState(false)
@@ -93,7 +95,7 @@ const Research = ({ addToCart }) => {
                   className="w-full h-[300px] W-[300px]  object-cover duration-300  hover:scale-105"
                 />
                 <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
-                  <button onClick={() => handleAddToCart(item)}>
+                  <button onClick={() => addToCart(item)}>
                     <div className="flex justify-center rounded-full items-center hover:bg-gray-500 text-white w-12 h-12 bg-black">
                       <BsPlus className="text-3xl" />
                     </div>

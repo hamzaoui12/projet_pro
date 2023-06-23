@@ -1,12 +1,14 @@
-import React, { useState, useEFfect, useEffect } from "react"
+import React, { useState, useEFfect, useEffect, useContext } from "react"
 import { BsPlus } from "react-icons/bs"
 import { orderStorage } from "../Storage/orerStorage.js"
 import { BrowserRouter as Router, Link, useParams } from "react-router-dom"
 import axios from "axios"
+import { CartContext } from "../contexts/CartContext.jsx"
 
-const Category = ({ addToCart }) => {
+const Category = () => {
   const [data, setData] = useState(null)
   const { id } = useParams()
+  const { addToCart } = useContext(CartContext)
   const [categories, setCategories] = useState(null)
   const [NomCategories, setNomCategorie] = useState("")
   const [div, setNav] = useState(false)
@@ -92,7 +94,7 @@ const Category = ({ addToCart }) => {
                   />
                 </Link>
                 <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
-                  <button onClick={() => handleAddToCart(item)}>
+                  <button onClick={() => addToCart(item)}>
                     <div className="flex justify-center rounded-full items-center hover:bg-gray-500 text-white w-12 h-12 bg-black">
                       <BsPlus className="text-3xl" />
                     </div>
