@@ -11,6 +11,7 @@ import { TbHome } from "react-icons/tb"
 import { VscAccount, VscCircleSmall } from "react-icons/vsc"
 import { Link } from "react-router-dom"
 import { useSearch } from "../context/Search"
+import axios from "axios"
 
 const SearchNavbar = () => {
   const [div, setNav] = useState(false)
@@ -19,11 +20,18 @@ const SearchNavbar = () => {
   const [showCategoryList, setShowCategoryList] = useState(false)
   const { search, setSearch } = useSearch()
   const [searchProduct, setSearchProduct] = useState("")
-
+  const [categories, setCategories] = useState(null)
   // const handleAddToCart = (product) => {
   //   setCart([...cart, product])
   //   setShowCart(true)
   // }
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/categories`)
+      .then((res) => res.data)
+      .then((data) => setCategories(data.result))
+      .catch((err) => console.log(err))
+  }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -128,30 +136,20 @@ const SearchNavbar = () => {
             </li>
             {showCategoryList && (
               <li>
-                <ul className=" text-gray-800 text-xl py-4 px-12">
-                  <Link to="/category" onClick={() => setNav(!div)}>
-                    <li className=" cursor-pointer grap-2 flex">
-                      <VscCircleSmall size={30} /> Kitchens
-                    </li>{" "}
-                  </Link>{" "}
-                  <Link to="/Category" onClick={() => setNav(!div)}>
-                    <li className=" cursor-pointer grap-2 flex">
-                      <VscCircleSmall size={30} />
-                      Bedrooms
-                    </li>
-                  </Link>{" "}
-                  <Link to="/category" onClick={() => setNav(!div)}>
-                    <li className=" cursor-pointer grap-2 flex">
-                      <VscCircleSmall size={30} />
-                      Bathroom
-                    </li>{" "}
-                  </Link>{" "}
-                  <Link to="/category" onClick={() => setNav(!div)}>
-                    <li className=" cursor-pointer grap-2 flex">
-                      <VscCircleSmall size={30} />
-                      Livingroom
-                    </li>{" "}
-                  </Link>{" "}
+                {/* Liste de clics */}
+                <ul className=" text-gray-800 text-xl py-4 px-4">
+                  {!!categories &&
+                    categories.map((category, index) => (
+                      <Link
+                        to={`/category/${category.id}`}
+                        onClick={() => setNav(!div)}
+                        key={index + "uuire"}
+                      >
+                        <li className=" cursor-pointer items-center grap-2 flex text-[14px]">
+                          <VscCircleSmall size={30} /> {category.name}
+                        </li>
+                      </Link>
+                    ))}
                 </ul>
               </li>
             )}

@@ -61,7 +61,7 @@ const Research = ({ addToCart }) => {
       <div class="flex justify-center items-center">
         {" "}
         <button
-          class="text-black text-xl font-bold py-6 px-4 rounded flex  lg-hidden justify-center items-center"
+          class="text-black text-xl font-bold p-12  rounded flex  lg-hidden justify-center items-center"
           onClick={openModal}
         >
           <svg
@@ -83,17 +83,14 @@ const Research = ({ addToCart }) => {
       </div>
 
       <div class="flex  max-w-[1640px] mx-auto py-12  ">
-        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-auto p-3 gap-6 cursor-pointer">
+        <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 gap-24 py-32  cursor-pointer">
           {data &&
             data.map((item, index) => (
-              <div
-                key={index}
-                className="border shadow-lg  hover:scale-105 duration-300  relative group"
-              >
+              <div key={index} className="relative group p-6 ">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-[300px] W-[300px] object-cover p-2"
+                  className="w-full h-[300px] W-[300px]  object-cover duration-300  hover:scale-105"
                 />
                 <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
                   <button onClick={() => handleAddToCart(item)}>
@@ -102,12 +99,10 @@ const Research = ({ addToCart }) => {
                     </div>
                   </button>
                 </div>
-                <div className="flex justify-between px-2 py-4">
-                  <p className="font-bold">{item.name}</p>
+                <div className="flex justify-between border-t px-2 py-6 font-bold text-lg">
+                  <p>{item.name}</p>
                   <p>
-                    <span className="bg-black text-white p-1 rounded-full">
-                      {item.price}
-                    </span>
+                    <span className="p-6">{item.price}</span>
                   </p>
                 </div>
               </div>

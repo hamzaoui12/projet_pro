@@ -13,11 +13,10 @@ const CategoryComposant = () => {
       .catch((err) => console.log(err))
   }, [])
 
-  console.log(categories)
   return (
-    <div className="max-w-[1640px] mx-auto p-4 py-12 grid md:grid-cols-4 cursor-pointer gap-6">
+    <div className="max-w-[1640px] mx-auto p-4  grid md:grid-cols-5 cursor-pointer gap-4">
       {categories &&
-        categories.slice(0, 4).map((category, index) => (
+        categories.map((category, index) => (
           <div
             className="rounded-xl relative hover:scale-105 duration-300"
             key={index + "id"}
@@ -36,8 +35,8 @@ const CategoryComposant = () => {
                 <p className="px-2"></p>
               </div>
               <img
-                className="max-h-[160px] md:max-h-[500px] w-full object-cover rounded-xl"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTfUcCGC5iJJRGuKZtmRMJhaRm8CWNl9zbog&usqp=CAU"
+                className="max-h-[200px] h-full md:max-h-[500px] w-full object-cover rounded-xl"
+                src={category.image}
                 alt="/"
               />
             </Link>

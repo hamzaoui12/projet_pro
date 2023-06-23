@@ -32,7 +32,6 @@ const Navbar = () => {
     setCart([...cart, product])
     setShowCart(true)
   }
-  console.log(categories)
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4">
       {/* Left side */}
