@@ -7,12 +7,7 @@ const CategoryComposant = () => {
 return (
     <div className="max-w-[1640px] mx-auto p-4 py-12 grid md:grid-cols-4 cursor-pointer gap-6">
       <div className="rounded-xl relative hover:scale-105 duration-300">
-        <Link
-          to="/room"
-          onClick={() => setNav(!div)}
-          size={30}
-          className="rounded-xl relative hover:scale-105 duration-300"
-        >
+        <Link to="/room" onClick={() => setNav(!div)} size={30}>
           {" "}
           <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
             <p className="font-bold text-3xl px-2 pt-4 text-orange-200">
@@ -28,13 +23,8 @@ return (
         </Link>
       </div>
 
-      <div>
-        <Link
-          to="/room"
-          onClick={() => setNav(!div)}
-          size={30}
-          className="rounded-xl relative hover:scale-105 duration-300"
-        >
+      <div className="rounded-xl relative hover:scale-105 duration-300">
+        <Link to="/room" onClick={() => setNav(!div)} size={30}>
           {" "}
           <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
             <p className="font-bold text-3xl px-2 pt-4 text-orange-200">Room</p>
@@ -48,14 +38,9 @@ return (
         </Link>
       </div>
 
-      <div>
+      <div className="rounded-xl relative hover:scale-105 duration-300">
         {" "}
-        <Link
-          to="/room"
-          onClick={() => setNav(!div)}
-          size={30}
-          className="rounded-xl relative hover:scale-105 duration-300"
-        >
+        <Link to="/room" onClick={() => setNav(!div)} size={30}>
           {" "}
           <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
             <p className="font-bold text-3xl px-2 pt-4 text-orange-200">
@@ -70,13 +55,8 @@ return (
           />
         </Link>
       </div>
-      <div>
-        <Link
-          to="/room"
-          onClick={() => setNav(!div)}
-          size={30}
-          className="rounded-xl relative hover:scale-105 duration-300"
-        >
+      <div className="rounded-xl relative hover:scale-105 duration-300">
+        <Link to="/room" onClick={() => setNav(!div)} size={30}>
           {" "}
           <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
             <p className="font-bold text-3xl px-2 pt-4 text-orange-200">

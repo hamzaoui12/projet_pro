@@ -1,128 +1,181 @@
 import React, { useState } from "react"
-
+import { Formik, Field, ErrorMessage } from "formik"
+import * as Yup from "yup"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
 import "tailwindcss/tailwind.css"
 
 const Registration = () => {
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [isChecked, setIsChecked] = useState(false)
-  const [errorMessage, setErrorMessage] = useState("")
-  const [successMessage, setSuccessMessage] = useState("")
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phoneNumber: ""
+  }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const navigate = useNavigate()
 
-    if (!email.includes("@")) {
-      setErrorMessage("Your email is not valid.")
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required("Le prénom est requis"),
+    lastName: Yup.string().required("Le nom de famille est requis"),
+    email: Yup.string().email("Email invalide").required("L'adresse email est requise"),
+    password: Yup.string()
+      .required("Le mot de passe est requis")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{10,}$/,
+        "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un caractère spécial, aucun signe égal (=) et doit comporter au moins 10 caractères"
+      ),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Les mots de passe doivent correspondre")
+      .required("La confirmation du mot de passe est requise"),
+    phoneNumber: Yup.string()
+      .matches(/^\d+$/, "Le numéro de téléphone doit contenir uniquement des chiffres")
+      .min(10, "Le numéro de téléphone doit comporter au moins 10 chiffres")
+      .max(15, "Le numéro de téléphone ne doit pas dépasser 15 chiffres")
+      .required("Le numéro de téléphone est requis")
+  })
 
-return
-    }
+  const handleSubmit = (values) => {
+    axios.post(`${process.env.REACT_APP_URL_ROUTE}/sign-up`, {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        password: values.password,
+        mail: values.email,
+        phoneNumber: values.phoneNumber
+      })
+      .then(function (response) {
+        navigate("/Singin")
+      })
+  }
 
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match.")
+  const [showPassword, setShowPassword] = useState(false)
 
-return
-    }
-
-    if (!isChecked) {
-      setErrorMessage("Please agree to the privacy policy.")
-
-return
-    }
-
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
-      setErrorMessage("Please complete all fields.")
- 
-return
-    }
-
-    setErrorMessage("")
-    setSuccessMessage("Account created successfully!")
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword)
   }
 
   return (
-    <div>
-      <div
-        className="flex items-center justify-center h-screen bg-gray-800"
-        style={{
-          backgroundImage: `url('https://images.pexels.com/photos/5998120/pexels-photo-5998120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-md">
-          <h1 className="text-4xl font-bold mb-8 text-gray-800">
-            Create an Account
-          </h1>
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <input
-              className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
-              placeholder="First Name"
-              value={firstName}
-              onChange={(event) => setFirstName(event.target.value)}
-              required
-            />
-            <input
-              className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
-              placeholder="Last Name"
-              value={lastName}
-              onChange={(event) => setLastName(event.target.value)}
-              required
-            />
-            <input
-              className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
-              placeholder="Email"
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              required
-            />
-            <input
-              className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
-              placeholder="Password"
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              required
-            />
-            <input
-              className="bg-white text-gray-900 border border-gray-300 p-2 rounded-lg"
-              placeholder="Confirm Password"
-              type="password"
-              value={confirmPassword}
-              onChange={(event) => setConfirmPassword(event.target.value)}
-              required
-            />
-            <div className="flex items-center gap-2 text-white">
-              <input
-                type="checkbox"
-                className="rounded-sm"
-                required
-                onChange={() => setIsChecked(!isChecked)}
+    <div
+      className="flex items-center justify-center h-screen bg-gray-800"
+      style={{
+        backgroundImage:
+          'url("https://images.pexels.com/photos/2029665/pexels-photo-2029665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")'
+      }}
+    >
+      <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-md mr-10">
+        <h1 className="text-4xl font-bold mb-8 text-gray-800">
+          Creer votre compte
+        </h1>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ handleSubmit }) => (
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+              <Field
+                name="firstName"
+                type="text"
+                placeholder="Prenom"
+                className="bg-transparent border border-gray-300 p-2 rounded-lg"
               />
-              <label className="text-gray-900">
-                By creating an account, I consent to the processing of my
-                personal data in accordance with the privacy policy.
-              </label>
-            </div>
-            <button className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-all duration-200">
-              Create
-            </button>
-          </form>
-          {errorMessage && <p className="text-red-500 mt-4">{errorMessage}</p>}
-          {successMessage && (
-            <p className="text-green-500 mt-4">{successMessage}</p>
+              <ErrorMessage
+                name="firstName"
+                component="div"
+                className="text-red-500"
+              />
+
+              <Field
+                name="lastName"
+                type="text"
+                placeholder="Nom"
+                className="bg-transparent border border-gray-300 p-2 rounded-lg"
+              />
+              <ErrorMessage
+                name="lastName"
+                component="div"
+                className="text-red-500"
+              />
+
+              <Field
+                name="email"
+                type="email"
+                placeholder="Email"
+                className="bg-transparent border border-gray-300 p-2 rounded-lg"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="text-red-500"
+              />
+
+              <div className="relative">
+                <Field
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Mot de passe"
+                  className="bg-transparent border border-gray-300 p-2 rounded-lg"
+                />
+                <button
+                  type="button"
+                  className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-600"
+                  onClick={toggleShowPassword}
+                >
+                  {showPassword ? "Cacher" : "Montrer"}
+                </button>
+              </div>
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="text-red-500"
+              />
+
+              <Field
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirmez le mot de passe"
+                className="bg-transparent border border-gray-300 p-2 rounded-lg"
+              />
+              <ErrorMessage
+                name="confirmPassword"
+                component="div"
+                className="text-red-500"
+              />
+
+              <Field
+                name="phoneNumber"
+                type="text"
+                placeholder="Numéro de téléphone 0000000000"
+                className="bg-transparent border border-gray-300 p-2 rounded-lg"
+              />
+              <ErrorMessage
+                name="phoneNumber"
+                component="div"
+                className="text-red-500"
+              />
+
+              <div className="flex items-center gap-2">
+                <Field
+                  type="checkbox"
+                  name="privacyPolicy"
+                  className="rounded-sm"
+                />
+                <label className="text-gray-700">En créant un compte, je consens au traitement de mes
+                   données personnelles.
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-all duration-200"
+              >
+                Creer
+              </button>
+            </form>
           )}
-          <p className="mt-4 text-black ">
-            Already have an account?{" "}
-            <a className="text-black mt-4 hover:text-blue-200" href="#">
-              Log in here
-            </a>
-          </p>
-        </div>
+        </Formik>
       </div>
     </div>
   )

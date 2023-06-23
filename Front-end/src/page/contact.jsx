@@ -11,7 +11,6 @@ const Contact = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    // Validation du formulaire
 
     if (email && subject && message) {
       // Envoi du formulaire de contact

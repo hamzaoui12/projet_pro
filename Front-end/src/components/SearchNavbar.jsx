@@ -1,39 +1,39 @@
-import React, { useContext, useState } from "react"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { useEffect, useState } from "react"
 import {
+  AiOutlineClose,
   AiOutlineMenu,
   AiOutlineSearch,
-  AiOutlineClose,
   AiOutlineShoppingCart,
 } from "react-icons/ai"
-import { TbHome } from "react-icons/tb"
 import { FaWallet } from "react-icons/fa"
-import { FiLogOut } from "react-icons/fi"
 import { MdCategory, MdHelp } from "react-icons/md"
-import { VscCircleSmall, VscAccount } from "react-icons/vsc"
-import { SidebarContext } from "../contexts/SidebarContext.jsx"
-import { CartContext } from "../contexts/CartContext.jsx"
-import { orderStorage } from "../Storage/orerStorage.js"
+import { TbHome } from "react-icons/tb"
+import { VscAccount, VscCircleSmall } from "react-icons/vsc"
+import { Link } from "react-router-dom"
+import { useSearch } from "../context/Search"
 
 const SearchNavbar = () => {
   const [div, setNav] = useState(false)
   const [cart, setCart] = useState([])
   const [item, setShowCart] = useState(false)
   const [showCategoryList, setShowCategoryList] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const { isOpen, setIsOpen } = useContext(SidebarContext)
-  const { itemAmount } = useContext(CartContext)
+  const { search, setSearch } = useSearch()
+  const [searchProduct, setSearchProduct] = useState("")
 
-  const handleLogout = () => {
-    setIsLoggedIn(false)
+  // const handleAddToCart = (product) => {
+  //   setCart([...cart, product])
+  //   setShowCart(true)
+  // }
 
-    setCart([])
-    setShowCart(false)
-  }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearch(searchProduct)
+    }, 1300)
+    return () => clearTimeout(timer)
+  }, [searchProduct, setSearch])
 
   return (
-    <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4 sticky top-0 z-20 bg-white">
-      {/* Left side */}
+    <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4">
       <div className="flex items-center">
         <div onClick={() => setNav(!div)} className="cursor-pointer">
           <AiOutlineMenu size={30} />
@@ -48,41 +48,56 @@ const SearchNavbar = () => {
           <AiOutlineSearch size={25} />
           <input
             className="bg-transparent p-2 w-full focus:outline-none"
+            value={searchProduct}
             type="text"
             placeholder="Best Furniture"
+            onChange={(e) => setSearchProduct(e.target.value)}
           />
         </div>
-
-        {/* Ajoutez d'autres éléments de la barre de navigation ici si nécessaire */}
       </nav>
       <div className="text-black md:flex flex items-center  gap-4 cursor-pointer">
-        <div onClick={() => setIsOpen(!isOpen)}>
+        <div onClick={() => setShowCart(!item)} size={25} className=" ">
           <AiOutlineShoppingCart className="text-3xl" />
-          {itemAmount > 0 ? (
+          {cart && cart.length > 0 && (
             <div className="bg-red-500 absolute text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
-              {itemAmount}
+              {cart.length}
             </div>
-          ) : (
-            ""
           )}
         </div>
         <Link to="/singin">
           <VscAccount size={30} className="text-3xl" />
         </Link>
-        {isLoggedIn ? (
-          <div onClick={() => handleLogout()} className="cursor-pointer">
-            <FiLogOut size={30} />
+        {item ? (
+          <div className=" fixed w-full h-screen z-10 top-0 right-0"></div>
+        ) : (
+          ""
+        )}
+        {item && (
+          <div
+            className={`${
+              item ? "right-0" : "-right-full"
+            } bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px]`}
+          >
+            <div className="flex items-center justify-between py-6 border-b">
+              <div className="uppercase text-xl font-semibold">
+                Shopping Bag
+              </div>{" "}
+              <AiOutlineClose
+                onClick={() => setShowCart(!item)}
+                size={30}
+                className="cursor-pointer w-8 h-8 flex justify-center items-center"
+              />
+            </div>
           </div>
-        ) : null}
+        )}
       </div>
-      {/* Mobile Menu */}
-      {/* Overlay */}
+
       {div ? (
         <div className="bg-black/80 fixed w-full h-screen z-10 top-0 left-0"></div>
       ) : (
         ""
       )}
-      {/* Side drawer menu */}
+
       <div
         className={
           div
@@ -95,9 +110,7 @@ const SearchNavbar = () => {
           size={30}
           className="absolute right-4 top-4 cursor-pointer"
         />
-        <h2 className="text-2xl p-4">
-          <span className="">Λｉｒｎｅｉｓ</span>
-        </h2>
+        <h2 className="text-2xl p-4">Λｉｒｎｅｉｓ</h2>
         <div>
           <ul className="flex font-bold flex-col p-4 text-gray-800">
             <Link to="/" onClick={() => setNav(!div)} className="mr-4">
@@ -111,11 +124,10 @@ const SearchNavbar = () => {
               size={25}
               className="text-xl py-2 flex cursor-pointer"
             >
-              <MdCategory className="mr-4 " /> Category
+              <MdCategory className="mr-4" /> Category
             </li>
             {showCategoryList && (
               <li>
-                {/* Liste de clics */}
                 <ul className=" text-gray-800 text-xl py-4 px-12">
                   <Link to="/category" onClick={() => setNav(!div)}>
                     <li className=" cursor-pointer grap-2 flex">
