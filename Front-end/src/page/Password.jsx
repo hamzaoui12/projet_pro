@@ -11,10 +11,13 @@ const PasswordResetPage = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [resetEmail, setResetEmail] = useState("");
 
-  const handleSubmit = (values) => {
-    console.log(values.email);
-    setResetEmail("");
-    setSuccessMessage("Password reset successful!");
+  const handleSubmit = (values, { setSubmitting }) => {
+    setIsSubmitting(true)
+    // Perform necessary action to reset the password
+    console.log(values.email)
+    setResetEmail("")
+    setSuccessMessage("Password reset successful!")
+    setSubmitting(false)
     setTimeout(() => {
       setSuccessMessage("");
     }, 3000);
