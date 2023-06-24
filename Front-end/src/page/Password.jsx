@@ -1,27 +1,24 @@
-import React, { useState } from "react";
-import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
-import { MdCheck } from "react-icons/md";
+import React, { useState } from "react"
+import { Formik, Form, Field } from "formik"
+import * as Yup from "yup"
+import { MdCheck } from "react-icons/md"
 
 const PasswordResetSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address"),
-});
+})
 
 const PasswordResetPage = () => {
-  const [successMessage, setSuccessMessage] = useState("");
-  const [resetEmail, setResetEmail] = useState("");
+  const [successMessage, setSuccessMessage] = useState("")
+  const [resetEmail, setResetEmail] = useState("")
 
   const handleSubmit = (values, { setSubmitting }) => {
-    setIsSubmitting(true)
-    // Perform necessary action to reset the password
-    console.log(values.email)
     setResetEmail("")
     setSuccessMessage("Password reset successful!")
     setSubmitting(false)
     setTimeout(() => {
-      setSuccessMessage("");
-    }, 3000);
-  };
+      setSuccessMessage("")
+    }, 3000)
+  }
 
   return (
     <div>
@@ -83,7 +80,7 @@ const PasswordResetPage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PasswordResetPage;
+export default PasswordResetPage

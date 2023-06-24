@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { Formik, Form, Field, ErrorMessage } from "formik"
+import { Formik, Field, ErrorMessage } from "formik"
 import { BrowserRouter as Router, Link } from "react-router-dom"
 
 const ValidateForm = () => {
@@ -56,8 +56,6 @@ const ValidateForm = () => {
 
   const handleSubmit = (values) => {
     localStorage.removeItem("userData")
-
-    console.log("values", values)
     localStorage.setItem("userData", JSON.stringify(values))
     paymentPageRef.current.click()
   }

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { BsPlus } from "react-icons/bs"
 import Filter from "../components/Filter"
 import { filteringFc } from "../components/utils/filteringFc"
 import { useSearch } from "../context/Search"
+import { CartContext } from "../contexts/CartContext.jsx"
 
-const Research = ({ addToCart }) => {
+const Research = () => {
   const { search } = useSearch()
   const [data, setData] = useState(null)
+  const { addToCart } = useContext(CartContext)
   const [materials, setMaterials] = useState([])
   const [categories, setCategories] = useState([])
   const [start, setStart] = useState(false)
@@ -45,9 +47,6 @@ const Research = ({ addToCart }) => {
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleAddToCart = (product) => {
-    addToCart(product)
-  }
   const openModal = () => {
     setIsOpen(true)
   }
@@ -57,24 +56,24 @@ const Research = ({ addToCart }) => {
   }
 
   return (
-    <div className="research" class="w-full ">
-      <div class="flex justify-center items-center">
+    <div className="research">
+      <div className="flex justify-center items-center">
         {" "}
         <button
-          class="text-black text-xl font-bold py-6 px-4 rounded flex  lg-hidden justify-center items-center"
+          className="text-black text-xl font-bold p-12  rounded flex  lg-hidden justify-center items-center"
           onClick={openModal}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
-            class="w-6 h-6"
+            className="w-6 h-6"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
             />
           </svg>
@@ -82,32 +81,27 @@ const Research = ({ addToCart }) => {
         </button>
       </div>
 
-      <div class="flex  max-w-[1640px] mx-auto py-12  ">
-        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-auto p-3 gap-6 cursor-pointer">
+      <div className="flex  max-w-[1640px] mx-auto py-12  ">
+        <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 gap-24 py-32  cursor-pointer">
           {data &&
             data.map((item, index) => (
-              <div
-                key={index}
-                className="border shadow-lg  hover:scale-105 duration-300  relative group"
-              >
+              <div key={index} className="relative group p-6 ">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-[300px] W-[300px] object-cover p-2"
+                  className="w-full h-[300px] W-[300px]  object-cover duration-300  hover:scale-105"
                 />
                 <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
-                  <button onClick={() => handleAddToCart(item)}>
+                  <button onClick={() => addToCart(item)}>
                     <div className="flex justify-center rounded-full items-center hover:bg-gray-500 text-white w-12 h-12 bg-black">
                       <BsPlus className="text-3xl" />
                     </div>
                   </button>
                 </div>
-                <div className="flex justify-between px-2 py-4">
-                  <p className="font-bold">{item.name}</p>
+                <div className="flex justify-between  px-2 py-6 font-bold text-lg">
+                  <p>{item.name}</p>
                   <p>
-                    <span className="bg-black text-white p-1 rounded-full">
-                      {item.price}
-                    </span>
+                    <span className="p-6">{item.price}</span>
                   </p>
                 </div>
               </div>

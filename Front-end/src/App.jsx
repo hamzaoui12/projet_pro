@@ -11,7 +11,7 @@ import PasswordResetPage from "./page/Password"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Layout from "./components/Layout"
 import Stripe from "./components/Stripe"
-import PaymentForm from "./page/données_de_paiement"
+import PaymentForm from "./page/Checkout"
 import Thankyou from "./page/thankyou"
 import Sidebar from "./components/Sidebar"
 import ValidateForm from "./page/validation_form"
@@ -30,7 +30,7 @@ const App = () => {
           }
         />
         <Route
-          path="/category"
+          path="/category/:id"
           element={
             <Layout>
               <Category />

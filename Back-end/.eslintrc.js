@@ -1,6 +1,12 @@
 module.exports = {
   root: true,
-  extends: ["eslint:recommended", "prettier"],
+  extends: [
+    "eslint:recommended",
+    "prettier",
+    "react-app",
+    "plugin:react/recommended",
+  ],
+  plugins: ["react", "react-hooks"],
   env: {
     es2022: true,
     node: true,
@@ -17,7 +23,6 @@ module.exports = {
       { avoidEscape: true, allowTemplateLiterals: true },
     ],
     semi: ["error", "never"],
-    "no-console": "error",
     "no-implicit-globals": "error",
     "no-warning-comments": ["error", { terms: ["fixme", "todo"] }],
     "newline-before-return": "error",
@@ -61,5 +66,11 @@ module.exports = {
         next: "*",
       },
     ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/no-unescaped-entities": ["error", { forbid: [">", "}"] }],
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
   },
+  settings: { react: { version: "detect" } },
 }
