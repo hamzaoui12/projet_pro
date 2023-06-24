@@ -1,117 +1,93 @@
 import { BsTrash3 } from "react-icons/bs"
-import { useState, useEffect } from "react"
-import { Formik, Field } from "formik"
-import { orderStorage } from "../Storage/orerStorage.js"
+import React, { useContext } from "react"
 import { BrowserRouter as Router, Link } from "react-router-dom"
+import { IoMdAdd, IoMdRemove } from "react-icons/io"
+import { CartContext } from "../contexts/CartContext"
 
-const Panier = () => {
-  orderStorage.storageOrder.shift()
-  const localStorageOrder = JSON.parse(localStorage.getItem("storageOrder"))
-  const [order, setOrder] = useState(localStorageOrder)
-  const [total, setTotal] = useState(0)
-  const initialValues = {
-    stock: 1,
-  }
-
-  const handleSubmit = (values) => {}
-
-  useEffect(() => {
-    console.log(localStorageOrder)
-  })
-
-  const deleteItem = (product) => {
-    const updatedOrder = order.filter((item) => item !== product)
-    setOrder(updatedOrder)
-    localStorage.setItem("storageOrder", JSON.stringify(updatedOrder))
-  }
-
-  const numberItem = (productPrice, values) => {
-    console.log(values)
-    setTotal(total + parseInt(productPrice))
-  }
+const Panier = (item) => {
+  const { removeFromCart, increaseAmount, decreaseAmount, cart, total } =
+    useContext(CartContext)
 
   return (
     <div>
-      <div className="flex flex-col lg:border-2 lg:border-black p-12 lg:border mx-16">
-        <span className="font-extrabold text-4xl pl-4 pb-8 mx-auto justify-center">
+      <div className="flex flex-col lg:border-2 lg:border-black p-12 mx-4 lg:mx-24 my-4 lg:my-10 ">
+        <span className="font-extrabold text-4xl pl-4 pb-8 lg:pb-16 mx-auto justify-center ">
           Panier
         </span>
-        <div className="lg:flex">
-          {localStorageOrder.length > 0 ? (
-            <div className="pl-4 pt-2 flex flex-col lg:w-1/2 lg:pl-0 lg:pl-40">
-              {order.map((product) => (
-                <Formik
-                  key={product.id}
-                  initialValues={initialValues}
-                  onSubmit={handleSubmit}
+
+        {cart.map((item) => (
+          <div key={item.id} className="flex flex-col  my-4 py-4 border-b">
+            <div className="flex flex-col lg:flex-row gap-w-3">
+              <img
+                className="w-48 lg:w-64 mr-4 object-cover"
+                src={item.image}
+                alt={item.name}
+              />
+              <div className="flex flex-col">
+                <span className="h-6 w-full text-xl font-bold mb-2 lg:mb-4 ">
+                  {item.name}
+                </span>
+                <span className="text-l break-words  overflow-hidden mb-2">
+                  {item.description}
+                </span>
+                <span className="h-6 w-full text-xl font-bold mb-2 lg:mb-4 ">
+                  {item.price} $
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-row-reverse">
+              <div className="flex gap-6 h-[36px] text-sm">
+                <div className="flex w-16 lg:w-30 items-center h-full border text-primary font-medium">
+                  <div
+                    onClick={() => decreaseAmount(item.id)}
+                    className="flex h-full w-36 text-white justify-center items-center cursor-pointer bg-black"
+                  >
+                    <IoMdRemove />
+                  </div>
+                  <div className="flex h-full justify-center items-center px-2 w-24 lg:w-30">
+                    {item.amount}
+                  </div>
+                  <div
+                    onClick={() => increaseAmount(item.id)}
+                    className="flex h-full w-36 justify-center items-center cursor-pointer text-white bg-black"
+                  >
+                    <IoMdAdd />
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    removeFromCart(item.id)
+                  }}
                 >
-                  {({ handleSubmit }) => (
-                    <form
-                      onSubmit={handleSubmit}
-                      className="flex h-28 lg:w-2/3 mb-4 lg:h-40 lg:w-full"
-                    >
-                      <div className="flex w-4/5">
-                        <img
-                          className="w-5/12 mr-4 object-cover"
-                          src="https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        />
-                        <div className="flex flex-col w-7/12">
-                          <span className="h-6 w-full text-base font-bold mb-4 overflow-x-hidden	">
-                            {product.name}
-                          </span>
-                          <span className="text-xs break-words overflow-hidden mb-1">
-                            {product.description}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex flex-col items-end w-1/5">
-                        <span className="h-1/5 w-5/12 font-bold mt-6 mr-4 lg:mr-0">
-                          {product.price}
-                        </span>
-                        <Field
-                          name="stock"
-                          onClick={() => {
-                            numberItem(product.price, product)
-                          }}
-                          type="number"
-                          min="0"
-                          max={product.stock}
-                          className="h-1/5 w-1/2 text-center border-2 border-black font-bold mt-6 mr-4 lg:mr-0"
-                        />
-                        <button>
-                          <BsTrash3
-                            onClick={() => {
-                              deleteItem(product)
-                            }}
-                            size={25}
-                            className="my-6 mr-4 lg:mr-0"
-                          />
-                        </button>
-                      </div>
-                    </form>
-                  )}
-                </Formik>
-              ))}
+                  <BsTrash3 size={25} />
+                </button>
+              </div>
             </div>
-          ) : (
-            <div className="flex justify-center items-center w-full font-bold">
-              Empty Cart
-            </div>
-          )}
-          <span className="ml-12 lg:relative font-extrabold text-xl pl-4 lg:w-1/2 lg:mt-24">
-            <div className="flex lg:absolute lg:bottom-0 flex-col justify-end lg:w-2/3">
-              <span>Total {total} €</span>
+          </div>
+        ))}
+
+        <div className="flex justify-center">
+          <div className="relative bottom-0  w-1/3">
+            <div className="grid grid-cols-2">
+              <span>Total</span>
+              <span className="flex justify-end">{total}$</span>
               <span className="font-extrabold text-sm pl-1 text-slate-400">
-                TVA 10% {((total * 10) / 100).toFixed(2)} $
+                TVA
               </span>
+              <span className="flex justify-end">
+                {((total * 20) / 100).toFixed(2)}$
+              </span>
+            </div>
+            <div>
               <Link to="/validationfrom">
                 {" "}
-                <button className="border-4 border-black py-2 mt-6  hover:bg-black hover:text-white">
+                <button className="border-4 border-black w-full py-2 mt-6 hover:bg-black hover:text-white">
                   Passer la commande
                 </button>
               </Link>
             </div>
-          </span>
+          </div>
         </div>
       </div>
     </div>

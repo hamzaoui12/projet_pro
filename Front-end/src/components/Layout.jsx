@@ -2,7 +2,7 @@ import { useLocation } from "react-router"
 import Footer from "./Footer"
 import Navbar from "./Navbar"
 import SearchNavbar from "./SearchNavbar"
-import { ContextSearch } from "../context/Search"
+import { ContextSearch } from "../contexts/Search"
 
 const Layout = (props) => {
   const { children } = props

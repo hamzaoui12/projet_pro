@@ -2,6 +2,7 @@ const BaseModel = require("./BaseModel.cjs")
 
 class CategoryModel extends BaseModel {
   static tableName = "categories"
+
   static relationMappings() {
     const ProductModel = require("./ProductModel.cjs")
     const ImageModel = require("./ImageModel.cjs")

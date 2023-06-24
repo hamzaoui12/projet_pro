@@ -38,7 +38,9 @@ const Account = () => {
       }}
     >
       <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-md max-w-lg mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-gray-800">Personal Information</h1>
+        <h1 className="text-4xl font-bold mb-8 text-gray-800">
+          Personal Information
+        </h1>
         <form className="flex flex-col gap-4">
           <input
             className="bg-transparent border border-gray-500 p-2 rounded-lg w-full"
@@ -79,7 +81,9 @@ const Account = () => {
             placeholder="Billing Address"
           />
         </form>
-        <h1 className="text-4xl font-bold mb-8 text-gray-800">Payment Methods</h1>
+        <h1 className="text-4xl font-bold mb-8 text-gray-800">
+          Payment Methods
+        </h1>
         <form className="flex flex-col gap-4 pb-4">
           <input
             className="bg-transparent border border-gray-500 p-2 rounded-lg w-full"

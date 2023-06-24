@@ -1,3 +1,5 @@
+const ProductModel = require("../models/ProductModel.cjs")
+
 const CategoryModel = require("../models/CategoryModel.cjs")
 const auth = require("../middlewares/auth.js")
 
@@ -18,10 +20,10 @@ const routeCategory = ({ app }) => {
 
   app.get("/categories/:id", async (req, res) => {
     const { id } = req.params
-    const category = await CategoryModel.query()
-      .findById(id)
-      .withGraphFetched("products")
-      .withGraphFetched("images")
+    const category = await ProductModel.query()
+      .where("category_id", id)
+      .withGraphFetched("materials")
+      .withGraphFetched("category")
 
     if (!checkCategory(category)) {
       res.status(404).send({ error: "not found" })

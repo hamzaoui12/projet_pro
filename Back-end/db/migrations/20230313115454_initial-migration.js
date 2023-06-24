@@ -4,6 +4,8 @@ exports.up = async (knex) => {
       table.increments("id")
       table.text("name").notNullable()
       table.integer("welcome_order")
+      table.text("image").notNullable()
+      table.text("description")
     })
 
     .createTable("contact", (table) => {
@@ -20,6 +22,7 @@ exports.up = async (knex) => {
       table.integer("highlander")
       table.integer("welcome_order")
       table.integer("stock")
+      table.text("image").notNullable()
       table.integer("priority")
       table.float("price").notNullable()
       table.integer("category_id").unsigned().notNullable()
@@ -149,13 +152,13 @@ exports.down = async (knex) => {
   await knex.schema
     .dropTable("userAddress")
     .dropTable("productMaterials")
-    .dropTable("bankCards")
     .dropTable("orderProducts")
+    .dropTable("bankCards")
     .dropTable("orders")
     .dropTable("images")
-    .dropTable("products")
+    .dropTable("users")
     .dropTable("address")
+    .dropTable("products")
     .dropTable("categories")
     .dropTable("materials")
-    .dropTable("users")
 }
