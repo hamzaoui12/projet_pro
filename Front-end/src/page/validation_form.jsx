@@ -69,7 +69,6 @@ const ValidateForm = () => {
 
       alert("Adresse et données utilisateur mises à jour avec succès")
       setSubmitting(false)
-      // sauter à la page
       navigate("/checkout")
     } catch (error) {
       alert("ERROR", error)
@@ -101,8 +100,8 @@ const ValidateForm = () => {
             onSubmit={handleSubmit}
             validate={validate}
           >
-            {({ isSubmitting }) => (
-              <Form className="space-y-4">
+            {({ isSubmitting, handleSubmit }) => (
+              <Form className="space-y-4" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label

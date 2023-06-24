@@ -4,7 +4,17 @@ exports.up = async (knex) => {
       table.increments("id")
       table.text("name").notNullable()
       table.integer("welcome_order")
+      table.text("image").notNullable()
+      table.text("description")
     })
+
+    .createTable("contact", (table) => {
+      table.increments("id").primary()
+      table.string("mail").notNullable()
+      table.string("subject").notNullable()
+      table.text("message").notNullable()
+    })
+
     .createTable("products", (table) => {
       table.increments("id")
       table.text("name").notNullable()
@@ -12,6 +22,7 @@ exports.up = async (knex) => {
       table.integer("highlander")
       table.integer("welcome_order")
       table.integer("stock")
+      table.text("image").notNullable()
       table.integer("priority")
       table.float("price").notNullable()
       table.integer("category_id").unsigned().notNullable()
@@ -23,19 +34,19 @@ exports.up = async (knex) => {
     })
     .createTable("images", (table) => {
       table.increments("id")
-      table.text("picture").notNullable() 
+      table.text("picture").notNullable()
       table.integer("product_id").unsigned().notNullable()
       table
         .foreign("product_id")
         .references("id")
         .inTable("products")
-        .onDelete("CASCADE")
-      table.integer("category_id").unsigned().notNullable()
+        .onDelete("SET NULL")
+      table.integer("category_id").unsigned()
       table
         .foreign("category_id")
         .references("id")
         .inTable("categories")
-        .onDelete("CASCADE")
+        .onDelete("SET NULL")
     })
     .createTable("materials", (table) => {
       table.increments("id")
@@ -141,13 +152,13 @@ exports.down = async (knex) => {
   await knex.schema
     .dropTable("userAddress")
     .dropTable("productMaterials")
-    .dropTable("bankCards")
     .dropTable("orderProducts")
+    .dropTable("bankCards")
     .dropTable("orders")
     .dropTable("images")
-    .dropTable("products")
+    .dropTable("users")
     .dropTable("address")
+    .dropTable("products")
     .dropTable("categories")
     .dropTable("materials")
-    .dropTable("users")
 }

@@ -1,12 +1,12 @@
 const MaterialModel = require("../models/MaterialModel.cjs")
-const auth = require("../middlewares/auth.js")
 
 const routeMaterials = async ({ app, db }) => {
   const checkMaterial = (material) => {
     if (material) {
       return true
-    }
-    return false
+    }    
+
+return false
   }
 
   app.get("/materials", async (req, res) => {
@@ -21,6 +21,7 @@ const routeMaterials = async ({ app, db }) => {
 
     if (!checkMaterial(material)) {
       res.status(404).send({ error: "not found" })
+
       return
     }
 
@@ -34,7 +35,6 @@ const routeMaterials = async ({ app, db }) => {
       const newMaterial = await MaterialModel.query().insert({
         name,
       })
-
       res.status(201).send({ result: newMaterial })
     } catch (error) {
       res.status(500).send({ error: "Failed to add material" })
@@ -50,17 +50,20 @@ const routeMaterials = async ({ app, db }) => {
         id,
         {
           name,
+
         }
       )
 
       if (!checkMaterial(updateMaterial)) {
         res.status(404).send({ error: "not found" })
+
         return
       }
 
       res.send(updateMaterial)
     } catch (error) {
       res.send({ result: error })
+
       return
     }
   })
@@ -71,6 +74,7 @@ const routeMaterials = async ({ app, db }) => {
 
     if (!checkMaterial(material)) {
       res.status(404).send({ error: "Not found" })
+
       return
     }
 

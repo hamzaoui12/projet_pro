@@ -7,36 +7,36 @@ class UserModel extends BaseModel {
     const OrderModel = require("./OrderModel.cjs")
     const AddressModel = require("./AddressModel.cjs")
     const BankCardModel = require("./BankCardModel.cjs")
-    
+
     return {
-      address : {
+      address: {
         relation: BaseModel.ManyToManyRelation,
         modelClass: AddressModel,
         join: {
           from: "users.id",
           through: {
             from: "userAddress.user_id",
-            to: "userAddress.address_id"
+            to: "userAddress.address_id",
           },
-          to: "address.id"
-        }
+          to: "address.id",
+        },
       },
       bankCards: {
-      modelClass: BankCardModel,
-      relation: BaseModel.HasManyRelation,
-      join: {
-        from: "users.id",
-        to: "bankCards.user_id"
-      }
-      },
-      orders: {
-        modelClass: OrderModel,
+        modelClass: BankCardModel,
         relation: BaseModel.HasManyRelation,
         join: {
           from: "users.id",
-          to: "orders.user_id"
-        }
+          to: "bankCards.user_id",
+        },
+      },
+      orders: {
+      modelClass: OrderModel,
+      relation: BaseModel.HasManyRelation,
+      join: {
+        from: "orders.id",
+        to: "orders.user_id"
       }
+    },
     }
   }
 }
