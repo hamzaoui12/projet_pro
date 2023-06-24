@@ -12,7 +12,7 @@ const Registration = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    phoneNumber: ""
+    phoneNumber: "",
   }
 
   const navigate = useNavigate()
@@ -42,7 +42,7 @@ const Registration = () => {
       )
       .min(10, "Le numéro de téléphone doit comporter au moins 10 chiffres")
       .max(15, "Le numéro de téléphone ne doit pas dépasser 15 chiffres")
-      .required("Le numéro de téléphone est requis")
+      .required("Le numéro de téléphone est requis"),
   })
 
   const handleSubmit = (values) => {

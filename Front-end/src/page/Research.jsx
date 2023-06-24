@@ -47,9 +47,6 @@ const Research = () => {
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleAddToCart = (product) => {
-    addToCart(product)
-  }
   const openModal = () => {
     setIsOpen(true)
   }
