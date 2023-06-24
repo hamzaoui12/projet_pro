@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Link } from "react-router-dom"
 
 const CategoryComposant = () => {
   const [div, setNav] = useState(false)
-  return (
+
+return (
     <div className="max-w-[1640px] mx-auto p-4 py-12 grid md:grid-cols-4 cursor-pointer gap-6">
       <div className="rounded-xl relative hover:scale-105 duration-300">
         <Link to="/room" onClick={() => setNav(!div)} size={30}>

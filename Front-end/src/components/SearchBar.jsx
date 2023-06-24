@@ -1,5 +1,5 @@
-import React from "react";
-import { Formik, Form, Field } from "formik";
+import React from "react"
+import { Formik, Form, Field } from "formik"
 
 const SearchBar = ({ onSubmit }) => {
   return (
@@ -79,9 +79,9 @@ const SearchBar = ({ onSubmit }) => {
     </Form>
   )}
 </Formik>
-);
-};
+)
+}
 
-export default SearchBar;
+export default SearchBar
 
 
