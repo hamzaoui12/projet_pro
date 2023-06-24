@@ -12,7 +12,7 @@ const Registration = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    phoneNumber: ""
+    phoneNumber: "",
   }
 
   const navigate = useNavigate()
@@ -20,7 +20,9 @@ const Registration = () => {
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("Le prénom est requis"),
     lastName: Yup.string().required("Le nom de famille est requis"),
-    email: Yup.string().email("Email invalide").required("L'adresse email est requise"),
+    email: Yup.string()
+      .email("Email invalide")
+      .required("L'adresse email est requise"),
     password: Yup.string()
       .required("Le mot de passe est requis")
       .matches(
@@ -28,22 +30,29 @@ const Registration = () => {
         "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un caractère spécial, aucun signe égal (=) et doit comporter au moins 10 caractères"
       ),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Les mots de passe doivent correspondre")
+      .oneOf(
+        [Yup.ref("password"), null],
+        "Les mots de passe doivent correspondre"
+      )
       .required("La confirmation du mot de passe est requise"),
     phoneNumber: Yup.string()
-      .matches(/^\d+$/, "Le numéro de téléphone doit contenir uniquement des chiffres")
+      .matches(
+        /^\d+$/,
+        "Le numéro de téléphone doit contenir uniquement des chiffres"
+      )
       .min(10, "Le numéro de téléphone doit comporter au moins 10 chiffres")
       .max(15, "Le numéro de téléphone ne doit pas dépasser 15 chiffres")
-      .required("Le numéro de téléphone est requis")
+      .required("Le numéro de téléphone est requis"),
   })
 
   const handleSubmit = (values) => {
-    axios.post(`${process.env.REACT_APP_URL_ROUTE}/sign-up`, {
+    axios
+      .post(`${process.env.REACT_APP_URL_ROUTE}/sign-up`, {
         firstName: values.firstName,
         lastName: values.lastName,
         password: values.password,
         mail: values.email,
-        phoneNumber: values.phoneNumber
+        phoneNumber: values.phoneNumber,
       })
       .then(function (response) {
         navigate("/Singin")
@@ -61,7 +70,7 @@ const Registration = () => {
       className="flex items-center justify-center h-screen bg-gray-800"
       style={{
         backgroundImage:
-          'url("https://images.pexels.com/photos/2029665/pexels-photo-2029665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")'
+          'url("https://images.pexels.com/photos/2029665/pexels-photo-2029665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
       }}
     >
       <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-md mr-10">
@@ -162,8 +171,9 @@ const Registration = () => {
                   name="privacyPolicy"
                   className="rounded-sm"
                 />
-                <label className="text-gray-700">En créant un compte, je consens au traitement de mes
-                   données personnelles.
+                <label className="text-gray-700">
+                  En créant un compte, je consens au traitement de mes données
+                  personnelles.
                 </label>
               </div>
 

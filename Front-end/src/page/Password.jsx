@@ -16,7 +16,6 @@ const PasswordResetPage = () => {
   const handleSubmit = (values, { setSubmitting }) => {
     setIsSubmitting(true)
     // Perform necessary action to reset the password
-    console.log(values.email)
     setResetEmail("")
     setSuccessMessage("Password reset successful!")
     setSubmitting(false)
