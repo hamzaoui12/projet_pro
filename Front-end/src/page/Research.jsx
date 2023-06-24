@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { BsPlus } from "react-icons/bs"
 import Filter from "../components/Filter"
 import { filteringFc } from "../components/utils/filteringFc"
-import { useSearch } from "../context/Search"
+import { useSearch } from "../contexts/Search"
 import { CartContext } from "../contexts/CartContext.jsx"
 
 const Research = () => {

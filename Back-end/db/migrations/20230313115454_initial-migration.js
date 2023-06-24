@@ -7,6 +7,14 @@ exports.up = async (knex) => {
       table.text("image").notNullable()
       table.text("description")
     })
+
+    .createTable("contact", (table) => {
+      table.increments("id").primary()
+      table.string("mail").notNullable()
+      table.string("subject").notNullable()
+      table.text("message").notNullable()
+    })
+
     .createTable("products", (table) => {
       table.increments("id")
       table.text("name").notNullable()

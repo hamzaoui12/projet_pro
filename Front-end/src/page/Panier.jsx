@@ -5,14 +5,8 @@ import { IoMdAdd, IoMdRemove } from "react-icons/io"
 import { CartContext } from "../contexts/CartContext"
 
 const Panier = (item) => {
-  const {
-    removeFromCart,
-    increaseAmount,
-    decreaseAmount,
-    cart,
-
-    total,
-  } = useContext(CartContext)
+  const { removeFromCart, increaseAmount, decreaseAmount, cart, total } =
+    useContext(CartContext)
 
   return (
     <div>
