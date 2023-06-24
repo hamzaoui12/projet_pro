@@ -1,32 +1,30 @@
-import React, { useState } from "react"
-import { Formik, Form, Field } from "formik"
-import * as Yup from "yup"
-import "tailwindcss/tailwind.css"
-import { MdCheck, MdRefresh } from "react-icons/md"
+import React, { useState } from "react";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import { MdCheck } from "react-icons/md";
 
 const PasswordResetSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address"),
-})
+});
 
 const PasswordResetPage = () => {
-  const [successMessage, setSuccessMessage] = useState("")
-  const [resetEmail, setResetEmail] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [successMessage, setSuccessMessage] = useState("");
+  const [resetEmail, setResetEmail] = useState("");
 
   const handleSubmit = (values, { setSubmitting }) => {
     setIsSubmitting(true)
     // Perform necessary action to reset the password
+    console.log(values.email)
     setResetEmail("")
     setSuccessMessage("Password reset successful!")
     setSubmitting(false)
     setTimeout(() => {
-      setSuccessMessage("")
-    }, 3000)
-  }
+      setSuccessMessage("");
+    }, 3000);
+  };
 
   return (
     <div>
-      {" "}
       <div
         className="min-h-screen flex items-center justify-center bg-gray-100"
         style={{
@@ -71,13 +69,7 @@ const PasswordResetPage = () => {
                   type="submit"
                   disabled={resetEmail === ""}
                 >
-                  {isSubmitting ? (
-                    <>
-                      <MdRefresh className="animate-spin mr-2" /> Submitting...
-                    </>
-                  ) : (
-                    "Reset Password"
-                  )}
+                  Reset Password
                 </button>
                 {successMessage && (
                   <div className="text-green-500 text-sm mt-2 flex items-center">
@@ -91,7 +83,7 @@ const PasswordResetPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PasswordResetPage
+export default PasswordResetPage;
