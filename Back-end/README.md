@@ -10,7 +10,7 @@ Dans le terminal, utiliser la commandes :
 Créer un fichier .env
 
 Dans ce fichier .env, créer les variables suivantes :
-
+STRIPE_SECRET_TEST=<clée secret>
 PORT = <port utilisé par le backend>
 DB_PORT = <port sur lequel la base de donnée tourne>
 DB_CLIENT = <le client utilisé (mysql2)>
