@@ -1,11 +1,11 @@
 const ProductModel = require("../models/ProductModel.cjs")
-const auth = require("../middlewares/auth.js")
 
 const routeProducts = async ({ app, db }) => {
   const checkProduct = (product) => {
     if (product) {
       return true
     }
+
     return false
   }
 
@@ -13,8 +13,6 @@ const routeProducts = async ({ app, db }) => {
     try {
       const { minPrice, maxPrice, inStock, dateAdded, sortBy, searchName } =
         req.query
-
-      console.log(sortBy, "Heloo from HERE")
 
       let query = ProductModel.query()
 
@@ -25,12 +23,12 @@ const routeProducts = async ({ app, db }) => {
       if (minPrice) {
         query = query.where("price", ">=", parseFloat(minPrice))
       }
+
       if (maxPrice) {
         query = query.where("price", "<=", parseFloat(maxPrice))
       }
 
       if (inStock !== "false") {
-        console.log("I am Here")
         query = query.where("stock", ">", 0)
       }
 
@@ -38,12 +36,9 @@ const routeProducts = async ({ app, db }) => {
         query = query.where("date", "=", dateAdded)
       }
 
-      console.log("ready to enter sortBy")
       if (sortBy === "asc") {
-        console.log("enter sortBy asc")
         query = query.orderBy("price", "asc")
       } else if (sortBy === "desc") {
-        console.log("enter sortBy desc")
         query = query.orderBy("price", "desc")
       }
 
@@ -53,8 +48,8 @@ const routeProducts = async ({ app, db }) => {
 
       res.status(200).json({ result })
     } catch (error) {
-      console.error(error)
       res.status(500).json({ error: "An error occurred" })
+
       return
     }
   })
@@ -68,6 +63,7 @@ const routeProducts = async ({ app, db }) => {
 
     if (!checkProduct(product)) {
       res.status(404).send({ error: "not found" })
+
       return
     }
 
@@ -110,7 +106,6 @@ const routeProducts = async ({ app, db }) => {
           })
         })
       )
-
       res.status(201).send({ result: newProduct })
     } catch (error) {
       res.status(500).send({ error: "Failed to add product" })
@@ -146,12 +141,14 @@ const routeProducts = async ({ app, db }) => {
 
       if (!checkProduct(updateProduct)) {
         res.status(404).send({ error: "Not found" })
+
         return
       }
 
       res.send(updateProduct)
     } catch (error) {
       res.send({ result: error })
+
       return
     }
   })
@@ -162,6 +159,7 @@ const routeProducts = async ({ app, db }) => {
 
     if (!checkProduct(product)) {
       res.status(404).send({ error: "Not found" })
+
       return
     }
 
