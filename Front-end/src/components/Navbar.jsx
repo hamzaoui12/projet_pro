@@ -17,7 +17,7 @@ import axios from "axios"
 import { SidebarContext } from "../contexts/SidebarContext.jsx"
 import { CartContext } from "../contexts/CartContext.jsx"
 
-const SearchNavbar = () => {
+const Navbar = () => {
   const [div, setNav] = useState(false)
   const [setCart] = useState([])
   const [setShowCart] = useState(false)
@@ -187,4 +187,4 @@ const SearchNavbar = () => {
   )
 }
 
-export default SearchNavbar
+export default Navbar
