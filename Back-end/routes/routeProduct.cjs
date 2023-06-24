@@ -1,11 +1,11 @@
 const ProductModel = require("../models/ProductModel.cjs")
-const auth = require("../middlewares/auth.js")
 
 const routeProducts = async ({ app, db }) => {
   const checkProduct = (product) => {
     if (product) {
       return true
     }
+
     return false
   }
 
@@ -23,6 +23,7 @@ const routeProducts = async ({ app, db }) => {
       if (minPrice) {
         query = query.where("price", ">=", parseFloat(minPrice))
       }
+
       if (maxPrice) {
         query = query.where("price", "<=", parseFloat(maxPrice))
       }
@@ -47,8 +48,8 @@ const routeProducts = async ({ app, db }) => {
 
       res.status(200).json({ result })
     } catch (error) {
-      console.error(error)
       res.status(500).json({ error: "An error occurred" })
+
       return
     }
   })
@@ -62,6 +63,7 @@ const routeProducts = async ({ app, db }) => {
 
     if (!checkProduct(product)) {
       res.status(404).send({ error: "not found" })
+
       return
     }
 
@@ -104,7 +106,6 @@ const routeProducts = async ({ app, db }) => {
           })
         })
       )
-
       res.status(201).send({ result: newProduct })
     } catch (error) {
       res.status(500).send({ error: "Failed to add product" })
@@ -140,12 +141,14 @@ const routeProducts = async ({ app, db }) => {
 
       if (!checkProduct(updateProduct)) {
         res.status(404).send({ error: "Not found" })
+
         return
       }
 
       res.send(updateProduct)
     } catch (error) {
       res.send({ result: error })
+
       return
     }
   })
@@ -156,6 +159,7 @@ const routeProducts = async ({ app, db }) => {
 
     if (!checkProduct(product)) {
       res.status(404).send({ error: "Not found" })
+
       return
     }
 

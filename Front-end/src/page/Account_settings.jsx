@@ -13,7 +13,9 @@ const Account = () => {
     const emailExists = checkIfEmailExists(email)
 
     if (userExists || emailExists) {
-      setErrorMessage("An account with this username or email already exists.")
+      setErrorMessage(
+        "An account with this username or email already exists."
+      )
     } else {
       // Handle form submission
     }

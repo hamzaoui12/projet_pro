@@ -27,18 +27,18 @@ exports.up = async (knex) => {
     .createTable("images", (table) => {
       table.increments("id")
       table.text("picture").notNullable()
-      table.integer("product_id").unsigned().notNullable()
+      table.integer("product_id").unsigned()
       table
         .foreign("product_id")
         .references("id")
         .inTable("products")
-        .onDelete("CASCADE")
-      table.integer("category_id").unsigned().notNullable()
+        .onDelete("SET NULL")
+      table.integer("category_id").unsigned()
       table
         .foreign("category_id")
         .references("id")
         .inTable("categories")
-        .onDelete("CASCADE")
+        .onDelete("SET NULL")
     })
     .createTable("materials", (table) => {
       table.increments("id")
