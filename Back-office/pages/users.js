@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   Table,
   TableHead,
@@ -9,11 +9,17 @@ import {
   Text,
   Title,
   Card,
-} from "@tremor/react";
+} from "@tremor/react"
+import Search from "@/lib/components/Search"
 
 function Users() {
   const [users, setusers] = useState([
-    { id: 0, name: "amina", phoneNumber: "0756345870", email: "amina.larbi@gmail.com" },
+    {
+      id: 0,
+      name: "amina",
+      phoneNumber: "0756345870",
+      email: "amina.larbi@gmail.com",
+    },
     {
       id: 0,
       name: "amina 1",
@@ -74,12 +80,12 @@ function Users() {
       phoneNumber: "0607345850",
       email: "amina10@test.com",
     },
-  
-  ]);
+  ])
 
   return (
     <div className="p-4 md:p-10 mx-auto max-w-7xl">
       <Title>Users</Title>
+      <Search />
       <Card className="mt-6">
         <Table>
           <TableHead>
@@ -105,7 +111,7 @@ function Users() {
         </Table>
       </Card>
     </div>
-  );
+  )
 }
 
-export default Users;
+export default Users
