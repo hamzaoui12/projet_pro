@@ -14,9 +14,6 @@ const ProductPage = ({ addToCart }, props) => {
   const [amount, setAmount] = useState(1)
   const [totalPrice, setTotalPrice] = useState(199)
 
-  console.log("id produit")
-  console.log(productId)
-
   const handleAddToCart = (product) => {
     addToCart(product)
   }
@@ -78,7 +75,6 @@ const ProductPage = ({ addToCart }, props) => {
     <div>
       <div className="max-w-[1640px] mx-auto  p-2">
         <div className="max-h-[500px] relative hidden md:flex ">
-          {/* Overlay */}
           <div className="absolute w-full h-full rounded-xl text-gray-200 max-h-[500px] bg-black/40 flex flex-col justify-center">
             <h1 className="px-4   md:text-6xl lg:text-7xl font-bold">
               The <span className="text-orange-200">Best</span>
