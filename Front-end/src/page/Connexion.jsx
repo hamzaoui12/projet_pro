@@ -3,16 +3,16 @@ import { Formik, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
 import { logToken } from "../Storage/logToken"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const Connexion = () => {
   const initialValues = {
     mail: "",
     password: "",
   }
-  const handleSubmit = (values) => {
-    const response = axios
-      .post("http://localhost:3300/sign-in/", {
+  const handleSubmit = async(values) => {
+    await axios
+      .post(`${process.env.REACT_APP_ROUTE}/sign-in/`, {
         mail: values.mail,
         password: values.password,
       })

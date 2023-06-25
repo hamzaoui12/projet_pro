@@ -33,7 +33,7 @@ class UserModel extends BaseModel {
       modelClass: OrderModel,
       relation: BaseModel.HasManyRelation,
       join: {
-        from: "orders.id",
+        from: "users.id",
         to: "orders.user_id"
       }
     },

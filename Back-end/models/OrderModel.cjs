@@ -20,7 +20,7 @@ class OrderModel extends BaseModel {
         modelClass: ProductModel,
         relation: BaseModel.ManyToManyRelation,
         join: {
-          from : "users.id",
+          from : "orders.id",
           through: {
             from: "orderProducts.order_id",
             to: "orderProducts.product_id"
