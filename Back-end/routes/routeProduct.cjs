@@ -50,6 +50,7 @@ const routeProducts = async ({ app, db }) => {
       const result = await query
         .withGraphFetched("materials")
         .withGraphFetched("category")
+        .withGraphFetched("images")
 
       res.status(200).json({ result })
     } catch (error) {
@@ -65,6 +66,7 @@ const routeProducts = async ({ app, db }) => {
       .findById(id)
       .withGraphFetched("materials")
       .withGraphFetched("category")
+      .withGraphFetched("images")
 
     if (!checkProduct(product)) {
       res.status(404).send({ error: "not found" })

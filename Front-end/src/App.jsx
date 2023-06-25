@@ -109,7 +109,7 @@ const App = () => {
           }
         />
         <Route
-          path="/product"
+          path="/product/:id"
           element={
             <Layout>
               <Product />
