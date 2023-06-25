@@ -12,7 +12,6 @@
     "ansi-styles": "^4.3.0",
     "argparse": "^2.0.1",
     "balanced-match": "^1.0.2",
-    "body-parser": "^1.20.2",
     "brace-expansion": "^1.1.11",
     "callsites": "^3.1.0",
     "chalk": "^4.1.2",
@@ -23,7 +22,7 @@
     "cross-spawn": "^7.0.3",
     "deep-is": "^0.1.4",
     "doctrine": "^3.0.0",
-    "dotenv": "^16.1.4",
+    "dotenv": "^16.0.3",
     "escape-string-regexp": "^4.0.0",
     "eslint-scope": "^7.1.1",
     "eslint-utils": "^3.0.0",
@@ -92,7 +91,6 @@
     "shebang-regex": "^3.0.0",
     "strip-ansi": "^6.0.1",
     "strip-json-comments": "^3.1.1",
-    "stripe": "^12.8.0",
     "supports-color": "^7.2.0",
     "text-table": "^0.2.0",
     "type-check": "^0.4.0",
@@ -110,8 +108,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.36.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-react": "^7.32.2"
+    "eslint": "^8.36.0"
   }
 }

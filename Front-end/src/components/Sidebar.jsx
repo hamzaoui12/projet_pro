@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Link } from "react-router-dom"
 const Sidebar = () => {
   const { isOpen, handleClose } = useContext(SidebarContext)
   const { cart, clearCart, total } = useContext(CartContext)
-
   return (
     <div
       className={`${

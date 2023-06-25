@@ -10,7 +10,7 @@ Dans le terminal, utiliser la commandes :
 Créer un fichier .env
 
 Dans ce fichier .env, créer les variables suivantes :
-STRIPE_SECRET_TEST=<clée secret>
+
 PORT = <port utilisé par le backend>
 DB_PORT = <port sur lequel la base de donnée tourne>
 DB_CLIENT = <le client utilisé (mysql2)>
@@ -23,17 +23,17 @@ PSW_ITERATIONS = <nombre iterations du sel (Integer)>
 PSW_KEY = <clef des mots de passe (Integer)>
 PSW_DIGEST = <methode de hashing utilisée>
 JWT_SECRET = <clef secrète du Json web token (String)>
-JWT_EXPIRE = <temps de validité du token (1m, 1d, 1w...)>
+JWT_EXPIRE = <temps de validité du token (1 min, 1 day, 1 week...)>
 
 ## Lancement des migrations
 
 Dans le terminal utiliser la commande "npx --knex migrate:latest"
 Si un message d'erreur apparait, essayer la commande "npx knex --esm migrate:latest"
 
-## Lancement du seed
+## Lancement du SEED
 
-Dans le terminal utiliser la commande "npx --knex seed:run"
-Si un message d'erreur apparait, essayer la commande "npx knex --esm seed:run"
+Dans le terminal, utiliser la commande : "node ./db/seed.js"
+puis ctrl+C après quelques secondes
 
 ## Lancement du backend
 

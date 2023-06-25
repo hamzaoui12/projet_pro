@@ -16,7 +16,6 @@ const PrixTotal = ({ produits, panier }) => {
 
   const calculerTotalPanier = () => {
     let somme = 0
-
     panier.forEach((item) => {
       somme += item.quantite * item.prix
     })

@@ -1,33 +1,34 @@
-import { useContext, useEffect, useState } from "react"
+import React, { useContext, useState } from "react"
+import { BrowserRouter as Router, Link } from "react-router-dom"
 import {
-  AiOutlineClose,
   AiOutlineMenu,
   AiOutlineSearch,
+  AiOutlineClose,
   AiOutlineShoppingCart,
 } from "react-icons/ai"
+import { TbHome } from "react-icons/tb"
 import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa"
 import { FaWallet } from "react-icons/fa"
 import { FiLogOut } from "react-icons/fi"
 import { MdCategory, MdHelp } from "react-icons/md"
-import { TbHome } from "react-icons/tb"
-import { VscAccount, VscCircleSmall } from "react-icons/vsc"
-import { Link } from "react-router-dom"
-import { useSearch } from "../contexts/Search"
-import axios from "axios"
+import { VscCircleSmall, VscAccount } from "react-icons/vsc"
 import { SidebarContext } from "../contexts/SidebarContext.jsx"
 import { CartContext } from "../contexts/CartContext.jsx"
+import { orderStorage } from "../Storage/orerStorage.js"
 
 const Navbar = () => {
   const [div, setNav] = useState(false)
-  const [setCart] = useState([])
-  const [setShowCart] = useState(false)
+  const [cart, setCart] = useState([])
+  const [item, setShowCart] = useState(false)
   const [showCategoryList, setShowCategoryList] = useState(false)
-  const { setSearch } = useSearch()
-  const [searchProduct] = useState("")
-  const [categories, setCategories] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const { isOpen, setIsOpen } = useContext(SidebarContext)
   const { itemAmount } = useContext(CartContext)
+
+  // const handleAddToCart = (product) => {
+  //   setCart([...cart, product])
+  //   setShowCart(true)
+  // }
 
   const handleLogout = () => {
     setIsLoggedIn(false)
@@ -36,23 +37,9 @@ const Navbar = () => {
     setShowCart(false)
   }
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/categories`)
-      .then((res) => res.data)
-      .then((data) => setCategories(data.result))
-  }, [])
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setSearch(searchProduct)
-    }, 1300)
-
-    return () => clearTimeout(timer)
-  }, [searchProduct, setSearch])
-
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between shadow-lg items-center p-4 sticky top-0 z-20 bg-white">
+      {/* Left side */}
       <div className="flex items-center">
         <div onClick={() => setNav(!div)} className="cursor-pointer">
           <AiOutlineMenu size={30} />
@@ -86,13 +73,14 @@ const Navbar = () => {
           </div>
         ) : null}
       </div>
-
+      {/* Mobile Menu */}
+      {/* Overlay */}
       {div ? (
         <div className="bg-black/80 fixed w-full h-screen z-10 top-0 left-0"></div>
       ) : (
         ""
       )}
-
+      {/* Side drawer menu */}
       <div
         className={
           div
@@ -109,7 +97,7 @@ const Navbar = () => {
           <span className="uppercase ">Λｉｒｎｅｉｓ</span>
         </h2>
         <div>
-          <ul className="flex font-bold flex-col p-4 text-gray-800">
+          <ul className="flex font-bold flex-col p-4 text-gray-800 ">
             <Link to="/" onClick={() => setNav(!div)} className="mr-4">
               <li className="text-xl py-4 flex cursor-pointer hover:scale-105 duration-300 ">
                 <TbHome size={25} className="mr-4 " />
@@ -119,26 +107,39 @@ const Navbar = () => {
             <li
               onClick={() => setShowCategoryList(!showCategoryList)}
               size={25}
-              className="text-xl py-2 flex cursor-pointer"
+              className="text-xl py-2 flex cursor-pointer hover:scale-105 duration-300 "
             >
-              <MdCategory className="mr-4" />{" "}
+              <MdCategory className="mr-4 " />{" "}
               <p className=" border-b font-semibold uppercase ">CATEGORY</p>
             </li>
             {showCategoryList && (
               <li>
-                <ul className=" text-gray-800 text-xl py-4 px-4">
-                  {!!categories &&
-                    categories.map((category, index) => (
-                      <Link
-                        to={`/category/${category.id}`}
-                        onClick={() => setNav(!div)}
-                        key={index + "uuire"}
-                      >
-                        <li className="cursor-pointer grap-2 flex hover:scale-105 duration-300 border-b">
-                          <VscCircleSmall size={30} /> {category.name}
-                        </li>
-                      </Link>
-                    ))}
+                {/* Liste de clics */}
+                <ul className=" text-gray-800 text-xl py-4 px-12">
+                  <Link to="/category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex hover:scale-105 duration-300">
+                      <VscCircleSmall size={30} />{" "}
+                      <p className="border-b">KITCHENS</p>
+                    </li>{" "}
+                  </Link>{" "}
+                  <Link to="/Category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex hover:scale-105 duration-300">
+                      <VscCircleSmall size={30} />
+                      <p className="border-b">BEDROOMS</p>
+                    </li>
+                  </Link>{" "}
+                  <Link to="/category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex hover:scale-105 duration-300">
+                      <VscCircleSmall size={30} />
+                      <p className="border-b">BATHROOM</p>
+                    </li>{" "}
+                  </Link>{" "}
+                  <Link to="/category" onClick={() => setNav(!div)}>
+                    <li className=" cursor-pointer grap-2 flex hover:scale-105 duration-300">
+                      <VscCircleSmall size={30} />
+                      <p className="border-b">LIVINGROOM</p>
+                    </li>{" "}
+                  </Link>{" "}
                 </ul>
               </li>
             )}
@@ -156,8 +157,8 @@ const Navbar = () => {
               <li className="text-xl py-4 flex hover:scale-105 duration-300 ">
                 <MdHelp size={25} className="mr-4 " />
                 <p className=" font-semibold uppercase border-b">FAQ</p>
-              </li>
-            </Link>
+              </li>{" "}
+            </Link>{" "}
           </ul>
           <div className="absolute bottom-3 left-[20%]">
             <ul className="flex space-x-8 py-6 relative left-4">

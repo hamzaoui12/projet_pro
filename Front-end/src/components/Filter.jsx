@@ -19,10 +19,12 @@ const Filter = ({
     axios
       .get("http://localhost:3001/materials")
       .then((response) => setData(response.data.result))
+      .catch((error) => console.log(error))
 
     axios
       .get("http://localhost:3001/categories")
       .then((response) => setDataCategories(response.data.result))
+      .catch((error) => console.log(error))
   }, [])
 
   return (
@@ -33,20 +35,20 @@ const Filter = ({
         </div>
         <div className="bg-white rounded-lg z-20 p-8">
           <h2 className="text-2xl font-bold mb-4">Filter</h2>
-          <div className=" border border-gray-200 rounded-lg p-4 m-4">
-            <div className="flex justify-between items-center">
-              <h3 className="text-gray-700 font-semibold">price</h3>
-              <span className="text-gray-500 text-sm">in €</span>
+          <div class=" border border-gray-200 rounded-lg p-4 m-4">
+            <div class="flex justify-between items-center">
+              <h3 class="text-gray-700 font-semibold">price</h3>
+              <span class="text-gray-500 text-sm">in €</span>
             </div>
-            <div className="mt-2">
+            <div class="mt-2">
               <label
-                className="block text-gray-700 font-semibold mb-2"
-                htmlFor="price-min"
+                class="block text-gray-700 font-semibold mb-2"
+                for="price-min"
               >
                 Minimum price:
               </label>
               <input
-                className="border border-gray-400 rounded-md py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+                class="border border-gray-400 rounded-md py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                 type="number"
                 id="price-min"
                 onChange={(e) =>
@@ -58,15 +60,15 @@ const Filter = ({
               ></input>
             </div>
 
-            <div className="mt-4">
+            <div class="mt-4">
               <label
-                className="block text-gray-700 font-semibold mb-2"
-                htmlFor="price-max"
+                class="block text-gray-700 font-semibold mb-2"
+                for="price-max"
               >
                 Maximum price:
               </label>
               <input
-                className="border border-gray-400 rounded-md py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
+                class="border border-gray-400 rounded-md py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                 onChange={(e) =>
                   setFilters((pre) => ({ ...pre, maxPrice: e.target.value }))
                 }
@@ -77,11 +79,11 @@ const Filter = ({
               ></input>
             </div>
           </div>
-          <div className=" border border-gray-200 rounded-lg p-4 m-4">
-            <div className="flex justify-between items-center">
-              <h3 className="text-gray-700 font-semibold">Sort</h3>
+          <div class=" border border-gray-200 rounded-lg p-4 m-4">
+            <div class="flex justify-between items-center">
+              <h3 class="text-gray-700 font-semibold">Sort</h3>
             </div>
-            <div className="">
+            <div class="">
               <div className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
@@ -117,7 +119,7 @@ const Filter = ({
               </div>
             </div>
           </div>
-          <div className="m-4 flex items-center gap-2 border border-gray-200 rounded-lg p-4">
+          <div class="m-4 flex items-center gap-2 border border-gray-200 rounded-lg p-4">
             <input
               checked={filter.isStock}
               type="checkbox"
@@ -128,11 +130,11 @@ const Filter = ({
               name="price-max"
               placeholder="Enter a maximum price"
             ></input>
-            <label className=" text-gray-700 font-semibold">
+            <label class=" text-gray-700 font-semibold">
               only avaiable in stock
             </label>
           </div>
-          <div className=" border border-gray-200 rounded-lg p-4 m-4">
+          <div class=" border border-gray-200 rounded-lg p-4 m-4">
             <h3 className=" capitalize mb-1">materials</h3>
             {data &&
               data.map((e, i) => (
@@ -164,7 +166,7 @@ const Filter = ({
               ))}
           </div>
 
-          <div className=" border border-gray-200 rounded-lg p-4 m-4">
+          <div class=" border border-gray-200 rounded-lg p-4 m-4">
             <h3 className=" capitalize mb-1">categories</h3>
             {dataCategories &&
               dataCategories.map((e, i) => (

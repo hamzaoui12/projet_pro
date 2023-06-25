@@ -1,9 +1,7 @@
-import React, { useRef } from "react"
-import { Formik, Field, ErrorMessage } from "formik"
+import React from "react"
+import { Formik, Form, Field, ErrorMessage } from "formik"
 import { BrowserRouter as Router, Link } from "react-router-dom"
-
 const ValidateForm = () => {
-  const paymentPageRef = useRef()
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -55,9 +53,7 @@ const ValidateForm = () => {
   }
 
   const handleSubmit = (values) => {
-    localStorage.removeItem("userData")
-    localStorage.setItem("userData", JSON.stringify(values))
-    paymentPageRef.current.click()
+    console.log(values)
   }
 
   return (
@@ -83,8 +79,8 @@ const ValidateForm = () => {
             validate={validate}
             onSubmit={handleSubmit}
           >
-            {({ isSubmitting, handleSubmit }) => (
-              <form className="space-y-4" onSubmit={handleSubmit}>
+            {({ isSubmitting }) => (
+              <Form className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label
@@ -255,23 +251,18 @@ const ValidateForm = () => {
                   </div>
                 </div>
 
-                {/* <Link to="/checkout"> */}
-                {/* {" "} */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-2 px-4 btn-black-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
-                  style={{ backgroundColor: "black", color: "white" }}
-                >
-                  Payment
-                </button>
-                {/* </Link> */}
-                <Link
-                  to="/payment"
-                  ref={paymentPageRef}
-                  style={{ opacity: "0" }}
-                ></Link>
-              </form>
+                <Link to="/checkout">
+                  {" "}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-2 px-4 btn-black-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
+                    style={{ backgroundColor: "black", color: "white" }}
+                  >
+                    Payment
+                  </button>
+                </Link>
+              </Form>
             )}
           </Formik>
         </div>

@@ -1,13 +1,13 @@
 const BaseModel = require("./BaseModel.cjs")
 const CategoryModel = require("./CategoryModel.cjs")
 const MaterialModel = require("./MaterialModel.cjs")
-const ImageModel = require("./ImageModel.cjs")
 const OrderModel = require("./OrderModel.cjs")
 
 class ProductModel extends BaseModel {
   static tableName = "products"
 
   static relationMappings() {
+    const ImageModel = require("./ImageModel.cjs")
     return {
       category: {
       relation: BaseModel.BelongsToOneRelation,

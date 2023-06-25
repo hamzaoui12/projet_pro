@@ -1,49 +1,23 @@
 import React from "react"
 import CarouselComponent from "../components/Carousel"
 import CategoryComposant from "../components/CategoryComposant"
-import { useEffect, useState } from "react"
-import axios from "axios"
-import ProductComponents from "../components/ProductComponents"
 
 const Home = () => {
-  const [homeImagesCategories, setHomeImagesCategories] = useState([])
-
-  useEffect(() => {
-    const fetchHomeCategories = async () => {
-      const allImages = []
-
-      await axios
-        .get(`${process.env.REACT_APP_ROUTE}/categories`)
-        .then((categories) => {
-          const homeCategories = categories.data.result.filter(
-            (category) => category.main_page !== 0
-          )
-          homeCategories.forEach((category) =>
-            allImages.push(category.images[0].picture)
-          )
-        })
-
-      return setHomeImagesCategories(allImages)
-    }
-    fetchHomeCategories()
-
-    return
-  }, [])
-
   return (
     <div>
       <div className="h-screen bg-black flex flex-col justify-center items-center relative">
         <div className="h-full w-full filter brightness-50">
-          {homeImagesCategories[0] !== undefined ? (
-            <CarouselComponent
-              images={homeImagesCategories}
-              slideDuration={5000}
-            />
-          ) : (
-            <div />
-          )}
+          <CarouselComponent
+            images={[
+              "https://images.pexels.com/photos/6585598/pexels-photo-6585598.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              "https://images.pexels.com/photos/276554/pexels-photo-276554.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              "https://images.pexels.com/photos/7031883/pexels-photo-7031883.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              "https://images.pexels.com/photos/8135105/pexels-photo-8135105.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+            ]}
+            slideDuration={2000}
+          />
         </div>
-        <div className="absolute left-0 top-1/2 transform -translate-y(-1/2 text-left pl-8">
+        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 text-left pl-8">
           <h1 className="text-white text-6xl font-bold">
             THE <span className="text-[#FED7AA]">HIGHLANDERS</span> OF THE{" "}
             <br />
@@ -94,10 +68,6 @@ const Home = () => {
       <div>
         <h1 className="text-center text-4xl font-bold">OUR PRODUCTS</h1>
         <CategoryComposant />
-      </div>
-      <div>
-        <h1 className="text-center text-4xl font-bold">OUR PRODUCTS</h1>
-        <ProductComponents />
       </div>
     </div>
   )

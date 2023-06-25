@@ -1,12 +1,21 @@
 import { BsTrash3 } from "react-icons/bs"
 import React, { useContext } from "react"
 import { BrowserRouter as Router, Link } from "react-router-dom"
-import { IoMdAdd, IoMdRemove } from "react-icons/io"
+import { IoMdClose, IoMdAdd, IoMdRemove } from "react-icons/io"
 import { CartContext } from "../contexts/CartContext"
+import { SidebarContext } from "../contexts/SidebarContext"
 
 const Panier = (item) => {
-  const { removeFromCart, increaseAmount, decreaseAmount, cart, total } =
-    useContext(CartContext)
+  const {
+    removeFromCart,
+    increaseAmount,
+    decreaseAmount,
+    cart,
+    clearCart,
+    total,
+  } = useContext(CartContext)
+
+  const { isOpen, handleClose } = useContext(SidebarContext)
 
   return (
     <div>
