@@ -1,67 +1,64 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import axios from "axios"
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const Orders = () => {
-  const navigate = useNavigate()
 
-  const [loading, setLoading] = useState(true)
-  const [orders, setOrders] = useState([])
-  const [sortedData, setSortedData] = useState({})
+  const navigate = useNavigate();
 
-  const token = localStorage.getItem("token")
-  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+  const [loading, setLoading] = useState(true);
+  const [orders, setOrders] = useState([]);
+  const [sortedData, setSortedData] = useState({});
 
   const handleOrderClick = (id) => {
-    navigate("/order/" + id)
+    navigate('/order/' + id)
   }
 
   useEffect(() => {
-    if (!token || !loggedUser) {
-      window.location.href = "/Singin"
-    }
+    const token = localStorage.getItem('token');
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
+    if (!token || !loggedUser) {
+      window.location.href = '/Singin';
+    }
     const fetchOrders = async () => {
-      const { data } = await axios.get("http://localhost:3002/orders", {
+      const { data } = await axios.get('http://localhost:3002/orders', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       setOrders(data.result.filter(order => order.user_id === loggedUser.id))
     }
-
     try {
-      setLoading(true)
-      fetchOrders()
+      setLoading(true);
+      fetchOrders();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }, [loggedUser,token])
 
   useEffect(() => {
     if (orders !== []) {
-      const dividedDataObj = {}
+      const dividedDataObj = {};
       orders.forEach(order => {
-        const year = new Date(order.date).getFullYear().toString()
-
+        const year = new Date(order.date).getFullYear().toString();
         if (!Object.prototype.hasOwnProperty.call(dividedDataObj, year)) {
-          dividedDataObj[year] = []
+          dividedDataObj[year] = [];
         }
+        dividedDataObj[year].push(order);
+      });
+      const sortedKeys = Object.keys(dividedDataObj).reverse();
 
-        dividedDataObj[year].push(order)
-      })
-      const sortedKeys = Object.keys(dividedDataObj).reverse()
-
-      const reversedDataObj = {}
+      const reversedDataObj = {};
       sortedKeys.forEach(key => {
-        reversedDataObj[key] = dividedDataObj[key].reverse()
-      })
+        reversedDataObj[key] = dividedDataObj[key].reverse();
+      });
 
-      setSortedData(reversedDataObj)
+      setSortedData(reversedDataObj);
     }
-  }, [orders])
+  }, [orders]);
 
 
 
@@ -93,11 +90,9 @@ const Orders = () => {
                               <hr className="border-solid border-black border-2 w-100" />
                               {
                                 sortedData[year].map((order, index) => {
-                                  const date = new Date(order.date)
-                                  const formattedDate = date.toISOString().split("T")[0].replace(/-/g, "/")
-
-                                  
-return (
+                                  const date = new Date(order.date);
+                                  const formattedDate = date.toISOString().split("T")[0].replace(/-/g, "/");
+                                  return (
                                     <div key={order.id} className="grid grid-cols-2 gap-4 mt-5 ml-2 py-4 cursor-pointer hover:bg-gray-200" onClick={() => handleOrderClick(order.id)}>
                                       <div className="col-span-1">
                                         <div className="grid grid-rows-2 gap-4">
@@ -112,7 +107,6 @@ return (
                                               order.arrived === 1 ? "ARRIVÉ" :
                                                 order.canceled === 1 ? "ANNULÉ" :
                                                   order.finished === 1 ? "TERMINÉ" : "EN COURS"
-
                                             }
                                           </div>
                                           <div className="row-span-1 font-bold">{order.total} €</div>
