@@ -14,6 +14,7 @@ import ValidateForm from "./page/validation_form"
 import PaymentForm from "./page/données_de_paiement"
 import Thankyou from "./page/thankyou"
 import Sidebar from "./components/Sidebar"
+import Orders from "./page/Orders"
 
 const App = () => {
   return (
@@ -129,6 +130,14 @@ const App = () => {
           element={
             <Layout>
               <PasswordResetPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <Layout>
+              <Orders />
             </Layout>
           }
         />
