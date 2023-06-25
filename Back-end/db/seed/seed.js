@@ -1,10 +1,9 @@
-const CategoryModel = require("../models/CategoryModel.cjs")
-
+const CategoryModel = require("../../models/CategoryModel.cjs")
 const knex = require("knex")
-const BaseModel = require("../models/BaseModel.cjs")
-const config = require("../config.js")
-const MaterialModel = require("../models/MaterialModel.cjs")
-const ProductModel = require("../models/ProductModel.cjs")
+const BaseModel = require("../../models/BaseModel.cjs")
+const config = require("../../config.js")
+const MaterialModel = require("../../models/MaterialModel.cjs")
+const ProductModel = require("../../models/ProductModel.cjs")
 
 const seed = async () => {
   const db = knex(config.db)
@@ -713,4 +712,6 @@ const seed = async () => {
   }
 }
 
-seed()
+module.exports ={
+  seed
+} 

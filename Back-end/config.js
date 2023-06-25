@@ -16,7 +16,7 @@ const config = {
       stub: "./db/migration.stub",
     },
     seeds: {
-        directory: "./db/seeds/seed/",
+        directory: "./db/seed",
     }
   },
   security: {
