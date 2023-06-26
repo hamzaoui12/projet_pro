@@ -3,9 +3,12 @@ import { BsPlus } from "react-icons/bs"
 import { BrowserRouter as Router, Link, useParams } from "react-router-dom"
 import axios from "axios"
 import { CartContext } from "../contexts/CartContext.jsx"
+import Paginator from "../components/Paginator.jsx"
+import paginateProducts from "../components/utils/pagination.jsx"
 
 const Category = () => {
-  const [data, setData] = useState(null)
+  const [paginatedData, setPaginatedData] = useState(null)
+  const [page, setPage] = useState(1)
   const { id } = useParams()
   const { addToCart } = useContext(CartContext)
   const [categories, setCategories] = useState(null)
@@ -14,8 +17,12 @@ const Category = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:3001/categories/${id}`)
-      .then((res) => setData(res.data.result))
-  }, [id])
+      .then((res) => {
+        const data = paginateProducts(res.data.result, page)
+        setPaginatedData(data)
+      })
+      .catch((err) => console.log(err.message))
+  }, [page, id])
   useEffect(() => {
     axios
       .get(`http://localhost:3001/categories/`)
@@ -24,15 +31,15 @@ const Category = () => {
   }, [])
 
   useEffect(() => {
-    if (Number(id) === 1) {
+    if (Number(id) === 11) {
       setNomCategorie("Chambre adultes")
-    } else if (Number(id) === 3) {
+    } else if (Number(id) === 13) {
       setNomCategorie("Cuisine")
-    } else if (Number(id) === 2) {
+    } else if (Number(id) === 12) {
       setNomCategorie("Chambre Enfant")
-    } else if (Number(id) === 4) {
+    } else if (Number(id) === 14) {
       setNomCategorie("Salle de bain")
-    } else if (Number(id) === 5) {
+    } else if (Number(id) === 15) {
       setNomCategorie("Salon")
     }
   }, [id])
@@ -66,11 +73,10 @@ const Category = () => {
               </h1>
             </div>
           ))}
-
-      <div className="max-w-[1640px] m-auto px-4 py-96">
+      <div className="max-w-[1640px] m-auto px-4 pt-96 pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-24 py-32  cursor-pointer">
-          {!!data &&
-            data.map((item, index) => (
+          {!!paginatedData &&
+            paginatedData.paginatedProducts.map((item, index) => (
               <div key={index} className="relative group p-6">
                 <Link to="/product">
                   <img
@@ -95,6 +101,11 @@ const Category = () => {
               </div>
             ))}
         </div>
+      </div>
+      <div className="w-full flex items-center justify-center pb-6">
+        {paginatedData && paginatedData.totalPages > 1 && (
+          <Paginator pagination={paginatedData} setPage={setPage} />
+        )}
       </div>
     </div>
   )

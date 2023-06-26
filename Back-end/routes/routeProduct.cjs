@@ -11,8 +11,16 @@ const routeProducts = async ({ app, db }) => {
 
   app.get("/products", async (req, res) => {
     try {
-      const { minPrice, maxPrice, inStock, dateAdded, sortBy, searchName } =
-        req.query
+      const {
+        minPrice,
+        maxPrice,
+        inStock,
+        material,
+        categories,
+        sortBy,
+        searchName,
+        page,
+      } = req.query
 
       let query = ProductModel.query()
 
@@ -32,24 +40,19 @@ const routeProducts = async ({ app, db }) => {
         query = query.where("stock", ">", 0)
       }
 
-      if (dateAdded) {
-        query = query.where("date", "=", dateAdded)
-      }
-
       if (sortBy === "asc") {
         query = query.orderBy("price", "asc")
       } else if (sortBy === "desc") {
         query = query.orderBy("price", "desc")
       }
 
-      const result = await query
-        .withGraphFetched("materials")
-        .withGraphFetched("category")
+      let result = await query.withGraphFetched("[materials, category]")
 
-      res.status(200).json({ result })
+      return res.status(200).json(result)
     } catch (error) {
-      res.status(500).json({ error: "An error occurred" })
-
+      res
+        .status(500)
+        .json({ error: "An error occurred", message: error.message })
       return
     }
   })
