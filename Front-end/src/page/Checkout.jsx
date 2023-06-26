@@ -1,8 +1,8 @@
 import React, { useState, useContext, useRef } from "react"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js"
-import axios from "axios"
 import { CartContext } from "../contexts/CartContext"
+import postRequest from "../components/utils/postRequest"
 
 function PaymentForm() {
   const userData = JSON.parse(localStorage.getItem("userData")) || []
@@ -31,7 +31,7 @@ function PaymentForm() {
 
     if (!error) {
       const { id } = paymentMethod
-      await axios.post("http://localhost:3001/stripe/charge", {
+      postRequest("stripe/charge", {
         amount: total,
         id: id,
         metaData: userData,

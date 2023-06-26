@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom"
 import { IoMdAdd, IoMdRemove } from "react-icons/io"
 import { CartContext } from "../contexts/CartContext"
 import { Formik } from "formik"
-import { logToken } from "../Storage/logToken"
-import axios from "axios"
+import inActualOrder from "../components/utils/inActualOrder"
+import addNewOrder from "../components/utils/addNewOrder"
 
 
 const Panier = (item) => {
@@ -24,26 +24,8 @@ const Panier = (item) => {
   }
   
   const handleSubmit = async (values) => {
-    if (logToken.isLogIn) {
-      const userData = JSON.parse(logToken.loggedUser)
-      const token = logToken.token
-      await axios.get(`${process.env.REACT_APP_ROUTE}/users/${userData.id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        }
-      }).then((response) => {
-        if (!response.data.result.orders || response.data.result.orders.filter(order => order.finished === 0) < 1) {
-          axios.post(`${process.env.REACT_APP_ROUTE}/orders`, {
-          "user_id": parseInt(userData.id),
-        }, {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          }
-        })
-        }
-      })
+    if (localStorage.getItem("token")) {
+      inActualOrder(addNewOrder)
       navigate("/validationfrom")
     }
   }

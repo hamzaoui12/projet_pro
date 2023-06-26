@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react"
 import { BsPlus } from "react-icons/bs"
-import { BrowserRouter as Router, Link, useParams } from "react-router-dom"
-import axios from "axios"
+import { Link, useParams } from "react-router-dom"
 import { CartContext } from "../contexts/CartContext.jsx"
+import getOneRequest from "../components/utils/getOneRequest.jsx"
+import getAllRequest from "../components/utils/getAllRequest.jsx"
 
 const Category = () => {
   const [data, setData] = useState(null)
@@ -12,13 +13,11 @@ const Category = () => {
   const [NomCategories, setNomCategorie] = useState("")
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/categories/${id}`)
+    getOneRequest("categories", id)
       .then((res) => setData(res.data.result))
   }, [id])
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/categories/`)
+    getAllRequest("categories")
       .then((res) => res.data)
       .then((data) => setCategories(data.result))
   }, [])

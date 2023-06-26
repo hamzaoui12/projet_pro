@@ -13,9 +13,9 @@ import { TbHome } from "react-icons/tb"
 import { VscAccount, VscCircleSmall } from "react-icons/vsc"
 import { Link } from "react-router-dom"
 import { useSearch } from "../contexts/Search"
-import axios from "axios"
 import { SidebarContext } from "../contexts/SidebarContext.jsx"
 import { CartContext } from "../contexts/CartContext.jsx"
+import getAllRequest from "./utils/getAllRequest"
 
 const SearchNavbar = () => {
   const [div, setNav] = useState(false)
@@ -49,8 +49,7 @@ const SearchNavbar = () => {
   }, [searchProduct, setSearch])
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/categories`)
+    getAllRequest("categories")
       .then((res) => res.data)
       .then((data) => setCategories(data.result))
   }, [])

@@ -2,7 +2,7 @@ import React from "react"
 import CarouselComponent from "../components/Carousel"
 import CategoryComposant from "../components/CategoryComposant"
 import { useEffect, useState } from "react"
-import axios from "axios"
+import getAllRequest from "../components/utils/getAllRequest"
 
 const Home = () => {
   const [homeImagesCategories, setHomeImagesCategories] = useState([])
@@ -11,7 +11,7 @@ const Home = () => {
     const fetchHomeCategories = async () => {
       const allImages = []
 
-      await axios.get(`${process.env.REACT_APP_ROUTE}/categories`).then((categories) => {
+      getAllRequest("categories").then((categories) => {
         const homeCategories = categories.data.result.filter((category) => category.main_page !== 0)
         homeCategories.forEach((category) => allImages.push(category.images[0].picture))
       })
@@ -47,7 +47,7 @@ const Home = () => {
           </p>
           <div className="mt-6">
             <a
-              href="./page/product"
+              href="/product"
               className="justify-center inline-block px-4 py-4 text-white text-lg font-semibold bg-white bg-opacity-25 border-white border-2 hover:bg-grid-200 rounded-lg mt-4"
             >
               Take advantage of all our current offers, here!

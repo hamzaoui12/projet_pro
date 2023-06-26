@@ -1,14 +1,13 @@
-import axios from "axios"
 import React, { useEffect, useState } from "react"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
+import getAllRequest from "./utils/getAllRequest"
 
 const CategoryComposant = () => {
   const [categories, setCategories] = useState(null)
   const [div, setNav] = useState(false)
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/categories`)
+    getAllRequest("categories")
       .then((res) => res.data)
       .then((data) => setCategories(data.result))
   }, [])
