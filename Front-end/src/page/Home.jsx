@@ -16,6 +16,7 @@ const Home = () => {
         homeCategories.forEach((category) => allImages.push(category.images[0].picture))
       })
 
+
       return setHomeImagesCategories(allImages)
     }
     fetchHomeCategories()
@@ -28,11 +29,13 @@ const Home = () => {
       <div className="h-screen bg-black flex flex-col justify-center items-center relative">
         <div className="h-full w-full filter brightness-50">
           {homeImagesCategories[0] !== undefined ? (
-          <CarouselComponent
-            images={homeImagesCategories}
-            slideDuration={5000}
-          />
-          ): (<div />)}
+            <CarouselComponent
+              images={homeImagesCategories}
+              slideDuration={5000}
+            />
+          ) : (
+            <div />
+          )}
         </div>
         <div className="absolute left-0 top-1/2 transform -translate-y(-1/2 text-left pl-8">
           <h1 className="text-white text-6xl font-bold">
@@ -85,6 +88,10 @@ const Home = () => {
       <div>
         <h1 className="text-center text-4xl font-bold">OUR PRODUCTS</h1>
         <CategoryComposant />
+      </div>
+      <div>
+        <h1 className="text-center text-4xl font-bold">OUR PRODUCTS</h1>
+        <ProductComponents />
       </div>
     </div>
   )
