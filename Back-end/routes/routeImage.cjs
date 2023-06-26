@@ -6,8 +6,8 @@ const routeImages = async ({ app, db }) => {
     if (image) {
       return true
     }
-    
-return false
+
+    return false
   }
 
   app.get("/images", async (req, res) => {
@@ -23,14 +23,12 @@ return false
     if (!checkImage(image)) {
       res.status(404).send({ error: "not found" })
 
-      
-return
+      return
     }
 
     res.send({ result: image })
   })
 
-    // Configurez Multer pour spécifier où enregistrer les fichiers téléchargés
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, "uploads/")
@@ -65,26 +63,23 @@ return
     const { product_id, category_id, picture } = req.body
 
     try {
-      const updateImage = await ImageModel.query()
-        .updateAndFetchById(id, {
-          product_id,
-          category_id,
-          picture,
-        })
+      const updateImage = await ImageModel.query().updateAndFetchById(id, {
+        product_id,
+        category_id,
+        picture,
+      })
 
       if (!checkImage(updateImage)) {
         res.status(404).send({ error: "not found" })
 
-        
-return
+        return
       }
 
       res.send(updateImage)
     } catch (error) {
       res.send({ result: error })
 
-      
-return
+      return
     }
   })
 
@@ -95,8 +90,7 @@ return
     if (!checkImage(image)) {
       res.status(404).send({ error: "not found" })
 
-      
-return
+      return
     }
 
     res.send({ result: image })

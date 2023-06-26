@@ -1,16 +1,14 @@
-import React, { useState, useContext } from "react"
+import React, { useState } from "react"
 import { data } from "../data/data.jsx"
 import { BsPlus } from "react-icons/bs"
 import { BrowserRouter as Router, Link } from "react-router-dom"
-import { CartContext } from "../contexts/CartContext.jsx"
 
-const ProductPage = () => {
+const ProductPage = ({ addToCart }) => {
   const [images] = useState({})
   const [activeImg, setActiveImage] = useState(images.img1)
   const [Kitchen] = useState(data)
   const [amount, setAmount] = useState(1)
   const [totalPrice, setTotalPrice] = useState(199)
-  const { addToCart } = useContext(CartContext)
 
   const handleAddToCart = (product) => {
     addToCart(product)
@@ -32,7 +30,6 @@ const ProductPage = () => {
       {" "}
       <div className="max-w-[1640px] mx-auto  p-2">
         <div className="max-h-[500px] relative hidden md:flex ">
-          {/* Overlay */}
           <div className="absolute w-full h-full rounded-xl text-gray-200 max-h-[500px] bg-black/40 flex flex-col justify-center">
             <h1 className="px-4   md:text-6xl lg:text-7xl font-bold">
               The <span className="text-orange-200">Best</span>
@@ -82,7 +79,7 @@ const ProductPage = () => {
               />
             </div>
           </div>
-          {/* ABOUT */}
+
           <div className="flex flex-col gap-4 lg:w-2/4">
             <div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
@@ -133,7 +130,6 @@ const ProductPage = () => {
             </div>
           </div>
         </div>{" "}
-        {/* Similar Products */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold p-6 ">
           Similar Products
         </h2>
@@ -151,7 +147,7 @@ const ProductPage = () => {
                 />
               </Link>
               <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
-                <button onClick={() => addToCart(item)}>
+                <button onClick={() => handleAddToCart(item)}>
                   <div className="flex justify-center rounded-full items-center hover:bg-gray-500 text-white w-12 h-12 bg-black">
                     <BsPlus className="text-3xl" />
                   </div>
