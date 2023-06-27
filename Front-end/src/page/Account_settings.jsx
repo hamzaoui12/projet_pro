@@ -4,7 +4,7 @@ import "tailwindcss/tailwind.css"
 const Account = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
+  const [setErrorMessage] = useState("")
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -13,11 +13,7 @@ const Account = () => {
     const emailExists = checkIfEmailExists(email)
 
     if (userExists || emailExists) {
-      setErrorMessage(
-        "An account with this username or email already exists."
-      )
-    } else {
-      // Handle form submission
+      setErrorMessage("An account with this username or email already exists.")
     }
   }
 

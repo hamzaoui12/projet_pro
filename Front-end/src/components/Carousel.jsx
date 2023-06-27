@@ -34,12 +34,21 @@ const CarouselComponent = (props) => {
             }`}
             key={image}
           >
-            {currentSlide === image && (
+            {`${image}`.includes("http") ? (
+            currentSlide === image && (
               <img
-                src={"http://localhost:3000/"+ image}
+                src={`${image}`}
                 alt="{curentSlide}"
                 className="h-full w-full object-cover"
               />
+              )) : (
+                currentSlide === image && (
+              <img
+                src={`${process.env.REACT_APP_URL_ROUTE}/${image}`}
+                alt="{curentSlide}"
+                className="h-full w-full object-cover"
+              />
+              )
             )}
           </div>
           )

@@ -3,6 +3,7 @@ import CarouselComponent from "../components/Carousel"
 import CategoryComposant from "../components/CategoryComposant"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import ProductComponents from "../components/ProductComponents"
 
 const Home = () => {
   const [homeImagesCategories, setHomeImagesCategories] = useState([])
@@ -11,10 +12,16 @@ const Home = () => {
     const fetchHomeCategories = async () => {
       const allImages = []
 
-      await axios.get(`${process.env.REACT_APP_ROUTE}/categories`).then((categories) => {
-        const homeCategories = categories.data.result.filter((category) => category.main_page !== 0)
-        homeCategories.forEach((category) => allImages.push(category.images[0].picture))
-      })
+      await axios
+        .get(`${process.env.REACT_APP_URL_ROUTE}/categories`)
+        .then((categories) => {
+          const homeCategories = categories.data.result.filter(
+            (category) => category.main_page !== 0
+          )
+          homeCategories.forEach((category) =>
+            allImages.push(category.image)
+          )
+        })
 
       return setHomeImagesCategories(allImages)
     }
@@ -28,11 +35,13 @@ const Home = () => {
       <div className="h-screen bg-black flex flex-col justify-center items-center relative">
         <div className="h-full w-full filter brightness-50">
           {homeImagesCategories[0] !== undefined ? (
-          <CarouselComponent
-            images={homeImagesCategories}
-            slideDuration={5000}
-          />
-          ): (<div />)}
+            <CarouselComponent
+              images={homeImagesCategories}
+              slideDuration={5000}
+            />
+          ) : (
+            <div />
+          )}
         </div>
         <div className="absolute left-0 top-1/2 transform -translate-y(-1/2 text-left pl-8">
           <h1 className="text-white text-6xl font-bold">
@@ -85,6 +94,10 @@ const Home = () => {
       <div>
         <h1 className="text-center text-4xl font-bold">OUR PRODUCTS</h1>
         <CategoryComposant />
+      </div>
+      <div>
+        <h1 className="text-center text-4xl font-bold">OUR PRODUCTS</h1>
+        <ProductComponents />
       </div>
     </div>
   )
