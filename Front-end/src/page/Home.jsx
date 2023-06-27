@@ -13,13 +13,13 @@ const Home = () => {
       const allImages = []
 
       await axios
-        .get(`${process.env.REACT_APP_ROUTE}/categories`)
+        .get(`${process.env.REACT_APP_URL_ROUTE}/categories`)
         .then((categories) => {
           const homeCategories = categories.data.result.filter(
             (category) => category.main_page !== 0
           )
           homeCategories.forEach((category) =>
-            allImages.push(category.images[0].picture)
+            allImages.push(category.image)
           )
         })
 
