@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { Formik, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
+import axios from "axios"
 import { logToken } from "../Storage/logToken"
 import { Link } from "react-router-dom"
-import postRequest from "../components/utils/postRequest"
 
 const Connexion = () => {
   const initialValues = {
@@ -13,8 +13,9 @@ const Connexion = () => {
   const [loginError, setLoginError] = useState("")
   const [loginSuccess, setLoginSuccess] = useState(false)
 
-  const handleSubmit = async (values) => {
-    postRequest("sign-in", {
+  const handleSubmit = (values) => {
+    axios
+      .post(`${process.env.REACT_APP_URL_ROUTE}/sign-in`, {
         mail: values.mail,
         password: values.password,
       })
@@ -41,7 +42,7 @@ const Connexion = () => {
       ),
   })
 
-  return(
+  return (
     <div className="w-full h-screen flex items-center">
       <div className="relative w-full sm:w-1/2 h-full flex flex-col">
         <div className="absolute top-[20%] left-[10%] flex flex-col">

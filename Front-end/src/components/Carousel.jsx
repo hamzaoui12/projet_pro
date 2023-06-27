@@ -36,7 +36,7 @@ const CarouselComponent = (props) => {
           >
             {currentSlide === image && (
               <img
-                src={`${process.env.REACT_APP_URL_ROUTE}+ image`}
+                src={"http://localhost:3000/"+ image}
                 alt="{curentSlide}"
                 className="h-full w-full object-cover"
               />

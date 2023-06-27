@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import getAllRequest from "./utils/getAllRequest"
+import axios from "axios"
 
 const Filter = ({
   close: closeModal,
@@ -9,15 +9,19 @@ const Filter = ({
   setCategories,
   materials,
   categories,
-  setStart,
-  P,
+  resetPage,
 }) => {
   const [data, setData] = useState(null)
   const [dataCategories, setDataCategories] = useState(null)
 
   useEffect(() => {
-    getAllRequest("materials")
+    axios
+      .get("http://localhost:3001/materials")
       .then((response) => setData(response.data.result))
+
+    axios
+      .get("http://localhost:3001/categories")
+      .then((response) => setDataCategories(response.data.result))
   }, [])
 
   return (
@@ -44,9 +48,10 @@ const Filter = ({
                 className="border border-gray-400 rounded-md py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
                 type="number"
                 id="price-min"
-                onChange={(e) =>
+                onChange={(e) => {
                   setFilters((pre) => ({ ...pre, minPrice: e.target.value }))
-                }
+                  resetPage(1)
+                }}
                 name="price-max"
                 placeholder="
                       Enter a minimum price"
@@ -62,9 +67,10 @@ const Filter = ({
               </label>
               <input
                 className="border border-gray-400 rounded-md py-1 px-3 w-full focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-                onChange={(e) =>
+                onChange={(e) => {
                   setFilters((pre) => ({ ...pre, maxPrice: e.target.value }))
-                }
+                  resetPage(1)
+                }}
                 type="number"
                 id="price-max"
                 name="price-max"
@@ -83,9 +89,10 @@ const Filter = ({
                   className="cursor-pointer"
                   value="asc"
                   checked={filter.sort === "asc" ? true : false}
-                  onChange={(e) =>
+                  onChange={(e) => {
                     setFilters((pre) => ({ ...pre, sort: e.target.value }))
-                  }
+                    resetPage(1)
+                  }}
                   id="sortAsc"
                 ></input>
                 <label className=" capitalize cursor-pointer" htmlFor="sortAsc">
@@ -97,9 +104,10 @@ const Filter = ({
                   type="checkbox"
                   className="cursor-pointer"
                   value="desc"
-                  onChange={(e) =>
+                  onChange={(e) => {
                     setFilters((pre) => ({ ...pre, sort: e.target.value }))
-                  }
+                    resetPage(1)
+                  }}
                   id="sortDesc"
                   checked={filter.sort === "desc" ? true : false}
                 ></input>
@@ -116,9 +124,10 @@ const Filter = ({
             <input
               checked={filter.isStock}
               type="checkbox"
-              onChange={(e) =>
+              onChange={(e) => {
                 setFilters((pre) => ({ ...pre, isStock: !filter.isStock }))
-              }
+                resetPage(1)
+              }}
               id="price-max"
               name="price-max"
               placeholder="Enter a maximum price"
@@ -141,13 +150,14 @@ const Filter = ({
                     className=" cursor-pointer"
                     value={e.name}
                     checked={materials.includes(e.name) ? true : false}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setMaterials((pre) =>
                         pre.includes(e.target.value)
                           ? pre.filter((mat) => mat !== e.target.value)
                           : [...pre, e.target.value]
                       )
-                    }
+                      resetPage(1)
+                    }}
                   />
                   <label
                     className=" capitalize cursor-pointer"
@@ -173,13 +183,14 @@ const Filter = ({
                     className=" cursor-pointer"
                     value={e.name}
                     checked={categories.includes(e.name) ? true : false}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setCategories((pre) =>
                         pre.includes(e.target.value)
                           ? pre.filter((mat) => mat !== e.target.value)
                           : [...pre, e.target.value]
                       )
-                    }
+                      resetPage(1)
+                    }}
                   />
                   <label
                     className=" capitalize cursor-pointer"

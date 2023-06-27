@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom"
 
 const ProductPage = ({ addToCart }) => {
   const [images] = useState({})
-  const [activeImg, setActiveImage] = useState(images.img1)
+  const [setActiveImage] = useState(images.img1)
   const [Kitchen] = useState(data)
   const [amount, setAmount] = useState(1)
   const [totalPrice, setTotalPrice] = useState(199)

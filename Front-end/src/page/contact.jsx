@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import "tailwindcss/tailwind.css"
 import { Formik, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
-import postRequest from "../components/utils/postRequest"
+import axios from "axios"
 
 const validationSchema = Yup.object().shape({
   mail: Yup.string().email("Email invalide").required("Champ requis"),
@@ -17,7 +17,8 @@ const Contact = () => {
   const handleSubmit = async (values, actions) => {
     try {
       await validationSchema.validate(values, { abortEarly: false })
-      postRequest("contacts", values)
+      await axios.post("http://localhost:3002/contacts", values)
+
       setSuccessMessage("Votre message a été envoyé avec succès !")
       actions.resetForm()
     } catch (error) {

@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { Formik, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
+import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import "tailwindcss/tailwind.css"
-import postRequest from "../components/utils/postRequest"
 
 const Registration = () => {
   const initialValues = {
@@ -46,7 +46,8 @@ const Registration = () => {
   })
 
   const handleSubmit = (values) => {
-    postRequest("sign-up", {
+    axios
+      .post(`${process.env.REACT_APP_URL_ROUTE}/sign-up`, {
         firstName: values.firstName,
         lastName: values.lastName,
         password: values.password,

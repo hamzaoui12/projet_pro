@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import { BrowserRouter as Router, Link } from "react-router-dom"
-import { BsPlus } from "react-icons/bs"
-import { filteringFc } from "../components/utils/filteringFc"
-import { useSearch } from "../contexts/Search"
 import { CartContext } from "../contexts/CartContext.jsx"
+import { Link } from "react-router-dom"
+import { BsPlus } from "react-icons/bs"
+
+import axios from "axios"
 
 const ProductComponents = () => {
   const [data, setData] = useState(null)
@@ -15,8 +15,9 @@ const ProductComponents = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await filteringFc()
-      setData(response)
+      const response = await axios.get("http://localhost:3001/products")
+
+      setData(response.data)
     }
     fetchData()
   }, [])

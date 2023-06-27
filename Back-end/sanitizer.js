@@ -12,8 +12,7 @@ const sanitizeUser = extract([
   "firstName",
   "lastName",
   "mail",
-  "phoneNumber",
-  "orders"
+  "phoneNumber"
 ])
 
 module.exports = sanitizeUser

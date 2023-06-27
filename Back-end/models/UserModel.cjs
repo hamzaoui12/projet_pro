@@ -30,13 +30,13 @@ class UserModel extends BaseModel {
         },
       },
       orders: {
-      modelClass: OrderModel,
-      relation: BaseModel.HasManyRelation,
-      join: {
-        from: "users.id",
-        to: "orders.user_id"
-      }
-    },
+        modelClass: OrderModel,
+        relation: BaseModel.HasManyRelation,
+        join: {
+          from: "users.id",
+          to: "orders.user_id",
+        },
+      },
     }
   }
 }
