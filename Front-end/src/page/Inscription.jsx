@@ -3,9 +3,11 @@ import { Formik, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import "tailwindcss/tailwind.css"
 
 const Registration = () => {
+  const { t } = useTranslation()
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -18,31 +20,25 @@ const Registration = () => {
   const navigate = useNavigate()
 
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("Le prénom est requis"),
-    lastName: Yup.string().required("Le nom de famille est requis"),
+    firstName: Yup.string().required(t("registration.firstNameRequired")),
+    lastName: Yup.string().required(t("registration.lastNameRequired")),
     email: Yup.string()
-      .email("Email invalide")
-      .required("L'adresse email est requise"),
+      .email(t("registration.invalidEmail"))
+      .required(t("registration.emailRequired")),
     password: Yup.string()
-      .required("Le mot de passe est requis")
+      .required(t("registration.passwordRequired"))
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{10,}$/,
-        "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un caractère spécial, aucun signe égal (=) et doit comporter au moins 10 caractères"
+        t("registration.passwordComplexity")
       ),
     confirmPassword: Yup.string()
-      .oneOf(
-        [Yup.ref("password"), null],
-        "Les mots de passe doivent correspondre"
-      )
-      .required("La confirmation du mot de passe est requise"),
+      .oneOf([Yup.ref("password"), null], t("registration.passwordMatch"))
+      .required(t("registration.confirmPasswordRequired")),
     phoneNumber: Yup.string()
-      .matches(
-        /^\d+$/,
-        "Le numéro de téléphone doit contenir uniquement des chiffres"
-      )
-      .min(10, "Le numéro de téléphone doit comporter au moins 10 chiffres")
-      .max(15, "Le numéro de téléphone ne doit pas dépasser 15 chiffres")
-      .required("Le numéro de téléphone est requis"),
+      .matches(/^\d+$/, t("registration.phoneNumberDigitsOnly"))
+      .min(10, t("registration.phoneNumberMinLength"))
+      .max(15, t("registration.phoneNumberMaxLength"))
+      .required(t("registration.phoneNumberRequired")),
   })
 
   const handleSubmit = (values) => {
@@ -75,7 +71,7 @@ const Registration = () => {
     >
       <div className="bg-white bg-opacity-80 p-6 rounded-lg shadow-md mr-10">
         <h1 className="text-4xl font-bold mb-8 text-gray-800">
-          Creer votre compte
+          {t("registration.createAccount")}
         </h1>
         <Formik
           initialValues={initialValues}
@@ -87,7 +83,7 @@ const Registration = () => {
               <Field
                 name="firstName"
                 type="text"
-                placeholder="Prenom"
+                placeholder={t("registration.firstName")}
                 className="bg-transparent border border-gray-300 p-2 rounded-lg"
               />
               <ErrorMessage
@@ -99,7 +95,7 @@ const Registration = () => {
               <Field
                 name="lastName"
                 type="text"
-                placeholder="Nom"
+                placeholder={t("registration.lastName")}
                 className="bg-transparent border border-gray-300 p-2 rounded-lg"
               />
               <ErrorMessage
@@ -111,7 +107,7 @@ const Registration = () => {
               <Field
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder={t("registration.email")}
                 className="bg-transparent border border-gray-300 p-2 rounded-lg"
               />
               <ErrorMessage
@@ -124,7 +120,7 @@ const Registration = () => {
                 <Field
                   name="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Mot de passe"
+                  placeholder={t("registration.password")}
                   className="bg-transparent border border-gray-300 p-2 rounded-lg"
                 />
                 <button
@@ -132,7 +128,9 @@ const Registration = () => {
                   className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-600"
                   onClick={toggleShowPassword}
                 >
-                  {showPassword ? "Cacher" : "Montrer"}
+                  {showPassword
+                    ? t("registration.hide")
+                    : t("registration.show")}
                 </button>
               </div>
               <ErrorMessage
@@ -144,7 +142,7 @@ const Registration = () => {
               <Field
                 name="confirmPassword"
                 type="password"
-                placeholder="Confirmez le mot de passe"
+                placeholder={t("registration.confirmPassword")}
                 className="bg-transparent border border-gray-300 p-2 rounded-lg"
               />
               <ErrorMessage
@@ -156,7 +154,7 @@ const Registration = () => {
               <Field
                 name="phoneNumber"
                 type="text"
-                placeholder="Numéro de téléphone 0000000000"
+                placeholder={t("registration.phoneNumber")}
                 className="bg-transparent border border-gray-300 p-2 rounded-lg"
               />
               <ErrorMessage
@@ -172,8 +170,7 @@ const Registration = () => {
                   className="rounded-sm"
                 />
                 <label className="text-gray-700">
-                  En créant un compte, je consens au traitement de mes données
-                  personnelles.
+                  {t("registration.consent")}
                 </label>
               </div>
 
@@ -181,7 +178,7 @@ const Registration = () => {
                 type="submit"
                 className="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-all duration-200"
               >
-                Creer
+                {t("registration.create")}
               </button>
             </form>
           )}

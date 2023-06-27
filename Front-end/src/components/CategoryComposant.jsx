@@ -1,10 +1,12 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { BrowserRouter as Router, Link } from "react-router-dom"
 
 const CategoryComposant = () => {
   const [categories, setCategories] = useState(null)
   const [div, setNav] = useState(false)
+  const { t } = useTranslation()
 
   useEffect(() => {
     axios
@@ -28,8 +30,10 @@ const CategoryComposant = () => {
               className="rounded-xl relative hover:scale-105 duration-300"
             >
               {" "}
-              <div className="absolute w-full h-full bg-black/50  text-white">
-                <p className="px-2"></p>
+              <div className="absolute w-full h-full bg-black/50 rounded-xl text-white">
+                <p className="font-bold text-3xl px-2 pt-4 text-orange-200">
+                  {t(category.name)}
+                </p>
               </div>
               <img
                 className="max-h-[250px] h-full md:max-h-[400px] w-full object-full"
