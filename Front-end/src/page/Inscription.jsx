@@ -47,7 +47,7 @@ const Registration = () => {
 
   const handleSubmit = (values) => {
     axios
-      .post(`${process.env.REACT_APP_URL_ROUTE}/sign-up`, {
+      .post("http://localhost:3001/sing-up", {
         firstName: values.firstName,
         lastName: values.lastName,
         password: values.password,

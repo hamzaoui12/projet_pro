@@ -1,63 +1,81 @@
-import React, { useRef } from "react"
-import { Formik, Field, ErrorMessage } from "formik"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import React, { useState } from "react"
+import { Formik, Form, Field, ErrorMessage } from "formik"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import * as Yup from "yup"
+
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string().required("Le prenom est requis"),
+  lastName: Yup.string().required("Le nom est requis"),
+  address: Yup.string().required("L'Adresse est requise"),
+  city: Yup.string().required("La ville est requise"),
+  region: Yup.string().required("La region est requise"),
+  postalCode: Yup.string()
+    .required("Le postal code est requis")
+    .matches(/^\d{5}$/, "Le code postal doit contenir 5 chiffres"),
+  country: Yup.string().required("Le pays est requis"),
+  phoneNumber: Yup.string()
+    .required("Le numero de telephone est requis")
+    .matches(/^\d{10}$/, "Le numéro de téléphone doit contenir 10 chiffres"),
+})
 
 const ValidateForm = () => {
-  const paymentPageRef = useRef()
+  const navigate = useNavigate()
+
+  const token = localStorage.getItem("token")
+  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+
   const initialValues = {
     firstName: "",
     lastName: "",
-    address1: "",
-    address2: "",
+    address: "",
     city: "",
     region: "",
     postalCode: "",
     country: "",
     phoneNumber: "",
   }
+  const [isFormValid, setIsFormValid] = useState(false)
 
   const validate = (values) => {
-    const errors = {}
-
-    if (!values.firstName) {
-      errors.firstName = "First name is required"
-    }
-
-    if (!values.lastName) {
-      errors.lastName = "Last name is required"
-    }
-
-    if (!values.address1) {
-      errors.address1 = "Address is required"
-    }
-
-    if (!values.city) {
-      errors.city = "City is required"
-    }
-
-    if (!values.region) {
-      errors.region = "Region is required"
-    }
-
-    if (!values.postalCode) {
-      errors.postalCode = "Postal code is required"
-    }
-
-    if (!values.country) {
-      errors.country = "Country is required"
-    }
-
-    if (!values.phoneNumber) {
-      errors.phoneNumber = "Phone number is required"
-    }
-
-    return errors
+    validationSchema
+      .validate(values, { abortEarly: false })
+      .then(() => setIsFormValid(true))
+      .catch(() => setIsFormValid(false))
   }
 
-  const handleSubmit = (values) => {
-    localStorage.removeItem("userData")
-    localStorage.setItem("userData", JSON.stringify(values))
-    paymentPageRef.current.click()
+
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      await axios.post("http://localhost:3001/addresses", {
+        country: values.country,
+        city: values.city,
+        region: values.region,
+        postalCode: values.postalCode,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      }
+      )
+
+      await axios.patch(`http://localhost:3001/users/${loggedUser.id}`, {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        phoneNumber: values.phoneNumber,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}` 
+        }
+      })
+
+      alert("Adresse et données utilisateur mises à jour avec succès")
+      setSubmitting(false)
+      navigate("/checkout")
+    } catch (error) {
+      console.log(error)
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -80,18 +98,19 @@ const ValidateForm = () => {
           <h1 className="text-3xl font-bold mb-8">Livraison</h1>
           <Formik
             initialValues={initialValues}
-            validate={validate}
+            validationSchema={validationSchema}
             onSubmit={handleSubmit}
+            validate={validate}
           >
-            {({ isSubmitting, handleSubmit }) => (
-              <form className="space-y-4" onSubmit={handleSubmit}>
+            {({ isSubmitting }) => (
+              <Form className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label
                       htmlFor="firstName"
                       className="text-lg font-semibold"
                     >
-                      First Name:
+                      Prenom:
                     </label>
                     <div className="relative">
                       <Field
@@ -108,7 +127,7 @@ const ValidateForm = () => {
                   </div>
                   <div>
                     <label htmlFor="lastName" className="text-lg font-semibold">
-                      Last Name:
+                      Nom:
                     </label>
                     <div className="relative">
                       <Field
@@ -127,34 +146,16 @@ const ValidateForm = () => {
 
                 <div>
                   <label htmlFor="address1" className="text-lg font-semibold">
-                    Address 1:
+                    Adresse :
                   </label>
                   <div className="relative">
                     <Field
                       type="text"
-                      name="address1"
+                      name="address"
                       className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
                     />
                     <ErrorMessage
-                      name="address1"
-                      component="div"
-                      className="text-red-500 mt-1"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="address2" className="text-lg font-semibold">
-                    Address 2:
-                  </label>
-                  <div className="relative">
-                    <Field
-                      type="text"
-                      name="address2"
-                      className="w-full text-black py-1 pl-2 pr-8 rounded-md border border-gray-300 focus:outline-none"
-                    />
-                    <ErrorMessage
-                      name="address2"
+                      name="address"
                       component="div"
                       className="text-red-500 mt-1"
                     />
@@ -164,7 +165,7 @@ const ValidateForm = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="city" className="text-lg font-semibold">
-                      City:
+                      Ville:
                     </label>
                     <div className="relative">
                       <Field
@@ -199,8 +200,11 @@ const ValidateForm = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="postalCode" className="text-lg font-semibold">
-                    Postal Code:
+                  <label
+                    htmlFor="postalCode"
+                    className="text-lg font-semibold"
+                  >
+                    Code Postal :
                   </label>
                   <div className="relative">
                     <Field
@@ -218,7 +222,7 @@ const ValidateForm = () => {
 
                 <div>
                   <label htmlFor="country" className="text-lg font-semibold">
-                    Country:
+                    Pays:
                   </label>
                   <div className="relative">
                     <Field
@@ -239,7 +243,7 @@ const ValidateForm = () => {
                     htmlFor="phoneNumber"
                     className="text-lg font-semibold"
                   >
-                    Phone Number:
+                    Numero de telephone:
                   </label>
                   <div className="relative">
                     <Field
@@ -255,23 +259,18 @@ const ValidateForm = () => {
                   </div>
                 </div>
 
-                {/* <Link to="/checkout"> */}
-                {/* {" "} */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-2 px-4 btn-black-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
-                  style={{ backgroundColor: "black", color: "white" }}
-                >
-                  Payment
-                </button>
-                {/* </Link> */}
-                <Link
-                  to="/payment"
-                  ref={paymentPageRef}
-                  style={{ opacity: "0" }}
-                ></Link>
-              </form>
+                <div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !isFormValid}
+                    className={`w-full py-2 px-4 btn-black-white font-semibold rounded-md ${!isFormValid ? "opacity-50 cursor-not-allowed" : ""
+                      } hover:bg-blue-700 focus:outline-none focus:bg-blue-700`}
+                    style={{ backgroundColor: "black", color: "white" }}
+                  >
+                    Payement
+                  </button>
+                </div>
+              </Form>
             )}
           </Formik>
         </div>
