@@ -1,6 +1,94 @@
 const CategoryModel = require("../models/CategoryModel.cjs")
 
 const routeAdmin = async ({ app, db }) => {
+
+    const checkUser = (user) => {
+      if (user) {
+        return true
+      }
+  
+      return false
+    }
+  
+    app.get("/admin/getUsers", async (req, res) => {
+      try {
+        const users = await UserModel.query()
+        res.send({
+          result: users.map((i) => ({
+            id: 1,
+            firstName: i.firstName,
+            lastName: i.lastName,
+  
+            mail: i.mail,
+            phoneNumber: i.phoneNumber,
+            is_admin: i.is_admin,
+          })),
+        })
+      } catch (error) {
+        console.log(error)
+        res.status(500).send({ error: "Failed to fetch users" })
+      }
+    })
+  
+    app.get("/admin/updateUserRole", async (req, res) => {
+      try {
+        const users = await UserModel.query()
+        res.send({
+          result: users.map((i) => ({
+            id: 1,
+            firstName: i.firstName,
+            lastName: i.lastName,
+  
+            mail: i.mail,
+            phoneNumber: i.phoneNumber,
+            is_admin: i.is_admin,
+          })),
+        })
+      } catch (error) {
+        console.log(error)
+        res.status(500).send({ error: "Failed to fetch users" })
+      }
+    })
+  
+    app.get("/admin/getUsers/:id", async (req, res) => {
+      try {
+        const users = await UserModel.query()
+          .findById(id)
+          .withGraphFetched("orders")
+        res.send({ result: users })
+      } catch (error) {
+        res.status(500).send({ error: "Failed to fetch users" })
+      }
+    })
+  
+    app.patch("/admin/updateUsers/:id", async (req, res) => {
+      const { id } = req.params
+      const { firstName, lastName, mail, phoneNumber } = req.body
+  
+      try {
+        const updateUser = await UserModel.query().updateAndFetchById(id, {
+          firstName,
+          lastName,
+          mail,
+          phoneNumber,
+        })
+  
+        if (!checkUser(updateUser)) {
+          res.status(404).send({ error: "not found" })
+  
+          return
+        }
+  
+        res.send(sanitizeUser(updateUser))
+      } catch (error) {
+        res.send({ result: error })
+  
+        return
+      }
+    })
+  
+  
+  
   const checkCategory = (category) => {
     if (category) {
       return true
