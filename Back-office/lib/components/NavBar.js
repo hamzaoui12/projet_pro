@@ -1,22 +1,23 @@
-import { Fragment } from "react";
-import { usePathname } from "next/navigation";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { signIn, signOut } from "next-auth/react";
-import Image from "next/image";
+import { Fragment } from "react"
+import { usePathname } from "next/navigation"
+import { Disclosure, Menu, Transition } from "@headlessui/react"
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
+import { signIn, signOut } from "next-auth/react"
+import Image from "next/image"
 
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Users", href: "/users" },
+  { name: "Categories", href: "/categories" },
   { name: "Contacts", href: "/contacts" },
-];
+]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(" ")
 }
 
 export default function Navbar({ user }) {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   return (
     <Disclosure as="nav" className="bg-white shadow-sm">
@@ -201,5 +202,5 @@ export default function Navbar({ user }) {
         </>
       )}
     </Disclosure>
-  );
+  )
 }
