@@ -34,10 +34,9 @@ const CategoryComposant = () => {
                 <p className="font-bold text-3xl px-2 pt-4 text-orange-200">
                   {t(category.name)}
                 </p>
-                <p className="px-2"></p>
               </div>
               <img
-                className="max-h-[200px] h-full md:max-h-[500px] w-full object-cover rounded-xl"
+                className="max-h-[250px] h-full md:max-h-[400px] w-full object-full"
                 src={category.image}
                 alt="/"
               />

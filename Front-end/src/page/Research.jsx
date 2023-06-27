@@ -4,9 +4,12 @@ import Filter from "../components/Filter"
 import { filteringFc } from "../components/utils/filteringFc"
 import { useSearch } from "../contexts/Search"
 import { CartContext } from "../contexts/CartContext.jsx"
+import Paginator from "../components/Paginator"
 
 const Research = () => {
   const { search } = useSearch()
+  const [pagination, setPagination] = useState(null)
+  const [page, setPage] = useState(1)
   const [data, setData] = useState(null)
   const { addToCart } = useContext(CartContext)
   const [materials, setMaterials] = useState([])
@@ -20,6 +23,7 @@ const Research = () => {
     sort: "asc",
     isStock: false,
   })
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await filteringFc(
@@ -29,9 +33,12 @@ const Research = () => {
         filter.minPrice,
         filter.sort,
         search,
-        filter.isStock
+        filter.isStock,
+        page
       )
+
       setData(response)
+      setPagination(response)
     }
     fetchData()
   }, [
@@ -43,8 +50,8 @@ const Research = () => {
     filter.minPrice,
     filter.sort,
     materials,
+    page,
   ])
-
   const [isOpen, setIsOpen] = useState(false)
 
   const openModal = () => {
@@ -58,9 +65,8 @@ const Research = () => {
   return (
     <div className="research">
       <div className="flex justify-center items-center">
-        {" "}
         <button
-          className="text-black text-xl font-bold p-12  rounded flex  lg-hidden justify-center items-center"
+          className="text-black text-2xl font-bold p-12  rounded flex  lg-hidden justify-center items-center"
           onClick={openModal}
         >
           <svg
@@ -69,7 +75,7 @@ const Research = () => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-6 h-6 "
           >
             <path
               strokeLinecap="round"
@@ -82,14 +88,14 @@ const Research = () => {
       </div>
 
       <div className="flex  max-w-[1640px] mx-auto py-12  ">
-        <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 gap-24 py-32  cursor-pointer">
+        <div className="grid grid-cols-1 lg:grid-cols-3  md:grid-cols-2 gap-24 py-18  cursor-pointer">
           {data &&
-            data.map((item, index) => (
+            data.paginatedProducts.map((item, index) => (
               <div key={index} className="relative group p-6 ">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-[300px] W-[300px]  object-cover duration-300  hover:scale-105"
+                  className="w-full h-full object-full duration-300  hover:scale-105"
                 />
                 <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
                   <button onClick={() => addToCart(item)}>
@@ -98,7 +104,7 @@ const Research = () => {
                     </div>
                   </button>
                 </div>
-                <div className="flex justify-between  px-2 py-6 font-bold text-lg">
+                <div className="flex justify-between  px-2 py-6 font-bold border-t text-lg">
                   <p>{item.name}</p>
                   <p>
                     <span className="p-6">{item.price}</span>
@@ -117,8 +123,12 @@ const Research = () => {
             materials={materials}
             setStart={setStart}
             categories={categories}
+            resetPage={setPage}
           />
         )}
+      </div>
+      <div className="w-full mb-4 flex items-center py-12 justify-center">
+        {pagination && <Paginator pagination={pagination} setPage={setPage} />}
       </div>
     </div>
   )
