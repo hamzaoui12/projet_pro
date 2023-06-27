@@ -31,7 +31,7 @@ function PaymentForm() {
 
     if (!error) {
       const { id } = paymentMethod
-      await axios.post("http://localhost:3001/stripe/charge", {
+      await axios.post("${process.env.REACT_APP_URL_ROUTE}/stripe/charge", {
         amount: total,
         id: id,
         metaData: userData,

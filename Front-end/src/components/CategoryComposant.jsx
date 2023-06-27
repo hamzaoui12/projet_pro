@@ -8,7 +8,7 @@ const CategoryComposant = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/categories`)
+      .get(`${process.env.REACT_APP_URL_ROUTE}/categories`)
       .then((res) => res.data)
       .then((data) => setCategories(data.result))
   }, [])

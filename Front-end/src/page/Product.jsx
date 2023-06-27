@@ -1,12 +1,20 @@
-import React, { useState } from "react"
-import { data } from "../data/data.jsx"
-import { BsPlus } from "react-icons/bs"
+import React, { useState, useEffect } from "react"
+import { useLocation } from 'react-router-dom';
+import { useParams } from "react-router-dom"
 import { BrowserRouter as Router, Link } from "react-router-dom"
+import axios from "axios"
+import CarouselComponent from "./../components/Carousel.jsx"
 
-const ProductPage = ({ addToCart }) => {
-  const [images] = useState({})
-  const [activeImg, setActiveImage] = useState(images.img1)
-  const [Kitchen] = useState(data)
+const ProductPage = ({ addToCart }, props) => {
+  const { id } = useParams()
+  const productId = id
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const categoryId = searchParams.get('category');
+  const [materials, setMaterials] = useState([])
+  const [images, setImages] = useState([])
+  const [product, setProduct] = useState(null)
+  const [product_filtered, setProductFiltered] = useState(null)
   const [amount, setAmount] = useState(1)
   const [totalPrice, setTotalPrice] = useState(199)
 
@@ -24,12 +32,59 @@ const ProductPage = ({ addToCart }) => {
       setTotalPrice((prevPrice) => prevPrice - 199)
     }
   }
+  
+
+  useEffect(() => {
+    fetchProductData()
+    fetchCategoryData()
+  }, [productId])
+  
+
+  const fetchProductData = async () => {
+    try {
+      await axios.get(
+        `${process.env.REACT_APP_URL_ROUTE}/products/${productId}`
+      ) 
+      .then((response) => {
+        setProduct(response.data.result)
+        console.log("Product")
+        console.log(response.data.result)
+        setImages(response.data.result.images)     
+        setMaterials(response.data.result.materials)
+      })      
+    } catch (error) {
+      console.log("Error fetching product data:", error)
+    }
+  }
+
+  const fetchCategoryData = async () => {
+    try {
+      console.log("id category 2")
+      console.log(categoryId)
+
+      const response = await axios.get(`${process.env.REACT_APP_URL_ROUTE}/products`)
+  
+      const allProducts = response.data.result
+      const filteredProducts = allProducts.filter(product => product.category_id === parseInt(categoryId))
+      
+      console.log("Product filtré")
+      console.log(filteredProducts)
+      setProductFiltered(filteredProducts)      
+    } catch (error) {
+      console.log("Error fetching product data:", error)
+    }
+  } 
+  
+
+  if (!product) {
+    return <div>Chargement...</div>
+  }
 
   return (
     <div>
-      {" "}
       <div className="max-w-[1640px] mx-auto  p-2">
         <div className="max-h-[500px] relative hidden md:flex ">
+          {/* Overlay */}
           <div className="absolute w-full h-full rounded-xl text-gray-200 max-h-[500px] bg-black/40 flex flex-col justify-center">
             <h1 className="px-4   md:text-6xl lg:text-7xl font-bold">
               The <span className="text-orange-200">Best</span>
@@ -45,60 +100,37 @@ const ProductPage = ({ addToCart }) => {
             alt="/"
           />
         </div>
-        <div className="flex flex-col justify-between lg:flex-row p-6 lg:p-24 gap-6 lg:gap-16 lg:items-center">
-          <div className="flex flex-col gap-6 lg:w-2/4">
-            <img
-              src="https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt=""
-              className="w-full h-full aspect-square object-cover rounded-xl"
-            />
-            <div className="flex flex-row justify-between h-12 sm:h-24">
-              <img
-                src="https://images.pexels.com/photos/6198663/pexels-photo-6198663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-                className="w-12 sm:w-24 h-12 sm:h-24 rounded-md cursor-pointer"
-                onClick={() => setActiveImage(images.img1)}
-              />
-              <img
-                src="https://images.pexels.com/photos/6198663/pexels-photo-6198663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-                className="w-12 sm:w-24 h-12 sm:h-24 rounded-md cursor-pointer"
-                onClick={() => setActiveImage(images.img2)}
-              />
-              <img
-                src="https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-                className="w-12 sm:w-24 h-12 sm:h-24 rounded-md cursor-pointer"
-                onClick={() => setActiveImage(images.img3)}
-              />
-              <img
-                src="https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-                className="w-12 sm:w-24 h-12 sm:h-24 rounded-md cursor-pointer"
-                onClick={() => setActiveImage(images.img4)}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-4 lg:w-2/4">
+        <div className=" flex flex-col justify-between lg:flex-row p-6 lg:p-24 gap-6 lg:gap-16 lg:items-center">
+          <div className="bg-black w-96 h-96 rounded-xl">
+            <CarouselComponent images={images.map((image) => `${image.picture}`)} slideDuration={3000} />
+          </div>          
+          <div className="flex flex-col gap-4  lg:w-2/4">
             <div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                BUREAU JARVIS
+                {product.name}
               </h1>
-              <span className="text-orange-200 font-semibold">En stock</span>
+              <span className="text-orange-200 font-semibold">
+                {product.stock}
+              </span>
             </div>
-            <p className="text-gray-700">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              numquam voluptate quod vitae excepturi odio obcaecati?
-              Sitlaudantium id dignissimos necessitatibus autem obcaecati non,
-              praesentium debitis. Rem officia veniam consectetur. Lorem ipsum
-              dolor sit amet consectetur adipisicing elit. Excepturi porro eos
-              iste blanditiis autem tempore ullam, numquam reiciendis, mollitia
-              commodi nobis error! Blanditiis, voluptatem tempore. Et,
-              cupiditate. A, libero alias?
-            </p>
+            <p className="text-gray-700">{product.description}</p>
+            {materials.length > 0 && (
+              <div className="text-gray-700">
+                <h1>Matériaux :</h1>
+                <ul>
+                  {materials.map((material, index) => (
+                    <li key={index}>{material.name}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {materials.length === 0 && (
+              <div className="text-gray-700">
+                <h1>Matériaux : Aucun matériaux</h1>
+              </div>
+            )}
             <h6 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
-              $ {totalPrice.toFixed(2)}
+              $ {product.price}
             </h6>
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-12">
               <div className="flex flex-row items-center">
@@ -122,48 +154,42 @@ const ProductPage = ({ addToCart }) => {
               <button
                 className="bg-black text-white font-semibold py-3 px-8 sm:px-16 rounded-xl h-full"
                 onClick={() =>
-                  handleAddToCart({ name: "BUREAU JARVIS", price: "$199.00" })
+                  handleAddToCart({ name: "{product.name}", price: "{product.price}" })
                 }
               >
                 Add to Cart
               </button>
             </div>
           </div>
-        </div>{" "}
+        </div>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl text-center font-bold p-6 ">
-          Similar Products
+          Produits similaires
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mx-auto p-3 gap-6 cursor-pointer">
-          {Kitchen.slice(0, 6).map((item, index) => (
-            <div
-              key={index}
-              className="border shadow-lg  hover:scale-105 duration-300  relative group"
-            >
-              <Link to="/product">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-[300px] W-[300px] object-cover p-2 "
-                />
-              </Link>
-              <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
-                <button onClick={() => handleAddToCart(item)}>
-                  <div className="flex justify-center rounded-full items-center hover:bg-gray-500 text-white w-12 h-12 bg-black">
-                    <BsPlus className="text-3xl" />
-                  </div>
-                </button>
+            {product_filtered && product_filtered.map((item) => (
+              <div
+                key={item.id}
+                className="border shadow-lg hover:scale-105 duration-300 relative group"
+              >
+                <Link to={`/product/${item.id}`}>
+                  <h1>{item.name}</h1>
+                  {item.images.length > 0 && (
+                    <img
+                      src={item.images[0].picture}
+                      alt={item.name}
+                      className="w-full h-[300px] W-[300px] object-cover p-2"
+                    />
+                  )}
+                </Link>
+                <div className="absolute top-2 -right-2 opacity-0 group-hover:opacity-100 p-5 flex flex-col gap-y-2 transition-all duration-300">
+                  <button onClick={() => handleAddToCart(item)}>
+                    <div className="flex justify-center rounded-full items-center hover:bg-gray-500 text-white w-12 h-12 bg-black">
+                    </div>
+                  </button>
+                </div>
               </div>
-              <div className="flex justify-between px-2 py-4">
-                <p className="font-bold">{item.name}</p>
-                <p>
-                  <span className="bg-black text-white p-1 rounded-full">
-                    {item.price}
-                  </span>
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
       </div>
     </div>
   )

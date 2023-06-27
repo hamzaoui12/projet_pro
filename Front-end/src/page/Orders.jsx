@@ -22,7 +22,7 @@ const Orders = () => {
       window.location.href = '/Singin';
     }
     const fetchOrders = async () => {
-      const { data } = await axios.get('http://localhost:3002/orders', {
+      const { data } = await axios.get('${process.env.REACT_APP_URL_ROUTE}/orders', {
         headers: {
           Authorization: `Bearer ${token}`
         }

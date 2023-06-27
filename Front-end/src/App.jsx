@@ -11,12 +11,9 @@ import PasswordResetPage from "./page/Password"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Layout from "./components/Layout"
 import ValidateForm from "./page/validation_form"
-import PaymentForm from "./page/données_de_paiement"
 import Thankyou from "./page/thankyou"
 import Sidebar from "./components/Sidebar"
 import Orders from "./page/Orders"
-import Orders from "./page/Orders"
-import Order from "./page/Order"
 
 const App = () => {
   return (
@@ -32,7 +29,7 @@ const App = () => {
           }
         />
         <Route
-          path="/category"
+          path="/category/:id"
           element={
             <Layout>
               <Category />
@@ -52,14 +49,6 @@ const App = () => {
           element={
             <Layout>
               <Thankyou />
-            </Layout>
-          }
-        />
-        <Route
-          path="/checkout"
-          element={
-            <Layout>
-              <PaymentForm />
             </Layout>
           }
         />
@@ -112,7 +101,7 @@ const App = () => {
           }
         />
         <Route
-          path="/product"
+          path="/product/:id"
           element={
             <Layout>
               <Product />

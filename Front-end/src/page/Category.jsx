@@ -13,12 +13,12 @@ const Category = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/categories/${id}`)
+      .get(`${process.env.REACT_APP_URL_ROUTE}/categories/${id}`)
       .then((res) => setData(res.data.result))
   }, [id])
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/categories/`)
+      .get(`${process.env.REACT_APP_URL_ROUTE}/categories/`)
       .then((res) => res.data)
       .then((data) => setCategories(data.result))
   }, [])
@@ -71,7 +71,7 @@ const Category = () => {
           {!!data &&
             data.map((item, index) => (
               <div key={index} className="relative group p-6">
-                <Link to="/product">
+                <Link to={`/product/${item.id}?category=${id}`}>
                   <img
                     src={item.image}
                     alt={item.name}

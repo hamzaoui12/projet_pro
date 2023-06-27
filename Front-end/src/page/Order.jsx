@@ -40,7 +40,7 @@ return str
 
     useEffect(() => {
         const fetchAddress = async () => {
-            const { data } = await axios.get(`http://localhost:3002/address/user/${loggedUser.id}`, {
+            const { data } = await axios.get(`${process.env.REACT_APP_URL_ROUTE}/address/user/${loggedUser.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -55,7 +55,7 @@ return str
 
         const fetchData = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:3002/orders/${id}`, {
+                const { data } = await axios.get(`${process.env.REACT_APP_URL_ROUTE}/orders/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -136,7 +136,7 @@ return str
             setTotalPrice(newTotal)
 
             const response = await axios.patch(
-                `http://localhost:3002/orders/${id}`,
+                `${process.env.REACT_APP_URL_ROUTE}/orders/${id}`,
                 requestBody,
                 {
                     headers: {

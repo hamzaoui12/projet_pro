@@ -1,5 +1,5 @@
 import { useLocation } from "react-router"
-import Footer from "./Footer"
+import Footer from "./footer"
 import Navbar from "./Navbar"
 import SearchNavbar from "./SearchNavbar"
 import { ContextSearch } from "../contexts/Search"
