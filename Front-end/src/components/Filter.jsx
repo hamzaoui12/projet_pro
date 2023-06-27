@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import axios from "axios"
+import getAllRequest from "./utils/getAllRequest"
 
 const Filter = ({
   close: closeModal,
@@ -15,12 +15,10 @@ const Filter = ({
   const [dataCategories, setDataCategories] = useState(null)
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/materials")
+    getAllRequest("materials")
       .then((response) => setData(response.data.result))
 
-    axios
-      .get("http://localhost:3001/categories")
+    getAllRequest("categories")
       .then((response) => setDataCategories(response.data.result))
   }, [])
 

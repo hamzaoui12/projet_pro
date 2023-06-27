@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
 import { Formik, Field, ErrorMessage } from "formik"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const ValidateForm = () => {
   const paymentPageRef = useRef()

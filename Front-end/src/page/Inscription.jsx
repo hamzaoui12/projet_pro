@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { Formik, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
-import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import "tailwindcss/tailwind.css"
+import postRequest from "../components/utils/postRequest"
 
 const Registration = () => {
   const initialValues = {
@@ -46,8 +46,7 @@ const Registration = () => {
   })
 
   const handleSubmit = (values) => {
-    axios
-      .post(`${process.env.REACT_APP_URL_ROUTE}/sign-up`, {
+      postRequest("sign-up", {
         firstName: values.firstName,
         lastName: values.lastName,
         password: values.password,
@@ -55,8 +54,9 @@ const Registration = () => {
         phoneNumber: values.phoneNumber,
       })
       .then(function (response) {
-        navigate("/Singin")
+        
       })
+    navigate("/singin")
   }
 
   const [showPassword, setShowPassword] = useState(false)

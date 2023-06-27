@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { data } from "../data/data.jsx"
 import { BsPlus } from "react-icons/bs"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const ProductPage = ({ addToCart }) => {
   const [images] = useState({})
