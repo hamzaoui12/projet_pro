@@ -10,12 +10,13 @@ import Panier from "./page/Panier"
 import PasswordResetPage from "./page/Password"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Layout from "./components/Layout"
-import ValidateForm from "./page/validation_form"
+import Stripe from "./components/Stripe"
 import PaymentForm from "./page/Checkout"
 import Thankyou from "./page/thankyou"
 import Sidebar from "./components/Sidebar"
 import Orders from "./page/Orders"
 import Order from "./page/Order"
+import ValidateForm from "./page/validation_form"
 
 const App = () => {
   return (
@@ -31,7 +32,7 @@ const App = () => {
           }
         />
         <Route
-          path="/category"
+          path="/category/:id"
           element={
             <Layout>
               <Category />
@@ -59,6 +60,14 @@ const App = () => {
           element={
             <Layout>
               <PaymentForm />
+            </Layout>
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            <Layout>
+              <Stripe />
             </Layout>
           }
         />

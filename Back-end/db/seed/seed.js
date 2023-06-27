@@ -16,6 +16,7 @@ const seed = async () => {
 
   const categories = [
     {
+      main_page: true,
       name: "Chambre adultes",
       description:
         "La chambre est un espace bien déterminé dans une maison. Privée, intime, elle doit refléter la personnalité de son occupant, adulte ou enfant, sans forcément correspondre au style du reste de la maison. Tout est permis pour la déco de la chambre, il suffit de laisser parler sa créativité.",
@@ -156,6 +157,7 @@ const seed = async () => {
       ],
     },
     {
+      main_page: true,
       name: "Cuisine",
       description:
         "La cuisine est l'ensemble des techniques de préparation des aliments en vue de leur consommation par les êtres humains que l'on a appelé précédemment « la cuisinerie ». La cuisine est diverse à travers le monde.",
@@ -214,6 +216,7 @@ const seed = async () => {
     },
     {
       name: "Salle de bain",
+      main_page: true,
       description:
         "Une salle de bains, ou salle de bain, est, dans un lieu d'habitation, une pièce dans laquelle peuvent être effectuées les opérations d'hygiène corporelle : prendre un bain ou une douche, se laver les mains ou le visage, se raser, etc. La salle de bains peut aussi comporter des toilettes",
       image:

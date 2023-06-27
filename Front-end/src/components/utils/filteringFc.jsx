@@ -1,4 +1,5 @@
 import axios from "axios"
+import paginateProducts from "./pagination"
 
 export const filteringFc = async (
   materials = [],
@@ -8,30 +9,38 @@ export const filteringFc = async (
   sort = "asc",
   search = "",
   isStock = "",
-  date = ""
+  page
 ) => {
   const response = await axios.get("http://localhost:3001/products", {
     params: {
-      dateAdded: date,
       inStock: isStock,
       minPrice: minPrice,
       maxPrice: maxPrice,
+      material: materials,
+      categories: categories,
       sortBy: sort,
       searchName: search,
+      page: page.toString(),
     },
   })
 
-  let data = response.data.result
+  let data = response.data
+  const materialData = materials
+  const categoriesData = categories
 
-  if (materials.length) {
+  if (materialData.length) {
     data = data.filter((product) =>
-      product.materials.some((material) => materials.includes(material.name))
+      product.materials.some((material) => materialData.includes(material.name))
     )
   }
 
-  if (categories.length) {
-    data = data.filter((product) => categories.includes(product.category.name))
+  if (categoriesData.length) {
+    data = data.filter((product) =>
+      categoriesData.includes(product.category.name)
+    )
   }
 
-  return data
+  const result = paginateProducts(data, page)
+
+  return result
 }

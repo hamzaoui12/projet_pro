@@ -3,9 +3,12 @@ import { BsPlus } from "react-icons/bs"
 import { BrowserRouter as Router, Link, useParams } from "react-router-dom"
 import axios from "axios"
 import { CartContext } from "../contexts/CartContext.jsx"
+import Paginator from "../components/Paginator.jsx"
+import paginateProducts from "../components/utils/pagination.jsx"
 
 const Category = () => {
-  const [data, setData] = useState(null)
+  const [paginatedData, setPaginatedData] = useState(null)
+  const [page, setPage] = useState(1)
   const { id } = useParams()
   const { addToCart } = useContext(CartContext)
   const [categories, setCategories] = useState(null)
@@ -14,8 +17,12 @@ const Category = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:3001/categories/${id}`)
-      .then((res) => setData(res.data.result))
-  }, [id])
+      .then((res) => {
+        const data = paginateProducts(res.data.result, page)
+        setPaginatedData(data)
+      })
+      .catch((err) => console.log(err.message))
+  }, [page, id])
   useEffect(() => {
     axios
       .get(`http://localhost:3001/categories/`)
@@ -24,21 +31,21 @@ const Category = () => {
   }, [])
 
   useEffect(() => {
-    if (Number(id) === 11) {
+    if (Number(id) === 21) {
       setNomCategorie("Chambre adultes")
-    } else if (Number(id) === 13) {
+    } else if (Number(id) === 22) {
       setNomCategorie("Cuisine")
-    } else if (Number(id) === 12) {
+    } else if (Number(id) === 24) {
       setNomCategorie("Chambre Enfant")
-    } else if (Number(id) === 14) {
+    } else if (Number(id) === 23) {
       setNomCategorie("Salle de bain")
-    } else if (Number(id) === 15) {
+    } else if (Number(id) === 25) {
       setNomCategorie("Salon")
     }
   }, [id])
 
   return (
-    <div className="max-w-[1640px] mx-auto ">
+    <div>
       <div className="max-w-[1640px] m-auto px-4 ">
         {categories &&
           categories
@@ -54,6 +61,7 @@ const Category = () => {
                     <span className="text-orange-200"></span> Furniture
                   </h1>
                 </div>
+
                 <img
                   className="w-full max-h-[500px] object-full "
                   src={category.image}
@@ -67,9 +75,10 @@ const Category = () => {
                 </h1>
               </div>
             ))}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-24 py-96  cursor-pointer">
-          {!!data &&
-            data.map((item, index) => (
+          {!!paginatedData &&
+            paginatedData.paginatedProducts.map((item, index) => (
               <div key={index} className="relative group p-6">
                 <Link to="/product">
                   <img
@@ -94,6 +103,11 @@ const Category = () => {
               </div>
             ))}
         </div>
+      </div>
+      <div className="w-full flex items-center justify-center pb-6">
+        {paginatedData && paginatedData.totalPages > 1 && (
+          <Paginator pagination={paginatedData} setPage={setPage} />
+        )}
       </div>
     </div>
   )

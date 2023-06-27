@@ -4,7 +4,7 @@ import "tailwindcss/tailwind.css"
 const Account = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
+  const [setErrorMessage] = useState("")
 
   const handleSubmit = (event) => {
     event.preventDefault()
