@@ -21,6 +21,7 @@ const validationSchema = Yup.object().shape({
 
 const ValidateForm = () => {
   const navigate = useNavigate()
+
   const token = localStorage.getItem("token")
   const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
 
@@ -46,7 +47,7 @@ const ValidateForm = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await axios.post("http://localhost:3002/addresses", {
+      await axios.post("http://localhost:3001/addresses", {
         country: values.country,
         city: values.city,
         region: values.region,
@@ -57,7 +58,8 @@ const ValidateForm = () => {
         }
       }
       )
-      await axios.patch(`http://localhost:3002/users/${loggedUser.id}`, {
+
+      await axios.patch(`http://localhost:3001/users/${loggedUser.id}`, {
         firstName: values.firstName,
         lastName: values.lastName,
         phoneNumber: values.phoneNumber,
@@ -71,7 +73,7 @@ const ValidateForm = () => {
       setSubmitting(false)
       navigate("/checkout")
     } catch (error) {
-      alert("ERROR", error)
+      console.log(error)
       setSubmitting(false)
     }
   }
@@ -100,8 +102,8 @@ const ValidateForm = () => {
             onSubmit={handleSubmit}
             validate={validate}
           >
-            {({ isSubmitting, handleSubmit }) => (
-              <Form className="space-y-4" onSubmit={handleSubmit}>
+            {({ isSubmitting }) => (
+              <Form className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label

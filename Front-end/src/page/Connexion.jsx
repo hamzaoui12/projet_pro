@@ -14,8 +14,8 @@ const Connexion = () => {
   const [loginSuccess, setLoginSuccess] = useState(false)
 
   const handleSubmit = (values) => {
-    const response = axios
-      .post("http://localhost:3300/sign-in/", {
+    axios
+      .post("http://localhost:3001/sign-in", {
         mail: values.mail,
         password: values.password,
       })
@@ -25,7 +25,7 @@ const Connexion = () => {
         setLoginError("")
       })
       .catch((error) => {
-        alert.error(error)
+        console.log(error)
         setLoginError("Failed to log in. Please check your credentials.")
         setLoginSuccess(false)
       })

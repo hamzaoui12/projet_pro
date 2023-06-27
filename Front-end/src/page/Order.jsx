@@ -22,8 +22,7 @@ const Order = () => {
     const [progress, setProgress] = useState(false)
     const [address, setAddress] = useState(null)
 
-    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
-    const token = localStorage.getItem("token")
+
 
     function capitalizeFirstLetter(str) {
         return str.charAt(0).toUpperCase() + str.slice(1)
@@ -39,8 +38,11 @@ return str
     }
 
     useEffect(() => {
+        const loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+        const token = localStorage.getItem("token")
+
         const fetchAddress = async () => {
-            const { data } = await axios.get(`http://localhost:3002/address/user/${loggedUser.id}`, {
+            const { data } = await axios.get(`http://localhost:3001/address/user/${loggedUser.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -55,7 +57,7 @@ return str
 
         const fetchData = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:3002/orders/${id}`, {
+                const { data } = await axios.get(`http://localhost:3001/orders/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -107,10 +109,12 @@ return str
         } finally {
             setLoading(false)
         }
-    }, [id,loggedUser,token])
+    }, [id])
 
 
     const updateOrder = async (productId, productPrice) => {
+        const token = localStorage.getItem("token")
+
         const updatedProductList = productList.filter(
             (product) => product.id !== productId
         )
@@ -135,16 +139,16 @@ return str
             }
             setTotalPrice(newTotal)
 
-            const response = await axios.patch(
-                `http://localhost:3002/orders/${id}`,
-                requestBody,
-                {
+            await axios.patch(
+                    `http://localhost:3002/orders/${id}`,
+                    requestBody,
+                    {
                     headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
                     },
-                }
-            )
+                    }
+                )
         } catch (error) {
             console.error("Error updating order:", error)
         }

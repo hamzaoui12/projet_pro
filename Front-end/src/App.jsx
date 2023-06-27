@@ -11,10 +11,9 @@ import PasswordResetPage from "./page/Password"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Layout from "./components/Layout"
 import ValidateForm from "./page/validation_form"
-import PaymentForm from "./page/données_de_paiement"
+import PaymentForm from "./page/Checkout"
 import Thankyou from "./page/thankyou"
 import Sidebar from "./components/Sidebar"
-import Orders from "./page/Orders"
 import Orders from "./page/Orders"
 import Order from "./page/Order"
 
@@ -132,6 +131,22 @@ const App = () => {
           element={
             <Layout>
               <PasswordResetPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <Layout>
+              <Orders />
+            </Layout>
+          }
+        />
+        <Route
+          path="/order/:id"
+          element={
+            <Layout>
+              <Order />
             </Layout>
           }
         />
