@@ -10,12 +10,14 @@
   padding: 0;
   outline: none;
 }
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 ul {
   list-style: none;
   padding: 0;
@@ -24,4 +26,23 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  border-top-color: #000;
+  border-left-color: #000;
+  animation: spin 1s linear infinite;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  width: 24px;
+  height: 24px;
 }
