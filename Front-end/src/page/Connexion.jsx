@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { Formik, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
-import axios from "axios"
 import { logToken } from "../Storage/logToken"
 import { Link } from "react-router-dom"
+import postRequest from "../components/utils/postRequest"
 
 const Connexion = () => {
   const initialValues = {
@@ -13,9 +13,8 @@ const Connexion = () => {
   const [loginError, setLoginError] = useState("")
   const [loginSuccess, setLoginSuccess] = useState(false)
 
-  const handleSubmit = (values) => {
-    axios
-      .post("http://localhost:3001/sign-in", {
+  const handleSubmit = async (values) => {
+    postRequest("sign-in", {
         mail: values.mail,
         password: values.password,
       })

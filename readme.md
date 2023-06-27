@@ -1,5 +1,7 @@
 # Lancement du backend
 
+Dans le terminal, se rendre dans Back-end
+
 ## Installation des dépendances et paquets
 
 Dans le terminal, utiliser la commandes :
@@ -39,3 +41,26 @@ Si un message d'erreur apparait, essayer la commande "npx knex --esm seed:run"
 
 Se placer sur le dossier "Back-end" et lancer la commande :
 node index.js
+
+# Lncement du front-end
+
+Dans le terminal, se rendre dans Front-end
+
+## Installation des dépendances et paquets
+
+Dans le terminal, utiliser la commandes :
+"npm install"
+
+## Configuration du fichier .env
+
+Créer un fichier .env
+
+Dans ce fichier .env, créer la variables suivantes :
+REACT_APP_URL_ROUTE=<url du server back (ex "http://127.0.0.1:8000" )>
+
+## Lancement du frontend
+
+Se placer sur le dossier "Front-end" et lancer la commande :
+npm start
+
+par défaut, le serveur prend le port 3000, vous pouvez vous rendre directement sur l'application avec l'url http://127.0.0.1:3000

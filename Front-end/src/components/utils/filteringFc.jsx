@@ -11,7 +11,7 @@ export const filteringFc = async (
   isStock = "",
   page
 ) => {
-  const response = await axios.get("http://localhost:3001/products", {
+  const response = await axios.get(`${process.env.REACT_APP_URL_ROUTE}/products`, {
     params: {
       inStock: isStock,
       minPrice: minPrice,
