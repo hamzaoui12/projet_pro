@@ -14,46 +14,46 @@ const CarouselComponent = (props) => {
         setSlide(0)
       }
 
-    setCurrentSlide(images[slide])
-  }
+      setCurrentSlide(images[slide])
+    }
     const timer = setTimeout(letSlide, slideDuration)
 
     return () => clearTimeout(timer)
   }, [slideDuration, images, slide])
 
-  return(
+  return (
     <div className="relative h-full w-full">
       {images[0] !== undefined ? (
         images.map((image) => {
-        return (
-          <div
-            className={`absolute h-full w-full ${
-              currentSlide === image
-                ? "opacity-1 duration-1000"
-                : "opacity-0 duration-1000 ease-in scale-75"
-            }`}
-            key={image}
-          >
-            {`${image}`.includes("http") ? (
-            currentSlide === image && (
-              <img
-                src={`${image}`}
-                alt="{curentSlide}"
-                className="h-full w-full object-cover"
-              />
-              )) : (
-                currentSlide === image && (
-              <img
-                src={`${process.env.REACT_APP_URL_ROUTE}/${image}`}
-                alt="{curentSlide}"
-                className="h-full w-full object-cover"
-              />
-              )
-            )}
-          </div>
+          return (
+            <div
+              className={`absolute h-full w-full ${
+                currentSlide === image
+                  ? "opacity-1 duration-1000"
+                  : "opacity-0 duration-1000 ease-in scale-75"
+              }`}
+              key={image}
+            >
+              {`${image}`.includes("http")
+                ? currentSlide === image && (
+                    <img
+                      src={`${image}`}
+                      alt="{curentSlide}"
+                      className="h-full w-full object-cover"
+                    />
+                  )
+                : currentSlide === image && (
+                    <img
+                      src={`http://localhost:3001/${image}`}
+                      alt="{curentSlide}"
+                      className="h-full w-full object-cover"
+                    />
+                  )}
+            </div>
           )
-        })) : (
-          <div />
+        })
+      ) : (
+        <div />
       )}
     </div>
   )

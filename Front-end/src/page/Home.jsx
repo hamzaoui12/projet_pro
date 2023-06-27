@@ -12,16 +12,12 @@ const Home = () => {
     const fetchHomeCategories = async () => {
       const allImages = []
 
-      await axios
-        .get(`${process.env.REACT_APP_URL_ROUTE}/categories`)
-        .then((categories) => {
-          const homeCategories = categories.data.result.filter(
-            (category) => category.main_page !== 0
-          )
-          homeCategories.forEach((category) =>
-            allImages.push(category.image)
-          )
-        })
+      await axios.get(`http://localhost:3001/categories`).then((categories) => {
+        const homeCategories = categories.data.result.filter(
+          (category) => category.main_page !== 0
+        )
+        homeCategories.forEach((category) => allImages.push(category.image))
+      })
 
       return setHomeImagesCategories(allImages)
     }
@@ -96,7 +92,7 @@ const Home = () => {
         <CategoryComposant />
       </div>
       <div>
-        <h1 className="text-center text-4xl font-bold">OUR PRODUCTS</h1>
+        <h1 className="text-center text-4xl font-bold">OUR Category</h1>
         <ProductComponents />
       </div>
     </div>
