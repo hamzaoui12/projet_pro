@@ -24,7 +24,7 @@ const Connexion = () => {
         setLoginError("")
       })
       .catch((error) => {
-        alert.error(error)
+        console.log(error)
         setLoginError("Failed to log in. Please check your credentials.")
         setLoginSuccess(false)
       })

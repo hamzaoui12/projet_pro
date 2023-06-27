@@ -13,7 +13,7 @@ import {
 } from "@tremor/react"
 import axios from "axios"
 
-const Users = () => {
+const Categories = () => {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -64,4 +64,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default Categories
