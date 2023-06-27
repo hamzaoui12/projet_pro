@@ -15,6 +15,9 @@ const config = {
       directory: "./db/migrations",
       stub: "./db/migration.stub",
     },
+    seeds: {
+        directory: "./db/seed",
+    }
   },
   security: {
     session: {

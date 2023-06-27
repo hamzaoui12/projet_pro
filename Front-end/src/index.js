@@ -1,13 +1,13 @@
 import React from "react"
+import ReactDOM from "react-dom"
 import App from "./App"
-import SidebarProvider from "./contexts/SidebarContext"
-import CartProvider from "./contexts/CartContext"
 import { I18nextProvider } from "react-i18next"
-import { createRoot } from "react-dom/client"
 import i18n from "./i18n"
 
-const root = createRoot(document.getElementById("root"))
-root.render(
+import SidebarProvider from "./contexts/SidebarContext"
+import CartProvider from "./contexts/CartContext"
+
+ReactDOM.render(
   <I18nextProvider i18n={i18n}>
     <SidebarProvider>
       <CartProvider>
@@ -16,5 +16,6 @@ root.render(
         </React.StrictMode>
       </CartProvider>
     </SidebarProvider>
-  </I18nextProvider>
+  </I18nextProvider>,
+  document.getElementById("root")
 )

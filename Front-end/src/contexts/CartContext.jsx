@@ -25,6 +25,7 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const localStorageCart = localStorage.getItem("cart")
+
     if (localStorageCart) {
       setCart(JSON.parse(localStorageCart))
     }
@@ -82,6 +83,7 @@ const CartProvider = ({ children }) => {
     const cartItem = cart.find((item) => {
       return item.id === id
     })
+
     if (cartItem) {
       const newCart = cart.map((item) => {
         if (item.id === id) {
@@ -92,10 +94,12 @@ const CartProvider = ({ children }) => {
       })
       setCart(newCart)
     }
+
     if (cartItem.amount < 2) {
       removeFromCart(id)
     }
   }
+
   return (
     <CartContext.Provider
       value={{

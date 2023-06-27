@@ -1,23 +1,15 @@
 import { BsTrash3 } from "react-icons/bs"
 import React, { useContext } from "react"
 import { BrowserRouter as Router, Link } from "react-router-dom"
-import { IoMdClose, IoMdAdd, IoMdRemove } from "react-icons/io"
+import { IoMdAdd, IoMdRemove } from "react-icons/io"
 import { CartContext } from "../contexts/CartContext"
 import { SidebarContext } from "../contexts/SidebarContext"
 import { useTranslation } from "react-i18next"
 import i18n from "i18next"
 
 const Panier = (item) => {
-  const {
-    removeFromCart,
-    increaseAmount,
-    decreaseAmount,
-    cart,
-    clearCart,
-    total,
-  } = useContext(CartContext)
-
-  const { isOpen, handleClose } = useContext(SidebarContext)
+  const { removeFromCart, increaseAmount, decreaseAmount, cart, total } =
+    useContext(CartContext)
 
   const { t } = useTranslation()
 

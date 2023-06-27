@@ -1,3 +1,5 @@
+const ProductModel = require("../models/ProductModel.cjs")
+
 const CategoryModel = require("../models/CategoryModel.cjs")
 const auth = require("../middlewares/auth.js")
 
@@ -10,20 +12,18 @@ const routeCategory = ({ app }) => {
     return false
   }
 
-  app.get("/categories", auth, async (req, res) => {
+  app.get("/categories", async (req, res) => {
     res.send({
-      result: await CategoryModel.query()
-        .withGraphFetched("products")
-        .withGraphFetched("images"),
+      result: await CategoryModel.query(),
     })
   })
 
-  app.get("/categories/:id", auth, async (req, res) => {
+  app.get("/categories/:id", async (req, res) => {
     const { id } = req.params
-    const category = await CategoryModel.query()
-      .findById(id)
-      .withGraphFetched("products")
-      .withGraphFetched("images")
+    const category = await ProductModel.query()
+      .where("category_id", id)
+      .withGraphFetched("materials")
+      .withGraphFetched("category")
 
     if (!checkCategory(category)) {
       res.status(404).send({ error: "not found" })
@@ -53,11 +53,11 @@ const routeCategory = ({ app }) => {
 
   app.patch("/categories/:id", auth, async (req, res) => {
     const { id } = req.params
-    const { name, welcome_order } = req.body
+    const { name, welcome_order, main_page } = req.body
 
     try {
       const updateCategory = await CategoryModel.query()
-        .updateAndFetchById(id, { name, welcome_order })
+        .updateAndFetchById(id, { name, welcome_order, main_page })
         .withGraphFetched("products")
         .withGraphFetched("images")
 
