@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react"
 import {
   Table,
   TableHead,
@@ -9,77 +9,29 @@ import {
   Text,
   Title,
   Card,
-} from "@tremor/react";
+  Button,
+} from "@tremor/react"
+import Search from "@/lib/components/Search"
+import axios from "axios"
 
 function Users() {
   const [users, setusers] = useState([
-    { id: 0, name: "amina", phoneNumber: "0756345870", email: "amina.larbi@gmail.com" },
-    {
-      id: 0,
-      name: "amina 1",
-      phoneNumber: "0607345841",
-      email: "amina1@test.com",
-    },
-    {
-      id: 1,
-      name: "amina 2",
-      phoneNumber: "0607345842",
-      email: "amina2@test.com",
-    },
-    {
-      id: 2,
-      name: "amina 3",
-      phoneNumber: "0607345843",
-      email: "amina3@test.com",
-    },
-    {
-      id: 3,
-      name: "amina 4",
-      phoneNumber: "0607345844",
-      email: "amina4@test.com",
-    },
-    {
-      id: 4,
-      name: "amina 5",
-      phoneNumber: "0607345845",
-      email: "amina5@test.com",
-    },
-    {
-      id: 5,
-      name: "amina 6",
-      phoneNumber: "0607345846",
-      email: "amina6@test.com",
-    },
-    {
-      id: 6,
-      name: "amina 7",
-      phoneNumber: "0607345847",
-      email: "amina7@test.com",
-    },
-    {
-      id: 7,
-      name: "amina 8",
-      phoneNumber: "0607345848",
-      email: "amina8@test.com",
-    },
-    {
-      id: 8,
-      name: "amina 9",
-      phoneNumber: "0607345849",
-      email: "amina9@test.com",
-    },
-    {
-      id: 9,
-      name: "amina 10",
-      phoneNumber: "0607345850",
-      email: "amina10@test.com",
-    },
-  
-  ]);
+   
+  ])
+
+  useEffect(() => {
+    ;(async () => {
+      let { data } = await axios.get("http://localhost:3001/admin/getUsers")
+
+      setusers(data.result)
+    })()
+  }, [])
 
   return (
     <div className="p-4 md:p-10 mx-auto max-w-7xl">
       <Title>Users</Title>
+      <Text>Search wth the magic of AI powered by App Ambient.</Text>
+      <Search />
       <Card className="mt-6">
         <Table>
           <TableHead>
@@ -87,25 +39,54 @@ function Users() {
               <TableHeaderCell>Name</TableHeaderCell>
               <TableHeaderCell>Phone Number</TableHeaderCell>
               <TableHeaderCell>Email</TableHeaderCell>
+              <TableHeaderCell>Role</TableHeaderCell>
+              <TableHeaderCell>Action</TableHeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {users.map((user) => (
               <TableRow key={Math.random}>
-                <TableCell>{user.name}</TableCell>
+                <TableCell>{`${user.firstName}${
+                  user.lastName ? " " + user.lastName : ""
+                }`}</TableCell>
                 <TableCell>
                   <Text>{user.phoneNumber}</Text>
                 </TableCell>
                 <TableCell>
-                  <Text>{user.email}</Text>
+                  <Text>{user.mail}</Text>
+                </TableCell>
+                <TableCell>
+                  <div
+                    style={{
+                      backgroundColor: user.is_admin
+                        ? "lightgreen"
+                        : "rgb(229 231 235)",
+                      borderColor: user.is_admin ? "white" : "rgb(209 213 219)",
+                      color: user.is_admin ? "black" : undefined,
+                    }}
+                    className="w-[80px] text-xs font-semibold cursor-pointer bg-gray-200 drop-shadow-md rounded-md border-gray-300 border-[2px] text-center py-[6px]"
+                  >
+                    {user.is_admin ? "Admin" : "User"}
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex flex-row items-center gap-x-3">
+                    <Button className="transition-all duration-300">
+                      Edit
+                    </Button>
+                    <Button className="bg-red-600 hover:border-red-700 border-red-600 hover:bg-red-700 transition-all duration-300">
+                      Delete
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+        { <UsersTable users={users} /> }
       </Card>
     </div>
-  );
+  )
 }
 
-export default Users;
+export default Users
