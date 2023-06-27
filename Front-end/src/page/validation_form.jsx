@@ -47,7 +47,7 @@ const ValidateForm = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await axios.post("http://localhost:3001/addresses", {
+      await axios.post(`${process.env.REACT_APP_URL_ROUTE}/addresses`, {
         country: values.country,
         city: values.city,
         region: values.region,
@@ -59,7 +59,7 @@ const ValidateForm = () => {
       }
       )
 
-      await axios.patch(`http://localhost:3001/users/${loggedUser.id}`, {
+      await axios.patch(`${process.env.REACT_APP_URL_ROUTE}/users/${loggedUser.id}`, {
         firstName: values.firstName,
         lastName: values.lastName,
         phoneNumber: values.phoneNumber,
