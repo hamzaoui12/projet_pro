@@ -4,7 +4,7 @@ import CartItem from "./CartItem"
 import { SidebarContext } from "../contexts/SidebarContext"
 import { CartContext } from "../contexts/CartContext"
 import { FiTrash2 } from "react-icons/fi"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const Sidebar = () => {
   const { isOpen, handleClose } = useContext(SidebarContext)

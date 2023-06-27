@@ -15,7 +15,7 @@ const ProductComponents = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("http://localhost:3001/products")
+      const response = await axios.get(`${process.env.REACT_APP_URL_ROUTE}/products`)
 
       setData(response.data)
     }
