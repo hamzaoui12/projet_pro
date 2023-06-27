@@ -4,7 +4,7 @@ const BaseModel = require("../../models/BaseModel.cjs")
 const config = require("../../config.js")
 const MaterialModel = require("../../models/MaterialModel.cjs")
 const ProductModel = require("../../models/ProductModel.cjs")
-const ImageModel = require("../../models/ImageModel.cjs");
+const ImageModel = require("../../models/ImageModel.cjs")
 
 const seed = async () => {
   const db = knex(config.db)
