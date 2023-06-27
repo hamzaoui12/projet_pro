@@ -10,6 +10,29 @@ const routeAddresses = async ({ app }) => {
     return false
   }
 
+  app.get('/address/user/:userId', async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+      const userAddresses = await AddressModel.query()
+        .whereExists(function () {
+          this.select('useraddress.user_id')
+            .from('useraddress')
+            .whereRaw('useraddress.address_id = address.id')
+            .andWhere('useraddress.user_id', userId);
+        })
+        .withGraphFetched('users')
+        .modifyGraph('users', (builder) => {
+          builder.select('firstName', 'lastName', 'phoneNumber');
+        });
+
+      res.json(userAddresses);
+    } catch (error) {
+      console.error('Error retrieving address data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
   app.get("/addresses", auth, async (req, res) => {
     try {
       const addresses = await AddressModel.query()
@@ -51,7 +74,7 @@ const routeAddresses = async ({ app }) => {
     }
   })
 
-  app.patch("/addresses/:id",auth ,async (req, res) => {
+  app.patch("/addresses/:id", auth, async (req, res) => {
     const { id } = req.params
     const { country, city, region, postalCode } = req.body
 
@@ -63,7 +86,7 @@ const routeAddresses = async ({ app }) => {
           region,
           postalCode,
         })
-      
+
       if (!checkAddress(updatedAddress)) {
         res.status(404).send({ error: "Address not found" })
       } else {
@@ -79,7 +102,7 @@ const routeAddresses = async ({ app }) => {
 
     try {
       const address = await AddressModel.query().findById(id)
-      
+
       if (!checkAddress(address)) {
         res.status(404).send({ error: "Address not found" })
       } else {
