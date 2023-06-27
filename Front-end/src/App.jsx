@@ -15,6 +15,7 @@ import PaymentForm from "./page/données_de_paiement"
 import Thankyou from "./page/thankyou"
 import Sidebar from "./components/Sidebar"
 import Orders from "./page/Orders"
+import Orders from "./page/Orders"
 import Order from "./page/Order"
 
 const App = () => {
@@ -131,15 +132,6 @@ const App = () => {
           element={
             <Layout>
               <PasswordResetPage />
-            </Layout>
-          }
-        />
-        
-        <Route
-          path="/order/:id"
-          element={
-            <Layout>
-              <Order />
             </Layout>
           }
         />
