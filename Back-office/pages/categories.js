@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   Table,
   TableHead,
@@ -9,59 +9,51 @@ import {
   Text,
   Title,
   Card,
+  Button,
 } from "@tremor/react"
+import axios from "axios"
 
 const Users = () => {
-  const [products, setproducts] = useState([
-    {
-      name: "CHAISE POUR ADULTE",
-      description: "Une très jolie chaise pour adulte",
-      stock: 10,
-      price: 150,
-    },
-    {
-      name: "CHAISE POUR ADULTE",
-      description: "Une très jolie chaise pour adulte",
-      stock: 10,
-      price: 150,
-    },
-    {
-      name: "CHAISE POUR ADULTE",
-      description: "Une très jolie chaise pour adulte",
-      stock: 10,
-      price: 150,
-    },
-    {
-      name: "CHAISE POUR ADULTE",
-      description: "Une très jolie chaise pour adulte",
-      stock: 10,
-      price: 150,
-    },
-  ])
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    ;(async () => {
+      let { data } = await axios.get(
+        "http://localhost:3001/admin/getCateogries"
+      )
+
+      setCategories(data.result)
+    })()
+  }, [])
 
   return (
     <div className="p-4 md:p-10 mx-auto max-w-7xl">
-      <Title>Products</Title>
+      <Title>Categories</Title>
       <Card className="mt-6">
         <Table>
           <TableHead>
             <TableRow>
-              <TableHeaderCell>Product Name</TableHeaderCell>
-              <TableHeaderCell>Description</TableHeaderCell>
-              <TableHeaderCell>Stock</TableHeaderCell>
-              <TableHeaderCell>Price</TableHeaderCell>
+              <TableHeaderCell>Category Name</TableHeaderCell>
+              <TableHeaderCell>Cateogry ID</TableHeaderCell>
+              <TableHeaderCell>Action</TableHeaderCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {products.map((product) => (
-              <TableRow key={Math.random}>
-                <TableCell>{product.name}</TableCell>
-                <TableCell>{product.description}</TableCell>
+            {categories.map((category) => (
+              <TableRow key={category.id}>
+                <TableCell>{category.name}</TableCell>
                 <TableCell>
-                  <Text>{product.stock}</Text>
+                  <Text className="">{category.id}</Text>
                 </TableCell>
                 <TableCell>
-                  <Text>${product.price}</Text>
+                  <div className="flex flex-row items-center gap-x-3">
+                    <Button className="transition-all duration-300">
+                      Edit
+                    </Button>
+                    <Button className="bg-red-600 hover:border-red-700 border-red-600 hover:bg-red-700 transition-all duration-300">
+                      Delete
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}
