@@ -14,8 +14,6 @@ import Stripe from "./components/Stripe"
 import PaymentForm from "./page/Checkout"
 import Thankyou from "./page/thankyou"
 import Sidebar from "./components/Sidebar"
-import Orders from "./page/Orders"
-import Order from "./page/Order"
 import ValidateForm from "./page/validation_form"
 
 const App = () => {
@@ -140,22 +138,6 @@ const App = () => {
           element={
             <Layout>
               <PasswordResetPage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/orders"
-          element={
-            <Layout>
-              <Orders />
-            </Layout>
-          }
-        />
-        <Route
-          path="/order/:id"
-          element={
-            <Layout>
-              <Order />
             </Layout>
           }
         />
