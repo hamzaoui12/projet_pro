@@ -15,7 +15,7 @@ const Connexion = () => {
 
   const handleSubmit = (values) => {
     axios
-      .post("http://localhost:3001/sign-in", {
+      .post(`${process.env.REACT_APP_URL_ROUTE}/sign-in`, {
         mail: values.mail,
         password: values.password,
       })
@@ -25,7 +25,7 @@ const Connexion = () => {
         setLoginError("")
       })
       .catch((error) => {
-        console.log(error)
+        alert.error(error)
         setLoginError("Failed to log in. Please check your credentials.")
         setLoginSuccess(false)
       })

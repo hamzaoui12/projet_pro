@@ -17,7 +17,7 @@ const Contact = () => {
   const handleSubmit = async (values, actions) => {
     try {
       await validationSchema.validate(values, { abortEarly: false })
-      await axios.post("http://localhost:3001/contacts", values)
+      await axios.post("http://localhost:3002/contacts", values)
 
       setSuccessMessage("Votre message a été envoyé avec succès !")
       actions.resetForm()
