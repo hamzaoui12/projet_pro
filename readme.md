@@ -64,3 +64,15 @@ Se placer sur le dossier "Front-end" et lancer la commande :
 npm start
 
 par défaut, le serveur prend le port 3000, vous pouvez vous rendre directement sur l'application avec l'url http://127.0.0.1:3000
+
+## Lancement du Back-office
+
+se placer sur le dossier "Back-office" et lancer les commande :
+npm install  
+npm run dev
+
+## Lancement de L'APP-MOBILE 
+
+se placer sur le dossier "APP-MOBILE" et lancer la commande :
+npx expo start
+
