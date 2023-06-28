@@ -30,7 +30,7 @@ const Sidebar = () => {
       <div className="flex felx-col gap-y-3 py-4 mt-4">
         <div className="flex w-full justify-between items-center">
           <div className="uppercase font-semibold">
-            <span className="mr-2">Total:</span>$ {parseFloat(total).toFixed(2)}
+            <span className="mr-2">Total:</span>€ {parseFloat(total).toFixed(2)}
           </div>
           <div
             onClick={clearCart}

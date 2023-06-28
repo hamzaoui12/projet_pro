@@ -7,22 +7,16 @@ import { Formik } from "formik"
 import inActualOrder from "../components/utils/inActualOrder"
 import addNewOrder from "../components/utils/addNewOrder"
 
-
 const Panier = (item) => {
   const navigate = useNavigate()
   const defaultProductId = 1
-  const {
-    removeFromCart,
-    increaseAmount,
-    decreaseAmount,
-    cart,
-    total,
-  } = useContext(CartContext)
+  const { removeFromCart, increaseAmount, decreaseAmount, cart, total } =
+    useContext(CartContext)
 
   const initialvalues = {
-    productId : defaultProductId
+    productId: defaultProductId,
   }
-  
+
   const handleSubmit = async (values) => {
     if (localStorage.getItem("token")) {
       inActualOrder(addNewOrder)
@@ -32,10 +26,7 @@ const Panier = (item) => {
 
   return (
     <div>
-      <Formik
-          initialValues={initialvalues}
-          onSubmit={handleSubmit}
-      >
+      <Formik initialValues={initialvalues} onSubmit={handleSubmit}>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col lg:border-2 lg:border-black p-12 mx-4 lg:mx-24 my-4 lg:my-10 ">
@@ -43,7 +34,10 @@ const Panier = (item) => {
                 Panier
               </span>
               {cart.map((item) => (
-                <div key={item.id} className="flex flex-col  my-4 py-4 border-b">
+                <div
+                  key={item.id}
+                  className="flex flex-col  my-4 py-4 border-b"
+                >
                   <div className="flex flex-col lg:flex-row gap-w-3">
                     <img
                       className="w-48 lg:w-64 mr-4 object-cover"
@@ -58,7 +52,7 @@ const Panier = (item) => {
                         {item.description}
                       </span>
                       <span className="h-6 w-full text-xl font-bold mb-2 lg:mb-4 ">
-                        {item.price} $
+                        {item.price} €
                       </span>
                     </div>
                   </div>
@@ -96,7 +90,7 @@ const Panier = (item) => {
                 <div className="relative bottom-0  w-1/3">
                   <div className="grid grid-cols-2">
                     <span>Total</span>
-                    <span className="flex justify-end">{total}$</span>
+                    <span className="flex justify-end">{total}€</span>
                     <span className="font-extrabold text-sm pl-1 text-slate-400">
                       TVA
                     </span>
@@ -105,9 +99,12 @@ const Panier = (item) => {
                     </span>
                   </div>
                   <div>
-                    <button type="submit" className="border-4 border-black w-full py-2 mt-6 hover:bg-black hover:text-white">
-                        {" "}
-                        Passer la commande
+                    <button
+                      type="submit"
+                      className="border-4 border-black w-full py-2 mt-6 hover:bg-black hover:text-white"
+                    >
+                      {" "}
+                      Passer la commande
                     </button>
                   </div>
                 </div>

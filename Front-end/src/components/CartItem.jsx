@@ -33,7 +33,7 @@ const CartItem = ({ item }) => {
           <div className=" flex gap-x-2 h-[36px] text-sm">
             <div className="flex gap-10">
               <div className="flex items-center justify-around whitespace-nowrap w-10">
-                {item.price} $
+                {item.price} €
               </div>
             </div>
           </div>
